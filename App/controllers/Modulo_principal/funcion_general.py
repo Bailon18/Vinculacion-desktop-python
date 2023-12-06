@@ -73,8 +73,6 @@ def evento_ocultar(tol_inv,tol_vis,line,dato):
         tol_vis.hide();tol_inv.show()
         line.setEchoMode(QtWidgets.QLineEdit.Password)
 
-
-
 def eventorol(parent,parent2):
     """Funcion recibe por parametro clase """
     
@@ -127,62 +125,121 @@ def estilo(parent):
     parent.venedit.bnt_ojoVis.setStyle(estiloDefecto)
 
 
+def crearbotoneslista(stilo,icono,tooltip):
     
-def cargausuarioicon(parent,tabla,dato):
+    btn_nuevo = QtWidgets.QToolButton()
     
+    btn_nuevo.setMinimumSize(QtCore.QSize(55, 54))
+    btn_nuevo.setStyleSheet(stilo)
+    btn_nuevo.setIcon(QtGui.QIcon(icono))
+    btn_nuevo.setToolTip(tooltip)
+    btn_nuevo.setCursor(QtGui.QCursor(QtGui.Qt.PointingHandCursor))
+
+    return btn_nuevo
+
+def llenar_tabla_vinculacion(parent,tabla,dato):
+
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(8)
-
+        tabla.setColumnCount(7)
+   
         for fila in range(len(dato)):
+  
+            botoneditar = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                            QToolButton:hover{background-color:#cbe1e3}""",
+                          
+                icono = u':/menu/acccion_editar.png',
+                tooltip = 'Editar vinculacion')
 
-            editar = QtWidgets.QPushButton()
-            editar.setMinimumSize(QtCore.QSize(35, 34))
+            botoneliminar = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+                            QToolButton:hover{background-color:#ebdada}""",
+                          
+                icono = u':/menu/accion_eliminar.png',
+                tooltip = 'Eliminar vinculacion')
+
+            botonpdf = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #FFF0E1; border-radius:8px}
+                            QToolButton:hover{background-color:#f4e6d7}""",
+                icono = u':/menu/accion_exportar.png',
+                tooltip = 'Exportar a PDF')
             
-            editar.setStyleSheet(u"QPushButton{background-color: #445d5e;\n""border-radius:5px}\QPushButton:hover{background-color:#3f5758}")
-    
-            editar.setIcon(QtGui.QIcon(u':/iconbar/edit2.png'))#'image/editar.png'))
-            editar.setToolTip("Editar usuario")
+
+            botonseguimiento = crearbotoneslista(
+                stilo = u"""QToolButton{background-color:  #E1F1FF; border-radius:8px}
+                            QToolButton:hover{background-color:#d0dfec}""",
+                icono = u':/menu/menuafiliacion.png',
+                tooltip = 'Ver seguimiento')
 
             layout = QtWidgets.QHBoxLayout()
-            layout.setContentsMargins(60,5,60,5)
-            layout.addWidget(editar)
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(botoneditar)
+            layout.addWidget(botoneliminar)
+            layout.addWidget(botonpdf)
+            layout.addWidget(botonseguimiento)
 
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
 
-            btn_editar(editar,fila,tabla,parent)
-            tabla.setCellWidget(fila ,7,widget)
+            btn_editar(botoneditar,fila,tabla,parent)
+            btn_eliminar(botoneliminar, fila,tabla,parent)
+            btn_pdf(botonpdf,fila,tabla,parent)
+            btn_seguimiento(botonseguimiento,fila,tabla,parent)
 
+
+            tabla.setCellWidget(fila ,6,widget)
 
             for columna in range(len(dato[fila])):
-                
-                # La columna de sedes utilizamos  el diccionario de sedes para obtener el nombre apartir del id
-                if columna == 3:
-                    dato[fila][columna] = parent.sedes[dato[fila][columna]]
-                    
                 tabla.setItem(fila,columna, QtWidgets.QTableWidgetItem(str(dato[fila][columna])))
-                # centrar item
                 tabla.item(fila,columna).setTextAlignment(QtCore.Qt.AlignCenter|QtCore.Qt.AlignVCenter)
+        
+
                 
                 
-def btn_editar(b_uno,fila,tabla,parent):
+def btn_editar(boton,fila,tabla,parent):
     
     """eventos  del boton editar """
-    b_uno.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    b_uno.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
+    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    
+def btn_eliminar(boton,fila,tabla,parent):
+    
+    """eventos  del boton eleminar """
+    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
+    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    
+def btn_pdf(boton,fila,tabla,parent):
+    
+    """eventos  del boton pdf """
+    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
+    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    
+def btn_seguimiento(boton,fila,tabla,parent):
+    
+    """eventos  del boton seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
+    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    
+    
+    
+    
+    
+    
     
 def btn_editar_acciones(fila,parent):
     
-    from controllers.Modulo_principal.Modulo_general import UsuarioEdit
+    print("Accion")
+    # from controllers.Modulo_principal.Modulo_general import UsuarioEdit
     
 
-    parent.dniseleccionado = parent.venPri.tabla_usuario.item(fila, 0).text()
+    # parent.dniseleccionado = parent.venPri.tabla_usuario.item(fila, 0).text()
 
-    parent.raizOpacidad.resize(parent.width(), parent.height())
-    parent.raizOpacidad.show()
-    UsuarioEdit(parent).exec_()
+    # parent.raizOpacidad.resize(parent.width(), parent.height())
+    # parent.raizOpacidad.show()
+    # UsuarioEdit(parent).exec_()
         
 
 # tabla principal

@@ -1080,7 +1080,7 @@ QComboBox::down-arrow
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="pag1">
                 <property name="styleSheet">
@@ -1603,6 +1603,21 @@ QScrollBar::sub-line:horizontal{
                              <attribute name="verticalHeaderStretchLastSection">
                               <bool>false</bool>
                              </attribute>
+                             <row>
+                              <property name="text">
+                               <string>Nueva fila</string>
+                              </property>
+                             </row>
+                             <row>
+                              <property name="text">
+                               <string>Nueva fila</string>
+                              </property>
+                             </row>
+                             <row>
+                              <property name="text">
+                               <string>Nueva fila</string>
+                              </property>
+                             </row>
                              <column>
                               <property name="text">
                                <string>ID</string>
@@ -1610,12 +1625,12 @@ QScrollBar::sub-line:horizontal{
                              </column>
                              <column>
                               <property name="text">
-                               <string>NOMBRE</string>
+                               <string>FECHA REGISTRO</string>
                               </property>
                              </column>
                              <column>
                               <property name="text">
-                               <string>APELLIDOS</string>
+                               <string>ESTUDIANTE</string>
                               </property>
                              </column>
                              <column>
@@ -1625,7 +1640,7 @@ QScrollBar::sub-line:horizontal{
                              </column>
                              <column>
                               <property name="text">
-                               <string>PROYECTO</string>
+                               <string>PERIODO ACADEMICO</string>
                               </property>
                              </column>
                              <column>
@@ -1776,53 +1791,6 @@ border-radius: 8px;
                             <number>12</number>
                            </property>
                            <item>
-                            <widget class="QComboBox" name="cbox_filtrar">
-                             <property name="minimumSize">
-                              <size>
-                               <width>176</width>
-                               <height>47</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>16777215</width>
-                               <height>47</height>
-                              </size>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>Periodo</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Fecha</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Nombres</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Proyecto</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>Tutor</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                           <item>
                             <widget class="QFrame" name="frame_16">
                              <property name="minimumSize">
                               <size>
@@ -1877,7 +1845,7 @@ border-radius: 8px;
                                  <string notr="true"/>
                                 </property>
                                 <property name="placeholderText">
-                                 <string>Buscar...</string>
+                                 <string>Buscar por cualquier campo</string>
                                 </property>
                                </widget>
                               </item>

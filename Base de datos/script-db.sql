@@ -1,3 +1,8 @@
+
+CREATE DATABASE IF NOT EXISTS vinculaciondb;
+
+USE vinculaciondb;
+
 -- ===============================================
 -- TABLA: instituciones_educativas
 -- Propósito: Almacena información sobre las instituciones educativas.
@@ -9,13 +14,6 @@ CREATE TABLE instituciones_educativas (
     direccion VARCHAR(255) -- Dirección física de la institución
 );
 
-INSERT INTO instituciones_educativas (nombre_institucion, tipo_institucion, direccion)
-VALUES
-    ('Universidad San Francisco de Quito', 'Universidad', 'Cumbayá, Quito'),
-    ('Universidad de las Américas', 'Universidad', 'Quito'),
-    ('Escuela Politécnica Nacional', 'Universidad', 'Quito'),
-    ('Universidad Central del Ecuador', 'Universidad', 'Quito');
-
 
 -- ===============================================
 -- TABLA: roles
@@ -26,10 +24,7 @@ CREATE TABLE roles (
     role_name VARCHAR(50) NOT NULL -- Nombre del rol (ej. Administrador, Tutor)
 );
 
--- Inserción de roles predefinidos
-INSERT INTO roles (role_name) VALUES 
-    ('Administrador'),
-    ('Tutor');
+
 
 -- ===============================================
 -- TABLA: proyectos
@@ -40,12 +35,7 @@ CREATE TABLE proyectos (
     nombre_proyecto VARCHAR(300) NOT NULL -- Nombre del proyecto
 );
 
--- Inserción de proyectos en la tabla 'proyectos'
-INSERT INTO proyectos (nombre_proyecto) VALUES
-    ('Manejo de desechos tecnológicos y su repercusión en la salud de los habitantes de la zona sur de Manabí (Gestión Integral de los desechos tecnológicos en la zona sur de Manabí)'),
-    ('Análisis de textos de redes sociales por medio de técnicas de procesamiento del lenguaje natural.'),
-    ('Herramientas de inteligencia artificial aplicadas a la transformación digital para el desarrollo socioeconómico de la zona sur de Manabí.'),
-    ('Aplicación de minería de proceso a empresas, Fase II.');
+
 
 -- ===============================================
 -- TABLA: carreras
@@ -56,14 +46,6 @@ CREATE TABLE carreras (
     codigo_carrera VARCHAR(50), -- Código de la carrera (ej. 650612A-P-01)
     nombre_carrera VARCHAR(255) -- Nombre de la carrera
 );
-
-INSERT INTO carreras (codigo_carrera, nombre_carrera)
-VALUES
-    ('650612A-P-01', 'Ingeniería en Sistemas'),
-    ('650612A-P-02', 'Ingeniería Informática'),
-    ('650612A-P-03', 'Tecnología de la Información'),
-    ('650612A-P-04', 'Ciencias de la Computación'),
-    ('650612A-P-05', 'Ingeniería de Software');
 
 
 -- ===============================================
@@ -82,17 +64,6 @@ CREATE TABLE usuarios (
     FOREIGN KEY (role_id) REFERENCES roles(role_id) -- Clave foránea a la tabla roles
 );
 
-
-
-
--- Inserción de usuarios tipo Tutor en la tabla 'usuarios'
-INSERT INTO usuarios (contrasena, identificacion, role_id, nombre, apellido, correo_electronico)
-VALUES
-    ('admin', '131021797-9', 2, 'Leopoldo Vinicio', 'Venegas Loor', 'venegas@gmail.com'),
-    ('admin', '130709493-6', 2, 'Roberto Wellington', 'Acuña Caicedo', 'acuna@gmail.com'),
-    ('admin', '1305516740', 2, 'Antonieta Del Carmen', 'Rodriguez Gonzales', 'rodriguez@gmail.com'),
-    ('admin', '1311396376', 2, 'Marlon Ruben', 'Barcia Moreira', 'barcia@gmail.com'),
-    ('admin', '012345678-9', 1, 'Pedro', 'Pablo', 'admin@gmail.com');
 
 
 -- ===============================================

@@ -1,5 +1,8 @@
 <RCC>
   <qresource prefix="menu">
+    <file>acccion_editar.png</file>
+    <file>accion_eliminar.png</file>
+    <file>accion_exportar.png</file>
     <file>invisible.png</file>
     <file>visible.png</file>
     <file>x.png</file>

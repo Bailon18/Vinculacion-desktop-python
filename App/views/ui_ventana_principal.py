@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ventana_principalAfPwaz.ui'
+## Form generated from reading UI file 'ventana_principalZwFcNX.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -692,6 +692,14 @@ class Ui_principal(object):
         self.tabla_principal.setHorizontalHeaderItem(5, __qtablewidgetitem5)
         __qtablewidgetitem6 = QTableWidgetItem()
         self.tabla_principal.setHorizontalHeaderItem(6, __qtablewidgetitem6)
+        if (self.tabla_principal.rowCount() < 3):
+            self.tabla_principal.setRowCount(3)
+        __qtablewidgetitem7 = QTableWidgetItem()
+        self.tabla_principal.setVerticalHeaderItem(0, __qtablewidgetitem7)
+        __qtablewidgetitem8 = QTableWidgetItem()
+        self.tabla_principal.setVerticalHeaderItem(1, __qtablewidgetitem8)
+        __qtablewidgetitem9 = QTableWidgetItem()
+        self.tabla_principal.setVerticalHeaderItem(2, __qtablewidgetitem9)
         self.tabla_principal.setObjectName(u"tabla_principal")
         self.tabla_principal.setStyleSheet(u"QTableWidget {\n"
 "outline: 0px;\n"
@@ -943,20 +951,6 @@ class Ui_principal(object):
         self.horizontalLayout_10.setSpacing(10)
         self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
         self.horizontalLayout_10.setContentsMargins(7, 9, 10, 12)
-        self.cbox_filtrar = QComboBox(self.frame_4)
-        self.cbox_filtrar.addItem("")
-        self.cbox_filtrar.addItem("")
-        self.cbox_filtrar.addItem("")
-        self.cbox_filtrar.addItem("")
-        self.cbox_filtrar.addItem("")
-        self.cbox_filtrar.setObjectName(u"cbox_filtrar")
-        self.cbox_filtrar.setMinimumSize(QSize(176, 47))
-        self.cbox_filtrar.setMaximumSize(QSize(16777215, 47))
-        self.cbox_filtrar.setCursor(QCursor(Qt.PointingHandCursor))
-        self.cbox_filtrar.setStyleSheet(u"")
-
-        self.horizontalLayout_10.addWidget(self.cbox_filtrar)
-
         self.frame_16 = QFrame(self.frame_4)
         self.frame_16.setObjectName(u"frame_16")
         self.frame_16.setMinimumSize(QSize(255, 47))
@@ -1261,22 +1255,22 @@ class Ui_principal(object):
         self.tabla_usuario = QTableWidget(self.frame_10)
         if (self.tabla_usuario.columnCount() < 8):
             self.tabla_usuario.setColumnCount(8)
-        __qtablewidgetitem7 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(0, __qtablewidgetitem7)
-        __qtablewidgetitem8 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(1, __qtablewidgetitem8)
-        __qtablewidgetitem9 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(2, __qtablewidgetitem9)
         __qtablewidgetitem10 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(3, __qtablewidgetitem10)
+        self.tabla_usuario.setHorizontalHeaderItem(0, __qtablewidgetitem10)
         __qtablewidgetitem11 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(4, __qtablewidgetitem11)
+        self.tabla_usuario.setHorizontalHeaderItem(1, __qtablewidgetitem11)
         __qtablewidgetitem12 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(5, __qtablewidgetitem12)
+        self.tabla_usuario.setHorizontalHeaderItem(2, __qtablewidgetitem12)
         __qtablewidgetitem13 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(6, __qtablewidgetitem13)
+        self.tabla_usuario.setHorizontalHeaderItem(3, __qtablewidgetitem13)
         __qtablewidgetitem14 = QTableWidgetItem()
-        self.tabla_usuario.setHorizontalHeaderItem(7, __qtablewidgetitem14)
+        self.tabla_usuario.setHorizontalHeaderItem(4, __qtablewidgetitem14)
+        __qtablewidgetitem15 = QTableWidgetItem()
+        self.tabla_usuario.setHorizontalHeaderItem(5, __qtablewidgetitem15)
+        __qtablewidgetitem16 = QTableWidgetItem()
+        self.tabla_usuario.setHorizontalHeaderItem(6, __qtablewidgetitem16)
+        __qtablewidgetitem17 = QTableWidgetItem()
+        self.tabla_usuario.setHorizontalHeaderItem(7, __qtablewidgetitem17)
         self.tabla_usuario.setObjectName(u"tabla_usuario")
         self.tabla_usuario.setStyleSheet(u"QTableWidget {\n"
 "outline: 0px;\n"
@@ -1790,7 +1784,7 @@ class Ui_principal(object):
 
         self.retranslateUi(principal)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_5.setCurrentIndex(0)
 
 
@@ -1841,24 +1835,24 @@ class Ui_principal(object):
         ___qtablewidgetitem = self.tabla_principal.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("principal", u"ID", None));
         ___qtablewidgetitem1 = self.tabla_principal.horizontalHeaderItem(1)
-        ___qtablewidgetitem1.setText(QCoreApplication.translate("principal", u"NOMBRE", None));
+        ___qtablewidgetitem1.setText(QCoreApplication.translate("principal", u"FECHA REGISTRO", None));
         ___qtablewidgetitem2 = self.tabla_principal.horizontalHeaderItem(2)
-        ___qtablewidgetitem2.setText(QCoreApplication.translate("principal", u"APELLIDOS", None));
+        ___qtablewidgetitem2.setText(QCoreApplication.translate("principal", u"ESTUDIANTE", None));
         ___qtablewidgetitem3 = self.tabla_principal.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("principal", u"FECHA AFILIACION", None));
         ___qtablewidgetitem4 = self.tabla_principal.horizontalHeaderItem(4)
-        ___qtablewidgetitem4.setText(QCoreApplication.translate("principal", u"PROYECTO", None));
+        ___qtablewidgetitem4.setText(QCoreApplication.translate("principal", u"PERIODO ACADEMICO", None));
         ___qtablewidgetitem5 = self.tabla_principal.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("principal", u"TUTOR", None));
         ___qtablewidgetitem6 = self.tabla_principal.horizontalHeaderItem(6)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("principal", u"ACCIONES", None));
-        self.cbox_filtrar.setItemText(0, QCoreApplication.translate("principal", u"Periodo", None))
-        self.cbox_filtrar.setItemText(1, QCoreApplication.translate("principal", u"Fecha", None))
-        self.cbox_filtrar.setItemText(2, QCoreApplication.translate("principal", u"Nombres", None))
-        self.cbox_filtrar.setItemText(3, QCoreApplication.translate("principal", u"Proyecto", None))
-        self.cbox_filtrar.setItemText(4, QCoreApplication.translate("principal", u"Tutor", None))
-
-        self.line_busqueda.setPlaceholderText(QCoreApplication.translate("principal", u"Buscar...", None))
+        ___qtablewidgetitem7 = self.tabla_principal.verticalHeaderItem(0)
+        ___qtablewidgetitem7.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
+        ___qtablewidgetitem8 = self.tabla_principal.verticalHeaderItem(1)
+        ___qtablewidgetitem8.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
+        ___qtablewidgetitem9 = self.tabla_principal.verticalHeaderItem(2)
+        ___qtablewidgetitem9.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
+        self.line_busqueda.setPlaceholderText(QCoreApplication.translate("principal", u"Buscar por cualquier campo", None))
         self.btn_nuevoafiliacion.setText(QCoreApplication.translate("principal", u" Nueva Afiliacion", None))
         self.cbox_modelo_3.setItemText(0, QCoreApplication.translate("principal", u"Seleccionar", None))
         self.cbox_modelo_3.setItemText(1, QCoreApplication.translate("principal", u"Santillana", None))
@@ -1871,22 +1865,22 @@ class Ui_principal(object):
         self.btn_busqueda_usuario.setText("")
         self.label_9.setText(QCoreApplication.translate("principal", u"Lista de usuarios registrados", None))
         self.btn_agregarusu.setText(QCoreApplication.translate("principal", u"  Agregar usuario", None))
-        ___qtablewidgetitem7 = self.tabla_usuario.horizontalHeaderItem(0)
-        ___qtablewidgetitem7.setText(QCoreApplication.translate("principal", u"DNI", None));
-        ___qtablewidgetitem8 = self.tabla_usuario.horizontalHeaderItem(1)
-        ___qtablewidgetitem8.setText(QCoreApplication.translate("principal", u"NOMBRE", None));
-        ___qtablewidgetitem9 = self.tabla_usuario.horizontalHeaderItem(2)
-        ___qtablewidgetitem9.setText(QCoreApplication.translate("principal", u"APELLIDOS", None));
-        ___qtablewidgetitem10 = self.tabla_usuario.horizontalHeaderItem(3)
-        ___qtablewidgetitem10.setText(QCoreApplication.translate("principal", u"SEDE", None));
-        ___qtablewidgetitem11 = self.tabla_usuario.horizontalHeaderItem(4)
-        ___qtablewidgetitem11.setText(QCoreApplication.translate("principal", u"CORREO", None));
-        ___qtablewidgetitem12 = self.tabla_usuario.horizontalHeaderItem(5)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("principal", u"CARGO", None));
-        ___qtablewidgetitem13 = self.tabla_usuario.horizontalHeaderItem(6)
-        ___qtablewidgetitem13.setText(QCoreApplication.translate("principal", u"ESTADO", None));
-        ___qtablewidgetitem14 = self.tabla_usuario.horizontalHeaderItem(7)
-        ___qtablewidgetitem14.setText(QCoreApplication.translate("principal", u"ACCIONES", None));
+        ___qtablewidgetitem10 = self.tabla_usuario.horizontalHeaderItem(0)
+        ___qtablewidgetitem10.setText(QCoreApplication.translate("principal", u"DNI", None));
+        ___qtablewidgetitem11 = self.tabla_usuario.horizontalHeaderItem(1)
+        ___qtablewidgetitem11.setText(QCoreApplication.translate("principal", u"NOMBRE", None));
+        ___qtablewidgetitem12 = self.tabla_usuario.horizontalHeaderItem(2)
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("principal", u"APELLIDOS", None));
+        ___qtablewidgetitem13 = self.tabla_usuario.horizontalHeaderItem(3)
+        ___qtablewidgetitem13.setText(QCoreApplication.translate("principal", u"SEDE", None));
+        ___qtablewidgetitem14 = self.tabla_usuario.horizontalHeaderItem(4)
+        ___qtablewidgetitem14.setText(QCoreApplication.translate("principal", u"CORREO", None));
+        ___qtablewidgetitem15 = self.tabla_usuario.horizontalHeaderItem(5)
+        ___qtablewidgetitem15.setText(QCoreApplication.translate("principal", u"CARGO", None));
+        ___qtablewidgetitem16 = self.tabla_usuario.horizontalHeaderItem(6)
+        ___qtablewidgetitem16.setText(QCoreApplication.translate("principal", u"ESTADO", None));
+        ___qtablewidgetitem17 = self.tabla_usuario.horizontalHeaderItem(7)
+        ___qtablewidgetitem17.setText(QCoreApplication.translate("principal", u"ACCIONES", None));
         self.btn_tabmonto.setText(QCoreApplication.translate("principal", u"ENTRADA", None))
         self.date_final.setDisplayFormat(QCoreApplication.translate("principal", u"yyyy-MM-d", None))
         self.label_57.setText(QCoreApplication.translate("principal", u"Filtrar", None))
