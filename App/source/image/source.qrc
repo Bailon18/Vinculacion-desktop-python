@@ -1,0 +1,17 @@
+<RCC>
+  <qresource prefix="menu">
+    <file>invisible.png</file>
+    <file>visible.png</file>
+    <file>x.png</file>
+    <file>contraerabajo.png</file>
+    <file>contraerarriba.png</file>
+    <file>botonadd.png</file>
+    <file>menuactualizar.png</file>
+    <file>menusalir.png</file>
+    <file>menu.png</file>
+    <file>menuafiliacion.png</file>
+    <file>menuhome.png</file>
+    <file>menureport.png</file>
+    <file>menuusuario.png</file>
+  </qresource>
+</RCC>

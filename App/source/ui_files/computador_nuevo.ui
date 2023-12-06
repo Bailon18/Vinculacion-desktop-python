@@ -1,0 +1,856 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Computador</class>
+ <widget class="QDialog" name="Computador">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>476</width>
+    <height>500</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>476</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>476</width>
+    <height>500</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/prefijoNuevo/logo.png</normaloff>:/prefijoNuevo/logo.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">#frame{background-color:white;border-radius:10px}
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #54BFC9;
+border-radius: 8px;}
+
+QPushButton:hover{background: #439CA8;
+border-radius: 8px; }
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>65</y>
+        <width>461</width>
+        <height>351</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_2{
+	
+	background-color: rgb(255, 255, 255);
+}
+
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+QLineEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QLineEdit::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+
+/* COMBOBOX */
+
+QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+border-radius:8px;
+padding:10px;
+combobox-popup: 0;
+border: 2px solid #F3F4F6;
+
+}
+
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#344647;
+	selection-color:#ffffff;
+	outline: 0px;
+   border: 1px solid #344647;
+ border-radius:8px;
+padding:10px
+}
+
+
+
+QComboBox::down-arrow
+{
+	image: url(:/prefijoNuevo/flecha_oscuro.png);
+     width: 11px;
+     height: 11px;
+}
+
+QComboBox::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+
+
+
+/* PLANTEXT*/
+QPlainTextEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QPlainTextEdit::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+QCheckBox{font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+color:#9CA3AF}
+
+
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="lbl5">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>180</y>
+         <width>151</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Compañia*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_serial">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>36</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>Ingrese serial</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl11">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>10</y>
+         <width>171</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Serial*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl9">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>97</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Modelo*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="cbox_compania">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>204</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>Seleccionar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Masculino</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Femenino</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="cbox_modelo">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>120</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <item>
+        <property name="text">
+         <string>Seleccionar</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Santillana</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Mayorca</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_95">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>260</y>
+         <width>161</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>ticket</string>
+       </property>
+      </widget>
+      <widget class="QDateEdit" name="fecha_registro">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>204</y>
+         <width>151</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">/*SPINBOX*/
+QDateEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QDateEdit::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::up-arrow{
+	image: url(:/prefijoNuevo/comDownP.png);
+     width: 9px;
+     height: 9px;
+}
+
+QDateEdit::down-arrow{
+	image:url(:/prefijoNuevo/comUpP.png);
+     width: 9px;
+     height: 9px;}
+
+QDateEdit::focus{
+background: #FFFFFF;
+border: 2px solid #526974;
+border-radius: 8px;
+}</string>
+       </property>
+       <property name="displayFormat">
+        <string>d-MM-yyyy</string>
+       </property>
+       <property name="calendarPopup">
+        <bool>false</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl8">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>180</y>
+         <width>181</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Fecha de registro*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QCheckBox" name="check_fecha">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>210</y>
+         <width>61</width>
+         <height>17</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Hoy</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl9_2">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>10</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Placa*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_placa">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>36</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>ingrese placa</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl9_3">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>97</y>
+         <width>81</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Marca*</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_marca">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>120</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>ingrese marca</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_ticket">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>290</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>ingrese ticket</string>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_serial">
+       <property name="geometry">
+        <rect>
+         <x>12</x>
+         <y>76</y>
+         <width>191</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 9pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_placa">
+       <property name="geometry">
+        <rect>
+         <x>241</x>
+         <y>77</y>
+         <width>191</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 9pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_ticket">
+       <property name="geometry">
+        <rect>
+         <x>10</x>
+         <y>330</y>
+         <width>191</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 9pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_marca">
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>160</y>
+         <width>191</width>
+         <height>16</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 9pt &quot;MS Shell Dlg 2&quot;;
+color: rgb(255, 0, 0);</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="line_id">
+       <property name="enabled">
+        <bool>true</bool>
+       </property>
+       <property name="geometry">
+        <rect>
+         <x>240</x>
+         <y>290</y>
+         <width>205</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="maxLength">
+        <number>30</number>
+       </property>
+       <property name="frame">
+        <bool>true</bool>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+       </property>
+       <property name="placeholderText">
+        <string>ingrese placa</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QPushButton" name="btn_guardar">
+      <property name="geometry">
+       <rect>
+        <x>130</x>
+        <y>430</y>
+        <width>195</width>
+        <height>47</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>195</width>
+        <height>47</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>110</width>
+        <height>47</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/*  BOTON */
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #3A4F50;
+border-radius: 8px;}
+
+QPushButton:hover{background: #344647;
+border-radius: 8px; }
+</string>
+      </property>
+      <property name="text">
+       <string>Guardar</string>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>15</width>
+        <height>21</height>
+       </size>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_3">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>477</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_3{background: #3A4F50 ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QToolButton" name="btn_closeadmi">
+       <property name="geometry">
+        <rect>
+         <x>440</x>
+         <y>10</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string>Cerrar</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#btn_closeadmi{
+font-family: Roboto;
+font-weight: normal;
+font-size: 14px;
+background-color: #d5d5d8;
+color: #6B7280;
+border-radius:11px
+}
+
+
+
+#btn_closeadmi:hover{background:#ce4d3a ;
+border-radius:11px; }
+
+
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/prefijoNuevo/close (1).png</normaloff>:/prefijoNuevo/close (1).png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>13</width>
+         <height>13</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="title_computador">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>301</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 22px;
+line-height: 40px;
+letter-spacing: 0.02em;
+color:#ffffff;</string>
+       </property>
+       <property name="text">
+        <string>Nueva Computadora</string>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>line_serial</tabstop>
+  <tabstop>line_placa</tabstop>
+  <tabstop>cbox_modelo</tabstop>
+  <tabstop>line_marca</tabstop>
+  <tabstop>cbox_compania</tabstop>
+  <tabstop>fecha_registro</tabstop>
+  <tabstop>check_fecha</tabstop>
+  <tabstop>line_ticket</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../image/source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

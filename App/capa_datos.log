@@ -1,0 +1,16 @@
+10:31:27 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IHDR' 16 13
+10:31:27 AM: DEBUG [PngImagePlugin.py:186] STREAM b'sBIT' 41 4
+10:31:27 AM: DEBUG [PngImagePlugin.py:698] b'sBIT' 41 4 (unknown)
+10:31:27 AM: DEBUG [PngImagePlugin.py:186] STREAM b'pHYs' 57 9
+10:31:27 AM: DEBUG [PngImagePlugin.py:186] STREAM b'tEXt' 78 25
+10:31:27 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IDAT' 115 24033
+10:32:29 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IHDR' 16 13
+10:32:29 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IDAT' 41 65536
+10:32:39 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IHDR' 16 13
+10:32:39 AM: DEBUG [PngImagePlugin.py:186] STREAM b'IDAT' 41 65536
+05:04:59 PM: DEBUG [PngImagePlugin.py:186] STREAM b'IHDR' 16 13
+05:04:59 PM: DEBUG [PngImagePlugin.py:186] STREAM b'sBIT' 41 4
+05:04:59 PM: DEBUG [PngImagePlugin.py:698] b'sBIT' 41 4 (unknown)
+05:04:59 PM: DEBUG [PngImagePlugin.py:186] STREAM b'pHYs' 57 9
+05:04:59 PM: DEBUG [PngImagePlugin.py:186] STREAM b'tEXt' 78 25
+05:04:59 PM: DEBUG [PngImagePlugin.py:186] STREAM b'IDAT' 115 24033
