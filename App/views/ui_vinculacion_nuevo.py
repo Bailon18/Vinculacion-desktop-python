@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'vinculacion_nuevoknYeFy.ui'
+## Form generated from reading UI file 'vinculacion_nuevoTdOkjR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -11,7 +11,6 @@
 from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
-
 
 from source.image import source
 
@@ -302,9 +301,13 @@ class Ui_NuevaVinculacion(object):
         self.line_identificacion.setEnabled(True)
         self.line_identificacion.setGeometry(QRect(10, 120, 205, 40))
         self.line_identificacion.setStyleSheet(u"")
-        self.line_identificacion.setMaxLength(30)
+        self.line_identificacion.setMaxLength(32767)
         self.line_identificacion.setFrame(True)
+        self.line_identificacion.setCursorPosition(0)
         self.line_identificacion.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
+        self.line_identificacion.setDragEnabled(False)
+        self.line_identificacion.setReadOnly(False)
+        self.line_identificacion.setCursorMoveStyle(Qt.LogicalMoveStyle)
         self.line_periodoacademico = QLineEdit(self.frame_2)
         self.line_periodoacademico.setObjectName(u"line_periodoacademico")
         self.line_periodoacademico.setEnabled(True)
@@ -532,6 +535,7 @@ class Ui_NuevaVinculacion(object):
         self.fecha_inicio.setDisplayFormat(QCoreApplication.translate("NuevaVinculacion", u"d-MM-yyyy", None))
         self.check_fecha.setText(QCoreApplication.translate("NuevaVinculacion", u"Hoy", None))
         self.lbl9_2.setText(QCoreApplication.translate("NuevaVinculacion", u"Tipo identificaci\u00f3n*", None))
+        self.line_identificacion.setText("")
         self.line_identificacion.setPlaceholderText(QCoreApplication.translate("NuevaVinculacion", u"ingrese identificacion", None))
         self.line_periodoacademico.setPlaceholderText(QCoreApplication.translate("NuevaVinculacion", u"Ingrese periodo acad...", None))
         self.cbo_tipo_identificacion.setItemText(0, QCoreApplication.translate("NuevaVinculacion", u"Cedula", None))

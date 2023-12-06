@@ -4,6 +4,7 @@ from PySide2 import QtWidgets , QtCore , QtGui
 from PySide2.QtCore import Qt
 
 from datetime import datetime
+from controllers.Modulo_utils.Funcion_validaciones import *
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
 
 from views.ui_vinculacion_nuevo import Ui_NuevaVinculacion
@@ -40,9 +41,25 @@ class Vinculacion(QtWidgets.QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint |QtCore.Qt.Tool | QtCore.Qt.MSWindowsFixedSizeDialogHint)
         self.vinculacion.btn_closeadmi.clicked.connect(lambda: self.cerrar_ui_vinculacion())
         
-    
-        
-        
+        # Para el QLineEdit line_identificacion
+        # Para el QLineEdit line_identificacion
+        val_identifiacion(self, self.vinculacion.line_identificacion)
+        mascara_identificacion(self.vinculacion.line_identificacion)
+        borrar_caracteres(self.vinculacion.line_identificacion, mascara_identificacion)
+
+
+        # Para el QLineEdit line_periodoacademico
+        val_periodo_academico(self, self.vinculacion.line_periodoacademico)
+        mascara_periodo_academico(self.vinculacion.line_periodoacademico)
+        borrar_caracteres(self.vinculacion.line_periodoacademico, mascara_periodo_academico)
+
+        # Para el QLineEdit line_codigoies
+        val_codigo_ies(self, self.vinculacion.line_codigoies)
+        mascara_codigo_ies(self.vinculacion.line_codigoies)
+        borrar_caracteres(self.vinculacion.line_codigoies, mascara_codigo_ies)
+
+
+                
 
     def keyPressEvent(self, event):
   
@@ -63,29 +80,24 @@ class Vinculacion(QtWidgets.QDialog):
         else:
             super().keyPressEvent(qKeyEvent)
             
+    def llenar_combobox(self, combobox, lista, longitud_maxima):
+        for elemento in lista:
+            id_elemento, nombre_elemento = elemento
+            texto_truncado = nombre_elemento[:longitud_maxima]
+            combobox.addItem(texto_truncado, userData=id_elemento)
+            combobox.setItemData(combobox.count() - 1, nombre_elemento, Qt.ToolTipRole)
+
     def configuracion_ventana(self):
-        
         lista_carrera, lista_institucion, lista_proyectos, lista_tutores = self.conec_base.getDatosProcess("ObtenerDatos")
         
-         # Llenar los QComboBox con las listas correspondientes
-        for elemento in lista_carrera:
-            id_elemento, nombre_elemento = elemento
-            self.vinculacion.cbox_carrera.addItem(nombre_elemento[:30])  # Mostrar solo los primeros 50 caracteres
-            self.vinculacion.cbox_carrera.setItemData(self.vinculacion.cbox_carrera.count() - 1, nombre_elemento, Qt.ToolTipRole)  # Establecer tooltip
+        self.llenar_combobox(self.vinculacion.cbox_carrera, lista_carrera, 30)
+        self.llenar_combobox(self.vinculacion.cbo_institucion, lista_institucion, 30)
+        self.llenar_combobox(self.vinculacion.cbo_proyectos, lista_proyectos, 100)
+        self.llenar_combobox(self.vinculacion.cbo_tutor, lista_tutores, 30)
         
-        for elemento in lista_institucion:
-            id_elemento, nombre_elemento = elemento
-            self.vinculacion.cbo_institucion.addItem(f'{nombre_elemento}', userData=id_elemento)
+    
         
-        for elemento in lista_proyectos:
-            id_elemento, nombre_elemento = elemento
-            self.vinculacion.cbo_proyectos.addItem(f'{nombre_elemento}', userData=id_elemento)
-        
-        for elemento in lista_tutores:
-            id_elemento, nombre_elemento = elemento
-            self.vinculacion.cbo_tutor.addItem(f'{nombre_elemento}', userData=id_elemento)
-        
- 
+
     # def evento_fecha(self):
         
     #     if self.vinculacion.check_fecha.isChecked():
