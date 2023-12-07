@@ -125,11 +125,23 @@ def estilo(parent):
     parent.venedit.bnt_ojoVis.setStyle(estiloDefecto)
 
 
+# def crearbotoneslista(stilo,icono,tooltip):
+    
+#     btn_nuevo = QtWidgets.QToolButton()
+    
+#     btn_nuevo.setMinimumSize(QtCore.QSize(55, 54))
+#     btn_nuevo.setStyleSheet(stilo)
+#     btn_nuevo.setIcon(QtGui.QIcon(icono))
+#     btn_nuevo.setToolTip(tooltip)
+#     btn_nuevo.setCursor(QtGui.QCursor(QtGui.Qt.PointingHandCursor))
+
+#     return btn_nuevo
+
+# tabla principal
 def crearbotoneslista(stilo,icono,tooltip):
     
     btn_nuevo = QtWidgets.QToolButton()
-    
-    btn_nuevo.setMinimumSize(QtCore.QSize(55, 54))
+    btn_nuevo.setMinimumSize(QtCore.QSize(35, 34))
     btn_nuevo.setStyleSheet(stilo)
     btn_nuevo.setIcon(QtGui.QIcon(icono))
     btn_nuevo.setToolTip(tooltip)
@@ -196,9 +208,7 @@ def llenar_tabla_vinculacion(parent,tabla,dato):
                 tabla.setItem(fila,columna, QtWidgets.QTableWidgetItem(str(dato[fila][columna])))
                 tabla.item(fila,columna).setTextAlignment(QtCore.Qt.AlignCenter|QtCore.Qt.AlignVCenter)
         
-
-                
-                
+          
 def btn_editar(boton,fila,tabla,parent):
     
     """eventos  del boton editar """
@@ -209,7 +219,7 @@ def btn_eliminar(boton,fila,tabla,parent):
     
     """eventos  del boton eleminar """
     boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) # acciona a realizar
     
 def btn_pdf(boton,fila,tabla,parent):
     
@@ -221,98 +231,57 @@ def btn_seguimiento(boton,fila,tabla,parent):
     
     """eventos  del boton seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
-    
-    
-    
-    
-    
-    
+    boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) # acciona a realizar
     
 def btn_editar_acciones(fila,parent):
     
-    print("Accion")
-    # from controllers.Modulo_principal.Modulo_general import UsuarioEdit
-    
+    from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
 
-    # parent.dniseleccionado = parent.venPri.tabla_usuario.item(fila, 0).text()
+    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    Vinculacion(vinculacion_id, "actualizar", parent).exec_()
 
-    # parent.raizOpacidad.resize(parent.width(), parent.height())
-    # parent.raizOpacidad.show()
-    # UsuarioEdit(parent).exec_()
-        
 
-# tabla principal
-def crearbotoneslista(stilo,icono,tooltip):
-    
-    btn_nuevo = QtWidgets.QToolButton()
-    btn_nuevo.setMinimumSize(QtCore.QSize(35, 34))
-    btn_nuevo.setStyleSheet(stilo)
-    btn_nuevo.setIcon(QtGui.QIcon(icono))
-    btn_nuevo.setToolTip(tooltip)
-    btn_nuevo.setCursor(QtGui.QCursor(QtGui.Qt.PointingHandCursor))
+def btn_eliminar_acciones(fila, parent):
+    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 2).text()
 
-    return btn_nuevo
+    mensaje = f"¿Está seguro(a) de eliminar la vinculación de {nombre_estudiante.upper()}? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
 
-def cargatablaComputador(parent,tabla,dato):
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
 
+    if respuesta == QtWidgets.QMessageBox.Yes:
+        parent.conec_base.getDatosProcess_condicion("EliminarVinculacion", (vinculacion_id,))
+        parent.listar_vinculacion()
+
+        QtWidgets.QMessageBox.information(parent, "Mensaje", f"La vinculación de {nombre_estudiante.upper()} se ha eliminado exitosamente.")
+
+def btn_seguimiento_acciones(fila, parent):
+
+    from controllers.Modulo_principal.seguimiento_admin import Seguimiento_admin
+
+    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 2).text()
+    nombre_tutor = parent.venPri.tabla_principal.item(fila, 5).text()
+
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    Seguimiento_admin([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
+
+def cargar_tabla(tabla,dato):
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(9)
+        tabla.setColumnCount(len(dato[0]))
    
         for fila in range(len(dato)):
-  
-            btn_editar = crearbotoneslista(
-                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
-                            QToolButton:hover{background-color:#cbe1e3}""",   
-                icono = u':/iconbar/editar.png',#'image/editar.png',
-                tooltip = 'Editar Computador')
-
-
-            layout = QtWidgets.QHBoxLayout()
-            layout.setContentsMargins(1,1,1,1)
-            layout.setSpacing(3)
-            layout.addWidget(btn_editar)
-
-    
-            widget = QtWidgets.QWidget()
-            widget.setLayout(layout)
-
-            editar_computador(btn_editar,fila,tabla,parent)
-
-            tabla.setCellWidget(fila ,8,widget)
-            
             for columna in range(len(dato[fila])):
-                
-                # La columna de modelos utilizamos  el diccionario de modelo para obtener el nombre apartir del id
-                if columna == 4:
-                    dato[fila][columna] = parent.modelos[dato[fila][columna]]
-                    
-                # La columna de sedes utilizamos  el diccionario de modelo para obtener el nombre apartir del id
-                if columna == 6:
-                    dato[fila][columna] = parent.compania[dato[fila][columna]]
-                
                 tabla.setItem(fila,columna, QtWidgets.QTableWidgetItem(str(dato[fila][columna])))
                 # centrar item
                 tabla.item(fila,columna).setTextAlignment(QtCore.Qt.AlignCenter|QtCore.Qt.AlignVCenter)
-                
-def editar_computador(btn_editar,fila,tabla,parent):
-    
-    btn_editar.clicked.connect(lambda:tabla.selectRow(fila)) # selecciona la fila
-    btn_editar.clicked.connect(lambda:editar_computadora(parent,fila,tabla)) # Modo 
 
+    else:
+        tabla.setRowCount(0)
 
-def editar_computadora(parent,fila,tabla):
-    
-    from controllers.Modulo_computador.Modulo_computador import Computador
-    
-    parent.raizOpacidad.resize(parent.width(), parent.height())
-    parent.raizOpacidad.show()
-
-    # Obtenemos el serial
-    idComputadora = tabla.item(fila,0).text()
-    
-    computadora = parent.conec_base.getDatosProcess_condicion('sp_busquedaComputador', [parent.sede_actual,'%d-%m-%Y', idComputadora])
-    
-    Computador(computadora , 2, parent).exec_()

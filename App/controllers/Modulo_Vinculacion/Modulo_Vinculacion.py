@@ -2,6 +2,9 @@
 from sys import version
 from PySide2 import QtWidgets , QtCore , QtGui
 from PySide2.QtCore import Qt
+from PySide2.QtWidgets import QMessageBox
+
+import re
 
 from datetime import datetime
 from controllers.Modulo_utils.Funcion_validaciones import *
@@ -18,7 +21,7 @@ from db.Modulo_base import BaseDatos
 
 class Vinculacion(QtWidgets.QDialog):
 
-    def __init__(self, datos=[] , modo="" , parent=None):
+    def __init__(self, vinculacion_id = None , modo="" , parent=None):
         
         super(Vinculacion, self).__init__(parent)
         self.vinculacion = Ui_NuevaVinculacion()
@@ -29,8 +32,13 @@ class Vinculacion(QtWidgets.QDialog):
 
         self.parent = parent
         
-        self.datos = datos
+        self.vinculacion_id = vinculacion_id 
         self.modo = modo
+
+        if self.vinculacion_id and self.modo == "actualizar":
+            self.cargar_datos_vinculacion(self.vinculacion_id)
+            self.vinculacion.vinculacion_titulo.setText('Actualizar Vinculación')
+            self.vinculacion.btn_guardar.setText('Actualizar')
         
         # Evento Opacidad -----------------------
         self.raizOpacidad = Clase_Opacidad(self.parent)
@@ -41,23 +49,21 @@ class Vinculacion(QtWidgets.QDialog):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint |QtCore.Qt.Tool | QtCore.Qt.MSWindowsFixedSizeDialogHint)
         self.vinculacion.btn_closeadmi.clicked.connect(lambda: self.cerrar_ui_vinculacion())
         
-        # Para el QLineEdit line_identificacion
-        # Para el QLineEdit line_identificacion
+
+        
+        # Validaciones y mascaras para los inputs
+        val_nombre_apellido(self, self.vinculacion.line_nombreapellidos)
         val_identifiacion(self, self.vinculacion.line_identificacion)
         mascara_identificacion(self.vinculacion.line_identificacion)
-        borrar_caracteres(self.vinculacion.line_identificacion, mascara_identificacion)
-
-
-        # Para el QLineEdit line_periodoacademico
         val_periodo_academico(self, self.vinculacion.line_periodoacademico)
         mascara_periodo_academico(self.vinculacion.line_periodoacademico)
-        borrar_caracteres(self.vinculacion.line_periodoacademico, mascara_periodo_academico)
-
-        # Para el QLineEdit line_codigoies
+        val_codigo_campoespecifico(self, self.vinculacion.line_campoespecifico)
+        mascara_campoespecifico(self.vinculacion.line_campoespecifico)
         val_codigo_ies(self, self.vinculacion.line_codigoies)
         mascara_codigo_ies(self.vinculacion.line_codigoies)
-        borrar_caracteres(self.vinculacion.line_codigoies, mascara_codigo_ies)
 
+        # boton guardar
+        self.vinculacion.btn_guardar.clicked.connect(lambda: self.obtener_campos_vinculacion())
 
                 
 
@@ -94,170 +100,143 @@ class Vinculacion(QtWidgets.QDialog):
         self.llenar_combobox(self.vinculacion.cbo_institucion, lista_institucion, 30)
         self.llenar_combobox(self.vinculacion.cbo_proyectos, lista_proyectos, 100)
         self.llenar_combobox(self.vinculacion.cbo_tutor, lista_tutores, 30)
-        
-    
-        
 
-    # def evento_fecha(self):
+    def obtener_campos_vinculacion(self):
         
-    #     if self.vinculacion.check_fecha.isChecked():
-    #         self.vinculacion.fecha_registro.setDate(QtCore.QDate.fromString(self.fecha_actual, "dd-MM-yyyy"))
+        nombre_apellidos = self.vinculacion.line_nombreapellidos.text().strip();
+        tipo_identificacion = self.vinculacion.cbo_tipo_identificacion.currentText();
+        identificacion = self.vinculacion.line_identificacion.text();
+        carrera = self.vinculacion.cbox_carrera.itemData(self.vinculacion.cbox_carrera.currentIndex()); 
+        institucion = self.vinculacion.cbo_institucion.itemData(self.vinculacion.cbo_institucion.currentIndex()); 
+        periodo_academico = self.vinculacion.line_periodoacademico.text()
+        fecha_inicio = self.vinculacion.fecha_inicio.date().toString("yyyy-dd-MM")
+        fecha_final = self.vinculacion.fecha_final.date().toString("yyyy-dd-MM")
+        numero_horas = self.vinculacion.spb_numerohoras.value()
+        codigo_ies = self.vinculacion.line_codigoies.text()
+        campo_especifico = self.vinculacion.line_campoespecifico.text()
+        tutor_asignado = self.vinculacion.cbo_tutor.itemData(self.vinculacion.cbo_tutor.currentIndex())
+        proyecto  = self.vinculacion.cbo_proyectos.itemData(self.vinculacion.cbo_proyectos.currentIndex())
 
-    # def cargaEdicionCompu(self, datos):
 
-    #     datos =[x for x in datos[0][0]]
-        
-    #     self.vinculacion.line_id.setText(str(datos[0]))
-    
-    #     self.vinculacion.fecha_registro.setDate(QtCore.QDate.fromString(datos[1], "dd-MM-yyyy"))
+        # Realizar las validaciones
+        mensaje_error = ""
+
+        if not nombre_apellidos:
+            mensaje_error += "- Ingrese el nombre y apellidos.\n"
+
+        if not tipo_identificacion:
+            mensaje_error += "- Seleccione un tipo de identificación.\n"
+
+        if len(identificacion) != 11 or identificacion[9] != '-':
+            mensaje_error += "- Ingrese una identificacion válido (ejemplo: 112233456-2).\n"
+
+        if not carrera:
+            mensaje_error += "- Seleccione una carrera.\n"
+
+        if not institucion:
+            mensaje_error += "- Seleccione una institución.\n"
+
+        patron_periodo_academico = re.compile(r'^P[1-2]-\d{4}$')
+        if not periodo_academico or not patron_periodo_academico.match(periodo_academico):
+            mensaje_error += "- Ingrese un período académico válido (ejemplo: P1-1222).\n"
+
+
+        if not fecha_inicio:
+            mensaje_error += "- Ingrese una fecha de inicio válida.\n"
+
+        if not fecha_final:
+            mensaje_error += "- Ingrese una fecha final válida.\n"
+
+        # if numero_horas <= 0:
+        #     mensaje_error += "- Ingrese un número válido de horas.\n"
+
+        if not codigo_ies or len(codigo_ies) != 4:
+            mensaje_error += "- El código de IES debe tener 4 dígitos.\n"
+
+
+        formato_correcto = re.match(r'^[1-9]?\d-[1-9]?\d[A-Z]$', campo_especifico)
+        if not campo_especifico or not formato_correcto:
+            mensaje_error += "- Ingrese un campo específico válido (ejemplo: 1-6A).\n"
+
+
+        if not tutor_asignado:
+            mensaje_error += "- Seleccione un tutor.\n"
+
+        if mensaje_error:
+            # Si hay errores, muestra el mensaje de error en un QMessageBox
+            QMessageBox.critical(self, "Error", "Revise los campos:\n" + mensaje_error)
+        else:
+
+            datos = [tipo_identificacion, identificacion, nombre_apellidos, carrera , periodo_academico,
+                        codigo_ies, fecha_inicio, fecha_final, numero_horas, campo_especifico, tutor_asignado, institucion, proyecto]
+
+            if self.modo == "actualizar":
+                # Lógica para actualizar los datos de la vinculación existente
+                datos.append(self.vinculacion_id)
+                self.actualizar_vinculacion(datos)
+            else:
+                # Lógica para crear una nueva vinculación
+                self.crear_nueva_vinculacion(datos)
+
+
+            # Si no hay errores, continuar con el procesamiento
+            QMessageBox.information(self, "Correcto", "Datos válidos. Continuar con el procesamiento...")
+
+    def cargar_datos_vinculacion(self, vinculacion_id):
+        datos = self.conec_base.getDatosProcess_condicion("ObtenerDatosVinculacion", (vinculacion_id,))
  
-    #     self.vinculacion.line_serial.setText(datos[2])
-    #     self.vinculacion.line_placa.setText(datos[3])
-    #     # MODELOS {3: 'Dell', 4: 'Lenovo'}
-    #     # modelos -> id
-    #     self.vinculacion.cbox_modelo.setCurrentText(self.modelos.get(datos[4]))
-    #     self.vinculacion.cbox_compania.setCurrentText(self.compania.get(datos[6]))
-    
-    #     self.vinculacion.line_marca.setText(datos[5])
-    #     self.vinculacion.line_ticket.setText(datos[7])
+        if datos:
+            datos = datos[0][0]
 
-    # def cargaComputador(self, rango):
-        
-    #     """
-    #     Metodo que tiene por funcion : listar el registro de computadoras condicionado por el sede
-    #     """
-        
-    #     computadoras = self.conec_base.getDatosProcess_condicion('sp_listaComputador', [self.sede_actual,'%d-%m-%Y', rango])
-    #     computadoras = [list(x) for x in computadoras[0]]
-    #     return computadoras
-          
-    # def validar(self,texto, posicion):
-        
-        
-        
-    #     consultas = {1:"SELECT serial FROM computador where %s in (select serial FROM computador)",
-    #                  2:"SELECT placa FROM computador where %s in (SELECT placa FROM computador)",
-    #                  3:"SELECT ticket FROM computador where %s in (SELECT ticket FROM computador)"}
-        
-    #     objecto = {1:self.vinculacion.line_serial, 2:self.vinculacion.line_placa, 3:self.vinculacion.line_ticket, 4:self.vinculacion.line_marca}
-    #     lbl_errores = {1:self.vinculacion.lbl_serial, 2:self.vinculacion.lbl_placa, 3:self.vinculacion.lbl_ticket, 4:self.vinculacion.lbl_marca}
-    #     mensajes = {1:"Número serial ingresado ya existe!", 2:"Número placa ingresado ya existe!", 3:"Número ticket ingresado ya existe!"}
-        
-    #     if texto:
-        
-    #         if posicion in [1, 2, 3,]:
-    #             consulta =self.conec_base.getDatos_condicion(consultas.get(posicion),(texto))
-        
-    #         if(posicion != 4 and consulta):
-                
-    #             self.lista_validacion.append(False)
-    #             objecto.get(posicion).setStyleSheet('border: 2px solid red')
-    #             lbl_errores.get(posicion).setText(mensajes.get(posicion))
-                   
-    #         else:
-    #             self.lista_validacion.append(True)
-    #             lbl_errores.get(posicion).setText("")
-    #             objecto.get(posicion).setStyleSheet('border: 2px solid green')     
-    #     else:
-    #         lbl_errores.get(posicion).setText("")
-    #         objecto.get(posicion).setStyleSheet('QLineEdit::focus{background: #FFFFFF;border: 2px solid #344647;border-radius: 8px;}')
-            
-    # def guardarComputador(self):
-        
-    #     # guardamos datos en las variables
-    #     id = self.vinculacion.line_id.text()
-    #     fecha_registro = self.vinculacion.fecha_registro.date().toString("yyyy-MM-dd")
-    #     sede_id = self.sede_actual
-    #     seriall = self.vinculacion.line_serial.text().strip()
-    #     placa = self.vinculacion.line_placa.text().strip()
-    #     marca = self.vinculacion.line_marca.text().strip()
-    #     modelo_id = self.vinculacion.cbox_modelo.itemData(self.vinculacion.cbox_modelo.currentIndex())
-    #     compania_id = self.vinculacion.cbox_compania.itemData(self.vinculacion.cbox_compania.currentIndex())
-    #     ticket = self.vinculacion.line_ticket.text().strip()
-        
+            self.vinculacion.line_nombreapellidos.setText(str(datos[0]))
+            self.vinculacion.cbo_tipo_identificacion.setCurrentText(datos[1])
+            self.vinculacion.line_identificacion.setText(str(datos[2]))
+            self.vinculacion.line_periodoacademico.setText(str(datos[5]))
+            self.vinculacion.fecha_inicio.setDate(datos[6])
+            self.vinculacion.fecha_final.setDate(datos[7])
+            self.vinculacion.spb_numerohoras.setValue(datos[8])
+            self.vinculacion.line_codigoies.setText(str(datos[9]))
+            self.vinculacion.line_campoespecifico.setText(str(datos[10]))
 
-    #     # consultas las serial , placa , ticket
-    #     errores = True
-                
-    #     if seriall == '':
-    #         errores = False
-    #         self.vinculacion.line_serial.setStyleSheet('border: 2px solid red')
-    #         self.vinculacion.lbl_serial.setText("Campo serial es obligatorio")
-            
-    #     if placa == '':
-    #         errores = False
-    #         self.vinculacion.line_placa.setStyleSheet('border: 2px solid red')
-    #         self.vinculacion.lbl_placa.setText("Campo placa es obligatorio")
-            
-    #     if ticket == '':
-    #         errores = False
-    #         self.vinculacion.line_ticket.setStyleSheet('border: 2px solid red')
-    #         self.vinculacion.lbl_ticket.setText("Campo ticket es obligatorio")
-            
-    #     if marca == '':
-    #         errores = False
-    #         self.vinculacion.line_marca.setStyleSheet('border: 2px solid red')
-    #         self.vinculacion.lbl_marca.setText("Campo marca es obligatorio")
-        
-    #     print("VALIDACION ",self.lista_validacion)
-        
-    #     return
+            # Obteniendo los identificadores de los datos
+            codigo_carrera = datos[3]
+            codigo_institucion = datos[4]
+            identificacion_tutor = datos[11]
+            id_proyecto = datos[12]
 
-    #     if errores and self.validacion:
-            
-    #         if self.modo == 1:
-                
-    #             consulta = """
-    #                         INSERT INTO computador(serial, marca, placa, fecha_registro, ticket, modelo_id, compania_id, sede_id)
-    #                         VALUES(%s, %s, %s, %s, %s, %s, %s, %s)
-    #                         """
-    #             self.conec_base.setDatos(consulta, [seriall, marca, placa ,fecha_registro, ticket, modelo_id, compania_id, sede_id])
-    #         else:
-    #             consulta = """
-    #                         UPDATE computador SET serial=%s, marca=%s, placa=%s, fecha_registro=%s, ticket=%s, modelo_id=%s,
-    #                         compania_id=%s, sede_id=%s WHERE id = %s
-    #                         """
-    #             self.conec_base.updateDatos(consulta, [seriall, marca, placa ,fecha_registro, ticket, modelo_id, compania_id, sede_id, id])
-            
-    #         # Cargamos la tabla con el nuevo computador
-    #         rango = self.parent.venPri.cbox_rango.currentText()
-    #         cargatablaComputador(self.parent, self.parent.venPri.tabla_principal, self.cargaComputador(rango))
-            
-    #         QtWidgets.QMessageBox.information(self, 'Computadora', 'La computadora se guardo correctamente.')
-            
-    #         self.parent.raizOpacidad.close()
-    #         self.close()
-            
-    # def configuracion(self):
-    #     self.vinculacion.line_id.hide()
-        
-    #     modelos , compania , sede_actual = self.conec_base.getDatosProcess_condicion('sp_cargarComputador', [self.parent.dni]) 
-        
-    #     self.sede_actual = sede_actual[0][0]
-        
-    #     self.vinculacion.cbox_modelo.clear()
-    #     for dato_mode in modelos:
-    #         self.vinculacion.cbox_modelo.addItem(dato_mode[1], dato_mode[0])
-        
-    #     self.vinculacion.cbox_compania.clear()
-    #     for dato_comp in compania:
-    #         self.vinculacion.cbox_compania.addItem(dato_comp[1], dato_comp[0])
-            
-    #     # Cargamos los modelos , companias convertimos a diccionario
+            # Buscando el índice correspondiente al identificador en los ComboBoxes
+            self.set_combobox_by_user_data(self.vinculacion.cbox_carrera, codigo_carrera)
+            self.set_combobox_by_user_data(self.vinculacion.cbo_institucion, codigo_institucion)
+            self.set_combobox_by_user_data(self.vinculacion.cbo_tutor, identificacion_tutor)
+            self.set_combobox_by_user_data(self.vinculacion.cbo_proyectos, id_proyecto)
 
-    #     self.modelos=dict(zip([i[0] for i in modelos],[i[1] for i in modelos]))
-    #     self.compania=dict(zip([i[0] for i in compania],[i[1] for i in compania]))
+    def set_combobox_by_user_data(self, combobox, user_data):
+        index = combobox.findData(user_data, role=Qt.UserRole) 
+        if index != -1:
+            combobox.setCurrentIndex(index)
+
+
+    def actualizar_vinculacion(self, dato_vinculacion):
+        try:
+            self.conec_base.setDatosProcess('ActualizarEstudianteYVinculacion', dato_vinculacion)
+            QMessageBox.information(self, "Éxito", "Vinculación fue actualizado exitosamente.")
+            self.parent.listar_vinculacion()
+            self.parent.raizOpacidad.close()
+            self.close()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error al actualizar vinculación: {str(e)}")
         
-    #     fecha = datetime.now()
-    #     self.fecha_actual = fecha.strftime('%d-%m-%Y')
-    #     self.vinculacion.fecha_registro.setDate(QtCore.QDate.fromString(self.fecha_actual, "dd-MM-yyyy"))
-        
-    #     # si la ventana es edicion -> llamamos al metodo de cargar datos
-    #     if self.modo == 2:
-    #         self.vinculacion.title_computador.setText('Edición Computadora')
-    #         self.vinculacion.btn_guardar.setText('Actualizar')
-    #         self.cargaEdicionCompu(self.datos)
-            
+    def crear_nueva_vinculacion(self, dato_vinculacion):
+        try:
+            self.conec_base.setDatosProcess('InsertarEstudianteYVinculacion', dato_vinculacion)
+            QMessageBox.information(self, "Éxito", "Nueva vinculación creada exitosamente.")
+            self.parent.listar_vinculacion()
+            self.parent.raizOpacidad.close()
+            self.close()
+        except Exception as e:
+            QMessageBox.critical(self, "Error", f"Error al crear la nueva vinculación: {str(e)}")
+
+
 
         
         

@@ -55,6 +55,29 @@ VALUES
     (5, 'P3-2023', '1005', '2023-03-15', '2023-08-15', 190, '5-6E', 2, 2, 1);
 
 
+-- Para el estudiante 1
+INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
+VALUES (1, 'Observación 1 para el estudiante 1', 1),
+       (1, 'Observación 2 para el estudiante 1', 1),
+       (1, 'Observación 3 para el estudiante 1', 1),
+       (1, 'Observación 4 para el estudiante 1', 1);
+
+-- Para el estudiante 2
+INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
+VALUES (2, 'Observación 1 para el estudiante 2', 2),
+       (2, 'Observación 2 para el estudiante 2', 2),
+       (2, 'Observación 3 para el estudiante 2', 2),
+       (2, 'Observación 4 para el estudiante 2', 2);
+
+-- Para el estudiante 3
+INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
+VALUES (3, 'Observación 1 para el estudiante 3', 3),
+       (3, 'Observación 2 para el estudiante 3', 3),
+       (3, 'Observación 3 para el estudiante 3', 3),
+       (3, 'Observación 4 para el estudiante 3', 3);
+
+
+
 DROP PROCEDURE IF EXISTS ListarVinculaciones;
 DELIMITER $$
 CREATE PROCEDURE ListarVinculaciones(
@@ -113,11 +136,169 @@ BEGIN
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS ObtenerDatos;
+DELIMITER $$
+CREATE PROCEDURE ObtenerDatos()
+BEGIN
+	
+    SELECT id_carrera, nombre_carrera FROM carreras;
+    SELECT id, nombre_institucion FROM instituciones_educativas;
+    SELECT id_proyecto, nombre_proyecto FROM  proyectos;
+    SELECT user_id , CONCAT(nombre, ' ', apellido) as tutor FROM usuarios WHERE  role_id = 2;
+
+END $$
+DELIMITER ;
 
 
-CALL ListarVinculaciones(2);
+DROP PROCEDURE IF EXISTS ObtenerDatosVinculacion;
+DELIMITER $$
+CREATE PROCEDURE ObtenerDatosVinculacion(IN vinculacion_id INT)
+BEGIN
+    SELECT 
+        e.nombres_apellidos, 
+        e.tipo_identificacion, 
+        e.identificacion, 
+        e.codigo_carrera, 
+        v.codigo_institucion, 
+        v.periodo_academico, 
+        v.fecha_inicio, 
+        v.fecha_fin,  
+        v.numero_horas, 
+        v.codigo_ies, 
+        v.campo_especifico, 
+        v.identificacion_tutor, 
+        v.id_proyecto
+    FROM vinculaciones v
+    INNER JOIN estudiantes e ON v.estudiante_id = e.estudiante_id
+    WHERE v.vinculacion_id = vinculacion_id;
+END $$
+DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS EliminarVinculacion;
+DELIMITER $$
+CREATE PROCEDURE EliminarVinculacion(
+    IN vinculacion_id_param INT
+)
+BEGIN
+    DECLARE estudiante_id_val INT;
+
+    -- Obtener el ID del estudiante asociado a la vinculación
+    SELECT estudiante_id INTO estudiante_id_val FROM vinculaciones WHERE vinculacion_id = vinculacion_id_param;
+
+    -- Eliminar el registro del estudiante
+    DELETE FROM estudiantes WHERE estudiante_id = estudiante_id_val;
+
+    -- Eliminar los registros de seguimientos asociados a la vinculación
+    DELETE FROM seguimientos WHERE vinculacion_id = vinculacion_id_param;
+    
+    -- Finalmente, eliminar la vinculación
+    DELETE FROM vinculaciones WHERE vinculacion_id = vinculacion_id_param;
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS InsertarEstudianteYVinculacion;
+DELIMITER $$
+CREATE PROCEDURE InsertarEstudianteYVinculacion(
+    IN tipo_identificacion_param VARCHAR(50),
+    IN identificacion_param VARCHAR(50),
+    IN nombres_apellidos_param VARCHAR(255),
+    IN codigo_carrera_param INT,
+    IN periodo_academico_param VARCHAR(50),
+    IN codigo_ies_param INT,
+    IN fecha_inicio_param DATE,
+    IN fecha_fin_param DATE,
+    IN numero_horas_param INT,
+    IN campo_especifico_param VARCHAR(255),
+    IN identificacion_tutor_param INT,
+    IN codigo_institucion_param INT,
+    IN id_proyecto_param INT
+)
+BEGIN
+    DECLARE estudiante_id_param INT;
+
+    -- Insertar el estudiante
+    INSERT INTO estudiantes (tipo_identificacion, identificacion, nombres_apellidos, codigo_carrera)
+    VALUES (tipo_identificacion_param, identificacion_param, nombres_apellidos_param, codigo_carrera_param);
+
+    -- Obtener el ID del estudiante insertado
+    SET estudiante_id_param = LAST_INSERT_ID();
+
+    -- Insertar la vinculación asociada al estudiante
+    INSERT INTO vinculaciones (estudiante_id, periodo_academico, codigo_ies, fecha_inicio, fecha_fin, numero_horas, campo_especifico, identificacion_tutor, codigo_institucion, id_proyecto)
+    VALUES (estudiante_id_param, periodo_academico_param, codigo_ies_param, fecha_inicio_param, fecha_fin_param, numero_horas_param, campo_especifico_param, identificacion_tutor_param, codigo_institucion_param, id_proyecto_param);
+    
+    -- Confirmar el final de la transacción
+    COMMIT;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS ActualizarEstudianteYVinculacion;
+DELIMITER $$
+CREATE PROCEDURE ActualizarEstudianteYVinculacion(
+    IN tipo_identificacion_param VARCHAR(50),
+    IN identificacion_param VARCHAR(50),
+    IN nombres_apellidos_param VARCHAR(255),
+    IN codigo_carrera_param INT,
+    IN periodo_academico_param VARCHAR(50),
+    IN codigo_ies_param INT,
+    IN fecha_inicio_param DATE,
+    IN fecha_fin_param DATE,
+    IN numero_horas_param INT,
+    IN campo_especifico_param VARCHAR(255),
+    IN identificacion_tutor_param INT,
+    IN codigo_institucion_param INT,
+    IN id_proyecto_param INT,
+	IN vinculacion_id_param INT
+)
+BEGIN
+    DECLARE estudiante_id_param INT;
+
+    -- Obtener el ID del estudiante asociado a la vinculación
+    SELECT estudiante_id INTO estudiante_id_param
+    FROM vinculaciones
+    WHERE vinculacion_id = vinculacion_id_param;
+
+    -- Actualizar los datos del estudiante
+    UPDATE estudiantes
+    SET tipo_identificacion = tipo_identificacion_param,
+        identificacion = identificacion_param,
+        nombres_apellidos = nombres_apellidos_param,
+        codigo_carrera = codigo_carrera_param
+    WHERE estudiante_id = estudiante_id_param;
+
+    -- Actualizar los datos de la vinculación asociada al estudiante
+    UPDATE vinculaciones
+    SET periodo_academico = periodo_academico_param,
+        codigo_ies = codigo_ies_param,
+        fecha_inicio = fecha_inicio_param,
+        fecha_fin = fecha_fin_param,
+        numero_horas = numero_horas_param,
+        campo_especifico = campo_especifico_param,
+        identificacion_tutor = identificacion_tutor_param,
+        codigo_institucion = codigo_institucion_param,
+        id_proyecto = id_proyecto_param
+    WHERE vinculacion_id = vinculacion_id_param;
+    
+    -- Confirmar el final de la transacción
+    COMMIT;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS ObtenerSeguimientosPorVinculacionId;
+DELIMITER $$
+CREATE PROCEDURE ObtenerSeguimientosPorVinculacionId(
+    IN vinculacion_id_param INT
+)
+BEGIN
+    SELECT fecha_seguimiento, observaciones
+    FROM seguimientos
+    WHERE vinculacion_id = vinculacion_id_param;
+END $$
+DELIMITER ;
 
 
 

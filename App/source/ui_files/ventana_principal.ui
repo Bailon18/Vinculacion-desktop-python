@@ -1080,7 +1080,7 @@ QComboBox::down-arrow
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="pag1">
                 <property name="styleSheet">
@@ -2057,6 +2057,30 @@ border-radius: 10px;}</string>
                        <property name="bottomMargin">
                         <number>12</number>
                        </property>
+                       <item row="2" column="0">
+                        <widget class="QFrame" name="frame_12">
+                         <property name="frameShadow">
+                          <enum>QFrame::Plain</enum>
+                         </property>
+                         <layout class="QGridLayout" name="gridLayout_14">
+                          <property name="leftMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="topMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="rightMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="bottomMargin">
+                           <number>0</number>
+                          </property>
+                          <property name="spacing">
+                           <number>0</number>
+                          </property>
+                         </layout>
+                        </widget>
+                       </item>
                        <item row="1" column="0">
                         <spacer name="verticalSpacer_13">
                          <property name="orientation">
@@ -2398,231 +2422,6 @@ border-radius: 8px; }
                            </spacer>
                           </item>
                          </layout>
-                        </widget>
-                       </item>
-                       <item row="2" column="0">
-                        <widget class="QFrame" name="frame_12">
-                         <property name="frameShadow">
-                          <enum>QFrame::Plain</enum>
-                         </property>
-                         <layout class="QGridLayout" name="gridLayout_14">
-                          <property name="leftMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="topMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="rightMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="bottomMargin">
-                           <number>0</number>
-                          </property>
-                          <property name="spacing">
-                           <number>0</number>
-                          </property>
-                         </layout>
-                        </widget>
-                       </item>
-                       <item row="3" column="0">
-                        <widget class="QTableWidget" name="tabla_usuario">
-                         <property name="styleSheet">
-                          <string notr="true">QTableWidget {
-outline: 0px;
-border:5px solid #f3f4f6;
-border-radius:15px;
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-line-height: 19px;
-letter-spacing: 0.02em;
-color: #6B7280;
-}
-
-
-/* cabezera*/
-QHeaderView::section {
-background-color:#f1f2f3;
-border-style: none;
-height:40px;
-font-family: &quot;Roboto&quot;;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #6B7280;
-
-
-}
-
-
-QHeaderView::section:horizontal{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #212529;
-
-}
-
-
-QTableWidget::disabled{
-    background-color:#acacac;
-    border: 1px solid #32414B;
-    color: #656565;
-    gridline-color: #656565;}
-
-/*bordes internos*/
-QTableWidget::item {
-	border-bottom: 3px solid #f3f4f6;
-
-}
-
-QTableWidget:item:selected{
-	background:white;/*color-seleccion*/
-color: #2c3d3e;
-}
-
-
-
-
-
-/*SCROLL VERTICAL*/
-
-QScrollBar:vertical{
-	background: #f3f4f6;
-	width: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:vertical{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 0px 0px 3px 2px;
-}
-
-QScrollBar::add-line:vertical {
-	height: 0px;
-}
-
-QScrollBar::sub-line:vertical {
-	height: 0 px;
-}
-
-
-/*SCROLL HORIZONTAL*/
-
-QScrollBar:horizontal{
-	background: #f3f4f6;
-	height: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:horizontal{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 3px 2px 0px 0px;
-}
-
-QScrollBar::add-line:horizontal{
-	height: 0px;
-}
-
-QScrollBar::sub-line:horizontal{
-	height: 0 px;
-}
-
-
-</string>
-                         </property>
-                         <property name="frameShape">
-                          <enum>QFrame::NoFrame</enum>
-                         </property>
-                         <property name="editTriggers">
-                          <set>QAbstractItemView::NoEditTriggers</set>
-                         </property>
-                         <property name="selectionMode">
-                          <enum>QAbstractItemView::SingleSelection</enum>
-                         </property>
-                         <property name="selectionBehavior">
-                          <enum>QAbstractItemView::SelectRows</enum>
-                         </property>
-                         <property name="verticalScrollMode">
-                          <enum>QAbstractItemView::ScrollPerPixel</enum>
-                         </property>
-                         <property name="horizontalScrollMode">
-                          <enum>QAbstractItemView::ScrollPerPixel</enum>
-                         </property>
-                         <property name="showGrid">
-                          <bool>false</bool>
-                         </property>
-                         <attribute name="horizontalHeaderVisible">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="horizontalHeaderMinimumSectionSize">
-                          <number>38</number>
-                         </attribute>
-                         <attribute name="horizontalHeaderDefaultSectionSize">
-                          <number>100</number>
-                         </attribute>
-                         <attribute name="horizontalHeaderHighlightSections">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="horizontalHeaderStretchLastSection">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderVisible">
-                          <bool>false</bool>
-                         </attribute>
-                         <attribute name="verticalHeaderDefaultSectionSize">
-                          <number>47</number>
-                         </attribute>
-                         <column>
-                          <property name="text">
-                           <string>DNI</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>NOMBRE</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>APELLIDOS</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>SEDE</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>CORREO</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>CARGO</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>ESTADO</string>
-                          </property>
-                         </column>
-                         <column>
-                          <property name="text">
-                           <string>ACCIONES</string>
-                          </property>
-                         </column>
                         </widget>
                        </item>
                       </layout>

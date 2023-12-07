@@ -96,7 +96,7 @@ CREATE TABLE vinculaciones (
     codigo_institucion INT, -- Referencia a la tabla instituciones_educativas
     id_proyecto INT, -- ID del proyecto vinculado
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de registro de la vinculación
-    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(estudiante_id), -- Clave foránea a la tabla estudiantes
+	FOREIGN KEY (estudiante_id) REFERENCES estudiantes(estudiante_id) ON DELETE CASCADE,
     FOREIGN KEY (identificacion_tutor) REFERENCES usuarios(user_id), -- Clave foránea a la tabla usuarios
     FOREIGN KEY (codigo_institucion) REFERENCES instituciones_educativas(id), -- Clave foránea a instituciones_educativas
     FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto) -- Clave foránea a la tabla proyectos
@@ -112,7 +112,7 @@ CREATE TABLE seguimientos (
     fecha_seguimiento TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha del seguimiento
     observaciones TEXT, -- Observaciones del seguimiento
     tutor_id INT, -- ID del tutor relacionado con el seguimiento
-    FOREIGN KEY (vinculacion_id) REFERENCES vinculaciones(vinculacion_id), -- Clave foránea a la tabla vinculaciones
+    FOREIGN KEY (vinculacion_id) REFERENCES vinculaciones(vinculacion_id) ON DELETE CASCADE,
     FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id) -- Clave foránea a la tabla usuarios
 );
 

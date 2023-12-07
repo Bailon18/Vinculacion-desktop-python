@@ -38,13 +38,6 @@ class Principal(QtWidgets.QMainWindow):
         
         self.listar_vinculacion();
         
-        
-        # self.venPri.lbl_tituloSede.setText(str(args[5]).upper())
-        
-        
-  
-        
-        
         # self.configuracion()
         self.controlSalida = True
          # clase opacidad-----------------------
@@ -70,10 +63,6 @@ class Principal(QtWidgets.QMainWindow):
 
 
     def closeEvent(self, event):
-        '''
-        Metodo para cerrar la aplicacion con una condición 
-        '''
-        
         if self.controlSalida:
             if(QtWidgets.QMessageBox.question(self, "Mensaje", "¿Desea cerrar la aplicacíon?.", 
                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No ) == QtWidgets.QMessageBox.Yes):
@@ -82,9 +71,6 @@ class Principal(QtWidgets.QMainWindow):
                 event.ignore()
             
     def cerrar_sesion(self):
-        '''
-        Metodo que tiene por funcion cerrar sesion  tambien apartir de una condicion
-        '''
         from controllers.Modulo_sesion.Modulo_inicio import Login
         
         self.controlSalida = False
@@ -291,8 +277,8 @@ class Principal(QtWidgets.QMainWindow):
     #     self.modelos=dict(zip([i[0] for i in modelos],[i[1] for i in modelos]))
     #     self.compania=dict(zip([i[0] for i in compania],[i[1] for i in compania]))
         
-# # Agregar usuario nuevo
-# class UsuarioAdmi(QtWidgets.QDialog):
+
+# class Seguimiento_admin(QtWidgets.QDialog):
 #     def __init__(self, parent=None):
         
 #         super(UsuarioAdmi, self).__init__()

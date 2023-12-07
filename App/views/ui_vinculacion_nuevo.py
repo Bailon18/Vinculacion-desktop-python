@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'vinculacion_nuevoTdOkjR.ui'
+## Form generated from reading UI file 'vinculacion_nuevoDEYTNI.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -211,6 +211,43 @@ class Ui_NuevaVinculacion(object):
 "}\n"
 "\n"
 "\n"
+"QDateEdit{\n"
+"font-family: Roboto;\n"
+"font-styl"
+                        "e: normal;\n"
+"font-weight: normal;\n"
+"font-size: 14px;\n"
+"letter-spacing: 0.02em;\n"
+"background: #F3F4F6;\n"
+"color:#9CA3AF;\n"
+"padding:8px;\n"
+"border-radius:8px; }\n"
+"\n"
+"QDateEdit::up-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QDateEdit::down-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QDateEdit::up-arrow{\n"
+"	image: url(:/menu/contraerarriba.png);\n"
+"     width: 11px;\n"
+"     height: 11px;\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow{\n"
+"	image: url(:/menu/contraerabajo.png);\n"
+"     width: 11px;\n"
+"     height: 11px;}\n"
+"\n"
+"QDateEdit::focus{\n"
+"background: #FFFFFF;\n"
+"border: 2px solid #344647;\n"
+"border-radius: 8px;\n"
+"}\n"
+"\n"
 "\n"
 "")
         self.frame_2.setFrameShape(QFrame.NoFrame)
@@ -248,49 +285,10 @@ class Ui_NuevaVinculacion(object):
         self.label_95.setGeometry(QRect(10, 190, 161, 31))
         self.fecha_inicio = QDateEdit(self.frame_2)
         self.fecha_inicio.setObjectName(u"fecha_inicio")
-        self.fecha_inicio.setGeometry(QRect(240, 220, 151, 40))
+        self.fecha_inicio.setGeometry(QRect(240, 220, 205, 40))
         self.fecha_inicio.setCursor(QCursor(Qt.PointingHandCursor))
-        self.fecha_inicio.setStyleSheet(u"/*SPINBOX*/\n"
-"QDateEdit{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 14px;\n"
-"letter-spacing: 0.02em;\n"
-"background: #F3F4F6;\n"
-"color:#9CA3AF;\n"
-"padding:8px;\n"
-"border-radius:8px; }\n"
-"\n"
-"QDateEdit::up-button {\n"
-"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
-"border-radius: 6px;}\n"
-"\n"
-"QDateEdit::down-button {\n"
-"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
-"border-radius: 6px;}\n"
-"\n"
-"QDateEdit::up-arrow{\n"
-"	image: url(:/prefijoNuevo/comDownP.png);\n"
-"     width: 9px;\n"
-"     height: 9px;\n"
-"}\n"
-"\n"
-"QDateEdit::down-arrow{\n"
-"	image:url(:/prefijoNuevo/comUpP.png);\n"
-"     width: 9px;\n"
-"     height: 9px;}\n"
-"\n"
-"QDateEdit::focus{\n"
-"background: #FFFFFF;\n"
-"border: 2px solid #526974;\n"
-"border-radius: 8px;\n"
-"}")
+        self.fecha_inicio.setStyleSheet(u"")
         self.fecha_inicio.setCalendarPopup(False)
-        self.check_fecha = QCheckBox(self.frame_2)
-        self.check_fecha.setObjectName(u"check_fecha")
-        self.check_fecha.setEnabled(True)
-        self.check_fecha.setGeometry(QRect(400, 230, 61, 17))
         self.lbl9_2 = QLabel(self.frame_2)
         self.lbl9_2.setObjectName(u"lbl9_2")
         self.lbl9_2.setGeometry(QRect(470, 10, 131, 21))
@@ -301,13 +299,13 @@ class Ui_NuevaVinculacion(object):
         self.line_identificacion.setEnabled(True)
         self.line_identificacion.setGeometry(QRect(10, 120, 205, 40))
         self.line_identificacion.setStyleSheet(u"")
-        self.line_identificacion.setMaxLength(32767)
         self.line_identificacion.setFrame(True)
         self.line_identificacion.setCursorPosition(0)
         self.line_identificacion.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.line_identificacion.setDragEnabled(False)
         self.line_identificacion.setReadOnly(False)
         self.line_identificacion.setCursorMoveStyle(Qt.LogicalMoveStyle)
+        self.line_identificacion.setClearButtonEnabled(False)
         self.line_periodoacademico = QLineEdit(self.frame_2)
         self.line_periodoacademico.setObjectName(u"line_periodoacademico")
         self.line_periodoacademico.setEnabled(True)
@@ -334,42 +332,7 @@ class Ui_NuevaVinculacion(object):
         self.fecha_final.setObjectName(u"fecha_final")
         self.fecha_final.setGeometry(QRect(470, 220, 205, 40))
         self.fecha_final.setCursor(QCursor(Qt.PointingHandCursor))
-        self.fecha_final.setStyleSheet(u"/*SPINBOX*/\n"
-"QDateEdit{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 14px;\n"
-"letter-spacing: 0.02em;\n"
-"background: #F3F4F6;\n"
-"color:#9CA3AF;\n"
-"padding:8px;\n"
-"border-radius:8px; }\n"
-"\n"
-"QDateEdit::up-button {\n"
-"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
-"border-radius: 6px;}\n"
-"\n"
-"QDateEdit::down-button {\n"
-"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
-"border-radius: 6px;}\n"
-"\n"
-"QDateEdit::up-arrow{\n"
-"	image: url(:/prefijoNuevo/comDownP.png);\n"
-"     width: 9px;\n"
-"     height: 9px;\n"
-"}\n"
-"\n"
-"QDateEdit::down-arrow{\n"
-"	image:url(:/prefijoNuevo/comUpP.png);\n"
-"     width: 9px;\n"
-"     height: 9px;}\n"
-"\n"
-"QDateEdit::focus{\n"
-"background: #FFFFFF;\n"
-"border: 2px solid #526974;\n"
-"border-radius: 8px;\n"
-"}")
+        self.fecha_final.setStyleSheet(u"")
         self.fecha_final.setCalendarPopup(False)
         self.label_97 = QLabel(self.frame_2)
         self.label_97.setObjectName(u"label_97")
@@ -493,10 +456,10 @@ class Ui_NuevaVinculacion(object):
         self.btn_closeadmi.setIcon(icon2)
         self.btn_closeadmi.setIconSize(QSize(13, 13))
         self.btn_closeadmi.setAutoRaise(True)
-        self.title_computador = QLabel(self.frame_3)
-        self.title_computador.setObjectName(u"title_computador")
-        self.title_computador.setGeometry(QRect(20, 10, 301, 27))
-        self.title_computador.setStyleSheet(u"font-family: Roboto;\n"
+        self.vinculacion_titulo = QLabel(self.frame_3)
+        self.vinculacion_titulo.setObjectName(u"vinculacion_titulo")
+        self.vinculacion_titulo.setGeometry(QRect(20, 10, 501, 27))
+        self.vinculacion_titulo.setStyleSheet(u"font-family: Roboto;\n"
 "font-style: normal;\n"
 "font-weight: 500;\n"
 "font-size: 22px;\n"
@@ -518,7 +481,6 @@ class Ui_NuevaVinculacion(object):
         QWidget.setTabOrder(self.line_codigoies, self.line_campoespecifico)
         QWidget.setTabOrder(self.line_campoespecifico, self.cbo_tutor)
         QWidget.setTabOrder(self.cbo_tutor, self.cbo_proyectos)
-        QWidget.setTabOrder(self.cbo_proyectos, self.check_fecha)
 
         self.retranslateUi(NuevaVinculacion)
 
@@ -527,13 +489,12 @@ class Ui_NuevaVinculacion(object):
 
     def retranslateUi(self, NuevaVinculacion):
         NuevaVinculacion.setWindowTitle(QCoreApplication.translate("NuevaVinculacion", u"Vinculaci\u00f3n", None))
-        self.lbl5.setText(QCoreApplication.translate("NuevaVinculacion", u"N\u00b0 horas*", None))
+        self.lbl5.setText(QCoreApplication.translate("NuevaVinculacion", u"N\u00b0 horas", None))
         self.line_nombreapellidos.setPlaceholderText(QCoreApplication.translate("NuevaVinculacion", u"Ingrese nombre y apellidos", None))
         self.lbl11.setText(QCoreApplication.translate("NuevaVinculacion", u"Nombre y apellidos*", None))
         self.lbl9.setText(QCoreApplication.translate("NuevaVinculacion", u"Carrera*", None))
         self.label_95.setText(QCoreApplication.translate("NuevaVinculacion", u"Periodo Academico*", None))
         self.fecha_inicio.setDisplayFormat(QCoreApplication.translate("NuevaVinculacion", u"d-MM-yyyy", None))
-        self.check_fecha.setText(QCoreApplication.translate("NuevaVinculacion", u"Hoy", None))
         self.lbl9_2.setText(QCoreApplication.translate("NuevaVinculacion", u"Tipo identificaci\u00f3n*", None))
         self.line_identificacion.setText("")
         self.line_identificacion.setPlaceholderText(QCoreApplication.translate("NuevaVinculacion", u"ingrese identificacion", None))
@@ -559,6 +520,6 @@ class Ui_NuevaVinculacion(object):
         self.btn_closeadmi.setToolTip(QCoreApplication.translate("NuevaVinculacion", u"Cerrar", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_closeadmi.setText("")
-        self.title_computador.setText(QCoreApplication.translate("NuevaVinculacion", u"Nueva Afiliaci\u00f3n", None))
+        self.vinculacion_titulo.setText(QCoreApplication.translate("NuevaVinculacion", u"Nueva Afiliaci\u00f3n", None))
     # retranslateUi
 

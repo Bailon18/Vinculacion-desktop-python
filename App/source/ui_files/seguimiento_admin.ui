@@ -15,18 +15,18 @@
   </property>
   <property name="minimumSize">
    <size>
-    <width>333</width>
+    <width>580</width>
     <height>550</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>600</width>
+    <width>580</width>
     <height>550</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Seguimiento detalle</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -359,7 +359,7 @@ border-top-right-radius: 10px;}</string>
         <rect>
          <x>20</x>
          <y>10</y>
-         <width>181</width>
+         <width>521</width>
          <height>27</height>
         </rect>
        </property>
@@ -367,16 +367,16 @@ border-top-right-radius: 10px;}</string>
         <string notr="true">font-family: Roboto;
 font-style: normal;
 font-weight: 500;
-font-size: 22px;
+font-size: 17px;
 line-height: 40px;
 letter-spacing: 0.02em;
 color:#ffffff;</string>
        </property>
        <property name="text">
-        <string>Transferencia</string>
+        <string>Seguimiento</string>
        </property>
       </widget>
-      <widget class="QToolButton" name="btn_closeTransfe">
+      <widget class="QToolButton" name="btn_closeseguimiento">
        <property name="geometry">
         <rect>
          <x>550</x>
@@ -430,7 +430,7 @@ border-radius:11px; }
        <rect>
         <x>20</x>
         <y>100</y>
-        <width>211</width>
+        <width>491</width>
         <height>16</height>
        </rect>
       </property>
@@ -584,7 +584,7 @@ QScrollBar::sub-line:horizontal{
        <bool>false</bool>
       </property>
       <attribute name="horizontalHeaderVisible">
-       <bool>false</bool>
+       <bool>true</bool>
       </attribute>
       <attribute name="horizontalHeaderMinimumSectionSize">
        <number>38</number>
