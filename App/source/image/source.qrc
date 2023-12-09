@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="menu">
+    <file>menuseguimiento.png</file>
+    <file>detalle.png</file>
     <file>acccion_editar.png</file>
     <file>accion_eliminar.png</file>
     <file>accion_exportar.png</file>

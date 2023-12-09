@@ -57,9 +57,14 @@ class Principal(QtWidgets.QMainWindow):
 
         #self.venPri.btn_home.clicked.connect(lambda: self.funcionbotonmenu())
         self.venPri.btn_afiliacion.clicked.connect(lambda: evento_pagina(self, 0, self.venPri.btn_afiliacion))
-        self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_reporte))
-        self.venPri.btn_usuario.clicked.connect(lambda: evento_pagina(self, 1, self.venPri.btn_usuario))
+        self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 3, self.venPri.btn_reporte))
+        self.venPri.btn_usuario.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_usuario))
+        self.venPri.btn_seguimientoo.clicked.connect(lambda: evento_pagina(self, 1, self.venPri.btn_seguimientoo))
         self.venPri.btn_nuevoafiliacion.clicked.connect(lambda: self.abrir_ventana_afiliacion())
+        self.venPri.btn_recargar.clicked.connect(lambda: self.listar_vinculacion())
+        
+        self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
+
 
 
     def closeEvent(self, event):
@@ -122,7 +127,8 @@ class Principal(QtWidgets.QMainWindow):
         self.listar_vinculacion(lista_vinculaciones)
 
 
-
+    def mostrar_vinculacion_rango(self, text):
+        self.listar_vinculacion()
 
 
     # def evento_rango(self, rango):

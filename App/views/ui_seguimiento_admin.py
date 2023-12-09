@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'seguimiento_adminCAZpYW.ui'
+## Form generated from reading UI file 'seguimiento_adminJujYeP.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -281,7 +281,7 @@ class Ui_SeguimientoAdmin(object):
         self.frame.setFrameShadow(QFrame.Plain)
         self.lbl8 = QLabel(self.frame)
         self.lbl8.setObjectName(u"lbl8")
-        self.lbl8.setGeometry(QRect(19, 70, 201, 21))
+        self.lbl8.setGeometry(QRect(19, 70, 371, 21))
         font = QFont()
         font.setFamily(u"Roboto")
         font.setBold(True)
@@ -318,7 +318,7 @@ class Ui_SeguimientoAdmin(object):
         self.btn_closeseguimiento.setObjectName(u"btn_closeseguimiento")
         self.btn_closeseguimiento.setGeometry(QRect(550, 10, 25, 25))
         self.btn_closeseguimiento.setFocusPolicy(Qt.NoFocus)
-        self.btn_closeseguimiento.setStyleSheet(u"#btn_closeTransfe{\n"
+        self.btn_closeseguimiento.setStyleSheet(u"#btn_closeseguimiento{\n"
 "font-family: Roboto;\n"
 "font-weight: normal;\n"
 "font-size: 14px;\n"
@@ -327,7 +327,7 @@ class Ui_SeguimientoAdmin(object):
 "border-radius:11px\n"
 "}\n"
 "\n"
-"#btn_closeTransfe:hover{background:#ce4d3a ;\n"
+"#btn_closeseguimiento:hover{background:#ce4d3a ;\n"
 "border-radius:11px; }\n"
 "\n"
 "\n"
@@ -339,7 +339,7 @@ class Ui_SeguimientoAdmin(object):
         self.btn_closeseguimiento.setAutoRaise(True)
         self.lbl_nombretutor = QLabel(self.frame)
         self.lbl_nombretutor.setObjectName(u"lbl_nombretutor")
-        self.lbl_nombretutor.setGeometry(QRect(20, 100, 211, 16))
+        self.lbl_nombretutor.setGeometry(QRect(20, 100, 491, 16))
         self.tabla_admiseguimiento = QTableWidget(self.frame)
         if (self.tabla_admiseguimiento.columnCount() < 2):
             self.tabla_admiseguimiento.setColumnCount(2)

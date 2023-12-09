@@ -305,7 +305,7 @@ border-radius: 8px;
        <rect>
         <x>19</x>
         <y>70</y>
-        <width>201</width>
+        <width>371</width>
         <height>21</height>
        </rect>
       </property>
@@ -392,7 +392,7 @@ color:#ffffff;</string>
         <string>Cerrar</string>
        </property>
        <property name="styleSheet">
-        <string notr="true">#btn_closeTransfe{
+        <string notr="true">#btn_closeseguimiento{
 font-family: Roboto;
 font-weight: normal;
 font-size: 14px;
@@ -401,7 +401,7 @@ color: #6B7280;
 border-radius:11px
 }
 
-#btn_closeTransfe:hover{background:#ce4d3a ;
+#btn_closeseguimiento:hover{background:#ce4d3a ;
 border-radius:11px; }
 
 

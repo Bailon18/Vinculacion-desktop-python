@@ -1,7 +1,14 @@
 
-CREATE DATABASE IF NOT EXISTS vinculaciondb;
+-- Eliminar la base de datos si existe
+DROP DATABASE IF EXISTS vinculaciondb;
 
+-- Crear la base de datos
+CREATE DATABASE vinculaciondb;
+
+-- Utilizar la base de datos
 USE vinculaciondb;
+
+
 
 -- ===============================================
 -- TABLA: instituciones_educativas
@@ -14,7 +21,6 @@ CREATE TABLE instituciones_educativas (
     direccion VARCHAR(255) -- Dirección física de la institución
 );
 
-
 -- ===============================================
 -- TABLA: roles
 -- Propósito: Almacena roles de usuarios en el sistema.
@@ -23,8 +29,6 @@ CREATE TABLE roles (
     role_id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del rol
     role_name VARCHAR(50) NOT NULL -- Nombre del rol (ej. Administrador, Tutor)
 );
-
-
 
 -- ===============================================
 -- TABLA: proyectos
@@ -35,8 +39,6 @@ CREATE TABLE proyectos (
     nombre_proyecto VARCHAR(300) NOT NULL -- Nombre del proyecto
 );
 
-
-
 -- ===============================================
 -- TABLA: carreras
 -- Propósito: Almacena información sobre las carreras o programas académicos.
@@ -46,7 +48,6 @@ CREATE TABLE carreras (
     codigo_carrera VARCHAR(50), -- Código de la carrera (ej. 650612A-P-01)
     nombre_carrera VARCHAR(255) -- Nombre de la carrera
 );
-
 
 -- ===============================================
 -- TABLA: usuarios
@@ -63,8 +64,6 @@ CREATE TABLE usuarios (
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de registro del usuario
     FOREIGN KEY (role_id) REFERENCES roles(role_id) -- Clave foránea a la tabla roles
 );
-
-
 
 -- ===============================================
 -- TABLA: estudiantes
@@ -90,13 +89,14 @@ CREATE TABLE vinculaciones (
     codigo_ies INT, -- Código de la institución educativa (ej. 1-6A)
     fecha_inicio DATE, -- Fecha de inicio de la vinculación
     fecha_fin DATE, -- Fecha de fin de la vinculación
-    numero_horas INT, -- Número de horas de la vinculación
+    numero_horas INT DEFAULT 0, -- Número de horas de la vinculación
     campo_especifico VARCHAR(255), -- Descripción o campo específico de la vinculación
     identificacion_tutor INT, -- ID del tutor vinculado
     codigo_institucion INT, -- Referencia a la tabla instituciones_educativas
     id_proyecto INT, -- ID del proyecto vinculado
+    estado VARCHAR(50) DEFAULT 'Pendiente', -- Estado por defecto "pendiente"
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de registro de la vinculación
-	FOREIGN KEY (estudiante_id) REFERENCES estudiantes(estudiante_id) ON DELETE CASCADE,
+    FOREIGN KEY (estudiante_id) REFERENCES estudiantes(estudiante_id) ON DELETE CASCADE,
     FOREIGN KEY (identificacion_tutor) REFERENCES usuarios(user_id), -- Clave foránea a la tabla usuarios
     FOREIGN KEY (codigo_institucion) REFERENCES instituciones_educativas(id), -- Clave foránea a instituciones_educativas
     FOREIGN KEY (id_proyecto) REFERENCES proyectos(id_proyecto) -- Clave foránea a la tabla proyectos
@@ -112,12 +112,7 @@ CREATE TABLE seguimientos (
     fecha_seguimiento TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha del seguimiento
     observaciones TEXT, -- Observaciones del seguimiento
     tutor_id INT, -- ID del tutor relacionado con el seguimiento
+    horas_seguimiento INT, -- Horas del seguimiento
     FOREIGN KEY (vinculacion_id) REFERENCES vinculaciones(vinculacion_id) ON DELETE CASCADE,
     FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id) -- Clave foránea a la tabla usuarios
 );
-
-
-
-
-
-

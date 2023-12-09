@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'vinculacion_nuevoDEYTNI.ui'
+## Form generated from reading UI file 'vinculacion_nuevoxBmQkq.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -19,8 +19,8 @@ class Ui_NuevaVinculacion(object):
         if not NuevaVinculacion.objectName():
             NuevaVinculacion.setObjectName(u"NuevaVinculacion")
         NuevaVinculacion.resize(710, 606)
-        NuevaVinculacion.setMinimumSize(QSize(600, 500))
-        NuevaVinculacion.setMaximumSize(QSize(800, 800))
+        NuevaVinculacion.setMinimumSize(QSize(600, 600))
+        NuevaVinculacion.setMaximumSize(QSize(710, 606))
         icon = QIcon()
         icon.addFile(u":/prefijoNuevo/logo.png", QSize(), QIcon.Normal, QIcon.Off)
         NuevaVinculacion.setWindowIcon(icon)
@@ -51,7 +51,7 @@ class Ui_NuevaVinculacion(object):
         self.frame.setFrameShadow(QFrame.Plain)
         self.frame_2 = QFrame(self.frame)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(10, 65, 691, 471))
+        self.frame_2.setGeometry(QRect(10, 70, 691, 471))
         self.frame_2.setMinimumSize(QSize(0, 0))
         self.frame_2.setStyleSheet(u"#frame_2{\n"
 "	\n"
@@ -339,6 +339,7 @@ class Ui_NuevaVinculacion(object):
         self.label_97.setGeometry(QRect(470, 190, 161, 31))
         self.spb_numerohoras = QSpinBox(self.frame_2)
         self.spb_numerohoras.setObjectName(u"spb_numerohoras")
+        self.spb_numerohoras.setEnabled(False)
         self.spb_numerohoras.setGeometry(QRect(10, 310, 71, 41))
         self.line_campoespecifico = QLineEdit(self.frame_2)
         self.line_campoespecifico.setObjectName(u"line_campoespecifico")
@@ -426,9 +427,23 @@ class Ui_NuevaVinculacion(object):
         self.btn_guardar.setIconSize(QSize(15, 21))
         self.frame_3 = QFrame(self.frame)
         self.frame_3.setObjectName(u"frame_3")
-        self.frame_3.setGeometry(QRect(0, 0, 711, 50))
+        self.frame_3.setGeometry(QRect(0, 0, 711, 70))
+        self.frame_3.setMinimumSize(QSize(0, 70))
+        self.frame_3.setMaximumSize(QSize(16777215, 4455))
         self.frame_3.setStyleSheet(u"#frame_3{background: #3A4F50 ;border-top-left-radius: 10px;\n"
-"border-top-right-radius: 10px;}")
+"border-top-right-radius: 10px;}\n"
+"\n"
+"QLabel{\n"
+"\n"
+"font-family: Roboto;\n"
+"font-style: normal;\n"
+"font-weight: 500;\n"
+"font-size: 17px;\n"
+"line-height: 40px;\n"
+"letter-spacing: 0.02em;\n"
+"color:#ffffff;\n"
+"\n"
+"}")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.btn_closeadmi = QToolButton(self.frame_3)
@@ -456,16 +471,26 @@ class Ui_NuevaVinculacion(object):
         self.btn_closeadmi.setIcon(icon2)
         self.btn_closeadmi.setIconSize(QSize(13, 13))
         self.btn_closeadmi.setAutoRaise(True)
+        self.axax = QLabel(self.frame_3)
+        self.axax.setObjectName(u"axax")
+        self.axax.setGeometry(QRect(20, 10, 201, 31))
+        self.axax.setStyleSheet(u"")
+        self.axax.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.vinculacion_titulo_2 = QLabel(self.frame_3)
+        self.vinculacion_titulo_2.setObjectName(u"vinculacion_titulo_2")
+        self.vinculacion_titulo_2.setGeometry(QRect(20, 40, 81, 31))
+        self.vinculacion_titulo_2.setStyleSheet(u"")
+        self.vinculacion_titulo_2.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.vinculacion_titulo = QLabel(self.frame_3)
         self.vinculacion_titulo.setObjectName(u"vinculacion_titulo")
-        self.vinculacion_titulo.setGeometry(QRect(20, 10, 501, 27))
-        self.vinculacion_titulo.setStyleSheet(u"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: 500;\n"
-"font-size: 22px;\n"
-"line-height: 40px;\n"
-"letter-spacing: 0.02em;\n"
-"color:#ffffff;")
+        self.vinculacion_titulo.setGeometry(QRect(220, 10, 391, 31))
+        self.vinculacion_titulo.setStyleSheet(u"")
+        self.vinculacion_titulo.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
+        self.vinculacion_estado = QLabel(self.frame_3)
+        self.vinculacion_estado.setObjectName(u"vinculacion_estado")
+        self.vinculacion_estado.setGeometry(QRect(100, 40, 171, 31))
+        self.vinculacion_estado.setStyleSheet(u"")
+        self.vinculacion_estado.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
 
         self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
 
@@ -520,6 +545,9 @@ class Ui_NuevaVinculacion(object):
         self.btn_closeadmi.setToolTip(QCoreApplication.translate("NuevaVinculacion", u"Cerrar", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_closeadmi.setText("")
+        self.axax.setText(QCoreApplication.translate("NuevaVinculacion", u"Nueva Vinculaci\u00f3n", None))
+        self.vinculacion_titulo_2.setText(QCoreApplication.translate("NuevaVinculacion", u"Estado:", None))
         self.vinculacion_titulo.setText(QCoreApplication.translate("NuevaVinculacion", u"Nueva Afiliaci\u00f3n", None))
+        self.vinculacion_estado.setText(QCoreApplication.translate("NuevaVinculacion", u"Pendiente", None))
     # retranslateUi
 

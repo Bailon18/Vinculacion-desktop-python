@@ -21,7 +21,7 @@ from db.Modulo_base import BaseDatos
 
 class Vinculacion(QtWidgets.QDialog):
 
-    def __init__(self, vinculacion_id = None , modo="" , parent=None):
+    def __init__(self, vinculacion_id = None , nombre_estudiante = '', estado = '', modo="" , parent=None):
         
         super(Vinculacion, self).__init__(parent)
         self.vinculacion = Ui_NuevaVinculacion()
@@ -33,13 +33,28 @@ class Vinculacion(QtWidgets.QDialog):
         self.parent = parent
         
         self.vinculacion_id = vinculacion_id 
+        self.nombre_estudiante = nombre_estudiante
+        self.estado = estado
         self.modo = modo
 
         if self.vinculacion_id and self.modo == "actualizar":
             self.cargar_datos_vinculacion(self.vinculacion_id)
-            self.vinculacion.vinculacion_titulo.setText('Actualizar Vinculación')
+            # self.vinculacion.vinculacion_titulo.setText(
+            #     f'Actualizar Vinculación: {self.nombre_estudiante} '
+            #     f'\nEstado: {self.estado}'
+            # )
+            self.vinculacion.axax.setText('Actualizar Vinculación: ')
+            self.vinculacion.vinculacion_titulo.setText(self.nombre_estudiante)
+            
+            self.actualizar_titulo_estado()
+            self.vinculacion.vinculacion_estado.setText(self.estado)
             self.vinculacion.btn_guardar.setText('Actualizar')
-        
+            
+        else:
+            self.vinculacion.vinculacion_estado.hide()
+            self.vinculacion.vinculacion_titulo.hide()
+            self.vinculacion.vinculacion_titulo_2.hide()
+            
         # Evento Opacidad -----------------------
         self.raizOpacidad = Clase_Opacidad(self.parent)
         self.raizOpacidad.close()
@@ -66,7 +81,17 @@ class Vinculacion(QtWidgets.QDialog):
         self.vinculacion.btn_guardar.clicked.connect(lambda: self.obtener_campos_vinculacion())
 
                 
+    def actualizar_titulo_estado(self):
+        if self.estado == "Pendiente":
+            color_texto = "red"
+        elif self.estado == "Culminado":
+            color_texto = "green"
 
+        estilo = f"color: {color_texto}; font-family: Roboto; font-style: normal; font-weight: 500; font-size: 17px; line-height: 40px; letter-spacing: 0.02em;"
+        self.vinculacion.vinculacion_estado.setStyleSheet(estilo)
+
+
+            
     def keyPressEvent(self, event):
   
         if event.key() == QtCore.Qt.Key_Escape:
@@ -111,7 +136,7 @@ class Vinculacion(QtWidgets.QDialog):
         periodo_academico = self.vinculacion.line_periodoacademico.text()
         fecha_inicio = self.vinculacion.fecha_inicio.date().toString("yyyy-dd-MM")
         fecha_final = self.vinculacion.fecha_final.date().toString("yyyy-dd-MM")
-        numero_horas = self.vinculacion.spb_numerohoras.value()
+        # numero_horas = self.vinculacion.spb_numerohoras.value()
         codigo_ies = self.vinculacion.line_codigoies.text()
         campo_especifico = self.vinculacion.line_campoespecifico.text()
         tutor_asignado = self.vinculacion.cbo_tutor.itemData(self.vinculacion.cbo_tutor.currentIndex())
@@ -147,9 +172,6 @@ class Vinculacion(QtWidgets.QDialog):
         if not fecha_final:
             mensaje_error += "- Ingrese una fecha final válida.\n"
 
-        # if numero_horas <= 0:
-        #     mensaje_error += "- Ingrese un número válido de horas.\n"
-
         if not codigo_ies or len(codigo_ies) != 4:
             mensaje_error += "- El código de IES debe tener 4 dígitos.\n"
 
@@ -168,7 +190,7 @@ class Vinculacion(QtWidgets.QDialog):
         else:
 
             datos = [tipo_identificacion, identificacion, nombre_apellidos, carrera , periodo_academico,
-                        codigo_ies, fecha_inicio, fecha_final, numero_horas, campo_especifico, tutor_asignado, institucion, proyecto]
+                        codigo_ies, fecha_inicio, fecha_final, campo_especifico, tutor_asignado, institucion, proyecto]
 
             if self.modo == "actualizar":
                 # Lógica para actualizar los datos de la vinculación existente

@@ -48,33 +48,21 @@ VALUES
 -- Insertar vinculaciones utilizando los IDs de estudiantes
 INSERT INTO vinculaciones (estudiante_id, periodo_academico, codigo_ies, fecha_inicio, fecha_fin, numero_horas, campo_especifico, identificacion_tutor, codigo_institucion, id_proyecto)
 VALUES
-    (1, 'P1-2023', '1001', '2023-01-15', '2023-06-15', 180, '1-6A', 1, 1, 1),
-    (2, 'P2-2023', '1002', '2023-02-01', '2023-07-01', 150, '2-6B', 1, 2, 2),
-    (3, 'P2-2023', '1003', '2023-02-15', '2023-07-15', 200, '3-6C', 2, 3, 3),
-    (4, 'P3-2023', '1004', '2023-03-01', '2023-08-01', 160, '4-6D', 2, 4, 4),
-    (5, 'P3-2023', '1005', '2023-03-15', '2023-08-15', 190, '5-6E', 2, 2, 1);
+    (1, 'P1-2023', '1001', '2023-01-15', '2023-06-15', 30, '1-6A', 1, 1, 1),
+    (2, 'P2-2023', '1002', '2023-02-01', '2023-07-01', 10, '2-6B', 1, 2, 2),
+    (3, 'P2-2023', '1003', '2023-02-15', '2023-07-15', 10, '3-6C', 2, 3, 3),
+    (4, 'P3-2023', '1004', '2023-03-01', '2023-08-01', 13, '4-6D', 2, 4, 4),
+    (5, 'P3-2023', '1005', '2023-03-15', '2023-08-15', 19, '5-6E', 2, 2, 1);
 
 
--- Para el estudiante 1
-INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
-VALUES (1, 'Observación 1 para el estudiante 1', 1),
-       (1, 'Observación 2 para el estudiante 1', 1),
-       (1, 'Observación 3 para el estudiante 1', 1),
-       (1, 'Observación 4 para el estudiante 1', 1);
+INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id, horas_seguimiento)
+VALUES 
+    (1, 'Seguimiento 1', 1, 8),
+    (2, 'Seguimiento 2', 1, 10),
+    (3, 'Seguimiento 3', 2, 16),
+    (4, 'Seguimiento 4', 2, 11),
+    (5, 'Seguimiento 5', 2, 20);
 
--- Para el estudiante 2
-INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
-VALUES (2, 'Observación 1 para el estudiante 2', 2),
-       (2, 'Observación 2 para el estudiante 2', 2),
-       (2, 'Observación 3 para el estudiante 2', 2),
-       (2, 'Observación 4 para el estudiante 2', 2);
-
--- Para el estudiante 3
-INSERT INTO seguimientos (vinculacion_id, observaciones, tutor_id)
-VALUES (3, 'Observación 1 para el estudiante 3', 3),
-       (3, 'Observación 2 para el estudiante 3', 3),
-       (3, 'Observación 3 para el estudiante 3', 3),
-       (3, 'Observación 4 para el estudiante 3', 3);
 
 
 
@@ -86,11 +74,11 @@ CREATE PROCEDURE ListarVinculaciones(
 BEGIN
     SELECT
         vinculaciones.vinculacion_id AS `Vinculación ID`,
-        DATE_FORMAT(vinculaciones.fecha_registro, '%Y-%m-%d %H:%i:%s') AS `Fecha de Registro de la Vinculación`,
         estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
         DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
         vinculaciones.periodo_academico AS `Período Académico`,
-        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`
+        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`,
+        vinculaciones.estado
     FROM
         vinculaciones
     INNER JOIN
@@ -113,11 +101,11 @@ CREATE PROCEDURE BuscarVinculaciones(
 BEGIN
     SELECT
         vinculaciones.vinculacion_id AS `Vinculación ID`,
-        DATE_FORMAT(vinculaciones.fecha_registro, "%Y-%m-%d %H:%i:%s") AS `Fecha de Registro de la Vinculación`,
         estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
-        DATE_FORMAT(vinculaciones.fecha_inicio, "%Y-%m-%d") AS `Fecha Inicio`,
+        DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
         vinculaciones.periodo_academico AS `Período Académico`,
-        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`
+        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`,
+        vinculaciones.estado
     FROM
         vinculaciones
     INNER JOIN
@@ -128,13 +116,15 @@ BEGIN
         usuarios.nombre LIKE CONCAT('%', criterio_busqueda, '%') OR
         usuarios.apellido LIKE CONCAT('%', criterio_busqueda, '%') OR
         estudiantes.nombres_apellidos LIKE CONCAT('%', criterio_busqueda, '%') OR
-        DATE_FORMAT(vinculaciones.fecha_registro, "%Y-%m-%d %H:%i:%s") LIKE CONCAT('%', criterio_busqueda, '%') OR
+        vinculaciones.estado LIKE CONCAT('%', criterio_busqueda, '%') OR
         DATE_FORMAT(vinculaciones.fecha_inicio, "%Y-%m-%d") LIKE CONCAT('%', criterio_busqueda, '%') OR
         vinculaciones.periodo_academico LIKE CONCAT('%', criterio_busqueda, '%')
     ORDER BY `Vinculación ID` DESC
     LIMIT limite; 
 END $$
 DELIMITER ;
+
+
 
 DROP PROCEDURE IF EXISTS ObtenerDatos;
 DELIMITER $$
@@ -167,7 +157,8 @@ BEGIN
         v.codigo_ies, 
         v.campo_especifico, 
         v.identificacion_tutor, 
-        v.id_proyecto
+        v.id_proyecto,
+        V.estado
     FROM vinculaciones v
     INNER JOIN estudiantes e ON v.estudiante_id = e.estudiante_id
     WHERE v.vinculacion_id = vinculacion_id;
@@ -210,7 +201,7 @@ CREATE PROCEDURE InsertarEstudianteYVinculacion(
     IN codigo_ies_param INT,
     IN fecha_inicio_param DATE,
     IN fecha_fin_param DATE,
-    IN numero_horas_param INT,
+    #IN numero_horas_param INT,
     IN campo_especifico_param VARCHAR(255),
     IN identificacion_tutor_param INT,
     IN codigo_institucion_param INT,
@@ -227,8 +218,8 @@ BEGIN
     SET estudiante_id_param = LAST_INSERT_ID();
 
     -- Insertar la vinculación asociada al estudiante
-    INSERT INTO vinculaciones (estudiante_id, periodo_academico, codigo_ies, fecha_inicio, fecha_fin, numero_horas, campo_especifico, identificacion_tutor, codigo_institucion, id_proyecto)
-    VALUES (estudiante_id_param, periodo_academico_param, codigo_ies_param, fecha_inicio_param, fecha_fin_param, numero_horas_param, campo_especifico_param, identificacion_tutor_param, codigo_institucion_param, id_proyecto_param);
+    INSERT INTO vinculaciones (estudiante_id, periodo_academico, codigo_ies, fecha_inicio, fecha_fin, campo_especifico, identificacion_tutor, codigo_institucion, id_proyecto)
+    VALUES (estudiante_id_param, periodo_academico_param, codigo_ies_param, fecha_inicio_param, fecha_fin_param, campo_especifico_param, identificacion_tutor_param, codigo_institucion_param, id_proyecto_param);
     
     -- Confirmar el final de la transacción
     COMMIT;
@@ -247,7 +238,7 @@ CREATE PROCEDURE ActualizarEstudianteYVinculacion(
     IN codigo_ies_param INT,
     IN fecha_inicio_param DATE,
     IN fecha_fin_param DATE,
-    IN numero_horas_param INT,
+    #IN numero_horas_param INT,
     IN campo_especifico_param VARCHAR(255),
     IN identificacion_tutor_param INT,
     IN codigo_institucion_param INT,
@@ -276,7 +267,7 @@ BEGIN
         codigo_ies = codigo_ies_param,
         fecha_inicio = fecha_inicio_param,
         fecha_fin = fecha_fin_param,
-        numero_horas = numero_horas_param,
+        #numero_horas = numero_horas_param,
         campo_especifico = campo_especifico_param,
         identificacion_tutor = identificacion_tutor_param,
         codigo_institucion = codigo_institucion_param,
@@ -299,6 +290,58 @@ BEGIN
     WHERE vinculacion_id = vinculacion_id_param;
 END $$
 DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS after_insert_seguimiento;
+DELIMITER $$
+CREATE TRIGGER after_insert_seguimiento
+AFTER INSERT ON seguimientos
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+
+    -- Actualizar horas en la vinculación
+    UPDATE vinculaciones
+    SET numero_horas = numero_horas + NEW.horas_seguimiento
+    WHERE vinculacion_id = NEW.vinculacion_id;
+
+    -- Obtener el total de horas actualizado
+    SELECT numero_horas INTO total_horas
+    FROM vinculaciones
+    WHERE vinculacion_id = NEW.vinculacion_id;
+
+    -- Cambiar el estado a "completado" si se alcanza el tope de horas (96 horas)
+    IF total_horas >= 96 THEN
+        UPDATE vinculaciones
+        SET estado = 'Completado'
+        WHERE vinculacion_id = NEW.vinculacion_id;
+    END IF;
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS ObtenerSeguimientosConEstudiantes;
+DELIMITER $$
+CREATE PROCEDURE ObtenerSeguimientosConEstudiantes()
+BEGIN
+    SELECT
+        s.seguimiento_id AS 'id-seguimiento',
+        e.nombres_apellidos AS 'nombreestudiante',
+        s.fecha_seguimiento AS 'fecha-seguimiento',
+        s.horas_seguimiento AS 'horas_seguimiento',
+        v.estado AS 'estado vinculacion'
+    FROM
+        seguimientos s
+    JOIN
+        vinculaciones v ON s.vinculacion_id = v.vinculacion_id
+    JOIN
+        estudiantes e ON v.estudiante_id = e.estudiante_id
+    ORDER BY
+        s.fecha_seguimiento DESC;
+END $$
+DELIMITER ;
+
+
 
 
 
