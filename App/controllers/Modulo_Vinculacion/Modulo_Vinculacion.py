@@ -134,8 +134,8 @@ class Vinculacion(QtWidgets.QDialog):
         carrera = self.vinculacion.cbox_carrera.itemData(self.vinculacion.cbox_carrera.currentIndex()); 
         institucion = self.vinculacion.cbo_institucion.itemData(self.vinculacion.cbo_institucion.currentIndex()); 
         periodo_academico = self.vinculacion.line_periodoacademico.text()
-        fecha_inicio = self.vinculacion.fecha_inicio.date().toString("yyyy-dd-MM")
-        fecha_final = self.vinculacion.fecha_final.date().toString("yyyy-dd-MM")
+        fecha_inicio = self.vinculacion.fecha_inicio.date().toString("yyyy-MM-dd")
+        fecha_final = self.vinculacion.fecha_final.date().toString("yyyy-MM-dd")
         # numero_horas = self.vinculacion.spb_numerohoras.value()
         codigo_ies = self.vinculacion.line_codigoies.text()
         campo_especifico = self.vinculacion.line_campoespecifico.text()
@@ -161,7 +161,7 @@ class Vinculacion(QtWidgets.QDialog):
         if not institucion:
             mensaje_error += "- Seleccione una institución.\n"
 
-        patron_periodo_academico = re.compile(r'^P[1-2]-\d{4}$')
+        patron_periodo_academico = re.compile(r'^P[1-9]-\d{4}$')
         if not periodo_academico or not patron_periodo_academico.match(periodo_academico):
             mensaje_error += "- Ingrese un período académico válido (ejemplo: P1-1222).\n"
 

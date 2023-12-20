@@ -55,7 +55,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.boton_deslizable.clicked.connect(lambda: evento_menu(self, self.venPri))
         
 
-        #self.venPri.btn_home.clicked.connect(lambda: self.funcionbotonmenu())
+        evento_pagina(self,0, self.venPri.btn_afiliacion)
         self.venPri.btn_afiliacion.clicked.connect(lambda: evento_pagina(self, 0, self.venPri.btn_afiliacion))
         self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 3, self.venPri.btn_reporte))
         self.venPri.btn_usuario.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_usuario))

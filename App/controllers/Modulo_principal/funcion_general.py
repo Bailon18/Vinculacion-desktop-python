@@ -88,9 +88,7 @@ def evento_tabla(parent):
     Funcion que recibe como paramentro la clase ventana principal
     funcionalidad es darle tamaño a las columnas 
     """
-    # tabla configuracion ---------------
-    # tabla configuracion ---------------
-    #parent.venPri.tabla_usuario.horizontalHeader().setVisible(True)
+
     parent.venPri.tabla_principal.horizontalHeader().setVisible(True)
     parent.venPri.tabla_principal_tutor.horizontalHeader().setVisible(True)
 
@@ -99,16 +97,14 @@ def evento_tabla(parent):
     lista_tabla=[parent.venPri.tabla_principal, parent.venPri.tabla_principal_tutor]
 
     # Lista de index
-    lista_index=[[0,1,2,4], [0,1,2]]
+    lista_index=[[0,1,2,6], [0,1,2,5]]
 
     # Lista de tamaño
-    lista_tamano=[[70,200,150,160], [70,200,150]]
+    lista_tamano=[[70,200,150,160], [70,300,150, 160]]
 
     for tabla,index,tamano in zip(lista_tabla,lista_index,lista_tamano):
 
-        # verificamos si el index esta lleno
         if index:
-            # insertamos tamaño al index 
             for ind,tam in zip(index,tamano):
                 tabla.setColumnWidth(ind,tam)
 
@@ -156,11 +152,6 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
                 icono = u':/menu/accion_eliminar.png',
                 tooltip = 'Eliminar vinculacion')
 
-            # botonpdf = crearbotoneslista(
-            #     stilo = u"""QToolButton{background-color: #FFF0E1; border-radius:8px}
-            #                 QToolButton:hover{background-color:#f4e6d7}""",
-            #     icono = u':/menu/accion_exportar.png',
-            #     tooltip = 'Exportar a PDF')
 
             botonseguimiento = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
@@ -173,7 +164,6 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
             layout.setSpacing(3)
             layout.addWidget(botoneditar)
             layout.addWidget(botoneliminar)
-            # layout.addWidget(botonpdf)
             layout.addWidget(botonseguimiento)
 
             widget = QtWidgets.QWidget()
@@ -181,7 +171,6 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
 
             btn_editar(botoneditar, fila, tabla, parent)
             btn_eliminar(botoneliminar, fila, tabla, parent)
-            # btn_pdf(botonpdf, fila, tabla, parent)
             btn_seguimiento(botonseguimiento, fila, tabla, parent)
 
             tabla.setCellWidget(fila ,6,widget)
@@ -190,8 +179,7 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 
-                # Cambiar el color del texto en la columna 5
-                if columna == 5:  # Ajusta el índice según la estructura de tus datos
+                if columna == 5: 
                     estado_columna = str(dato[fila][columna])
                     color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else QtGui.QColor('green')
                     item.setForeground(QtGui.QBrush(color_texto))
@@ -202,26 +190,21 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
 def btn_editar(boton,fila,tabla,parent):
     
     """eventos  del boton editar """
-    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) 
     
 def btn_eliminar(boton,fila,tabla,parent):
     
     """eventos  del boton eleminar """
-    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) # acciona a realizar
-    
-def btn_pdf(boton,fila,tabla,parent):
-    
-    """eventos  del boton pdf """
-    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) # acciona a realizar
+    boton.clicked.connect(lambda: tabla.selectRow(fila))            
+    boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) 
     
 def btn_seguimiento(boton,fila,tabla,parent):
     
     """eventos  del boton seguimiento """
-    boton.clicked.connect(lambda: tabla.selectRow(fila)) # selecciona filaedi (pinta)              
-    boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) # acciona a realizar
+    boton.clicked.connect(lambda: tabla.selectRow(fila))              
+    boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 
+    
     
 def btn_editar_acciones(fila,parent):
     
@@ -233,7 +216,6 @@ def btn_editar_acciones(fila,parent):
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
     Vinculacion(vinculacion_id, nombre_estudiante,estado,  "actualizar", parent).exec_()
-
 
 def btn_eliminar_acciones(fila, parent):
     vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
@@ -277,3 +259,59 @@ def cargar_tabla(tabla,dato):
     else:
         tabla.setRowCount(0)
 
+def llenar_tabla_seguimiento(parent, tabla, dato):
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(6)
+   
+        for fila in range(len(dato)):
+
+            boton_agregar_seguimiento = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                            QToolButton:hover{background-color:#cbe1e3}""",
+                icono = u':/menu/acccion_editar.png',
+                tooltip = 'Agregar seguimiento')
+
+
+            bton_editar_seguimiento = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
+                            QToolButton:hover{background-color:#82b5b9}""",
+                icono = u':/menu/detalle.png',
+                tooltip = 'Editar seguimiento')
+
+
+            bton_eliminar_seguimiento = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+                            QToolButton:hover{background-color:#ebdada}""",
+                icono = u':/menu/accion_eliminar.png',
+                tooltip = 'Eliminar seguimiento')
+
+
+
+            layout = QtWidgets.QHBoxLayout()
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(boton_agregar_seguimiento)
+            layout.addWidget(bton_eliminar_seguimiento)
+            layout.addWidget(bton_editar_seguimiento)
+
+            widget = QtWidgets.QWidget()
+            widget.setLayout(layout)
+
+            btn_agregar_seguimiento(boton_agregar_seguimiento, fila, tabla, parent)
+            btn_eliminar_seguimiento(bton_eliminar_seguimiento, fila, tabla, parent)
+            btn_editr_seguimiento(bton_editar_seguimiento, fila, tabla, parent)
+
+            tabla.setCellWidget(fila ,6,widget)
+
+            for columna in range(len(dato[fila])):
+                item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                
+                if columna == 5: 
+                    estado_columna = str(dato[fila][columna])
+                    color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else QtGui.QColor('green')
+                    item.setForeground(QtGui.QBrush(color_texto))
+
+                tabla.setItem(fila, columna, item)

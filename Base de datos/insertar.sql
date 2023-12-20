@@ -74,8 +74,8 @@ CREATE PROCEDURE ListarVinculaciones(
 BEGIN
     SELECT
         vinculaciones.vinculacion_id AS `Vinculación ID`,
-        estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
         DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
         vinculaciones.periodo_academico AS `Período Académico`,
         CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`,
         vinculaciones.estado
@@ -322,12 +322,12 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS ObtenerSeguimientosConEstudiantes;
 DELIMITER $$
-CREATE PROCEDURE ObtenerSeguimientosConEstudiantes()
+CREATE PROCEDURE ObtenerSeguimientosConEstudiantes(IN tutor_id_param INT)
 BEGIN
     SELECT
         s.seguimiento_id AS 'id-seguimiento',
         e.nombres_apellidos AS 'nombreestudiante',
-        s.fecha_seguimiento AS 'fecha-seguimiento',
+        DATE_FORMAT(s.fecha_seguimiento, '%Y-%m-%d %H:%i:%s') AS 'fecha-seguimiento',
         s.horas_seguimiento AS 'horas_seguimiento',
         v.estado AS 'estado vinculacion'
     FROM
@@ -336,12 +336,17 @@ BEGIN
         vinculaciones v ON s.vinculacion_id = v.vinculacion_id
     JOIN
         estudiantes e ON v.estudiante_id = e.estudiante_id
+    JOIN
+        usuarios u ON s.tutor_id = u.user_id
+    WHERE
+        u.role_id = 2  
+        AND u.user_id = tutor_id_param  
     ORDER BY
         s.fecha_seguimiento DESC;
 END $$
 DELIMITER ;
 
-
+CALL ObtenerSeguimientosConEstudiantes(1); 
 
 
 
