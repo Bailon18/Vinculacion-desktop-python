@@ -65,7 +65,7 @@ class Principal(QtWidgets.QMainWindow):
         
         self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
 
-
+        self.listar_seguimiento_tutor(2)
 
     def closeEvent(self, event):
         if self.controlSalida:
@@ -126,11 +126,19 @@ class Principal(QtWidgets.QMainWindow):
         lista_vinculaciones = self.conec_base.getDatosProcess_condicion("BuscarVinculaciones", (textobusqueda, limite))
         self.listar_vinculacion(lista_vinculaciones)
 
-
     def mostrar_vinculacion_rango(self, text):
         self.listar_vinculacion()
 
 
+
+
+    def listar_seguimiento_tutor(self, tutor_id):
+        
+        limite = 5
+        lista_seguimiento = self.conec_base.getDatosProcess_condicion('ObtenerSeguimientosConEstudiantes', (tutor_id, limite))
+        llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, lista_seguimiento[0])
+        
+        
     # def evento_rango(self, rango):
         
     #     consulta = self.conec_base.getDatos_condicion("""SELECT id, DATE_FORMAT( fecha_registro, "%%d-%%m-%%Y"), serial, 

@@ -126,6 +126,7 @@ def crearbotoneslista(stilo,icono,tooltip):
     
     btn_nuevo = QtWidgets.QToolButton()
     btn_nuevo.setMinimumSize(QtCore.QSize(35, 34))
+    btn_nuevo.setIconSize(QtCore.QSize(20, 20))
     btn_nuevo.setStyleSheet(stilo)
     btn_nuevo.setIcon(QtGui.QIcon(icono))
     btn_nuevo.setToolTip(tooltip)
@@ -270,21 +271,21 @@ def llenar_tabla_seguimiento(parent, tabla, dato):
             boton_agregar_seguimiento = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
                             QToolButton:hover{background-color:#cbe1e3}""",
-                icono = u':/menu/acccion_editar.png',
+                icono = u':/menu/agregar_seguimiento.png',
                 tooltip = 'Agregar seguimiento')
 
 
             bton_editar_seguimiento = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
-                            QToolButton:hover{background-color:#82b5b9}""",
-                icono = u':/menu/detalle.png',
+                QToolButton:hover{background-color:#82b5b9}""",
+                icono = u':/menu/seguimiento_edtir.png',
                 tooltip = 'Editar seguimiento')
 
 
-            bton_eliminar_seguimiento = crearbotoneslista(
+            bton_eliminar_seguimiento = crearbotoneslista(        
                 stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
-                            QToolButton:hover{background-color:#ebdada}""",
-                icono = u':/menu/accion_eliminar.png',
+                        QToolButton:hover{background-color:#ebdada}""",
+                icono = u':/menu/seguimiento_eliminar.png',
                 tooltip = 'Eliminar seguimiento')
 
 
@@ -293,8 +294,8 @@ def llenar_tabla_seguimiento(parent, tabla, dato):
             layout.setContentsMargins(1,1,1,1)
             layout.setSpacing(3)
             layout.addWidget(boton_agregar_seguimiento)
-            layout.addWidget(bton_eliminar_seguimiento)
             layout.addWidget(bton_editar_seguimiento)
+            layout.addWidget(bton_eliminar_seguimiento)
 
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
@@ -303,15 +304,37 @@ def llenar_tabla_seguimiento(parent, tabla, dato):
             btn_eliminar_seguimiento(bton_eliminar_seguimiento, fila, tabla, parent)
             btn_editr_seguimiento(bton_editar_seguimiento, fila, tabla, parent)
 
-            tabla.setCellWidget(fila ,6,widget)
+            tabla.setCellWidget(fila ,5,widget)
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 
-                if columna == 5: 
+                if columna == 3:
+                    if isinstance(dato[fila][columna], int) or dato[fila][columna].isdigit():
+                        item.setText(f"{dato[fila][columna]} horas")
+                        
+                if columna == 4: 
                     estado_columna = str(dato[fila][columna])
                     color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else QtGui.QColor('green')
                     item.setForeground(QtGui.QBrush(color_texto))
 
                 tabla.setItem(fila, columna, item)
+                
+def btn_agregar_seguimiento(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    #boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) 
+    
+def btn_eliminar_seguimiento(boton,fila,tabla,parent):
+    
+    """eventos  del boton eliminar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))            
+    #boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) 
+    
+def btn_editr_seguimiento(boton,fila,tabla,parent):
+    
+    """eventos  del boton editar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))              
+    #boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 

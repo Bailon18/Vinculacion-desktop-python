@@ -322,7 +322,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS ObtenerSeguimientosConEstudiantes;
 DELIMITER $$
-CREATE PROCEDURE ObtenerSeguimientosConEstudiantes(IN tutor_id_param INT)
+CREATE PROCEDURE ObtenerSeguimientosConEstudiantes(IN tutor_id_param INT, IN limit_param INT)
 BEGIN
     SELECT
         s.seguimiento_id AS 'id-seguimiento',
@@ -342,11 +342,13 @@ BEGIN
         u.role_id = 2  
         AND u.user_id = tutor_id_param  
     ORDER BY
-        s.fecha_seguimiento DESC;
+        s.fecha_seguimiento DESC
+    LIMIT limit_param;
 END $$
 DELIMITER ;
 
-CALL ObtenerSeguimientosConEstudiantes(1); 
+
+CALL ObtenerSeguimientosConEstudiantes(2, 1); 
 
 
 
