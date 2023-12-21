@@ -65,17 +65,29 @@ class Vinculacion(QtWidgets.QDialog):
         self.vinculacion.btn_closeadmi.clicked.connect(lambda: self.cerrar_ui_vinculacion())
         
 
+        self.vinculacion.line_identificacion.textChanged.connect(lambda: self.vinculacion.line_identificacion.setToolTip('Formato: 10 digitos\n Ejm: 992929394-9'))
+        self.vinculacion.line_periodoacademico.textChanged.connect(lambda: self.vinculacion.line_periodoacademico.setToolTip('Ejm: P1-2023'))
+        self.vinculacion.line_codigoies.textChanged.connect(lambda: self.vinculacion.line_codigoies.setToolTip('Formato: 4 digito númericos\n Ejm: 1003'))
+        self.vinculacion.line_campoespecifico.textChanged.connect(lambda: self.vinculacion.line_campoespecifico.setToolTip('Ejm: 1-2A'))
         
+
+
+
         # Validaciones y mascaras para los inputs
         val_nombre_apellido(self, self.vinculacion.line_nombreapellidos)
         val_identifiacion(self, self.vinculacion.line_identificacion)
-        mascara_identificacion(self.vinculacion.line_identificacion)
+        #mascara_identificacion(self.vinculacion.line_identificacion)
         val_periodo_academico(self, self.vinculacion.line_periodoacademico)
-        mascara_periodo_academico(self.vinculacion.line_periodoacademico)
+        ##mascara_periodo_academico(self.vinculacion.line_periodoacademico)
         val_codigo_campoespecifico(self, self.vinculacion.line_campoespecifico)
-        mascara_campoespecifico(self.vinculacion.line_campoespecifico)
+        #mascara_campoespecifico(self.vinculacion.line_campoespecifico)
         val_codigo_ies(self, self.vinculacion.line_codigoies)
-        mascara_codigo_ies(self.vinculacion.line_codigoies)
+        ##mascara_codigo_ies(self.vinculacion.line_codigoies)
+
+
+        # self.vinculacion.line_identificacion.textChanged.connect(
+        #     lambda: borrar_caracteres_identificacion(self.vinculacion.line_identificacion, mascara_identificacion)
+        # )
 
         # boton guardar
         self.vinculacion.btn_guardar.clicked.connect(lambda: self.obtener_campos_vinculacion())

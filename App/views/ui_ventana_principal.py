@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ventana_principalHKmMGX.ui'
+## Form generated from reading UI file 'ventana_principalSrrtXT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -2125,7 +2125,7 @@ class Ui_principal(object):
 
         self.retranslateUi(principal)
 
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(1)
         self.stackedWidget_5.setCurrentIndex(0)
 
 
@@ -2216,7 +2216,7 @@ class Ui_principal(object):
         ___qtablewidgetitem11 = self.tabla_principal_tutor.horizontalHeaderItem(1)
         ___qtablewidgetitem11.setText(QCoreApplication.translate("principal", u"ESTUDIANTE", None));
         ___qtablewidgetitem12 = self.tabla_principal_tutor.horizontalHeaderItem(2)
-        ___qtablewidgetitem12.setText(QCoreApplication.translate("principal", u"FECHA SEGUIMIENTO", None));
+        ___qtablewidgetitem12.setText(QCoreApplication.translate("principal", u"FECHA AFILIACI\u00d3N", None));
         ___qtablewidgetitem13 = self.tabla_principal_tutor.horizontalHeaderItem(3)
         ___qtablewidgetitem13.setText(QCoreApplication.translate("principal", u"HORAS SEGUIMIENTO", None));
         ___qtablewidgetitem14 = self.tabla_principal_tutor.horizontalHeaderItem(4)

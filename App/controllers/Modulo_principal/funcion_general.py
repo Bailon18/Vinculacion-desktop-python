@@ -325,7 +325,7 @@ def btn_agregar_seguimiento(boton,fila,tabla,parent):
     
     """eventos  del boton agregar seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))          
-    #boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) 
+    boton.clicked.connect(lambda: agregar_seguimiento_acccion(fila,parent)) 
     
 def btn_eliminar_seguimiento(boton,fila,tabla,parent):
     
@@ -338,3 +338,19 @@ def btn_editr_seguimiento(boton,fila,tabla,parent):
     """eventos  del boton editar seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))              
     #boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 
+
+
+def agregar_seguimiento_acccion(fila, parent):
+    pass
+
+    # from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
+
+    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 1).text()
+    # nombre_tutor = parent.venPri.tabla_principal.item(fila, 4).text()
+
+    # tutor_id = parent.tutor_id
+
+    # parent.raizOpacidad.resize(parent.width(), parent.height())
+    # parent.raizOpacidad.show()
+    # Seguimiento([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()

@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>SeguimientoNuevo</class>
+ <widget class="QDialog" name="SeguimientoNuevo">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>430</width>
+    <height>550</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>430</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>580</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Seguimiento</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/prefijoNuevo/logo.png</normaloff>:/prefijoNuevo/logo.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QTableWidget {
+outline: 0px;
+border:5px solid #f3f4f6;
+border-radius:15px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 19px;
+letter-spacing: 0.02em;
+color: #6B7280;
+}
+
+
+/* cabezera*/
+QHeaderView::section {
+background-color:#f1f2f3;
+border-style: none;
+height:40px;
+font-family: &quot;Roboto&quot;;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 14px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #6B7280;
+
+
+}
+
+
+QHeaderView::section:horizontal{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 14px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #212529;
+
+}
+
+
+QTableWidget::disabled{
+    background-color:#acacac;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;}
+
+/*bordes internos*/
+QTableWidget::item {
+	border-bottom: 3px solid #f3f4f6;
+
+}
+
+QTableWidget:item:selected{
+	background:white;/*color-seleccion*/
+color: #2c3d3e;
+}
+
+
+
+
+
+/*SCROLL VERTICAL*/
+
+QScrollBar:vertical{
+	background: #f3f4f6;
+	width: 11px; 
+	margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical{
+	background: #cdcecf;
+    border-radius:3px;
+	margin: 0px 0px 3px 2px;
+}
+
+QScrollBar::add-line:vertical {
+	height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+	height: 0 px;
+}
+
+
+/*SCROLL HORIZONTAL*/
+
+QScrollBar:horizontal{
+	background: #f3f4f6;
+	height: 11px; 
+	margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal{
+	background: #cdcecf;
+    border-radius:3px;
+	margin: 3px 2px 0px 0px;
+}
+
+QScrollBar::add-line:horizontal{
+	height: 0px;
+}
+
+QScrollBar::sub-line:horizontal{
+	height: 0 px;
+}
+
+</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">
+
+#frame{background-color:white;border-radius:10px}
+
+
+QLabel{
+font-family: Roboto;
+font-style: bold;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+
+
+/* PLANTEXT*/
+QPlainTextEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QPlainTextEdit::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+QCheckBox{font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+color:#9CA3AF}
+
+
+/*SPINBOX*/
+QSpinBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QSpinBox::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::up-arrow{
+	image: url(:/menu/contraerarriba.png);
+     width: 11px;
+     height: 11px;
+}
+
+QSpinBox::down-arrow{
+	image: url(:/menu/contraerabajo.png);
+     width:11px;
+     height: 11px;}
+
+QSpinBox::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+QDateEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QDateEdit::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::up-arrow{
+	image: url(:/menu/contraerarriba.png);
+     width: 11px;
+     height: 11px;
+}
+
+QDateEdit::down-arrow{
+	image: url(:/menu/contraerabajo.png);
+     width: 11px;
+     height: 11px;}
+
+QDateEdit::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+
+
+
+
+
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <widget class="QLabel" name="lbl8">
+      <property name="geometry">
+       <rect>
+        <x>19</x>
+        <y>70</y>
+        <width>371</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>-1</pointsize>
+        <weight>60</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#lbl8{
+
+font-family: Roboto ;
+font-style: bold;
+font-weight: 480;
+font-size: 17px;
+line-height: 28px;
+letter-spacing: 0.02em;
+color: #374151}</string>
+      </property>
+      <property name="text">
+       <string>Estudiante asignado</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>431</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_2{background: #3A4F50 ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="lbl_nombre_estudiante">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>10</y>
+         <width>361</width>
+         <height>27</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font-family: Roboto;
+font-style: normal;
+font-weight: 500;
+font-size: 17px;
+line-height: 40px;
+letter-spacing: 0.02em;
+color:#ffffff;</string>
+       </property>
+       <property name="text">
+        <string>Seguimiento</string>
+       </property>
+      </widget>
+      <widget class="QToolButton" name="btn_closeseguimiento">
+       <property name="geometry">
+        <rect>
+         <x>400</x>
+         <y>10</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string>Cerrar</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#btn_closeseguimiento{
+font-family: Roboto;
+font-weight: normal;
+font-size: 14px;
+background-color: #d5d5d8;
+color: #6B7280;
+border-radius:11px
+}
+
+#btn_closeseguimiento:hover{background:#ce4d3a ;
+border-radius:11px; }
+
+
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/x.png</normaloff>:/menu/x.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>13</width>
+         <height>13</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QLabel" name="lbl_nombreestudiante">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>100</y>
+        <width>341</width>
+        <height>16</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>tutor asignado</string>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl8_2">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>201</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="font">
+       <font>
+        <family>Roboto</family>
+        <pointsize>-1</pointsize>
+        <weight>60</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#lbl8_2{
+
+font-family: Roboto ;
+font-style: bold;
+font-weight: 480;
+font-size: 17px;
+line-height: 28px;
+letter-spacing: 0.02em;
+color: #374151}</string>
+      </property>
+      <property name="text">
+       <string>Detalles</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="QDateEdit" name="fecha_seguimiento">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>200</y>
+        <width>230</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="displayFormat">
+       <string>d-MM-yyyy</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_96">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>170</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Fecha seguimiento*</string>
+      </property>
+     </widget>
+     <widget class="QSpinBox" name="spb_numerohoras">
+      <property name="enabled">
+       <bool>false</bool>
+      </property>
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>200</y>
+        <width>71</width>
+        <height>41</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl5">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>175</y>
+        <width>101</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>N° horas</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="QPlainTextEdit" name="plain_observacion">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>290</y>
+        <width>391</width>
+        <height>191</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_97">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>260</y>
+        <width>161</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Observaciones*</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btn_guardar">
+      <property name="geometry">
+       <rect>
+        <x>300</x>
+        <y>490</y>
+        <width>110</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>110</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="focusPolicy">
+       <enum>Qt::NoFocus</enum>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/*  BOTON */
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #3A4F50;
+border-radius: 8px;}
+
+QPushButton:hover{background: #344647;
+border-radius: 8px; }
+</string>
+      </property>
+      <property name="text">
+       <string>Guardar</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../image/source.qrc">
+        <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+      </property>
+      <property name="iconSize">
+       <size>
+        <width>15</width>
+        <height>21</height>
+       </size>
+      </property>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../image/source.qrc"/>
+  <include location="../image/source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

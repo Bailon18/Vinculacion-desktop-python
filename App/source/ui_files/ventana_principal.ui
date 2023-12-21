@@ -1109,7 +1109,7 @@ QComboBox::down-arrow
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="pag1">
                 <property name="styleSheet">
@@ -2701,7 +2701,7 @@ QScrollBar::sub-line:horizontal{
                              </column>
                              <column>
                               <property name="text">
-                               <string>FECHA SEGUIMIENTO</string>
+                               <string>FECHA AFILIACIÓN</string>
                               </property>
                              </column>
                              <column>

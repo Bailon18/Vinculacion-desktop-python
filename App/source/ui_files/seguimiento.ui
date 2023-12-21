@@ -1,0 +1,3551 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Seguimiento</class>
+ <widget class="QDialog" name="Seguimiento">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>620</width>
+    <height>560</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>620</width>
+    <height>560</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>620</width>
+    <height>600</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Sesiones</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>:/prefijoNuevo/logo.png</normaloff>:/prefijoNuevo/logo.png</iconset>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
+  </property>
+  <layout class="QGridLayout" name="gridLayout_5">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">frame{
+background-color:#f1f1f1;
+border-bottom-right-radius: 10;
+border-bottom-left-radius: 10;
+}</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="leftMargin">
+       <number>0</number>
+      </property>
+      <property name="topMargin">
+       <number>0</number>
+      </property>
+      <property name="rightMargin">
+       <number>0</number>
+      </property>
+      <property name="bottomMargin">
+       <number>0</number>
+      </property>
+      <property name="spacing">
+       <number>0</number>
+      </property>
+      <item row="1" column="0">
+       <widget class="QStackedWidget" name="stack_principal">
+        <property name="styleSheet">
+         <string notr="true">
+stack_principal{
+	background-color:#f1f1f1;
+}
+
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::NoFrame</enum>
+        </property>
+        <property name="currentIndex">
+         <number>1</number>
+        </property>
+        <widget class="QWidget" name="page_4">
+         <layout class="QGridLayout" name="gridLayout_9">
+          <property name="leftMargin">
+           <number>0</number>
+          </property>
+          <property name="topMargin">
+           <number>0</number>
+          </property>
+          <property name="rightMargin">
+           <number>0</number>
+          </property>
+          <property name="bottomMargin">
+           <number>0</number>
+          </property>
+          <property name="spacing">
+           <number>0</number>
+          </property>
+          <item row="0" column="0">
+           <widget class="QScrollArea" name="scrollArea_4">
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="verticalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOn</enum>
+            </property>
+            <property name="horizontalScrollBarPolicy">
+             <enum>Qt::ScrollBarAlwaysOff</enum>
+            </property>
+            <property name="widgetResizable">
+             <bool>true</bool>
+            </property>
+            <widget class="QWidget" name="scrollAreaWidgetContents_4">
+             <property name="geometry">
+              <rect>
+               <x>0</x>
+               <y>0</y>
+               <width>603</width>
+               <height>680</height>
+              </rect>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_10">
+              <property name="leftMargin">
+               <number>0</number>
+              </property>
+              <property name="topMargin">
+               <number>0</number>
+              </property>
+              <property name="rightMargin">
+               <number>0</number>
+              </property>
+              <property name="bottomMargin">
+               <number>0</number>
+              </property>
+              <property name="spacing">
+               <number>0</number>
+              </property>
+              <item row="0" column="0">
+               <widget class="QFrame" name="frame_10">
+                <property name="minimumSize">
+                 <size>
+                  <width>0</width>
+                  <height>680</height>
+                 </size>
+                </property>
+                <property name="styleSheet">
+                 <string notr="true">#frame_10{background-color:#ffffff}
+
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+QLineEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QLineEdit::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* DATE */
+QDateEdit
+{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px;
+}
+
+QDateEdit::drop-down
+{
+	image: url(:/prefijoNuevo/025-calendar-13.png);
+    width:15px;
+    height:15px;
+padding:13px 20px 10px 10px;
+}
+
+QDateEdit::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+border-radius:8px;
+}
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#54BFC9;
+	selection-color:#FFFFFF;
+	outline: 0px;
+   border: 1px solid #D1D5DB;
+ border-radius:8px;
+}
+
+
+QComboBox::down-arrow
+{
+	image: url(:/prefijoNuevo/flecha_oscuro.png);
+     width: 11px;
+     height: 11px;
+}
+
+
+
+QComboBox::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+
+/* LISTA */
+
+
+QListWidget{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px;
+}
+
+
+QListView::item:selected
+{
+    background-color: #F3F4F6; color: #9CA3AF;
+	outline: 0px;
+}
+
+QListView::item:focus
+{
+background: #54BFC9;
+border-radius:8px;
+color:white}
+
+
+QListWidget::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+
+}</string>
+                </property>
+                <property name="frameShape">
+                 <enum>QFrame::NoFrame</enum>
+                </property>
+                <property name="frameShadow">
+                 <enum>QFrame::Plain</enum>
+                </property>
+                <layout class="QVBoxLayout" name="verticalLayout">
+                 <property name="spacing">
+                  <number>0</number>
+                 </property>
+                 <property name="leftMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="topMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="rightMargin">
+                  <number>0</number>
+                 </property>
+                 <property name="bottomMargin">
+                  <number>0</number>
+                 </property>
+                 <item>
+                  <widget class="QLabel" name="label_33">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                   <property name="maximumSize">
+                    <size>
+                     <width>16777215</width>
+                     <height>1</height>
+                    </size>
+                   </property>
+                   <property name="styleSheet">
+                    <string notr="true">border: 1px solid #D1D5DB;
+</string>
+                   </property>
+                   <property name="text">
+                    <string/>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QFrame" name="frame_11">
+                   <property name="minimumSize">
+                    <size>
+                     <width>0</width>
+                     <height>421</height>
+                    </size>
+                   </property>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Sunken</enum>
+                   </property>
+                   <widget class="QFrame" name="frame_13">
+                    <property name="geometry">
+                     <rect>
+                      <x>10</x>
+                      <y>10</y>
+                      <width>911</width>
+                      <height>659</height>
+                     </rect>
+                    </property>
+                    <property name="minimumSize">
+                     <size>
+                      <width>0</width>
+                      <height>421</height>
+                     </size>
+                    </property>
+                    <property name="frameShape">
+                     <enum>QFrame::NoFrame</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Sunken</enum>
+                    </property>
+                    <widget class="QStackedWidget" name="stackedWidget_2">
+                     <property name="geometry">
+                      <rect>
+                       <x>0</x>
+                       <y>10</y>
+                       <width>911</width>
+                       <height>718</height>
+                      </rect>
+                     </property>
+                     <property name="styleSheet">
+                      <string notr="true"/>
+                     </property>
+                     <property name="currentIndex">
+                      <number>0</number>
+                     </property>
+                     <widget class="QWidget" name="pag_agregarSesion">
+                      <property name="minimumSize">
+                       <size>
+                        <width>0</width>
+                        <height>0</height>
+                       </size>
+                      </property>
+                      <property name="maximumSize">
+                       <size>
+                        <width>16777215</width>
+                        <height>16777215</height>
+                       </size>
+                      </property>
+                      <property name="styleSheet">
+                       <string notr="true">#pag_agregarSesion{
+	background-color: rgb(255, 255, 255);
+}
+
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+QLineEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QLineEdit::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* DATE */
+
+QDateEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QDateEdit::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::up-arrow{
+	image: url(:/prefijoNuevo/comDownP.png);
+     width: 9px;
+     height: 9px;
+}
+
+QDateEdit::down-arrow{
+	image:url(:/prefijoNuevo/comUpP.png);
+     width: 9px;
+     height: 9px;}
+
+QDateEdit::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+border-radius:8px;
+padding:10px
+}
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#54BFC9;
+	selection-color:#FFFFFF;
+	outline: 0px;
+   border: 1px solid #D1D5DB;
+ border-radius:8px;
+padding:10px
+}
+
+
+QComboBox::down-arrow
+{
+	image: url(:/prefijoNuevo/flecha_oscuro.png);
+     width: 11px;
+     height: 11px;
+}
+
+
+
+QComboBox::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+QComboBox {combobox-popup: 0}
+
+/* LISTA */
+
+
+QListWidget{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px;
+}
+
+
+QListView::item:selected
+{
+    background-color: #F3F4F6; color: #9CA3AF;
+	outline: 0px;
+}
+
+QListView::item:focus
+{
+background: #54BFC9;
+border-radius:8px;
+color:white}
+
+
+QListWidget::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+
+}
+
+
+/*SPINBOX*/
+/*SPINBOX*/
+QSpinBox,QDoubleSpinBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QSpinBox::up-button,QDoubleSpinBox::up-button{
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::down-button,QDoubleSpinBox::down-button{
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::up-arrow,QDoubleSpinBox::up-arrow{
+	image: url(:/prefijoNuevo/comDownP.png);
+     width: 9px;
+     height: 9px;
+}
+
+QSpinBox::down-arrow,QDoubleSpinBox::down-arrow{
+	image:url(:/prefijoNuevo/comUpP.png);
+     width: 9px;
+     height: 9px;}
+
+QSpinBox::hover,QDoubleSpinBox::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+QSpinBox::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* PLANTEXT*/
+QPlainTextEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QPlainTextEdit::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* BOTON*/
+/*  BOTON */
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #54BFC9;
+border-radius: 8px;}
+
+QPushButton:hover{background: #439CA8;
+border-radius: 8px; }
+
+</string>
+                      </property>
+                      <widget class="QDateEdit" name="datefecha_atencion">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="displayFormat">
+                        <string>d-MM-yyyy</string>
+                       </property>
+                       <property name="calendarPopup">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_84">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>428</y>
+                         <width>161</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Estado sesión*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_79">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>140</y>
+                         <width>133</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Duracion sesión*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_80">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>140</y>
+                         <width>111</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Hora final*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_81">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>140</y>
+                         <width>151</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Hora inicio*</string>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_estadosesion">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>459</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pendiente</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Asistió</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tardanza</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reprogramado</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Falta injustificada</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QLineEdit" name="line_duracion">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>1</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_88">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>250</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Costo Asignado*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_89">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>39</y>
+                         <width>151</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Fecha de atención*</string>
+                       </property>
+                      </widget>
+                      <widget class="QSpinBox" name="spin_horafinal">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="suffix">
+                        <string>:59</string>
+                       </property>
+                       <property name="prefix">
+                        <string/>
+                       </property>
+                       <property name="minimum">
+                        <number>8</number>
+                       </property>
+                       <property name="maximum">
+                        <number>24</number>
+                       </property>
+                       <property name="value">
+                        <number>8</number>
+                       </property>
+                      </widget>
+                      <widget class="QPlainTextEdit" name="plain_observacion">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>549</y>
+                         <width>581</width>
+                         <height>91</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_90">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>340</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Fecha de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_91">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>250</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Costo Pagar*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_92">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>39</y>
+                         <width>191</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Centro de atención*</string>
+                       </property>
+                      </widget>
+                      <widget class="QDoubleSpinBox" name="spin_monto">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="prefix">
+                        <string>S/.</string>
+                       </property>
+                       <property name="suffix">
+                        <string/>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_tipocita">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Individual</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pareja</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Familiar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Evaluación</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Emdr</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_estadopago">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>370</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pago pendiente</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pagó adelantado</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pagó mismo día</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Ayuda total</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_centroatencion">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Centro padma</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Centro médico</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Virtual</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QLabel" name="label_93">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>39</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Cantidad de sesiones*</string>
+                       </property>
+                      </widget>
+                      <widget class="QSpinBox" name="spin_horainicio">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="suffix">
+                        <string>:00</string>
+                       </property>
+                       <property name="minimum">
+                        <number>8</number>
+                       </property>
+                       <property name="maximum">
+                        <number>24</number>
+                       </property>
+                       <property name="value">
+                        <number>8</number>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_43">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>0</y>
+                         <width>221</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">/*#label{font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 21px;
+letter-spacing: 0.02em;
+color: #374151;}
+*/
+#label_43{
+/* H5-medium */
+
+font-family: Roboto ;
+font-style: bold;
+font-weight: 480;
+font-size: 21px;
+line-height: 28px;
+letter-spacing: 0.02em;
+color: #374151}</string>
+                       </property>
+                       <property name="text">
+                        <string>Agregar sesión</string>
+                       </property>
+                      </widget>
+                      <widget class="QSpinBox" name="spin_cantidadsesiones">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="minimum">
+                        <number>1</number>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_94">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>250</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Tipo cita*</string>
+                       </property>
+                      </widget>
+                      <widget class="QDateEdit" name="date_fechapago">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>370</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="displayFormat">
+                        <string>d-MM-yyyy</string>
+                       </property>
+                       <property name="calendarPopup">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_95">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>520</y>
+                         <width>161</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Obervación</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_96">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>340</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Estado de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_97">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>340</y>
+                         <width>151</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Medio de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="Line" name="line_2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>225</y>
+                         <width>881</width>
+                         <height>16</height>
+                        </rect>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">
+color: #D1D5DB
+</string>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Plain</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>2</number>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_mediopago">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>370</y>
+                         <width>281</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>BBVA Padma</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>BCP Carmen</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>YAPE Carmen</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>PLIN Carmen</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Efectivo</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Convenio H&amp;I</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Convenio Tejiendo sonrisas</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QDoubleSpinBox" name="line_costoasignado">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="prefix">
+                        <string>S/.</string>
+                       </property>
+                       <property name="suffix">
+                        <string/>
+                       </property>
+                      </widget>
+                      <widget class="QFrame" name="frame_invisible">
+                       <property name="geometry">
+                        <rect>
+                         <x>310</x>
+                         <y>430</y>
+                         <width>601</width>
+                         <height>81</height>
+                        </rect>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::NoFrame</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QLabel" name="label_109">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>0</y>
+                          <width>161</width>
+                          <height>31</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Fecha Antigua</string>
+                        </property>
+                       </widget>
+                       <widget class="QDateEdit" name="date_fechantigua">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>29</y>
+                          <width>280</width>
+                          <height>47</height>
+                         </rect>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="displayFormat">
+                         <string>d-MM-yyyy</string>
+                        </property>
+                        <property name="calendarPopup">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QDateEdit" name="date_reprogramacion">
+                        <property name="geometry">
+                         <rect>
+                          <x>310</x>
+                          <y>30</y>
+                          <width>280</width>
+                          <height>47</height>
+                         </rect>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="displayFormat">
+                         <string>d-MM-yyyy</string>
+                        </property>
+                        <property name="calendarPopup">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_86">
+                        <property name="geometry">
+                         <rect>
+                          <x>310</x>
+                          <y>1</y>
+                          <width>161</width>
+                          <height>31</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Fecha reprogramada</string>
+                        </property>
+                       </widget>
+                      </widget>
+                     </widget>
+                     <widget class="QWidget" name="pag_editarSesion">
+                      <property name="styleSheet">
+                       <string notr="true">#pag_editarSesion{
+	background-color: rgb(255, 255, 255);
+}
+
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+QLineEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QLineEdit::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* DATE */
+
+QDateEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QDateEdit::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QDateEdit::up-arrow{
+	image: url(:/prefijoNuevo/comDownP.png);
+     width: 9px;
+     height: 9px;
+}
+
+QDateEdit::down-arrow{
+	image:url(:/prefijoNuevo/comUpP.png);
+     width: 9px;
+     height: 9px;}
+
+QDateEdit::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+border-radius:8px;
+padding:10px
+}
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#54BFC9;
+	selection-color:#FFFFFF;
+	outline: 0px;
+   border: 1px solid #D1D5DB;
+ border-radius:8px;
+padding:10px
+}
+
+
+QComboBox::down-arrow
+{
+	image: url(:/prefijoNuevo/flecha_oscuro.png);
+     width: 11px;
+     height: 11px;
+}
+
+
+
+QComboBox::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+QComboBox {combobox-popup: 0}
+
+
+
+/* LISTA */
+
+
+QListWidget{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px;
+}
+
+
+QListView::item:selected
+{
+    background-color: #F3F4F6; color: #9CA3AF;
+	outline: 0px;
+}
+
+QListView::item:hover
+{
+background: #54BFC9;
+border-radius:8px;
+color:white}
+
+
+QListWidget::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+
+}
+
+
+/*SPINBOX*/
+QSpinBox,QDoubleSpinBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QSpinBox::up-button,QDoubleSpinBox::up-button{
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::down-button,QDoubleSpinBox::down-button{
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::up-arrow,QDoubleSpinBox::up-arrow{
+	image: url(:/prefijoNuevo/comDownP.png);
+     width: 9px;
+     height: 9px;
+}
+
+QSpinBox::down-arrow,QDoubleSpinBox::down-arrow{
+	image:url(:/prefijoNuevo/comUpP.png);
+     width: 9px;
+     height: 9px;}
+
+QSpinBox::hover,QDoubleSpinBox::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+QSpinBox::focus{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+
+/* PLANTEXT*/
+QPlainTextEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QPlainTextEdit::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+
+/* BOTON*/
+/*  BOTON */
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #54BFC9;
+border-radius: 8px;}
+
+QPushButton:hover{background: #439CA8;
+border-radius: 8px; }
+</string>
+                      </property>
+                      <widget class="QSpinBox" name="spin_cantidadsesiones2">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="minimum">
+                        <number>1</number>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_estadopago2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>370</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pago pendiente</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pagó adelantado</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pagó mismo día</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Ayuda total</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QSpinBox" name="spin_horainicio2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="suffix">
+                        <string>:00</string>
+                       </property>
+                       <property name="minimum">
+                        <number>8</number>
+                       </property>
+                       <property name="maximum">
+                        <number>21</number>
+                       </property>
+                       <property name="value">
+                        <number>8</number>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_51">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>0</y>
+                         <width>151</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">/*#label{font-family: Roboto;
+font-style: normal;
+font-weight: bold;
+font-size: 21px;
+letter-spacing: 0.02em;
+color: #374151;}
+*/
+#label_51{
+/* H5-medium */
+
+font-family: Roboto ;
+font-style: bold;
+font-weight: 480;
+font-size: 21px;
+line-height: 28px;
+letter-spacing: 0.02em;
+color: #374151}</string>
+                       </property>
+                       <property name="text">
+                        <string>Editar sesión</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_111">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>250</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Tipo cita*</string>
+                       </property>
+                      </widget>
+                      <widget class="Line" name="line_4">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>223</y>
+                         <width>881</width>
+                         <height>20</height>
+                        </rect>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true">
+color: #D1D5DB
+</string>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Plain</enum>
+                       </property>
+                       <property name="lineWidth">
+                        <number>2</number>
+                       </property>
+                       <property name="orientation">
+                        <enum>Qt::Horizontal</enum>
+                       </property>
+                      </widget>
+                      <widget class="QSpinBox" name="spin_horafinal2">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="suffix">
+                        <string>:59</string>
+                       </property>
+                       <property name="minimum">
+                        <number>8</number>
+                       </property>
+                       <property name="maximum">
+                        <number>21</number>
+                       </property>
+                      </widget>
+                      <widget class="QDateEdit" name="datefecha_atencion2">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="displayFormat">
+                        <string>d-MM-yyyy</string>
+                       </property>
+                       <property name="calendarPopup">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_centroatencion2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>69</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Centro padma</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Centro médico</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Virtual</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QLabel" name="label_112">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>140</y>
+                         <width>151</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Hora inicio*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_113">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>250</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Costo Asignado*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_114">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>340</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Estado de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_115">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>340</y>
+                         <width>131</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Medio de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="QDateEdit" name="date_fechapago2">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>370</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="displayFormat">
+                        <string>d-MM-yyyy</string>
+                       </property>
+                       <property name="calendarPopup">
+                        <bool>false</bool>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_116">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>39</y>
+                         <width>191</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Centro de atención*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_117">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>39</y>
+                         <width>141</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Fecha de atención*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_118">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>140</y>
+                         <width>133</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Duracion sesión*</string>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_mediopago2">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>370</y>
+                         <width>281</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>BBVA Padma</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>BCP Carmen</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>YAPE Carmen</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>PLIN Padma</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Efectivo</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Convenio H&amp;I</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Convenio Tejiendo sonrisas</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QLineEdit" name="line_duracion2">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>164</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="text">
+                        <string>1</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_119">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>140</y>
+                         <width>111</width>
+                         <height>21</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Hora final*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_120">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>39</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Cantidad de sesiones*</string>
+                       </property>
+                      </widget>
+                      <widget class="QDoubleSpinBox" name="spin_monto2">
+                       <property name="enabled">
+                        <bool>true</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="prefix">
+                        <string>S/.</string>
+                       </property>
+                       <property name="suffix">
+                        <string/>
+                       </property>
+                      </widget>
+                      <widget class="QPlainTextEdit" name="plain_observacion2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>549</y>
+                         <width>581</width>
+                         <height>91</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>0</height>
+                        </size>
+                       </property>
+                       <property name="maximumSize">
+                        <size>
+                         <width>16777215</width>
+                         <height>16777215</height>
+                        </size>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_121">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>428</y>
+                         <width>161</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Estado sesión*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_122">
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>340</y>
+                         <width>280</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Fecha de pago*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_123">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>518</y>
+                         <width>161</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Obervación*</string>
+                       </property>
+                      </widget>
+                      <widget class="QLabel" name="label_124">
+                       <property name="geometry">
+                        <rect>
+                         <x>620</x>
+                         <y>250</y>
+                         <width>181</width>
+                         <height>31</height>
+                        </rect>
+                       </property>
+                       <property name="text">
+                        <string>Costo Pagar*</string>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_estadosesion2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>460</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pendiente</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Asistió</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Tardanza</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Reprogramado</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Falta injustificada</string>
+                        </property>
+                       </item>
+                      </widget>
+                      <widget class="QFrame" name="frame_20">
+                       <property name="geometry">
+                        <rect>
+                         <x>310</x>
+                         <y>439</y>
+                         <width>601</width>
+                         <height>81</height>
+                        </rect>
+                       </property>
+                       <property name="frameShape">
+                        <enum>QFrame::NoFrame</enum>
+                       </property>
+                       <property name="frameShadow">
+                        <enum>QFrame::Raised</enum>
+                       </property>
+                       <widget class="QDateEdit" name="date_fechantigua2">
+                        <property name="enabled">
+                         <bool>false</bool>
+                        </property>
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>20</y>
+                          <width>280</width>
+                          <height>47</height>
+                         </rect>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="displayFormat">
+                         <string>d-MM-yyyy</string>
+                        </property>
+                        <property name="calendarPopup">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_125">
+                        <property name="geometry">
+                         <rect>
+                          <x>10</x>
+                          <y>-9</y>
+                          <width>161</width>
+                          <height>31</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Fecha Antigua*</string>
+                        </property>
+                       </widget>
+                       <widget class="QDateEdit" name="date_reprogramacion2">
+                        <property name="geometry">
+                         <rect>
+                          <x>310</x>
+                          <y>20</y>
+                          <width>280</width>
+                          <height>47</height>
+                         </rect>
+                        </property>
+                        <property name="minimumSize">
+                         <size>
+                          <width>0</width>
+                          <height>40</height>
+                         </size>
+                        </property>
+                        <property name="cursor">
+                         <cursorShape>PointingHandCursor</cursorShape>
+                        </property>
+                        <property name="styleSheet">
+                         <string notr="true"/>
+                        </property>
+                        <property name="displayFormat">
+                         <string>d-MM-yyyy</string>
+                        </property>
+                        <property name="calendarPopup">
+                         <bool>false</bool>
+                        </property>
+                       </widget>
+                       <widget class="QLabel" name="label_126">
+                        <property name="geometry">
+                         <rect>
+                          <x>310</x>
+                          <y>-9</y>
+                          <width>201</width>
+                          <height>31</height>
+                         </rect>
+                        </property>
+                        <property name="text">
+                         <string>Fecha reprogramada*</string>
+                        </property>
+                       </widget>
+                      </widget>
+                      <widget class="QDoubleSpinBox" name="line_costoasignado2">
+                       <property name="enabled">
+                        <bool>false</bool>
+                       </property>
+                       <property name="geometry">
+                        <rect>
+                         <x>320</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <property name="prefix">
+                        <string>S/.</string>
+                       </property>
+                       <property name="suffix">
+                        <string/>
+                       </property>
+                      </widget>
+                      <widget class="QComboBox" name="cbox_tipocita2">
+                       <property name="geometry">
+                        <rect>
+                         <x>20</x>
+                         <y>280</y>
+                         <width>280</width>
+                         <height>47</height>
+                        </rect>
+                       </property>
+                       <property name="minimumSize">
+                        <size>
+                         <width>0</width>
+                         <height>40</height>
+                        </size>
+                       </property>
+                       <property name="cursor">
+                        <cursorShape>PointingHandCursor</cursorShape>
+                       </property>
+                       <property name="styleSheet">
+                        <string notr="true"/>
+                       </property>
+                       <item>
+                        <property name="text">
+                         <string>Seleccionar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Individual</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Pareja</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Familiar</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Evaluación</string>
+                        </property>
+                       </item>
+                       <item>
+                        <property name="text">
+                         <string>Emdr</string>
+                        </property>
+                       </item>
+                      </widget>
+                     </widget>
+                    </widget>
+                   </widget>
+                  </widget>
+                 </item>
+                </layout>
+               </widget>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QFrame" name="frame_9">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>66</height>
+             </size>
+            </property>
+            <property name="styleSheet">
+             <string notr="true">#frame_9{background-color: #f1f1f1; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+
+
+
+/*  BOTON */
+
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #54BFC9;
+border-radius: 8px;}
+
+QPushButton:hover{background: #439CA8;
+border-radius: 8px; }
+
+</string>
+            </property>
+            <property name="frameShape">
+             <enum>QFrame::NoFrame</enum>
+            </property>
+            <property name="frameShadow">
+             <enum>QFrame::Plain</enum>
+            </property>
+            <widget class="QPushButton" name="btn_actualizar_sesion">
+             <property name="geometry">
+              <rect>
+               <x>760</x>
+               <y>10</y>
+               <width>151</width>
+               <height>47</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Ignored" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Actualizar sesión</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/prefijoNuevo/anadir.png</normaloff>:/prefijoNuevo/anadir.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>21</width>
+               <height>35</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="autoRepeat">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+             <property name="default">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="btn_cancelar">
+             <property name="geometry">
+              <rect>
+               <x>600</x>
+               <y>10</y>
+               <width>151</width>
+               <height>47</height>
+              </rect>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="text">
+              <string>Lista de sesiones</string>
+             </property>
+            </widget>
+            <widget class="QPushButton" name="btn_agregar_sesion">
+             <property name="geometry">
+              <rect>
+               <x>760</x>
+               <y>10</y>
+               <width>151</width>
+               <height>47</height>
+              </rect>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Ignored" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="sizeIncrement">
+              <size>
+               <width>0</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="cursor">
+              <cursorShape>PointingHandCursor</cursorShape>
+             </property>
+             <property name="focusPolicy">
+              <enum>Qt::NoFocus</enum>
+             </property>
+             <property name="toolTip">
+              <string/>
+             </property>
+             <property name="autoFillBackground">
+              <bool>false</bool>
+             </property>
+             <property name="styleSheet">
+              <string notr="true"/>
+             </property>
+             <property name="text">
+              <string>Agregar sesión</string>
+             </property>
+             <property name="icon">
+              <iconset>
+               <normaloff>:/prefijoNuevo/anadir.png</normaloff>:/prefijoNuevo/anadir.png</iconset>
+             </property>
+             <property name="iconSize">
+              <size>
+               <width>21</width>
+               <height>35</height>
+              </size>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <property name="autoRepeat">
+              <bool>false</bool>
+             </property>
+             <property name="autoExclusive">
+              <bool>false</bool>
+             </property>
+             <property name="autoDefault">
+              <bool>false</bool>
+             </property>
+             <property name="default">
+              <bool>false</bool>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+            </widget>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="page_2">
+         <property name="styleSheet">
+          <string notr="true">background-color: #f1f1f1;
+border-bottom-right-radius: 10;
+border-bottom-left-radius: 10;</string>
+         </property>
+         <widget class="QLabel" name="label_39">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>30</y>
+            <width>241</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font-family: Roboto ;
+font-style: bold;
+font-weight: 480;
+font-size: 21px;
+line-height: 28px;
+letter-spacing: 0.02em;
+color: #374151}</string>
+          </property>
+          <property name="text">
+           <string>Lista de seguimientos</string>
+          </property>
+         </widget>
+         <widget class="QFrame" name="frame_17">
+          <property name="geometry">
+           <rect>
+            <x>14</x>
+            <y>80</y>
+            <width>591</width>
+            <height>341</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">#frame_17{
+ border:8px solid white;
+border-radius:18px
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::NoFrame</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_30">
+           <property name="leftMargin">
+            <number>0</number>
+           </property>
+           <property name="topMargin">
+            <number>0</number>
+           </property>
+           <property name="rightMargin">
+            <number>0</number>
+           </property>
+           <property name="bottomMargin">
+            <number>0</number>
+           </property>
+           <property name="spacing">
+            <number>0</number>
+           </property>
+           <item row="0" column="0">
+            <widget class="QTableWidget" name="tabla_sesion">
+             <property name="styleSheet">
+              <string notr="true">QTableWidget {
+outline: 0px;
+border:2px solid #f3f4f6;
+border-radius:18px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 19px;
+letter-spacing: 0.02em;
+color: #6B7280;
+background-color: rgb(255, 255, 255);
+}
+
+/* cabezera*/
+QHeaderView::section {
+border-style: none;
+height:50px;
+font-family: &quot;Roboto&quot;;
+font-style: normal;
+font-weight: normal;
+font-size: 13px;
+line-height: 14px;
+letter-spacing: 0.04em;
+color: #6B7280;
+}
+
+
+QHeaderView::section:horizontal{
+font-family: Roboto;
+font-style:normal ;
+font-weight: normal;
+font-size: 13px;
+letter-spacing: 0.04em;
+color:#212529;
+background-color:#F1F1F1 ;
+}
+
+
+QTableWidget::disabled{
+    background-color:#acacac;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;}
+
+/*bordes internos*/
+QTableWidget::item {
+	border-bottom: 4px solid #f3f4f6;
+border-style:ridge
+
+}
+
+QTableWidget:item:selected{
+	background:white;/*color-seleccion*/
+color: #54bfc9;
+}
+
+
+
+
+
+
+/*SCROLL VERTICAL*/
+
+QScrollBar:vertical{
+	background: #f3f4f6;
+	width: 11px; 
+	margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:vertical{
+	background: #cdcecf;
+    border-radius:3px;
+	margin: 0px 0px 3px 2px;
+}
+
+QScrollBar::add-line:vertical {
+	height: 0px;
+}
+
+QScrollBar::sub-line:vertical {
+	height: 0 px;
+}
+
+
+/*SCROLL HORIZONTAL*/
+
+QScrollBar:horizontal{
+	background: #f3f4f6;
+	height: 11px; 
+	margin: 0px 0px 0px 0px;
+}
+
+QScrollBar::handle:horizontal{
+	background: #cdcecf;
+    border-radius:3px;
+	margin: 3px 2px 0px 0px;
+}
+
+QScrollBar::add-line:horizontal{
+	height: 0px;
+}
+
+QScrollBar::sub-line:horizontal{
+	height: 0 px;
+}
+
+</string>
+             </property>
+             <property name="frameShape">
+              <enum>QFrame::NoFrame</enum>
+             </property>
+             <property name="editTriggers">
+              <set>QAbstractItemView::NoEditTriggers</set>
+             </property>
+             <property name="selectionMode">
+              <enum>QAbstractItemView::SingleSelection</enum>
+             </property>
+             <property name="selectionBehavior">
+              <enum>QAbstractItemView::SelectRows</enum>
+             </property>
+             <property name="verticalScrollMode">
+              <enum>QAbstractItemView::ScrollPerPixel</enum>
+             </property>
+             <property name="horizontalScrollMode">
+              <enum>QAbstractItemView::ScrollPerPixel</enum>
+             </property>
+             <property name="showGrid">
+              <bool>false</bool>
+             </property>
+             <property name="sortingEnabled">
+              <bool>false</bool>
+             </property>
+             <attribute name="horizontalHeaderMinimumSectionSize">
+              <number>39</number>
+             </attribute>
+             <attribute name="horizontalHeaderHighlightSections">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderVisible">
+              <bool>false</bool>
+             </attribute>
+             <attribute name="verticalHeaderMinimumSectionSize">
+              <number>23</number>
+             </attribute>
+             <attribute name="verticalHeaderDefaultSectionSize">
+              <number>41</number>
+             </attribute>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
+             <column>
+              <property name="text">
+               <string>ID</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>FECHA SEGUIMIENTO</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>HORA ASIGNADA</string>
+              </property>
+             </column>
+             <column>
+              <property name="text">
+               <string>ACCIONES</string>
+              </property>
+             </column>
+             <item row="0" column="0">
+              <property name="text">
+               <string>98657</string>
+              </property>
+             </item>
+             <item row="0" column="1">
+              <property name="text">
+               <string>46</string>
+              </property>
+             </item>
+             <item row="0" column="2">
+              <property name="text">
+               <string>436</string>
+              </property>
+             </item>
+             <item row="0" column="3">
+              <property name="text">
+               <string>643</string>
+              </property>
+             </item>
+             <item row="1" column="0">
+              <property name="text">
+               <string>6436</string>
+              </property>
+             </item>
+             <item row="1" column="1">
+              <property name="text">
+               <string>643</string>
+              </property>
+             </item>
+             <item row="1" column="2">
+              <property name="text">
+               <string>4343</string>
+              </property>
+             </item>
+             <item row="1" column="3">
+              <property name="text">
+               <string>643</string>
+              </property>
+             </item>
+             <item row="2" column="0">
+              <property name="text">
+               <string>436</string>
+              </property>
+             </item>
+             <item row="2" column="1">
+              <property name="text">
+               <string>43643</string>
+              </property>
+             </item>
+             <item row="2" column="2">
+              <property name="text">
+               <string>643</string>
+              </property>
+             </item>
+             <item row="2" column="3">
+              <property name="text">
+               <string>643</string>
+              </property>
+             </item>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+         <widget class="QComboBox" name="cbox_rangosesiones">
+          <property name="geometry">
+           <rect>
+            <x>92</x>
+            <y>440</y>
+            <width>71</width>
+            <height>38</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>92</width>
+            <height>38</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #FFFFFF;
+color:#9CA3AF;
+border-radius:8px;
+}
+
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#54BFC9;
+	selection-color:#FFFFFF;
+	outline: 0px;
+   border: 1px solid #D1D5DB;
+ border-radius:8px;
+}
+
+
+QComboBox::down-arrow
+{
+
+	image: url(:/prefijoNuevo/flecha_oscuro.png);
+     width: 11px;
+     height: 11px;
+}
+
+
+
+QComboBox::hover{
+background: #FFFFFF;
+border: 2px solid #54BFC9;
+border-radius: 8px;
+}
+
+QComboBox {combobox-popup: 0}</string>
+          </property>
+          <item>
+           <property name="text">
+            <string>5</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>10</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>20</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>50</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QPushButton" name="btn_agregarses">
+          <property name="geometry">
+           <rect>
+            <x>430</x>
+            <y>20</y>
+            <width>161</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Ignored" vsizetype="Maximum">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="sizeIncrement">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="autoFillBackground">
+           <bool>false</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">
+QPushButton{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+letter-spacing: 0.02em;
+color:white;
+padding:8px;
+background: #3A4F50;
+border-radius: 8px;}
+
+QPushButton:hover{background: #344647;
+border-radius: 8px; }
+</string>
+          </property>
+          <property name="text">
+           <string>Nuevo seguimiento</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../image/source.qrc">
+            <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>12</width>
+            <height>38</height>
+           </size>
+          </property>
+          <property name="checkable">
+           <bool>false</bool>
+          </property>
+          <property name="autoRepeat">
+           <bool>false</bool>
+          </property>
+          <property name="autoExclusive">
+           <bool>false</bool>
+          </property>
+          <property name="autoDefault">
+           <bool>false</bool>
+          </property>
+          <property name="default">
+           <bool>false</bool>
+          </property>
+          <property name="flat">
+           <bool>false</bool>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_44">
+          <property name="geometry">
+           <rect>
+            <x>20</x>
+            <y>441</y>
+            <width>71</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+</string>
+          </property>
+          <property name="text">
+           <string>Mostrar</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="label_45">
+          <property name="geometry">
+           <rect>
+            <x>172</x>
+            <y>440</y>
+            <width>81</width>
+            <height>31</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 15px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+</string>
+          </property>
+          <property name="text">
+           <string>sesiones</string>
+          </property>
+         </widget>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QFrame" name="frame_19">
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>54</height>
+         </size>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#frame_19{background: #0B3A4C ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}
+
+#frame_19{background: #3A4F50 ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Plain</enum>
+        </property>
+        <widget class="QLabel" name="lbl_nombrepaciente">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>4</y>
+           <width>361</width>
+           <height>23</height>
+          </rect>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>8</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0.02em;
+color: #FFFFFF;}</string>
+         </property>
+         <property name="text">
+          <string>Seguimiento</string>
+         </property>
+        </widget>
+        <widget class="QToolButton" name="btn_closeseguimiento">
+         <property name="geometry">
+          <rect>
+           <x>590</x>
+           <y>10</y>
+           <width>25</width>
+           <height>25</height>
+          </rect>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="toolTip">
+          <string>Cerrar</string>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#btn_closeseguimiento{
+font-family: Roboto;
+font-weight: normal;
+font-size: 14px;
+background-color: #d5d5d8;
+color: #6B7280;
+border-radius:11px
+}
+
+
+
+#btn_closeseguimiento:hover{background:#ce4d3a ;
+border-radius:11px; }
+
+
+</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset resource="../image/source.qrc">
+           <normaloff>:/menu/x.png</normaloff>:/menu/x.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>13</width>
+           <height>13</height>
+          </size>
+         </property>
+         <property name="autoRaise">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="lbl_nombreestudiante">
+         <property name="geometry">
+          <rect>
+           <x>20</x>
+           <y>29</y>
+           <width>411</width>
+           <height>20</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel{font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 23px;
+letter-spacing: 0.02em;
+color: #FFFFFF;}</string>
+         </property>
+         <property name="text">
+          <string>Jose Mariano Martinez Jimenez</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>cbox_centroatencion</tabstop>
+  <tabstop>spin_cantidadsesiones</tabstop>
+  <tabstop>datefecha_atencion</tabstop>
+  <tabstop>spin_horainicio</tabstop>
+  <tabstop>spin_horafinal</tabstop>
+  <tabstop>line_duracion</tabstop>
+  <tabstop>cbox_tipocita</tabstop>
+  <tabstop>line_costoasignado</tabstop>
+  <tabstop>spin_monto</tabstop>
+  <tabstop>cbox_estadopago</tabstop>
+  <tabstop>date_fechapago</tabstop>
+  <tabstop>cbox_mediopago</tabstop>
+  <tabstop>cbox_estadosesion</tabstop>
+  <tabstop>date_fechantigua</tabstop>
+  <tabstop>date_reprogramacion</tabstop>
+  <tabstop>plain_observacion</tabstop>
+  <tabstop>cbox_centroatencion2</tabstop>
+  <tabstop>spin_cantidadsesiones2</tabstop>
+  <tabstop>datefecha_atencion2</tabstop>
+  <tabstop>spin_horainicio2</tabstop>
+  <tabstop>spin_horafinal2</tabstop>
+  <tabstop>line_duracion2</tabstop>
+  <tabstop>cbox_tipocita2</tabstop>
+  <tabstop>line_costoasignado2</tabstop>
+  <tabstop>spin_monto2</tabstop>
+  <tabstop>cbox_estadopago2</tabstop>
+  <tabstop>date_fechapago2</tabstop>
+  <tabstop>cbox_mediopago2</tabstop>
+  <tabstop>cbox_estadosesion2</tabstop>
+  <tabstop>date_fechantigua2</tabstop>
+  <tabstop>date_reprogramacion2</tabstop>
+  <tabstop>plain_observacion2</tabstop>
+  <tabstop>scrollArea_4</tabstop>
+  <tabstop>tabla_sesion</tabstop>
+  <tabstop>cbox_rangosesiones</tabstop>
+ </tabstops>
+ <resources>
+  <include location="../image/source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

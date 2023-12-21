@@ -35,6 +35,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.setupUi(self)
         
         self.conec_base = BaseDatos()
+        self.tutor_id = 2
         
         self.listar_vinculacion();
         
@@ -47,6 +48,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_cerrar.clicked.connect(lambda: self.cerrar_sesion())
         
         self.venPri.line_busqueda.textChanged.connect(lambda: self.busqueda_vinculacion())
+        self.venPri.line_busqueda_tutor.textChanged.connect(lambda: self.busqueda_vinculacion_tutor())
 
  
         evento_menu(self, self.venPri, tr=0)
@@ -64,8 +66,9 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_recargar.clicked.connect(lambda: self.listar_vinculacion())
         
         self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
+        self.venPri.cbox_rango_tutor.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango_tutor(self.venPri.cbox_rango_tutor.currentText()))
 
-        self.listar_seguimiento_tutor(2)
+        self.listar_seguimiento_tutor()
 
     def closeEvent(self, event):
         if self.controlSalida:
@@ -126,19 +129,44 @@ class Principal(QtWidgets.QMainWindow):
         lista_vinculaciones = self.conec_base.getDatosProcess_condicion("BuscarVinculaciones", (textobusqueda, limite))
         self.listar_vinculacion(lista_vinculaciones)
 
+
     def mostrar_vinculacion_rango(self, text):
         self.listar_vinculacion()
 
 
-
-
-    def listar_seguimiento_tutor(self, tutor_id):
+    def listar_seguimiento_tutor(self):
         
-        limite = 5
-        lista_seguimiento = self.conec_base.getDatosProcess_condicion('ObtenerSeguimientosConEstudiantes', (tutor_id, limite))
+        limite = int(self.venPri.cbox_rango_tutor.currentText())
+
+        lista_seguimiento = self.conec_base.getDatosProcess_condicion('ObtenerSeguimientosConEstudiantes', (self.tutor_id, limite))
         llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, lista_seguimiento[0])
+
+
+    def listar_vinculacion_tutor(self, datos=None):
+        
+        if datos is None:
+            self.listar_seguimiento_tutor()
+
+        if isinstance(datos, list) and datos:
+            datos_a_insertar = datos[0]
+            llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, datos_a_insertar)
+        else:
+            print("Los datos obtenidos no son válidos o están vacíos. No se pudo llenar la tabla.")
+
+    def busqueda_vinculacion_tutor(self):
+
+        textobusqueda =  self.venPri.line_busqueda_tutor.text()
+        limite = int(self.venPri.cbox_rango_tutor.currentText())
+
+        lista_vinculaciones_tutor = self.conec_base.getDatosProcess_condicion("filtrarSeguimientosConEstudiantes", (self.tutor_id, limite, textobusqueda,))
+        self.listar_vinculacion_tutor(lista_vinculaciones_tutor)
+
+
+    def mostrar_vinculacion_rango_tutor(self, text):
+        self.listar_vinculacion_tutor()
         
         
+
     # def evento_rango(self, rango):
         
     #     consulta = self.conec_base.getDatos_condicion("""SELECT id, DATE_FORMAT( fecha_registro, "%%d-%%m-%%Y"), serial, 
