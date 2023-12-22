@@ -97,10 +97,10 @@ def evento_tabla(parent):
     lista_tabla=[parent.venPri.tabla_principal, parent.venPri.tabla_principal_tutor]
 
     # Lista de index
-    lista_index=[[0,1,2,6], [0,1,2,5]]
+    lista_index=[[0,6], [0,5]]
 
     # Lista de tamaño
-    lista_tamano=[[70,200,150,160], [70,300,150, 160]]
+    lista_tamano=[[70,160], [70, 160]]
 
     for tabla,index,tamano in zip(lista_tabla,lista_index,lista_tamano):
 
@@ -126,7 +126,7 @@ def crearbotoneslista(stilo,icono,tooltip):
     
     btn_nuevo = QtWidgets.QToolButton()
     btn_nuevo.setMinimumSize(QtCore.QSize(35, 34))
-    btn_nuevo.setIconSize(QtCore.QSize(20, 20))
+    btn_nuevo.setIconSize(QtCore.QSize(25, 25))
     btn_nuevo.setStyleSheet(stilo)
     btn_nuevo.setIcon(QtGui.QIcon(icono))
     btn_nuevo.setToolTip(tooltip)
@@ -268,42 +268,38 @@ def llenar_tabla_seguimiento(parent, tabla, dato):
    
         for fila in range(len(dato)):
 
-            boton_agregar_seguimiento = crearbotoneslista(
+            boton_ver_seguimiento = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
                             QToolButton:hover{background-color:#cbe1e3}""",
-                icono = u':/menu/agregar_seguimiento.png',
-                tooltip = 'Agregar seguimiento')
+                icono = u':/menu/visualizar_seguimiento.png',
+                tooltip = 'ver seguimiento')
 
 
-            bton_editar_seguimiento = crearbotoneslista(
-                stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
-                QToolButton:hover{background-color:#82b5b9}""",
-                icono = u':/menu/seguimiento_edtir.png',
-                tooltip = 'Editar seguimiento')
+            # bton_editar_seguimiento = crearbotoneslista(
+            #     stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
+            #     QToolButton:hover{background-color:#82b5b9}""",
+            #     icono = u':/menu/seguimiento_edtir.png',
+            #     tooltip = 'Editar seguimiento')
 
 
-            bton_eliminar_seguimiento = crearbotoneslista(        
-                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
-                        QToolButton:hover{background-color:#ebdada}""",
-                icono = u':/menu/seguimiento_eliminar.png',
-                tooltip = 'Eliminar seguimiento')
+            # bton_eliminar_seguimiento = crearbotoneslista(        
+            #     stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+            #             QToolButton:hover{background-color:#ebdada}""",
+            #     icono = u':/menu/seguimiento_eliminar.png',
+            #     tooltip = 'Eliminar seguimiento')
 
 
 
             layout = QtWidgets.QHBoxLayout()
             layout.setContentsMargins(1,1,1,1)
             layout.setSpacing(3)
-            layout.addWidget(boton_agregar_seguimiento)
-            layout.addWidget(bton_editar_seguimiento)
-            layout.addWidget(bton_eliminar_seguimiento)
-
+            layout.addWidget(boton_ver_seguimiento)
+ 
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
 
-            btn_agregar_seguimiento(boton_agregar_seguimiento, fila, tabla, parent)
-            btn_eliminar_seguimiento(bton_eliminar_seguimiento, fila, tabla, parent)
-            btn_editr_seguimiento(bton_editar_seguimiento, fila, tabla, parent)
-
+            btn_ver_seguimiento(boton_ver_seguimiento, fila, tabla, parent)
+          
             tabla.setCellWidget(fila ,5,widget)
 
             for columna in range(len(dato[fila])):
@@ -321,36 +317,38 @@ def llenar_tabla_seguimiento(parent, tabla, dato):
 
                 tabla.setItem(fila, columna, item)
                 
-def btn_agregar_seguimiento(boton,fila,tabla,parent):
+def btn_ver_seguimiento(boton,fila,tabla,parent):
     
     """eventos  del boton agregar seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))          
-    boton.clicked.connect(lambda: agregar_seguimiento_acccion(fila,parent)) 
+    boton.clicked.connect(lambda: ver_seguimiento_acccion(fila,parent)) 
     
-def btn_eliminar_seguimiento(boton,fila,tabla,parent):
+# def btn_eliminar_seguimiento(boton,fila,tabla,parent):
     
-    """eventos  del boton eliminar seguimiento """
-    boton.clicked.connect(lambda: tabla.selectRow(fila))            
-    #boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) 
+#     """eventos  del boton eliminar seguimiento """
+#     boton.clicked.connect(lambda: tabla.selectRow(fila))            
+#     #boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) 
     
-def btn_editr_seguimiento(boton,fila,tabla,parent):
+# def btn_editr_seguimiento(boton,fila,tabla,parent):
     
-    """eventos  del boton editar seguimiento """
-    boton.clicked.connect(lambda: tabla.selectRow(fila))              
+#     """eventos  del boton editar seguimiento """
+#     boton.clicked.connect(lambda: tabla.selectRow(fila))              
     #boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 
 
 
-def agregar_seguimiento_acccion(fila, parent):
+def ver_seguimiento_acccion(fila, parent):
     pass
 
-    # from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
+    from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
 
-    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 1).text()
-    # nombre_tutor = parent.venPri.tabla_principal.item(fila, 4).text()
+    vinculacion_id = parent.venPri.tabla_principal_tutor.item(fila, 0).text()
+    nombre_estudiante = parent.venPri.tabla_principal_tutor.item(fila, 1).text()
+    tutor_id = parent.tutor_id
+    modo = 'Edit'
 
-    # tutor_id = parent.tutor_id
+    dato = [vinculacion_id, nombre_estudiante, tutor_id, modo]
 
-    # parent.raizOpacidad.resize(parent.width(), parent.height())
-    # parent.raizOpacidad.show()
-    # Seguimiento([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    Seguimiento(dato,parent = parent).exec_()
+

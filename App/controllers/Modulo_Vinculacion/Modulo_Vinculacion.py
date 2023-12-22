@@ -72,22 +72,13 @@ class Vinculacion(QtWidgets.QDialog):
         
 
 
-
         # Validaciones y mascaras para los inputs
         val_nombre_apellido(self, self.vinculacion.line_nombreapellidos)
         val_identifiacion(self, self.vinculacion.line_identificacion)
-        #mascara_identificacion(self.vinculacion.line_identificacion)
         val_periodo_academico(self, self.vinculacion.line_periodoacademico)
-        ##mascara_periodo_academico(self.vinculacion.line_periodoacademico)
         val_codigo_campoespecifico(self, self.vinculacion.line_campoespecifico)
-        #mascara_campoespecifico(self.vinculacion.line_campoespecifico)
         val_codigo_ies(self, self.vinculacion.line_codigoies)
-        ##mascara_codigo_ies(self.vinculacion.line_codigoies)
 
-
-        # self.vinculacion.line_identificacion.textChanged.connect(
-        #     lambda: borrar_caracteres_identificacion(self.vinculacion.line_identificacion, mascara_identificacion)
-        # )
 
         # boton guardar
         self.vinculacion.btn_guardar.clicked.connect(lambda: self.obtener_campos_vinculacion())
@@ -148,7 +139,6 @@ class Vinculacion(QtWidgets.QDialog):
         periodo_academico = self.vinculacion.line_periodoacademico.text()
         fecha_inicio = self.vinculacion.fecha_inicio.date().toString("yyyy-MM-dd")
         fecha_final = self.vinculacion.fecha_final.date().toString("yyyy-MM-dd")
-        # numero_horas = self.vinculacion.spb_numerohoras.value()
         codigo_ies = self.vinculacion.line_codigoies.text()
         campo_especifico = self.vinculacion.line_campoespecifico.text()
         tutor_asignado = self.vinculacion.cbo_tutor.itemData(self.vinculacion.cbo_tutor.currentIndex())

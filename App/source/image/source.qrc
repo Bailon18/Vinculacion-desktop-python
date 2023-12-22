@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="menu">
+    <file>visualizar_seguimiento.png</file>
+    <file>retornar.png</file>
     <file>seguimiento_edtir.png</file>
     <file>seguimiento_eliminar.png</file>
     <file>agregar_seguimiento.png</file>

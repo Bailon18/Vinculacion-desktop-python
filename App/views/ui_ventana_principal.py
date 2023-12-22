@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ventana_principalSrrtXT.ui'
+## Form generated from reading UI file 'ventana_principalqqHVqE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -548,13 +548,8 @@ class Ui_principal(object):
 "font-weight: normal;\n"
 "font-size: 14px;\n"
 "line-height: 14px;\n"
-"/* identical to box height */\n"
-"\n"
 "letter-spacing: 0.04em;\n"
 "text-transform: uppercase;\n"
-"\n"
-"/* Gray/500 - text-medium */\n"
-"\n"
 "color: #6B7280;}\n"
 "\n"
 "QPushButton{\n"
@@ -566,10 +561,10 @@ class Ui_principal(object):
 "color:white;\n"
 "padding:8px;\n"
 "background: #3f5758;\n"
-"border-radius: 8px;}\n"
+"border-radius: 4px;}\n"
 "\n"
 "QPushButton:hover{background: #3f5758;\n"
-"border-radius: 8px; }\n"
+"border-radius: 4px; }\n"
 "")
         self.frame_7.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_5 = QHBoxLayout(self.frame_7)
@@ -888,12 +883,12 @@ class Ui_principal(object):
 "font-size: 15px;\n"
 "letter-spacing: 0.02em;\n"
 "color:white;\n"
-"padding:8px;\n"
+"padding:4px;\n"
 "background: #3f5758;\n"
-"border-radius: 8px;}\n"
+"border-radius: 4px;}\n"
 "\n"
 "QPushButton:hover{background: #3f5758;\n"
-"border-radius: 8px; }\n"
+"border-radius: 4px; }\n"
 "\n"
 "\n"
 "/* COMBOBOX */\n"
@@ -963,8 +958,8 @@ class Ui_principal(object):
         self.horizontalLayout_10.setContentsMargins(7, 9, 10, 12)
         self.line_busqueda = QLineEdit(self.frame_4)
         self.line_busqueda.setObjectName(u"line_busqueda")
-        self.line_busqueda.setMinimumSize(QSize(0, 45))
-        self.line_busqueda.setMaximumSize(QSize(16777215, 45))
+        self.line_busqueda.setMinimumSize(QSize(0, 40))
+        self.line_busqueda.setMaximumSize(QSize(16777215, 40))
         self.line_busqueda.setStyleSheet(u"")
 
         self.horizontalLayout_10.addWidget(self.line_busqueda)
@@ -975,7 +970,7 @@ class Ui_principal(object):
 
         self.btn_nuevoafiliacion = QPushButton(self.frame_4)
         self.btn_nuevoafiliacion.setObjectName(u"btn_nuevoafiliacion")
-        self.btn_nuevoafiliacion.setMinimumSize(QSize(150, 47))
+        self.btn_nuevoafiliacion.setMinimumSize(QSize(160, 40))
         self.btn_nuevoafiliacion.setMaximumSize(QSize(156, 150))
         self.btn_nuevoafiliacion.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_nuevoafiliacion.setStyleSheet(u"")
@@ -1197,13 +1192,8 @@ class Ui_principal(object):
 "font-weight: normal;\n"
 "font-size: 14px;\n"
 "line-height: 14px;\n"
-"/* identical to box height */\n"
-"\n"
 "letter-spacing: 0.04em;\n"
 "text-transform: uppercase;\n"
-"\n"
-"/* Gray/500 - text-medium */\n"
-"\n"
 "color: #6B7280;}\n"
 "\n"
 "QPushButton{\n"
@@ -1213,12 +1203,12 @@ class Ui_principal(object):
 "font-size: 15px;\n"
 "letter-spacing: 0.02em;\n"
 "color:white;\n"
-"padding:8px;\n"
+"padding:4px;\n"
 "background: #3f5758;\n"
-"border-radius: 8px;}\n"
+"border-radius: 4px;}\n"
 "\n"
 "QPushButton:hover{background: #3f5758;\n"
-"border-radius: 8px; }\n"
+"border-radius: 4px; }\n"
 "")
         self.frame_8.setFrameShadow(QFrame.Plain)
         self.horizontalLayout_8 = QHBoxLayout(self.frame_8)
@@ -1615,38 +1605,61 @@ class Ui_principal(object):
         self.frame_11.setFrameShadow(QFrame.Plain)
         self.gridLayout_15 = QGridLayout(self.frame_11)
         self.gridLayout_15.setObjectName(u"gridLayout_15")
-        self.cbox_modelo_3 = QComboBox(self.frame_11)
-        self.cbox_modelo_3.addItem("")
-        self.cbox_modelo_3.addItem("")
-        self.cbox_modelo_3.addItem("")
-        self.cbox_modelo_3.setObjectName(u"cbox_modelo_3")
-        self.cbox_modelo_3.setMinimumSize(QSize(184, 0))
-        self.cbox_modelo_3.setCursor(QCursor(Qt.PointingHandCursor))
-        self.cbox_modelo_3.setStyleSheet(u"")
+        self.verticalSpacer_3 = QSpacerItem(23, 37, QSizePolicy.Minimum, QSizePolicy.Preferred)
 
-        self.gridLayout_15.addWidget(self.cbox_modelo_3, 3, 0, 1, 1)
+        self.gridLayout_15.addItem(self.verticalSpacer_3, 2, 0, 1, 1)
 
-        self.frame_56 = QFrame(self.frame_11)
-        self.frame_56.setObjectName(u"frame_56")
-        self.frame_56.setMinimumSize(QSize(0, 47))
-        self.frame_56.setStyleSheet(u"#frame_56{background: #F3F4F6;\n"
-"border: 1px solid  #F3F4F6; ;\n"
-"border-radius: 11px;}\n"
+        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Ignored)
+
+        self.gridLayout_15.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
+
+        self.label_9 = QLabel(self.frame_11)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setStyleSheet(u"font-family: Roboto;\n"
+"font-style: normal;\n"
+"font-weight: normal;\n"
+"font-size: 22px;\n"
+"line-height: 28px;\n"
+"letter-spacing: 0.02em;\n"
 "\n"
-"#frame_56::focus{\n"
-"background: #FFFFFF;\n"
-"border: 2px solid #54BFC9;\n"
-"border-radius: 8px;\n"
-"}")
-        self.frame_56.setFrameShape(QFrame.StyledPanel)
-        self.frame_56.setFrameShadow(QFrame.Plain)
-        self.horizontalLayout_11 = QHBoxLayout(self.frame_56)
-        self.horizontalLayout_11.setObjectName(u"horizontalLayout_11")
-        self.horizontalLayout_11.setContentsMargins(1, 1, 7, 1)
-        self.line_busqueda_usuario = QLineEdit(self.frame_56)
+"color: #000000;")
+
+        self.gridLayout_15.addWidget(self.label_9, 1, 0, 1, 1)
+
+        self.btn_agregarusu = QPushButton(self.frame_11)
+        self.btn_agregarusu.setObjectName(u"btn_agregarusu")
+        self.btn_agregarusu.setMinimumSize(QSize(195, 40))
+        self.btn_agregarusu.setMaximumSize(QSize(110, 40))
+        self.btn_agregarusu.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_agregarusu.setStyleSheet(u"/*  BOTON */\n"
+"\n"
+"QPushButton{\n"
+"font-family: Roboto;\n"
+"font-style: normal;\n"
+"font-weight: normal;\n"
+"font-size: 15px;\n"
+"letter-spacing: 0.02em;\n"
+"color:white;\n"
+"padding:8px;\n"
+"background: #3f5758;\n"
+"border-radius: 4px;}\n"
+"\n"
+"QPushButton:hover{background: #3f5758;\n"
+"border-radius: 4px; }\n"
+"")
+        self.btn_agregarusu.setIcon(icon8)
+        self.btn_agregarusu.setIconSize(QSize(15, 21))
+
+        self.gridLayout_15.addWidget(self.btn_agregarusu, 3, 3, 1, 1)
+
+        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.gridLayout_15.addItem(self.horizontalSpacer_5, 3, 2, 1, 1)
+
+        self.line_busqueda_usuario = QLineEdit(self.frame_11)
         self.line_busqueda_usuario.setObjectName(u"line_busqueda_usuario")
-        self.line_busqueda_usuario.setMinimumSize(QSize(0, 45))
-        self.line_busqueda_usuario.setMaximumSize(QSize(16777215, 45))
+        self.line_busqueda_usuario.setMinimumSize(QSize(0, 40))
+        self.line_busqueda_usuario.setMaximumSize(QSize(16777215, 40))
         self.line_busqueda_usuario.setStyleSheet(u"QLineEdit{\n"
 "font-family: Roboto;\n"
 "font-style: normal;\n"
@@ -1668,79 +1681,7 @@ class Ui_principal(object):
 "\n"
 "")
 
-        self.horizontalLayout_11.addWidget(self.line_busqueda_usuario)
-
-        self.btn_busqueda_usuario = QToolButton(self.frame_56)
-        self.btn_busqueda_usuario.setObjectName(u"btn_busqueda_usuario")
-        self.btn_busqueda_usuario.setEnabled(True)
-        self.btn_busqueda_usuario.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_busqueda_usuario.setStyleSheet(u"border-radius:0px")
-        icon9 = QIcon()
-        icon9.addFile(u":/prefijoNuevo/Vector (2).png", QSize(), QIcon.Normal, QIcon.Off)
-        icon9.addFile(u":/prefijoNuevo/busquedaa.png", QSize(), QIcon.Active, QIcon.Off)
-        self.btn_busqueda_usuario.setIcon(icon9)
-        self.btn_busqueda_usuario.setIconSize(QSize(26, 23))
-        self.btn_busqueda_usuario.setCheckable(False)
-        self.btn_busqueda_usuario.setAutoRepeat(False)
-        self.btn_busqueda_usuario.setAutoRaise(True)
-
-        self.horizontalLayout_11.addWidget(self.btn_busqueda_usuario)
-
-
-        self.gridLayout_15.addWidget(self.frame_56, 3, 1, 1, 1)
-
-        self.label_9 = QLabel(self.frame_11)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setStyleSheet(u"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 22px;\n"
-"line-height: 28px;\n"
-"letter-spacing: 0.02em;\n"
-"\n"
-"color: #000000;")
-
-        self.gridLayout_15.addWidget(self.label_9, 1, 0, 1, 1)
-
-        self.verticalSpacer_2 = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Ignored)
-
-        self.gridLayout_15.addItem(self.verticalSpacer_2, 0, 0, 1, 1)
-
-        self.horizontalSpacer_5 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.gridLayout_15.addItem(self.horizontalSpacer_5, 3, 2, 1, 1)
-
-        self.btn_agregarusu = QPushButton(self.frame_11)
-        self.btn_agregarusu.setObjectName(u"btn_agregarusu")
-        self.btn_agregarusu.setMinimumSize(QSize(195, 47))
-        self.btn_agregarusu.setMaximumSize(QSize(110, 47))
-        self.btn_agregarusu.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_agregarusu.setStyleSheet(u"/*  BOTON */\n"
-"\n"
-"QPushButton{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 15px;\n"
-"letter-spacing: 0.02em;\n"
-"color:white;\n"
-"padding:8px;\n"
-"background: #3f5758;\n"
-"border-radius: 8px;}\n"
-"\n"
-"QPushButton:hover{background: #3f5758;\n"
-"border-radius: 8px; }\n"
-"")
-        icon10 = QIcon()
-        icon10.addFile(u":/prefijoNuevo/Vector.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_agregarusu.setIcon(icon10)
-        self.btn_agregarusu.setIconSize(QSize(15, 21))
-
-        self.gridLayout_15.addWidget(self.btn_agregarusu, 3, 3, 1, 1)
-
-        self.verticalSpacer_3 = QSpacerItem(23, 37, QSizePolicy.Minimum, QSizePolicy.Preferred)
-
-        self.gridLayout_15.addItem(self.verticalSpacer_3, 2, 0, 1, 1)
+        self.gridLayout_15.addWidget(self.line_busqueda_usuario, 3, 0, 1, 1)
 
 
         self.gridLayout_12.addWidget(self.frame_11, 0, 0, 1, 1)
@@ -1973,9 +1914,9 @@ class Ui_principal(object):
 "QPushButton:hover{background: #29353A;\n"
 "border-radius: 8px; }\n"
 "")
-        icon11 = QIcon()
-        icon11.addFile(u":/prefijoNuevo/reportee.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_generar.setIcon(icon11)
+        icon9 = QIcon()
+        icon9.addFile(u":/prefijoNuevo/reportee.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_generar.setIcon(icon9)
         self.btn_generar.setIconSize(QSize(16, 16))
 
         self.verticalLayout_6.addWidget(self.btn_generar)
@@ -2125,7 +2066,7 @@ class Ui_principal(object):
 
         self.retranslateUi(principal)
 
-        self.stackedWidget.setCurrentIndex(1)
+        self.stackedWidget.setCurrentIndex(0)
         self.stackedWidget_5.setCurrentIndex(0)
 
 
@@ -2166,7 +2107,7 @@ class Ui_principal(object):
         self.cbox_perfil.setItemText(1, QCoreApplication.translate("principal", u"Cerrar Sesion", None))
 
         self.lbl_online.setText(QCoreApplication.translate("principal", u"    Online", None))
-        self.label_2.setText(QCoreApplication.translate("principal", u"  Lista de Afiliaci\u00f3n", None))
+        self.label_2.setText(QCoreApplication.translate("principal", u"  Lista de Vinculaci\u00f3n", None))
         self.label_4.setText(QCoreApplication.translate("principal", u"MOSTRAR", None))
         self.cbox_rango.setItemText(0, QCoreApplication.translate("principal", u"5", None))
         self.cbox_rango.setItemText(1, QCoreApplication.translate("principal", u"10", None))
@@ -2198,7 +2139,7 @@ class Ui_principal(object):
         ___qtablewidgetitem9 = self.tabla_principal.verticalHeaderItem(2)
         ___qtablewidgetitem9.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
         self.line_busqueda.setPlaceholderText(QCoreApplication.translate("principal", u"Buscar por cualquier campo", None))
-        self.btn_nuevoafiliacion.setText(QCoreApplication.translate("principal", u" Nueva Afiliacion", None))
+        self.btn_nuevoafiliacion.setText(QCoreApplication.translate("principal", u" Nueva Vinculaci\u00f3n", None))
         self.label_6.setText(QCoreApplication.translate("principal", u"  Lista de alumnos asignados", None))
         self.line_busqueda_tutor.setPlaceholderText(QCoreApplication.translate("principal", u"Buscar por cualquier campo", None))
         self.label_7.setText(QCoreApplication.translate("principal", u"MOSTRAR", None))
@@ -2229,17 +2170,9 @@ class Ui_principal(object):
         ___qtablewidgetitem17.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
         ___qtablewidgetitem18 = self.tabla_principal_tutor.verticalHeaderItem(2)
         ___qtablewidgetitem18.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
-        self.cbox_modelo_3.setItemText(0, QCoreApplication.translate("principal", u"Seleccionar", None))
-        self.cbox_modelo_3.setItemText(1, QCoreApplication.translate("principal", u"Santillana", None))
-        self.cbox_modelo_3.setItemText(2, QCoreApplication.translate("principal", u"Mayorca", None))
-
-        self.line_busqueda_usuario.setPlaceholderText(QCoreApplication.translate("principal", u"Nombre y apellidos...", None))
-#if QT_CONFIG(tooltip)
-        self.btn_busqueda_usuario.setToolTip(QCoreApplication.translate("principal", u"Buscar", None))
-#endif // QT_CONFIG(tooltip)
-        self.btn_busqueda_usuario.setText("")
         self.label_9.setText(QCoreApplication.translate("principal", u"Lista de usuarios registrados", None))
         self.btn_agregarusu.setText(QCoreApplication.translate("principal", u"  Agregar usuario", None))
+        self.line_busqueda_usuario.setPlaceholderText(QCoreApplication.translate("principal", u"Nombre y apellidos...", None))
         self.btn_tabmonto.setText(QCoreApplication.translate("principal", u"ENTRADA", None))
         self.date_final.setDisplayFormat(QCoreApplication.translate("principal", u"yyyy-MM-d", None))
         self.label_57.setText(QCoreApplication.translate("principal", u"Filtrar", None))

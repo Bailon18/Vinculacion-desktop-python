@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'loginRQJFlW.ui'
+## Form generated from reading UI file 'loginZhtbID.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -133,16 +133,16 @@ class Ui_ventana_sesion(object):
 "")
         self.line_correo = QLineEdit(self.pag_inicio)
         self.line_correo.setObjectName(u"line_correo")
-        self.line_correo.setGeometry(QRect(30, 180, 296, 47))
+        self.line_correo.setGeometry(QRect(30, 190, 296, 40))
         self.line_correo.setStyleSheet(u"")
         self.line_correo.setMaxLength(100)
         self.label_Psicologa = QLabel(self.pag_inicio)
         self.label_Psicologa.setObjectName(u"label_Psicologa")
-        self.label_Psicologa.setGeometry(QRect(30, 150, 121, 25))
+        self.label_Psicologa.setGeometry(QRect(30, 160, 121, 25))
         self.label_Psicologa.setStyleSheet(u"")
         self.frame_5 = QFrame(self.pag_inicio)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setGeometry(QRect(28, 280, 296, 47))
+        self.frame_5.setGeometry(QRect(28, 280, 296, 40))
         self.frame_5.setStyleSheet(u"#frame_5{background-color:#f3f4f6;\n"
 "border-radius:8px}")
         self.frame_5.setFrameShape(QFrame.NoFrame)
@@ -160,7 +160,7 @@ class Ui_ventana_sesion(object):
         self.tol_invsible = QToolButton(self.frame_7)
         self.tol_invsible.setObjectName(u"tol_invsible")
         self.tol_invsible.setEnabled(True)
-        self.tol_invsible.setGeometry(QRect(0, 10, 30, 30))
+        self.tol_invsible.setGeometry(QRect(0, 5, 30, 30))
         self.tol_invsible.setMinimumSize(QSize(3, 0))
         self.tol_invsible.setCursor(QCursor(Qt.PointingHandCursor))
         self.tol_invsible.setStyleSheet(u"background-color: transparent;")
@@ -173,7 +173,7 @@ class Ui_ventana_sesion(object):
         self.tol_visible = QToolButton(self.frame_7)
         self.tol_visible.setObjectName(u"tol_visible")
         self.tol_visible.setEnabled(True)
-        self.tol_visible.setGeometry(QRect(0, 10, 30, 30))
+        self.tol_visible.setGeometry(QRect(0, 4, 30, 30))
         self.tol_visible.setCursor(QCursor(Qt.PointingHandCursor))
         self.tol_visible.setMouseTracking(False)
         self.tol_visible.setStyleSheet(u"background-color: transparent;")
@@ -204,7 +204,7 @@ class Ui_ventana_sesion(object):
         self.label_contrasea.setStyleSheet(u"")
         self.btn_aceptar = QToolButton(self.pag_inicio)
         self.btn_aceptar.setObjectName(u"btn_aceptar")
-        self.btn_aceptar.setGeometry(QRect(30, 350, 296, 47))
+        self.btn_aceptar.setGeometry(QRect(30, 340, 296, 40))
         self.btn_aceptar.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_aceptar.setFocusPolicy(Qt.NoFocus)
         self.btn_aceptar.setStyleSheet(u"#btn_aceptar{\n"
@@ -216,17 +216,17 @@ class Ui_ventana_sesion(object):
 "color:white;\n"
 "padding:8px;\n"
 "background: #3A4F50;\n"
-"border-radius: 8px;}\n"
+"border-radius: 4px;}\n"
 "\n"
 "#btn_aceptar:hover{background: #314344;\n"
-"border-radius: 8px; }\n"
+"border-radius: 4px; }\n"
 "\n"
 "")
         self.btn_aceptar.setIconSize(QSize(20, 20))
         self.btn_aceptar.setAutoRaise(True)
         self.btn_recuperar = QToolButton(self.pag_inicio)
         self.btn_recuperar.setObjectName(u"btn_recuperar")
-        self.btn_recuperar.setGeometry(QRect(150, 410, 171, 21))
+        self.btn_recuperar.setGeometry(QRect(159, 390, 171, 21))
         self.btn_recuperar.setFocusPolicy(Qt.NoFocus)
         self.btn_recuperar.setStyleSheet(u"background-color: transparent;\n"
 "color:#0d73b1;\n"

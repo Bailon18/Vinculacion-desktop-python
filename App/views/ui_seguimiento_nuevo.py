@@ -12,8 +12,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
-import source_rc
-import source_rc
+from source.image import source
 
 class Ui_SeguimientoNuevo(object):
     def setupUi(self, SeguimientoNuevo):

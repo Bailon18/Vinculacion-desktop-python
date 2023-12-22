@@ -348,6 +348,7 @@ DELIMITER ;
 
 DROP PROCEDURE IF EXISTS filtrarSeguimientosConEstudiantes;
 DELIMITER $$
+
 CREATE PROCEDURE filtrarSeguimientosConEstudiantes(
     IN tutor_id_param INT,
     IN limit_param INT,
@@ -358,11 +359,10 @@ BEGIN
         v.vinculacion_id AS 'id-vinculacion',
         e.nombres_apellidos AS 'nombreestudiante',
         DATE_FORMAT(v.fecha_registro, '%Y-%m-%d %H:%i:%s') AS 'fecha-seguimiento',
-        v.numero_horas 'horas_seguimiento',
-        v.estado AS 'estado vinculacion'
+        v.numero_horas AS 'horas_seguimiento',
+        v.estado AS 'estado_vinculacion'
     FROM
         vinculaciones v
-
     JOIN
         estudiantes e ON v.estudiante_id = e.estudiante_id
     JOIN
@@ -373,17 +373,59 @@ BEGIN
         AND (
             e.nombres_apellidos LIKE CONCAT('%', criterio_busqueda, '%') OR
             DATE_FORMAT(v.fecha_registro, '%Y-%m-%d') LIKE CONCAT('%', criterio_busqueda, '%') OR
-            v.estado LIKE CONCAT('%', criterio_busqueda, '%')
+            v.estado LIKE CONCAT('%', criterio_busqueda, '%') OR
+            CAST(v.vinculacion_id AS CHAR) LIKE CONCAT('%', criterio_busqueda, '%') OR
+            CAST(v.numero_horas AS CHAR) LIKE CONCAT('%', criterio_busqueda, '%')
         )
     ORDER BY
         v.fecha_registro DESC
     LIMIT limit_param;
 END $$
+
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS InsertarSeguimientoTutor;
+DELIMITER $$
+CREATE PROCEDURE InsertarSeguimientoTutor(
+    IN vinculacion_id_param INT,
+    IN fecha_seguimiento_param TIMESTAMP,
+    IN observaciones_param TEXT,
+    IN tutor_id_param INT,
+    IN horas_seguimiento_param INT
+)
+BEGIN
+    INSERT INTO seguimientos (vinculacion_id, fecha_seguimiento, observaciones, tutor_id, horas_seguimiento)
+    VALUES (vinculacion_id_param, fecha_seguimiento_param, observaciones_param, tutor_id_param, horas_seguimiento_param);
+END $$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS InsertarSeguimientoTutor;
+DELIMITER $$
+CREATE PROCEDURE ObtenerSeguimientosPorTutorYEstudiante(
+    IN tutor_id_param INT,
+    IN estudiante_id_param INT
+)
+BEGIN
+    SELECT
+        s.seguimiento_id,
+        DATE_FORMAT(s.fecha_seguimiento, '%Y-%m-%d') AS fecha_formateada,
+        s.horas_seguimiento
+    FROM
+        seguimientos s
+    JOIN
+        vinculaciones v ON s.vinculacion_id = v.vinculacion_id
+    WHERE
+        s.tutor_id = tutor_id_param
+        AND v.estudiante_id = estudiante_id_param
+    ORDER BY s.fecha_seguimiento DESC;
+END $$
 DELIMITER ;
 
 
 
-CALL filtrarSeguimientosConEstudiantes(2, 5, '16'); 
+
 
 
 

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'vinculacion_nuevocOpBuG.ui'
+## Form generated from reading UI file 'vinculacion_nuevorBbvOQ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -416,10 +416,10 @@ class Ui_NuevaVinculacion(object):
 "color:white;\n"
 "padding:8px;\n"
 "background: #3A4F50;\n"
-"border-radius: 8px;}\n"
+"border-radius: 4px;}\n"
 "\n"
 "QPushButton:hover{background: #344647;\n"
-"border-radius: 8px; }\n"
+"border-radius: 4px; }\n"
 "")
         icon1 = QIcon()
         icon1.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)

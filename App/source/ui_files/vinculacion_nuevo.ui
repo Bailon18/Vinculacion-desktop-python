@@ -870,10 +870,10 @@ letter-spacing: 0.02em;
 color:white;
 padding:8px;
 background: #3A4F50;
-border-radius: 8px;}
+border-radius: 4px;}
 
 QPushButton:hover{background: #344647;
-border-radius: 8px; }
+border-radius: 4px; }
 </string>
       </property>
       <property name="text">
