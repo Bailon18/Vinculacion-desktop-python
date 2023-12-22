@@ -401,13 +401,22 @@ END $$
 DELIMITER ;
 
 
-DROP PROCEDURE IF EXISTS InsertarSeguimientoTutor;
+
+DROP PROCEDURE IF EXISTS ObtenerSeguimientosPorTutorYEstudiante;
 DELIMITER $$
 CREATE PROCEDURE ObtenerSeguimientosPorTutorYEstudiante(
     IN tutor_id_param INT,
-    IN estudiante_id_param INT
+    IN vinculacion_param INT
 )
 BEGIN
+    DECLARE estudiante_id INT;
+
+    -- Obteniendo el estudiante_id de la tabla vinculaciones
+    SELECT estudiante_id INTO estudiante_id
+    FROM vinculaciones
+    WHERE vinculacion_id = vinculacion_param;
+
+    -- Consulta para obtener los seguimientos por tutor_id y estudiante_id
     SELECT
         s.seguimiento_id,
         DATE_FORMAT(s.fecha_seguimiento, '%Y-%m-%d') AS fecha_formateada,
@@ -418,10 +427,14 @@ BEGIN
         vinculaciones v ON s.vinculacion_id = v.vinculacion_id
     WHERE
         s.tutor_id = tutor_id_param
-        AND v.estudiante_id = estudiante_id_param
+        AND v.estudiante_id = estudiante_id
     ORDER BY s.fecha_seguimiento DESC;
 END $$
 DELIMITER ;
+
+
+
+
 
 
 
