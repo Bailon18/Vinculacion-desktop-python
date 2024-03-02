@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'seguimientolDPSEW.ui'
+## Form generated from reading UI file 'seguimientoDolZYt.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -56,6 +56,45 @@ class Ui_Seguimiento(object):
 "font-size: 15px;\n"
 "letter-spacing: 0.02em;\n"
 "color: #6B7280;}\n"
+"\n"
+"\n"
+"QDateEdit{\n"
+"font-family: Roboto;\n"
+"font-style: normal;\n"
+"font-weight: normal;\n"
+"font-size: 14px;\n"
+"letter-spacing: 0.02em;\n"
+"background: #F3F4F6;\n"
+"color:#9CA3AF;\n"
+"padding:8px;\n"
+"border-radius:8px; }\n"
+"\n"
+"QDateEdit::up-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QDateEdit::down-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QDateEdit::up-arrow{\n"
+"	image: url(:/menu/contraerarriba.png);\n"
+"     width: 11px;\n"
+"     height: 11px;\n"
+"}\n"
+"\n"
+"QDateEdit::down-arrow{\n"
+"	image: url(:/menu/contraerabajo.png);\n"
+"     width: 11px;\n"
+"     height: 11px;}\n"
+"\n"
+"QDateEdit::focus{\n"
+"background: #FFFFFF;\n"
+"border: 2px solid #344"
+                        "647;\n"
+"border-radius: 8px;\n"
+"}\n"
+"\n"
 "\n"
 "")
         self.stack_principal.setFrameShape(QFrame.NoFrame)
@@ -249,7 +288,7 @@ class Ui_Seguimiento(object):
         self.frame_13.setFrameShadow(QFrame.Sunken)
         self.stack_formulario = QStackedWidget(self.frame_13)
         self.stack_formulario.setObjectName(u"stack_formulario")
-        self.stack_formulario.setGeometry(QRect(0, 10, 911, 741))
+        self.stack_formulario.setGeometry(QRect(0, 10, 911, 709))
         self.stack_formulario.setMinimumSize(QSize(0, 709))
         self.stack_formulario.setMaximumSize(QSize(16777215, 624))
         self.stack_formulario.setStyleSheet(u"QLabel{\n"
@@ -663,9 +702,9 @@ class Ui_Seguimiento(object):
         self.btn_guardar.setIconSize(QSize(15, 21))
         self.btn_retornar_listado = QPushButton(self.frame_9)
         self.btn_retornar_listado.setObjectName(u"btn_retornar_listado")
-        self.btn_retornar_listado.setGeometry(QRect(280, 10, 180, 40))
-        self.btn_retornar_listado.setMinimumSize(QSize(180, 40))
-        self.btn_retornar_listado.setMaximumSize(QSize(110, 40))
+        self.btn_retornar_listado.setGeometry(QRect(275, 10, 191, 40))
+        self.btn_retornar_listado.setMinimumSize(QSize(186, 40))
+        self.btn_retornar_listado.setMaximumSize(QSize(200, 40))
         self.btn_retornar_listado.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_retornar_listado.setFocusPolicy(Qt.NoFocus)
         self.btn_retornar_listado.setStyleSheet(u"QPushButton {\n"
@@ -702,7 +741,7 @@ class Ui_Seguimiento(object):
 "")
         self.label_39 = QLabel(self.page_2)
         self.label_39.setObjectName(u"label_39")
-        self.label_39.setGeometry(QRect(20, 100, 241, 31))
+        self.label_39.setGeometry(QRect(20, 140, 241, 31))
         self.label_39.setStyleSheet(u"QLabel{\n"
 "font-family: Roboto ;\n"
 "font-style: bold;\n"
@@ -713,7 +752,7 @@ class Ui_Seguimiento(object):
 "color: #374151}")
         self.frame_17 = QFrame(self.page_2)
         self.frame_17.setObjectName(u"frame_17")
-        self.frame_17.setGeometry(QRect(14, 140, 591, 291))
+        self.frame_17.setGeometry(QRect(10, 170, 591, 331))
         self.frame_17.setStyleSheet(u"#frame_17{\n"
 " border:8px solid white;\n"
 "border-radius:18px\n"
@@ -868,69 +907,6 @@ class Ui_Seguimiento(object):
 
         self.gridLayout_30.addWidget(self.tabla_listado_seguimiento, 0, 0, 1, 1)
 
-        self.cbox_rangoseguimiento = QComboBox(self.page_2)
-        self.cbox_rangoseguimiento.addItem("")
-        self.cbox_rangoseguimiento.addItem("")
-        self.cbox_rangoseguimiento.addItem("")
-        self.cbox_rangoseguimiento.addItem("")
-        self.cbox_rangoseguimiento.setObjectName(u"cbox_rangoseguimiento")
-        self.cbox_rangoseguimiento.setGeometry(QRect(90, 460, 81, 38))
-        self.cbox_rangoseguimiento.setMinimumSize(QSize(0, 0))
-        self.cbox_rangoseguimiento.setMaximumSize(QSize(92, 38))
-        self.cbox_rangoseguimiento.setCursor(QCursor(Qt.PointingHandCursor))
-        self.cbox_rangoseguimiento.setStyleSheet(u"QComboBox{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 14px;\n"
-"letter-spacing: 0.02em;\n"
-"background: #F3F4F6;\n"
-"color:#9CA3AF;\n"
-"border-radius:8px;\n"
-"padding:10px;\n"
-"combobox-popup: 0;\n"
-"border: 2px solid #F3F4F6;\n"
-"\n"
-"}\n"
-"\n"
-"\n"
-"QComboBox::drop-down\n"
-"{\n"
-"    width: 20px;\n"
-"    border-left-width: 1px;\n"
-"	padding: 10px 10px 10px 20px;\n"
-" }\n"
-"\n"
-"\n"
-"QComboBox QAbstractItemView {\n"
-"	color:#9CA3AF;\n"
-"	font-size:14px;\n"
-"	background-color: #F3F4F6;\n"
-"	selection-background-color:#3f5758;\n"
-"	selection-color:#ffffff;\n"
-"	outline: 0px;\n"
-"   border: 1px solid #3f5758;\n"
-" border-radius:8px;\n"
-"padding:10px\n"
-"}\n"
-"\n"
-"\n"
-"\n"
-"QComboBox::down-arrow\n"
-"{\n"
-"	image: url(:/menu/contraerabajo.png);\n"
-"     width: 11px;\n"
-"     height: 11px;\n"
-"}\n"
-"\n"
-"QComboBox::focus{\n"
-"background: #FFFFFF;\n"
-"border: 2px solid #3f5758;\n"
-"border-radius: 8px;\n"
-"}\n"
-"\n"
-"\n"
-"QComboBox {combobox-popup: 0}")
         self.btn_nuevo_seguimiento = QPushButton(self.page_2)
         self.btn_nuevo_seguimiento.setObjectName(u"btn_nuevo_seguimiento")
         self.btn_nuevo_seguimiento.setGeometry(QRect(440, 30, 161, 40))
@@ -965,57 +941,33 @@ class Ui_Seguimiento(object):
         self.btn_nuevo_seguimiento.setAutoExclusive(False)
         self.btn_nuevo_seguimiento.setAutoDefault(False)
         self.btn_nuevo_seguimiento.setFlat(False)
-        self.label_44 = QLabel(self.page_2)
-        self.label_44.setObjectName(u"label_44")
-        self.label_44.setGeometry(QRect(20, 461, 61, 31))
-        self.label_44.setMinimumSize(QSize(0, 0))
-        self.label_44.setMaximumSize(QSize(16777215, 16777215))
-        self.label_44.setStyleSheet(u"QLabel{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: 450;\n"
-"font-size: 15px;\n"
+        self.fecha_inicio_seguimiento = QDateEdit(self.page_2)
+        self.fecha_inicio_seguimiento.setObjectName(u"fecha_inicio_seguimiento")
+        self.fecha_inicio_seguimiento.setGeometry(QRect(20, 90, 165, 40))
+        self.fecha_inicio_seguimiento.setDateTime(QDateTime(QDate(2000, 1, 1), QTime(0, 0, 0)))
+        self.fecha_inicio_seguimiento.setCalendarPopup(False)
+        self.fecha_final_seguimiento = QDateEdit(self.page_2)
+        self.fecha_final_seguimiento.setObjectName(u"fecha_final_seguimiento")
+        self.fecha_final_seguimiento.setGeometry(QRect(210, 90, 165, 40))
+        self.fecha_final_seguimiento.setCalendarPopup(False)
+        self.fecha_final_seguimiento.setCurrentSectionIndex(0)
+        self.label_99 = QLabel(self.page_2)
+        self.label_99.setObjectName(u"label_99")
+        self.label_99.setGeometry(QRect(20, 60, 161, 31))
+        self.label_100 = QLabel(self.page_2)
+        self.label_100.setObjectName(u"label_100")
+        self.label_100.setGeometry(QRect(210, 60, 161, 31))
+        self.label_41 = QLabel(self.page_2)
+        self.label_41.setObjectName(u"label_41")
+        self.label_41.setGeometry(QRect(20, 30, 241, 31))
+        self.label_41.setStyleSheet(u"QLabel{\n"
+"font-family: Roboto ;\n"
+"font-style: bold;\n"
+"font-weight: 480;\n"
+"font-size: 21px;\n"
+"line-height: 28px;\n"
 "letter-spacing: 0.02em;\n"
-"color: #6B7280;}\n"
-"")
-        self.label_45 = QLabel(self.page_2)
-        self.label_45.setObjectName(u"label_45")
-        self.label_45.setGeometry(QRect(190, 460, 101, 31))
-        self.label_45.setMinimumSize(QSize(0, 0))
-        self.label_45.setMaximumSize(QSize(16777215, 16777215))
-        self.label_45.setStyleSheet(u"QLabel{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: 450;\n"
-"font-size: 15px;\n"
-"letter-spacing: 0.02em;\n"
-"color: #6B7280;}\n"
-"")
-        self.line_busqueda_seguimiento = QLineEdit(self.page_2)
-        self.line_busqueda_seguimiento.setObjectName(u"line_busqueda_seguimiento")
-        self.line_busqueda_seguimiento.setGeometry(QRect(20, 30, 331, 45))
-        self.line_busqueda_seguimiento.setMinimumSize(QSize(0, 45))
-        self.line_busqueda_seguimiento.setMaximumSize(QSize(16777215, 45))
-        self.line_busqueda_seguimiento.setStyleSheet(u"\n"
-"\n"
-"QLineEdit{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 14px;\n"
-"letter-spacing: 0.02em;\n"
-"background: #F3F4F6;\n"
-"border: 2px solid #F3F4F6;\n"
-"border-radius: 8px;\n"
-"color:#9CA3AF;\n"
-"padding:10px}\n"
-"\n"
-"\n"
-"QLineEdit::focus{\n"
-"background: #FFFFFF;\n"
-"border: 2px solid #3f5758;\n"
-"border-radius: 8px;\n"
-"}")
+"color: #374151}")
         self.stack_principal.addWidget(self.page_2)
 
         self.gridLayout.addWidget(self.stack_principal, 1, 0, 1, 1)
@@ -1087,11 +1039,10 @@ class Ui_Seguimiento(object):
         QWidget.setTabOrder(self.spin_monto, self.cbox_mediopago)
         QWidget.setTabOrder(self.cbox_mediopago, self.scrollArea_4)
         QWidget.setTabOrder(self.scrollArea_4, self.tabla_listado_seguimiento)
-        QWidget.setTabOrder(self.tabla_listado_seguimiento, self.cbox_rangoseguimiento)
 
         self.retranslateUi(Seguimiento)
 
-        self.stack_principal.setCurrentIndex(0)
+        self.stack_principal.setCurrentIndex(1)
         self.stack_formulario.setCurrentIndex(0)
         self.btn_nuevo_seguimiento.setDefault(False)
 
@@ -1135,15 +1086,12 @@ class Ui_Seguimiento(object):
         ___qtablewidgetitem2.setText(QCoreApplication.translate("Seguimiento", u"HORA ASIGNADA", None));
         ___qtablewidgetitem3 = self.tabla_listado_seguimiento.horizontalHeaderItem(3)
         ___qtablewidgetitem3.setText(QCoreApplication.translate("Seguimiento", u"ACCIONES", None));
-        self.cbox_rangoseguimiento.setItemText(0, QCoreApplication.translate("Seguimiento", u"5", None))
-        self.cbox_rangoseguimiento.setItemText(1, QCoreApplication.translate("Seguimiento", u"10", None))
-        self.cbox_rangoseguimiento.setItemText(2, QCoreApplication.translate("Seguimiento", u"20", None))
-        self.cbox_rangoseguimiento.setItemText(3, QCoreApplication.translate("Seguimiento", u"50", None))
-
         self.btn_nuevo_seguimiento.setText(QCoreApplication.translate("Seguimiento", u"Nuevo seguimiento", None))
-        self.label_44.setText(QCoreApplication.translate("Seguimiento", u"Mostrar", None))
-        self.label_45.setText(QCoreApplication.translate("Seguimiento", u"Seguimientos", None))
-        self.line_busqueda_seguimiento.setPlaceholderText(QCoreApplication.translate("Seguimiento", u"Buscar por cualquier campo", None))
+        self.fecha_inicio_seguimiento.setDisplayFormat(QCoreApplication.translate("Seguimiento", u"yyyy-MM-d", None))
+        self.fecha_final_seguimiento.setDisplayFormat(QCoreApplication.translate("Seguimiento", u"yyyy-MM-d", None))
+        self.label_99.setText(QCoreApplication.translate("Seguimiento", u"Selecciona fecha inicio", None))
+        self.label_100.setText(QCoreApplication.translate("Seguimiento", u"Selecciona fecha final", None))
+        self.label_41.setText(QCoreApplication.translate("Seguimiento", u"Filtrar", None))
         self.lbl_nombrepaciente.setText(QCoreApplication.translate("Seguimiento", u"Seguimiento", None))
 #if QT_CONFIG(tooltip)
         self.btn_closeseguimiento.setToolTip(QCoreApplication.translate("Seguimiento", u"Cerrar", None))

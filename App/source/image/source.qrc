@@ -1,27 +1,32 @@
 <RCC>
   <qresource prefix="menu">
-    <file>visualizar_seguimiento.png</file>
-    <file>retornar.png</file>
-    <file>seguimiento_edtir.png</file>
-    <file>seguimiento_eliminar.png</file>
-    <file>agregar_seguimiento.png</file>
-    <file>menuseguimiento.png</file>
-    <file>detalle.png</file>
+    <file>logito2.png</file>
+    <file>logito.png</file>
     <file>acccion_editar.png</file>
     <file>accion_eliminar.png</file>
     <file>accion_exportar.png</file>
-    <file>invisible.png</file>
-    <file>visible.png</file>
-    <file>x.png</file>
+    <file>agregar_seguimiento.png</file>
+    <file>botonadd.png</file>
     <file>contraerabajo.png</file>
     <file>contraerarriba.png</file>
-    <file>botonadd.png</file>
-    <file>menuactualizar.png</file>
-    <file>menusalir.png</file>
+    <file>detalle.png</file>
+    <file>invisible.png</file>
+    <file>menu_mantenimiento.png</file>
     <file>menu.png</file>
+    <file>menuactualizar.png</file>
     <file>menuafiliacion.png</file>
+    <file>menusalir.png</file>
     <file>menuhome.png</file>
     <file>menureport.png</file>
+    <file>menuseguimiento.png</file>
     <file>menuusuario.png</file>
+    <file>retornar.png</file>
+    <file>seguimiento_eliminar.png</file>
+    <file>seguimiento_edtir.png</file>
+    <file>source.py</file>
+    <file>source.qrc</file>
+    <file>visible.png</file>
+    <file>visualizar_seguimiento.png</file>
+    <file>x.png</file>
   </qresource>
 </RCC>

@@ -2,9 +2,19 @@
 from db.conexion import Conexion
 from db.logger_base import logger
 from db.cursor_del_pool import CursorDelPool
+import requests
 
 
 class BaseDatos:
+
+
+    @classmethod
+    def verificarConexionInternet(cls):
+        try:
+            response = requests.get("http://www.google.com", timeout=5)
+            return True
+        except requests.ConnectionError:
+            return False
 
     @classmethod
     def getDatos(cls,consulta):

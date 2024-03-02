@@ -1,6 +1,0 @@
-"Dependencias a instalar"
-"pip install [aqui nombre de la dependencia]"
-
-PyMySQL==1.0.2
-pymysql-pooling==1.0.6
-PySide2==5.15.2

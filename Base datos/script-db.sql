@@ -1,12 +1,12 @@
 
 -- Eliminar la base de datos si existe
-DROP DATABASE IF EXISTS vinculaciondb;
+DROP DATABASE IF EXISTS dbscmlul0fs4ii;
 
 -- Crear la base de datos
-CREATE DATABASE vinculaciondb;
+CREATE DATABASE dbscmlul0fs4ii;
 
 -- Utilizar la base de datos
-USE vinculaciondb;
+USE dbscmlul0fs4ii;
 
 
 
@@ -18,7 +18,8 @@ CREATE TABLE instituciones_educativas (
     id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único de la institución
     nombre_institucion VARCHAR(255), -- Nombre de la institución
     tipo_institucion VARCHAR(50), -- Tipo de institución (ej. universidad, colegio, etc.)
-    direccion VARCHAR(255) -- Dirección física de la institución
+    direccion VARCHAR(255), -- Dirección física de la institución
+	estado VARCHAR(50) DEFAULT 'Activo' -- Estado por defecto "Activo"
 );
 
 -- ===============================================
@@ -36,7 +37,8 @@ CREATE TABLE roles (
 -- ===============================================
 CREATE TABLE proyectos (
     id_proyecto INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del proyecto
-    nombre_proyecto VARCHAR(300) NOT NULL -- Nombre del proyecto
+    nombre_proyecto VARCHAR(300) NOT NULL, -- Nombre del proyecto
+    estado VARCHAR(50) DEFAULT 'Activo' -- Estado por defecto "Activo"
 );
 
 -- ===============================================
@@ -62,6 +64,7 @@ CREATE TABLE usuarios (
     apellido VARCHAR(100), -- Apellido del usuario
     correo_electronico VARCHAR(100), -- Correo electrónico del usuario
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, -- Fecha de registro del usuario
+    estado VARCHAR(50) DEFAULT 'Activo', -- Estado por defecto "Activo"
     FOREIGN KEY (role_id) REFERENCES roles(role_id) -- Clave foránea a la tabla roles
 );
 

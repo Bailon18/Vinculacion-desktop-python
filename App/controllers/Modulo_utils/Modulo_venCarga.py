@@ -61,7 +61,7 @@ class Ui_VenCarga(QDialog):
 
 
         # CAMBIAR TEXTO EN PLENA CARGA
-        self.raizCarga.labTitu.setText(f'{self.lista_data[3]} {self.lista_data[4]}')
+        self.raizCarga.labTitu.setText(f'{self.lista_data[1]}')
         # EJECUTANDO LA BARRA DE PROGRESO
         self.timeLoad = QTimer()
         self.timeLoad.timeout.connect(self.progresoView)
@@ -82,9 +82,8 @@ class Ui_VenCarga(QDialog):
 
             self.close()
 
-            dni, nombre_rol,nombre_rol_reverse,nom,apellido, foto = self.lista_data
-            
-            self.main = Principal(dni, nombre_rol,nombre_rol_reverse,nom,apellido, foto)
+    
+            self.main = Principal(self.lista_data)
             self.main.showMaximized()
             #self.main.show()
 

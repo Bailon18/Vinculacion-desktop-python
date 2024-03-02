@@ -73,9 +73,12 @@ class Seguimiento_admin(QtWidgets.QDialog):
 
     def llenar_seguimiento(self, vinculacion_id):
         
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
         datos = self.conec_base.getDatosProcess_condicion("ObtenerSeguimientosPorVinculacionId", (vinculacion_id,))
         if len(datos) > 0:
-            print(datos)
             cargar_tabla(self.seguimiento.tabla_admiseguimiento, datos[0])
 
             

@@ -1,0 +1,7 @@
+fpdf==1.7.2
+pillow==10.2.0
+PyMySQL==1.1.0
+pipenv instyall pymysql-pooling==1.0.6
+PySide2==5.15.2.1
+shiboken2==5.15.2.1
+cryptography="*"

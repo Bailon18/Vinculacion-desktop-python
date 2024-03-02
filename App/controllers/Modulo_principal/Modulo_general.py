@@ -1,12 +1,14 @@
 
 from PySide2 import QtWidgets , QtCore , QtGui
+from PySide2.QtCore import Qt
 from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
+from controllers.Modulo_mantenimiento.Mantenimiento_instituciones import Instituciones
+from controllers.Modulo_mantenimiento.Mantenimiento_proyectos import Proyectos
+from controllers.Modulo_usuarios.Modulo_usuarios import Perfil
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
-#from prueba import Tranferencia
+
 from views.ui_ventana_principal import Ui_principal
-from views.ui_usuario_admi import Ui_Admi
-from views.ui_usuario_perfil import Ui_Perfil
-from views.ui_admiedit import Ui_AdmiEdit
+
 
 import re, os
 from PIL import Image
@@ -14,17 +16,7 @@ from datetime import datetime
 
 from controllers.Modulo_principal.funcion_general import *
 
-# importaciones de modulo utils 
-from controllers.Modulo_utils.config.configVenPrincipal import configuracionVentana
-from controllers.Modulo_utils.config.configVenAdmin import configuracionVentanaAdmin
-from controllers.Modulo_utils.config.configVenPerfil import configuracionVentanaPerfil
-from controllers.Modulo_utils.config.configVenEditUsuario import configuracionVentanaEdit
-
-
-
-# importamos la clase de la base datos
 from db.Modulo_base import BaseDatos
-
 
 class Principal(QtWidgets.QMainWindow):
 
@@ -35,9 +27,27 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.setupUi(self)
         
         self.conec_base = BaseDatos()
-        self.tutor_id = 2
-        
-        self.listar_vinculacion();
+
+        self.configuracion_ventana()
+        self.rol = args[0][2]
+        self.tutor_id = args[0][0]
+        self.venPri.lbl_usuario.setText(str(args[0][1]))
+        self.venPri.lbl_rol.setText(str(args[0][2]))
+
+        if(self.rol != 'Administrador'):
+            self.venPri.btn_afiliacion.setHidden(True)
+            self.venPri.btn_usuario.setHidden(True)
+            self.venPri.btn_reporte.setHidden(True)
+            self.venPri.btn_home.setHidden(True)
+            self.venPri.btn_seguimientoo.setHidden(False)
+            evento_pagina(self,1, self.venPri.btn_seguimientoo)
+        else:
+            self.venPri.btn_seguimientoo.setHidden(True)
+            self.venPri.btn_home.setHidden(False)
+            evento_pagina(self,0, self.venPri.btn_afiliacion)
+
+        self.listar_vinculacion()
+        self.listar_usuarios()
         
         # self.configuracion()
         self.controlSalida = True
@@ -49,26 +59,77 @@ class Principal(QtWidgets.QMainWindow):
         
         self.venPri.line_busqueda.textChanged.connect(lambda: self.busqueda_vinculacion())
         self.venPri.line_busqueda_tutor.textChanged.connect(lambda: self.busqueda_vinculacion_tutor())
+        self.venPri.line_busqueda_reporte_estudiantes.textChanged.connect(lambda: self.busqueda_datos_estudiante())
+        self.venPri.line_busqueda_usuario.textChanged.connect(lambda: self.busqueda_usuarios_filtro())
+        self.venPri.cbox_perfil.activated.connect(lambda: self.evento_perfil())
+     
 
  
         evento_menu(self, self.venPri, tr=0)
         evento_hora(self)
         evento_tabla(self)
         self.venPri.boton_deslizable.clicked.connect(lambda: evento_menu(self, self.venPri))
-        
 
-        evento_pagina(self,0, self.venPri.btn_afiliacion)
+        evento_pagina_mantenimiento(self, 1, self.venPri.btn_menu_institucion)
+        self.venPri.btn_menu_institucion.clicked.connect(lambda: evento_pagina_mantenimiento(self, 1, self.venPri.btn_menu_institucion))
+        self.venPri.btn_menu_proyectos.clicked.connect(lambda: evento_pagina_mantenimiento(self, 0, self.venPri.btn_menu_proyectos))
+
+        self.venPri.btn_agregar_instituto.clicked.connect(lambda: self.mostrar_formulario_instituciones())
+        self.venPri.btn_agregar_proyectos.clicked.connect(lambda: self.mostrar_formulario_proyectos())
+
+        self.llenado_instituciones('Activo')
+        self.llenado_proyectos('Activo')
+
+        self.venPri.check_estado_institucion.stateChanged.connect(lambda: self.mostrar_instituciones_estado())
+        self.venPri.check_estado_proyectos.stateChanged.connect(lambda: self.mostrar_proyectos_estado())
+    
+
         self.venPri.btn_afiliacion.clicked.connect(lambda: evento_pagina(self, 0, self.venPri.btn_afiliacion))
-        self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 3, self.venPri.btn_reporte))
-        self.venPri.btn_usuario.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_usuario))
         self.venPri.btn_seguimientoo.clicked.connect(lambda: evento_pagina(self, 1, self.venPri.btn_seguimientoo))
+        self.venPri.btn_home.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_home))
+        self.venPri.btn_usuario.clicked.connect(lambda: evento_pagina(self, 3, self.venPri.btn_usuario))
+        self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 4, self.venPri.btn_reporte))
+        
+        
         self.venPri.btn_nuevoafiliacion.clicked.connect(lambda: self.abrir_ventana_afiliacion())
         self.venPri.btn_recargar.clicked.connect(lambda: self.listar_vinculacion())
+        self.venPri.btn_agregar_usuario.clicked.connect(lambda: self.abrir_ventana_perfil())
         
         self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
         self.venPri.cbox_rango_tutor.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango_tutor(self.venPri.cbox_rango_tutor.currentText()))
+        
+        evento_seleccion_reporte(self, self.venPri.radioEstudiante, 1)
+        self.venPri.radioEstudiante.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioEstudiante, 1))
+        self.venPri.radioTutor.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioTutor, 0))
 
         self.listar_seguimiento_tutor()
+        
+        # evento reporte
+        self.venPri.cbo_tutores.activated.connect(lambda: self.evento_filtro_tutores())  
+        self.llenado_reporte('En Progreso',  self.venPri.tabla_reporte_tutores, 'ObtenerInfoVinculacionPorTutor', 5, self.venPri.cbo_tutores.itemData(self.venPri.cbo_tutores.currentIndex()))
+        self.venPri.radioProcesoT.clicked.connect(lambda: self.filtro_reporte('En Progreso','Tutor', 'ObtenerInfoVinculacionPorTutor'))
+        self.venPri.radioPendienteT.clicked.connect(lambda: self.filtro_reporte('Pendiente','Tutor', 'ObtenerInfoVinculacionPorTutor'))
+        self.venPri.radioCulminadoT.clicked.connect(lambda: self.filtro_reporte('Culminado','Tutor', 'ObtenerInfoVinculacionPorTutor'))
+        self.venPri.cbox_rango_reporte_tutor.activated.connect(lambda: self.evento_filtro_tutores()) 
+        
+        
+        self.llenado_reporte('En Progreso',  self.venPri.tabla_reporte_estudiantes, 'obtenerInformacionVinculacionesConEstado', 5)
+        self.venPri.check_todos_estudiantes.clicked.connect(lambda: self.evento_obtener_reporte_general())
+        self.venPri.cbox_rango_estudiantes.activated.connect(lambda: self.evento_obtener_reporte_general())
+        self.venPri.radioProcesoE.clicked.connect(lambda: self.filtro_reporte('En Progreso','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
+        self.venPri.radioPendienteE.clicked.connect(lambda: self.filtro_reporte('Pendiente','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
+        self.venPri.radioCulminadoE.clicked.connect(lambda: self.filtro_reporte('Culminado','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
+        
+
+    def evento_perfil(self):
+        
+        if self.venPri.cbox_perfil.currentIndex() == 0:
+
+            self.raizOpacidad.resize(self.width(), self.height())
+            self.raizOpacidad.show()
+            Perfil(self, 'Editar', [self.tutor_id, 'Jose Luna']).exec_()
+        else:
+            self.cerrar_sesion()
 
     def closeEvent(self, event):
         if self.controlSalida:
@@ -104,13 +165,35 @@ class Principal(QtWidgets.QMainWindow):
             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
         else:
             super().keyPressEvent(qKeyEvent)
+       
+    def configuracion_ventana(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+        lista_carrera, lista_institucion, lista_proyectos, lista_tutores = self.conec_base.getDatosProcess("ObtenerDatos")
+        if(len(lista_tutores) > 0):
+            self.llenar_combobox(self.venPri.cbo_tutores, lista_tutores, 50)
+          
             
     def abrir_ventana_afiliacion(self):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         Vinculacion(parent = self).exec_()
 
+
+    def abrir_ventana_perfil(self):
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        Perfil(parent = self, modo ='Nuevo').exec_()
+
     def listar_vinculacion(self, datos=None):
+        
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
         
         limite = int(self.venPri.cbox_rango.currentText())
         
@@ -121,26 +204,34 @@ class Principal(QtWidgets.QMainWindow):
             datos_a_insertar = datos[0]
             llenar_tabla_vinculacion(self, self.venPri.tabla_principal, datos_a_insertar)
         else:
-            print("Los datos obtenidos no son válidos o están vacíos. No se pudo llenar la tabla.")
+            pass
+            #print("Los datos obtenidos no son válidos o están vacíos. No se pudo llenar la tabla.")
 
     def busqueda_vinculacion(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
         textobusqueda =  self.venPri.line_busqueda.text()
         limite = int(self.venPri.cbox_rango.currentText())
+        
         lista_vinculaciones = self.conec_base.getDatosProcess_condicion("BuscarVinculaciones", (textobusqueda, limite))
         self.listar_vinculacion(lista_vinculaciones)
-
 
     def mostrar_vinculacion_rango(self, text):
         self.listar_vinculacion()
 
-
     def listar_seguimiento_tutor(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
         
         limite = int(self.venPri.cbox_rango_tutor.currentText())
 
         lista_seguimiento = self.conec_base.getDatosProcess_condicion('ObtenerSeguimientosConEstudiantes', (self.tutor_id, limite))
         llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, lista_seguimiento[0])
-
 
     def listar_vinculacion_tutor(self, datos=None):
         
@@ -151,9 +242,14 @@ class Principal(QtWidgets.QMainWindow):
             datos_a_insertar = datos[0]
             llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, datos_a_insertar)
         else:
-            print("Los datos obtenidos no son válidos o están vacíos. No se pudo llenar la tabla.")
+            pass
+
 
     def busqueda_vinculacion_tutor(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
 
         textobusqueda =  self.venPri.line_busqueda_tutor.text()
         limite = int(self.venPri.cbox_rango_tutor.currentText())
@@ -165,608 +261,160 @@ class Principal(QtWidgets.QMainWindow):
     def mostrar_vinculacion_rango_tutor(self, text):
         self.listar_vinculacion_tutor()
         
+    def listar_usuarios(self):
         
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
 
-    # def evento_rango(self, rango):
+        resultado  = self.conec_base.getDatosProcess('ListarUsuarios')
+        if(len(resultado) > 0):
+            resultado = resultado[0]
+            llenar_tabla_usuario(self, self.venPri.tabla_usuario, resultado)
+
+
+    def busqueda_usuarios_filtro(self):
         
-    #     consulta = self.conec_base.getDatos_condicion("""SELECT id, DATE_FORMAT( fecha_registro, "%%d-%%m-%%Y"), serial, 
-    #                                                             placa, modelo_id, marca,compania_id, ticket 
-    #                                                         FROM computador 
-    #                                                         WHERE sede_id = %s Order by id DESC 
-    #                                                         LIMIT %s; """, (self.sede_actual, int(rango)))
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
 
-    #     if consulta:
-    #         computadoras = [list(x) for x in consulta]
-    #         cargatablaComputador(self, self.venPri.tabla_principal, computadoras)
+        texto_busqueda = self.venPri.line_busqueda_usuario.text().strip()
+
+        resultado = self.conec_base.getDatosProcess_condicion('filtrarUsuarios', (texto_busqueda,))
+        if(len(resultado) > 0):
+            resultado = resultado[0]
+            llenar_tabla_usuario(self, self.venPri.tabla_usuario, resultado)
+        else:
+            self.listar_usuarios()
+
+
+    def mostrar_formulario_instituciones(self):
+        
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        Instituciones(parent = self, modo='Nuevo').exec_()
+
+
+    def mostrar_formulario_proyectos(self):
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        Proyectos(parent = self, modo='Nuevo').exec_()
+
+
+    def llenado_instituciones(self, estado):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+        respuesta = self.conec_base.getDatosProcess_condicion('ListarInstitucionesPorEstado' , (estado, ))
+        if(respuesta):
+            respuesta = respuesta[0]
+            llenar_tabla_institucion(self, self.venPri.tabla_intituciones, respuesta)
+
+
+    def mostrar_instituciones_estado(self):
+
+        estado = 'Inactivo' if self.venPri.check_estado_institucion.isChecked() else 'Activo'
+        self.llenado_instituciones(estado)
+
+    def llenado_proyectos(self, estado):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+
+        respuesta = self.conec_base.getDatosProcess_condicion('ListarProyectosPorEstado' , (estado, ))
+        if(respuesta):
+            respuesta = respuesta[0]
+            llenar_tabla_proyectos(self, self.venPri.tabla_proyectos, respuesta)
+
+    def mostrar_proyectos_estado(self):
+
+        estado = 'Inactivo' if self.venPri.check_estado_proyectos.isChecked() else 'Activo'
+        self.llenado_proyectos(estado)
+
+    def llenado_reporte(self, estado, tabla, procedimiento, limite, condicion=0):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+        if(condicion != 0):
+            respuesta = self.conec_base.getDatosProcess_condicion( procedimiento , (estado,limite,condicion, ))
+        else:                                                                 
+            respuesta = self.conec_base.getDatosProcess_condicion( procedimiento , (estado,limite ))
+            
+        if(respuesta):
+            respuesta = respuesta[0]
+            cargar_tabla(tabla, respuesta)
+            
+    def filtro_reporte(self, estado , tipo, consulta):
+        
+        if(tipo == 'Estudiante'):
+            limite = int(self.venPri.cbox_rango_estudiantes.currentText())
+            self.llenado_reporte(estado , self.venPri.tabla_reporte_estudiantes, consulta, limite)
+        else:
+            limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+            tutor_id = self.venPri.cbo_tutores.itemData(self.venPri.cbo_tutores.currentIndex());
+            self.llenado_reporte(estado , self.venPri.tabla_reporte_tutores, consulta, limite, tutor_id)
+            
+    def evento_obtener_reporte_general(self):
+        if self.venPri.check_todos_estudiantes.isChecked():
+            self.venPri.radioCulminadoE.setEnabled(True)
+            self.venPri.radioProcesoE.setEnabled(True)
+            self.venPri.radioPendienteE.setEnabled(True)
+            self.venPri.line_busqueda_reporte_estudiantes.setEnabled(False)
+            estado = ''
+            
+            if self.venPri.radioPendienteE.isChecked():
+                estado = 'Pendiente'
+            elif self.venPri.radioProcesoE.isChecked():
+                estado = 'En Progreso'
+            else:
+                estado = 'Culminado'
+                
+            self.filtro_reporte(estado, 'Estudiante', 'obtenerInformacionVinculacionesConEstado')
+        else:
+            self.venPri.line_busqueda_reporte_estudiantes.setEnabled(True)
+            self.venPri.radioCulminadoE.setEnabled(False)
+            self.venPri.radioProcesoE.setEnabled(False)
+            self.venPri.radioPendienteE.setEnabled(False)
     
-    # def cargaCompu(self, rango):
+    def evento_filtro_tutores(self):
         
-    #     computadoras = self.conec_base.getDatosProcess_condicion('sp_listaComputador', [self.sede_actual,'%d-%m-%Y', rango])
-    #     computadoras = [list(x) for x in computadoras[0]]
-        
-    #     if computadoras:
-    #         cargatablaComputador(self, self.venPri.tabla_principal, computadoras)
-    #     else:  
-    #         self.venPri.tabla_principal.setRowCount(0)
-
-    # def busqueda_computadora(self):
-    #     opcion = self.venPri.cbox_filtrarCompu.currentIndex()
-    #     textoBusqueda = self.venPri.line_busquedaCompu.text().strip()
-    #     computadoras = self.conec_base.getDatosProcess_condicion('sp_filtrarComputadora',[self.sede_actual, '%d-%m-%Y', opcion, '%'+textoBusqueda+'%'])
-    #     computadoras = [list(x) for x in computadoras[0]]
-    #     if computadoras:
-    #         cargatablaComputador(self, self.venPri.tabla_principal, computadoras)
+        estado = ''
             
-    # def cargar_usuario(self):
-        
-    #     '''
-    #     Metodo que tiene por funcion obtener usuarios total de la base de datos
-    #     y respectivamente  envia la lista de usuarios a la funcion algoritmo_usuarios()
-    #     '''
-        
-    #     usuarios = self.conec_base.getDatos("""
-    #     SELECT u.dni, u.nombre, u.apellidos, u.sede_id,
-	# 	u.correo, r.descripcion cargo, if(u.estado = 1, "Activo", "Bloqueado") Estado
-    #     FROM usuario_rol ur 
-    #     inner join rol r on ur.rol_id = r.id
-    #     inner join usuario u on ur.usuario_dni = u.dni
-    #     """)
-        
-    #     self.algoritmo_usuarios(usuarios)
+        if self.venPri.radioPendienteT.isChecked():
+            estado = 'Pendiente'
+        elif self.venPri.radioProcesoT.isChecked():
+            estado = 'En Progreso'
+        else:
+            estado = 'Culminado'
     
-    # def busqueda_usuarios(self):
-
-    #     usuario = self.venPri.line_busqueda_usuario.text()
-    #     print('usuario ', usuario)
-    #     usuarios = self.conec_base.getDatos_condicion("""
-                                                       
-    #             SELECT u.dni, u.nombre, u.apellidos, u.sede_id,
-    #             u.correo, r.descripcion cargo, if(u.estado = 1, "Activo", "Bloqueado") Estado
-    #             FROM usuario_rol ur 
-    #             inner join rol r on ur.rol_id = r.id
-    #             inner join usuario u on ur.usuario_dni = u.dni
-
-    #             and concat_ws(u.nombre,' ', u.apellidos) LIKE %s
-                
-    #             """, ('%'+usuario+'%'))
-
-    #     if(usuarios):
-    #         self.algoritmo_usuarios(usuarios)
-
-    # def algoritmo_usuarios(self, usuarios):
-    #     '''
-    #     Metodo que tiene por funcion juntar los roles del usuario apartir ('-')
-    #     y respectivamente envia los datos para llenar la tabla de usuarios
-    #     :param list suarios: lista de usuarios 
-    #     '''
-    #     if usuarios:
-    #         lista = [list(x) for x in usuarios]
-    #         lista_princi = []
-    #         for lis in lista:
-    #             try:
-    #                 dnis = [dni[0] for dni in lista_princi]
-    #                 if(lis[0] in dnis):
-    #                     index = dnis.index(lis[0])
-    #                     lista_princi[index][5] = lis[5]+" - " + \
-    #                         (lista_princi[index][5]).title()
-    #                     continue
-    #             except:
-    #                 pass
-    #             lista_princi.append(lis)
-    #         cargausuarioicon(self, self.venPri.tabla_usuario, lista_princi)    
-        
-    # def abrirUsuario(self):
-    #     '''
-    #     Metodo que tiene por funcion abrir formulario de llenado para un nuevo usuario
-    #     '''
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     UsuarioAdmi(self).exec_()
-        
-    # def abrirComputador(self):
-    #     '''
-    #     Metodo que tiene por funcion abrir formulario de llenado para un nuevo Computador
-    #     '''
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Computador([], 1, self).exec_()
-            
-    # def abrirTransferencia(self):
-        
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Tranferencia(self.sede_actual, self).exec_()
+        self.filtro_reporte(estado, 'Tutor', 'ObtenerInfoVinculacionPorTutor')
             
         
         
-    # def evento_perfil(self):
-     
-    #     if self.venPri.cbox_perfil.currentIndex() == 0:
-    #         self.raizOpacidad.resize(self.width(), self.height())
-    #         self.raizOpacidad.show()
-    #         UsuarioPerfil(self).exec_()
-    #     else:
-    #         self.cerrar_sesion()
+    def busqueda_datos_estudiante(self):
         
-    # def configuracion(self):
-    #     '''
-    #     configuracion basicas para cargar datos y condiciones de menu
-    #     '''
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
         
-    #     apellido = self.apellido[0:self.apellido.index(' ')] if(' ' in self.apellido) else self.apellido
-    #     self.venPri.lbl_usuario.setText(self.nombreUsuario +' '+ apellido)
-    #     self.venPri.lbl_rol.setText(self.nombreRol)
-        
-        
-    #     # Desactivamos el boton reporte si no son administradora y soporte
-    #     if self.nombreRol != 'Admin':
-    #         self.venPri.btn_usuario.hide()
-
-    #     # Limpiamos la foto y agregamos la actualizada
-    #     self.venPri.lbl_foto.clear()
-        
-    #     if self.foto != 0:
-    #         pixmap = QtGui.QPixmap()
-    #         pixmap.loadFromData(self.foto, 'png')
-    #         self.venPri.lbl_foto.setPixmap(pixmap)
+        self.venPri.check_todos_estudiantes.setChecked(False)
+        self.evento_obtener_reporte_general()
+        parametro_busqueda = self.venPri.line_busqueda_reporte_estudiantes.text().strip()
+        respuesta = self.conec_base.getDatosProcess_condicion( 'obtenerInformacionVinculacionesConEstadoYBusqueda' , (parametro_busqueda, ))
+        if(respuesta):
+            respuesta = respuesta[0]
+            cargar_tabla(self.venPri.tabla_reporte_estudiantes, respuesta)
             
             
-    #     modelos , compania , sede_actual = self.conec_base.getDatosProcess_condicion('sp_cargarComputador', [self.dni]) 
-        
-    #     self.sede_actual = sede_actual[0][0]
-        
-    #     # Cargamos los modelos , companias convertimos a diccionario
-    #     self.modelos=dict(zip([i[0] for i in modelos],[i[1] for i in modelos]))
-    #     self.compania=dict(zip([i[0] for i in compania],[i[1] for i in compania]))
-        
-
-# class Seguimiento_admin(QtWidgets.QDialog):
-#     def __init__(self, parent=None):
-        
-#         super(UsuarioAdmi, self).__init__()
-#         self.venAdmi = Ui_Admi()
-#         self.venAdmi.setupUi(self)
-
-#         # conexion con la bd
-#         self.control_admi = BaseDatos()
-        
-#         self.parent = parent
-        
-#         # Lista para agregar la seleccion de roles para el usuario
-#         self.listaseleccion = []
-        
-#         # convertimos la lista de sedes que tiene la ventana principal a un diccinario
-#         self.sedes_dic = dict(zip(parent.sedes.values(),parent.sedes.keys()))
-        
-#         # configuracion basica de la ventana
-#         configuracionVentanaAdmin(self)
-
-#         # Boton guardar usuario registrado 
-#         self.venAdmi.btn_guardar.clicked.connect(lambda: self.guardarDatosUsuario())
-
-        
-#     def keyPressEvent(self, event):
-#         ''' 
-#         Metodo que detecta el boton espace y lo desabilita 
-#         '''
-#         if event.key() == QtCore.Qt.Key_Escape:
-#             pass
-        
-#     def keyPressEvent(self, qKeyEvent):
-#         '''
-#         Metodo que configura para movernos de un input a otro atravez del boton enter
-#         '''
-#         if qKeyEvent.modifiers() & QtCore.Qt.AltModifier:
-#             qKeyEvent.ignore()
-#         elif qKeyEvent.key() in (QtCore.Qt.Key_Return, QtCore.Qt.Key_Enter):
-#             self.focusNextChild()
-#             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
-#         else:
-#             super().keyPressEvent(qKeyEvent)
-        
-#     def guardarDatosUsuario(self):
-#         '''
-#         Metodo que obtiene los datos del usuario , valida los campos ingresados
-#         y respectivamente guarda en la base de datos
-#         '''
-        
-#         # Obtenemos datos del usuario 
-#         dni = self.venAdmi.line_dni.text()
-#         nombre = self.venAdmi.line_nombre.text().strip().title()
-#         apellidos = self.venAdmi.line_apeP.text().strip().title()
-#         genero = "M" if self.venAdmi.cbox_genero.currentIndex() == 1 else "F"
-#         fecha = self.venAdmi.date_naci.text()
-#         sede_id = self.sedes_dic[self.venAdmi.cbox_sedes.currentText()] if self.venAdmi.cbox_sedes.currentText() != 'Seleccionar' else 0
-#         estado = self.venAdmi.cbox_estado.currentIndex()
-#         correo = self.venAdmi.line_correo.text().strip()
-#         contrasena = self.venAdmi.line_contrasena.text().strip()
-
-#         # metodo para  validar el correo
-#         validar_correo = bool(re.findall(r'^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]{2,}[.][a-zA-Z]{2,4}$', correo))
-
-#         # Dominios que el correo ingresado debe tener
-#         base_correo = ["@gmail.com", "@hotmail.com", "@outlook.com", "@summa-sci.com"]
-
-
-#         try:
-#             cadena_correo = correo[0:correo.index("@")]
-#         except:
-#             cadena_correo = ''
-
-#         if(correo.lstrip(cadena_correo) in base_correo):
-#             sw_correo_val = True
-#         else:
-#             sw_correo_val = False
-
-#         # procedimiento almacenado que retorna datos de tabla usuario , roles
-#         consulta_usuario , consulta_roles = self.control_admi.getDatosProcess("sp_consultausuarioAdmi")
-
-#         # convertimos los roles en un diccionario
-#         roles = dict(zip([ide[0] for ide in consulta_roles],[nom[1] for nom in consulta_roles]))
-
-#         # separamos el dni y correo en listas distintas
-#         if consulta_usuario:
-#             lista_dni = [x[0] for x in consulta_usuario]
-#             lista_correo = [x[2] for x in consulta_usuario]
-            
-
-#         errores = []
-
-#         if (nombre == ''):
-#             errores.append("    *Dato nombre")
-
-#         if(apellidos == ''):
-#             errores.append("    *Dato apellidos")
-            
-#         if len(dni) < 8:
-#             errores.append("    *Dato dni ")
-        
-#         elif int(dni) in lista_dni:
-#             errores.append("    *Dato dni ya existe en el sistema.")
-            
-#         if (validar_correo) == False or (sw_correo_val == False) or len(correo) == 0:
-#             errores.append("    *Correo no autorizado consultar con el ceo.")
-
-#         elif correo in lista_correo:
-#             errores.append("    *Correo ya existe en el sistema.")
-
-#         if len(contrasena) < 8:
-#             errores.append("    *Dato contraseña minino 8 digitos.")
-
-#         if len(self.listaseleccion) == 0:
-#             errores.append("    *Cargo obligatorio.")
-        
-#         if sede_id == 0:
-#             errores.append("    *Sede obligatorio.")
-
-#         if self.venAdmi.cbox_genero.currentIndex() == 0:
-#             errores.append("    *Sexo obligatorio.")
-            
-      
-#         if not errores:
-#             rolesnom = ""
-            
-#             for i in self.listaseleccion:
-#                 rolesnom += " - "+roles[i].upper()+" - "
-
-#             if (QtWidgets.QMessageBox.question(self, "Usuario", "¿Estas segura(o) darle el rol "+rolesnom+" Al usuario?",
-#                                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes):
-
-#                 # convertimos la foto a binario
-#                 foto = "source\\image\\businessman.png"
-#                 with open(foto, "rb") as f:
-#                     foto_base = f.read()
-
-#                 # insertamos los datos a la tabla usuario
-#                 self.control_admi.setDatos("""
-#                                             INSERT INTO usuario(dni, nombre, apellidos, fecha_nacimiento,correo,
-#                                             contrasena ,sexo, estado, foto , sede_id)VALUES(%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)""",
-#                                             (dni, nombre, apellidos, fecha, correo, contrasena, genero , estado, foto_base, sede_id))
-
-#                 # insertamos los datos a la tabla roles-usuario
-#                 lista = []
-#                 [lista.append([dni, x]) for x in self.listaseleccion]
-                
-#                 # insertamos en la tabla usuario_rol 
-#                 self.control_admi.setDatosListFor("""INSERT INTO usuario_rol(usuario_dni, rol_id)VALUES(%s,%s)""", lista)
-
-#                 QtWidgets.QMessageBox.information(self, 'Usuario', 'Usuario se agrego correctamente')
-
-#                 # actualizamos la tabla usuario llamando al metodo donde recarga los datos actualizados
-#                 self.parent.cargar_usuario()
-#                 self.parent.raizOpacidad.close()
-#                 self.close()
-                
-#             else:
-#                 return
-
-#         else:
-#             QtWidgets.QMessageBox.critical(
-#                 self, 'Usuario', 'Error, revise los datos:\n'+"\n".join(errores))
- 
-# # Perfil
-# class UsuarioPerfil(QtWidgets.QDialog):
-#     def __init__(self, parent):
-#         super(UsuarioPerfil, self).__init__()
-#         self.venPerfil = Ui_Perfil()
-#         self.venPerfil.setupUi(self)
-#         self.control_perfil = BaseDatos()
-#         self.parent = parent
-
-#         configuracionVentanaPerfil(self)
-
-#         self.ruta_imagen = None
-#         self.foto_base = None
-#         self.lista_usuario = []
-#         self.Llenado_datos()
-
-#         self.venPerfil.btn_foto.clicked.connect(self.cambiar_foto)
-#         self.venPerfil.btn_guardar.clicked.connect(self.guardar_datos)
-
-
-#     def keyPressEvent(self, qKeyEvent):
-#         if qKeyEvent.modifiers() & QtCore.Qt.AltModifier:
-#             qKeyEvent.ignore()
-#         elif qKeyEvent.key() in (QtCore.Qt.Key_Return, QtCore.Qt.Key_Enter):
-#             self.focusNextChild()
-#             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
-#         else:
-#             super().keyPressEvent(qKeyEvent)
-
-#     def Llenado_datos(self):
-#         '''
-#         Metodo que tiene por funcion obtener datos del usuario logeado y respectivamente
-#         rellenar los datos en los campos correspondientes.
-        
-#         '''
- 
-#         # --- Datos obtenidos de la tabla usuario ---
-#         usuario, roles = self.control_perfil.getDatosProcess_condicion("sp_cargaperfil", [self.parent.dni])
-#         #USUARIO ((12345678, 'Manuel', 'Anonimo', '2000-02-01', 'manuel@gmail.com', 'admin1234', 1, None),)
-        
-#         roles = [x[0] for x in roles]
-#         roles = " - ".join(roles)
-
-#         datoLogin = [x for x in usuario]
-#         self.lista_usuario = [x for x in datoLogin[0]]
-        
-#         self.venPerfil.line_dni.setText(str(self.lista_usuario[0]))  # dni
-#         self.venPerfil.line_nombre.setText(str(self.lista_usuario[1]))
-#         self.venPerfil.line_apeP.setText(str(self.lista_usuario[2]))
-#         self.venPerfil.date_naci.setDate(QtCore.QDate.fromString(self.lista_usuario[3], "yyyy-MM-dd"))
-#         self.venPerfil.line_correo.setText(str(self.lista_usuario[4]))
-#         self.venPerfil.line_contrasena.setText(str(self.lista_usuario[5]))
-#         self.venPerfil.cbox_genero.setCurrentIndex(int(self.lista_usuario[6]))
-
-#         self.venPerfil.line_cargo.setText(str(roles))
-
-#         self.venPerfil.lbl_perfil.clear()
-#         if self.lista_usuario[7]:
-#             pixmap = QtGui.QPixmap()
-#             pixmap.loadFromData(self.lista_usuario[7], 'png')
-#             self.venPerfil.lbl_perfil.setPixmap(pixmap)
-#             self.foto_base = self.lista_usuario[7]
-
-
-#     def cambiar_foto(self):
-#         """Metodo para editar la foto de tu perfil"""
-#         self.ruta_imagen = QtWidgets.QFileDialog.getOpenFileName(self, "Seleccionar imagen", " ", "Archivos de imagen (*.png *.jpg)")[0]
-
-#         if self.ruta_imagen:
-#             # Adaptar imagen
-#             self.foto_perfil = QtGui.QPixmap(self.ruta_imagen)
-
-#             # Mostrar imagen
-#             self.venPerfil.lbl_perfil.setPixmap(self.foto_perfil)
-
-#     def guardar_datos(self):
-#         """Metodo para actualizar datos"""
-
-#         dni = self.venPerfil.line_dni.text()  # _-_-_-_-_-
-
-#         nombre = self.venPerfil.line_nombre.text().strip().title()
-#         apellidoP = self.venPerfil.line_apeP.text().strip().title()
-        
-#         fecha = self.venPerfil.date_naci.date().toString("yyyy-MM-dd")
-#         genero = "M" if self.venPerfil.cbox_genero.currentIndex() == 1 else "F"
-#         contrasena = self.venPerfil.line_contrasena.text().strip()
-
-#         controlador = []
-
-#         if nombre == '':
-#             controlador.append('   *Dato nombre')
-
-#         if apellidoP == '':
-#             controlador.append('   *Dato Apellidos')
-
-#         if len(contrasena) <= 8:
-#             controlador.append('   *Dato contraseña minimo 8 digitos')
-
-#         if self.venPerfil.cbox_genero.currentIndex() == 0:
-#             controlador.append("   *Sexo obligatorio.")
-
-#         if not controlador:
-            
-#             # si selecciono imagen
-#             if self.ruta_imagen:
-         
-#                 # abrir - ajustar imagen
-#                 foo = Image.open(self.ruta_imagen)
-#                 mg = foo.resize((500, 350))
-
-#                 # convertimos la imagen a png
-#                 mg.save('source/assets/imageCover.png')
-          
-#                 # obtenemos la ruta raiz de la imagen
-#                 self.ruta_imagen = os.getcwd()+"/source/assets/imageCover.png"
-             
-#                 # convertimos en byte de la imagen
-#                 with open(self.ruta_imagen, "rb") as f:
-             
-#                     self.foto_base = f.read()
-
-            
-#             datos = (nombre, apellidoP, fecha, contrasena,genero, self.foto_base, dni)
-#             get_datos_base = self.control_perfil.getDatosProcess_condicion("sp_upadatePerfil", datos)[0]
-#             datoLogin = [x[0] for x in get_datos_base]
-
-#             pixmap = QtGui.QPixmap()
-#             pixmap.loadFromData(datoLogin[0], 'png')
-#             self.parent.venPri.lbl_foto.setPixmap(pixmap)
-
-#             self.parent.cargar_usuario()
-
-#             nom = nombre[0:nombre.index(' ')] if(' ' in nombre) else nombre
-#             ape = apellidoP[0:apellidoP.index(' ')] if(' ' in apellidoP) else apellidoP
-
-#             self.parent.venPri.lbl_usuario.setText(str(nom+" "+ape))
-
-#             QtWidgets.QMessageBox.information(self, 'Usuario', 'Datos fueron actualizados correctamente.')
-
-#         else:
-#             QtWidgets.QMessageBox.critical(
-#                 self, 'Usuario', 'Datos no fueron actualizados revise datos\n' + "\n".join(controlador))
-
-
-#     def keyPressEvent(self, event):
-#         if event.key() == QtCore.Qt.Key_Escape:
-#             pass
-        
-# # Editar usuario
-# class UsuarioEdit(QtWidgets.QDialog):
-#     def __init__(self, parent=None):
-#         super(UsuarioEdit, self).__init__()
-#         self.venedit = Ui_AdmiEdit()
-#         self.venedit.setupUi(self)
-        
-#         self.parent = parent
-        
-#         configuracionVentanaEdit(self)
-        
-#         self.control_editusu = BaseDatos()
-        
-        
-#         self.listaseleccion = []
-        
-        
-#         self.cargarusuario()
-#         self.venedit.btn_guardar.clicked.connect(lambda: self.actualizar_usuario())
-
-
-
-#     def keyPressEvent(self, event):
-#         if event.key() == QtCore.Qt.Key_Escape:
-#             pass
-
-#     def keyPressEvent(self, qKeyEvent):
-#         if qKeyEvent.modifiers() & QtCore.Qt.AltModifier:
-#             qKeyEvent.ignore()
-#         elif qKeyEvent.key() in (QtCore.Qt.Key_Return, QtCore.Qt.Key_Enter):
-#             self.focusNextChild()
-#             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
-#         else:
-#             super().keyPressEvent(qKeyEvent)
-
-
-#     def cargarusuario(self):
-
-       
-#         usuario, roles = self.control_editusu.getDatosProcess_condicion("sp_cargausuarioEdit", [self.parent.dniseleccionado, ])
-#         # Usuario  ((22222222, 'Manuel Raul', 'Perez Luna', '2000-01-01', 'manuel65@gmail.com', 'manuel1234567', 'M', '1'),)
-
-#         usuario = [x for x in usuario[0]]
-#         roles = [x[0] for x in roles]
-
-#         # los id roles de la consulta lo guardamos en lista seleccion
-#         self.listaseleccion = roles
-
-#         nom = ""
-#         for i in usuario[1]:
-#             if i == " ":
-#                 break
-#             nom += i
-
-#         self.venedit.lbl_nombretitulo.setText(str(nom+" "+usuario[2]))
-#         self.venedit.lbl_dnititulo.setText(str(usuario[0]))
-
-#         self.venedit.line_dni.setText(str(usuario[0]))
-#         self.usuario_dni = usuario[0]
-#         self.venedit.line_nombre.setText(str(usuario[1]))
-#         self.venedit.line_apeP.setText(str(usuario[2]))
-
-#         self.venedit.date_naci.setDate(QtCore.QDate.fromString(usuario[3], "yyyy-MM-dd"))
-#         self.venedit.line_correo.setText(str(usuario[4]))
-#         self.venedit.line_contrasena.setText(str(usuario[5]))
-        
-#         rol_id = 1 if usuario[6] == 'M' else 2
-#         self.venedit.cbox_genero.setCurrentIndex(rol_id)
-
-#         self.venedit.cbox_estado.setCurrentIndex(int(usuario[7]))
-
-#         for i in roles:
-#             if i == 3:
-#                 self.venedit.admi.setChecked(True)
-#             if i == 4:
-#                 self.venedit.user.setChecked(True)
-        
-   
-#     def actualizar_usuario(self):
-#         """
-#         Metodo que tiene por finalidad  actualizar 
-#         """
-   
-#         estado = self.venedit.cbox_estado.currentIndex()
-#         correo = self.venedit.line_correo.text().strip()
-        
-#         errores = []  
-
-#         if len(self.listaseleccion) == 0:
-#             errores.append("    *Cargo obligatorio.")
-
-#         if not errores:
-
-#             if (QtWidgets.QMessageBox.question(self, "Usuario", """¿Estas segura(o) actualizar datos del usuario?.""",
-#                                             QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No) == QtWidgets.QMessageBox.Yes):
-
-
-#                 datos =  (estado , correo, self.parent.dniseleccionado)
-
-#                 self.control_editusu.getDatosProcess_condicion("sp_upadateUsuario", datos)
-
-               
-#                 self.control_editusu.deleteDatos(
-#                     """DELETE FROM usuario_rol WHERE usuario_dni=%s""", (self.parent.dniseleccionado))
-
-#                 for i in self.listaseleccion:
-#                     self.control_editusu.setDatos("""INSERT INTO usuario_rol(usuario_dni,rol_id)values(%s,%s)""",(self.parent.dniseleccionado, i))
-
-#                 QtWidgets.QMessageBox.information(self, 'Usuario', 'Dato usuario se atualizo correctamente')
-
-#                 #if self.parent.dni == self.usuario_dni:
-#                 #    self.parent.venPri.lbl_psicologa.setText(
-#                 #        str(nombre+" "+apellidoP))
-
-#                 # actualizar *- pacientes/inicio/perfilsuperior
-
-#                 # cargamos tabla usuario
-#                 self.parent.cargar_usuario()
-
-#                 # tabla principal
-#                 #self.parent.rango_mostrar()
-
-#                 # tabla inicio
-#                 #consulta = consulta_pac_psi()
-#                 #dato_inicio = self.control_editusu.getDatos_condicion(
-#                 #    consulta+"""ORDER BY p.pas_numhistoria DESC LIMIT %s""", (12))
-#                 #cargar_tabla(self.parent.venPri.tabla_inicio, dato_inicio)
-
-#                 self.parent.raizOpacidad.close()
-#                 self.close()
-
-#             else:
-#                 return
-
-#         else:
-#             QtWidgets.QMessageBox.critical(
-#                 self, 'Usuario', 'Dato no actualizado, revise datos\n'+"\n".join(errores))
-                
+    def llenar_combobox(self, combobox, lista, longitud_maxima):
+        for elemento in lista:
+            id_elemento, nombre_elemento = elemento
+            texto_truncado = nombre_elemento[:longitud_maxima]
+            combobox.addItem(texto_truncado, userData=id_elemento)
+            combobox.setItemData(combobox.count() - 1, nombre_elemento, Qt.ToolTipRole)

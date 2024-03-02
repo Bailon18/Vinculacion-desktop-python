@@ -51,47 +51,22 @@ def mascara_codigo_ies(objeto):
     """Máscara de ingreso"""
     objeto.setInputMask("9999") 
     
+
+import re
+
+import re
+
+def validar_correo_electronico(correo):
     
-def borrar_caracteres(objeto, mascara_actual):
-    # Obtener el cursor del QLineEdit
-    cursor = objeto.cursorPosition()
+    patron_correo = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$'
+    patron_compilado = re.compile(patron_correo)
     
-    # Obtener el texto actual
-    texto = objeto.text()
-    
-    # Verificar si hay algo seleccionado
-    if objeto.selectedText():
-        # Si hay texto seleccionado, eliminar el texto seleccionado
-        objeto.insert("")
+    if patron_compilado.match(correo):
+        return True
     else:
-        # Si no hay texto seleccionado, eliminar el carácter a la izquierda del cursor
-        texto = texto[:cursor - 1] + texto[cursor:]
-        objeto.setText(texto)
-        objeto.setCursorPosition(cursor - 1)  # Restaurar la posición del cursor
+        return False
+
+
+
+
     
-    # Aplicar la máscara y la validación nuevamente
-    mascara_actual(objeto)
-
-
-def borrar_caracteres_identificacion(objeto, mascara_identificacion):
-    cursor = objeto.cursorPosition()
-    texto = objeto.text()
-    
-    if objeto.selectedText():
-        objeto.insert("")
-    else:
-        # Verificar si el cursor está en una posición que no puede ser eliminada
-        if cursor > 0 and texto[cursor - 1] == '-':
-            # Si el cursor está justo antes del guión, mover el cursor un paso a la izquierda
-            objeto.setCursorPosition(cursor - 1)
-        else:
-            # Si no está justo antes del guión, eliminar el carácter a la izquierda del cursor
-            texto = texto[:cursor - 1] + texto[cursor:]
-            objeto.setText(texto)
-            objeto.setCursorPosition(cursor - 1)
-
-    mascara_identificacion(objeto)
-
-
-
-

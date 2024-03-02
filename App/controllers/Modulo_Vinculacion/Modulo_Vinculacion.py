@@ -39,10 +39,6 @@ class Vinculacion(QtWidgets.QDialog):
 
         if self.vinculacion_id and self.modo == "actualizar":
             self.cargar_datos_vinculacion(self.vinculacion_id)
-            # self.vinculacion.vinculacion_titulo.setText(
-            #     f'Actualizar Vinculación: {self.nombre_estudiante} '
-            #     f'\nEstado: {self.estado}'
-            # )
             self.vinculacion.axax.setText('Actualizar Vinculación: ')
             self.vinculacion.vinculacion_titulo.setText(self.nombre_estudiante)
             
@@ -85,6 +81,9 @@ class Vinculacion(QtWidgets.QDialog):
 
                 
     def actualizar_titulo_estado(self):
+
+        if self.estado == 'En progreso':
+            color_texto = 'blue'
         if self.estado == "Pendiente":
             color_texto = "red"
         elif self.estado == "Culminado":
@@ -122,12 +121,26 @@ class Vinculacion(QtWidgets.QDialog):
             combobox.setItemData(combobox.count() - 1, nombre_elemento, Qt.ToolTipRole)
 
     def configuracion_ventana(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
         lista_carrera, lista_institucion, lista_proyectos, lista_tutores = self.conec_base.getDatosProcess("ObtenerDatos")
+        
         
         self.llenar_combobox(self.vinculacion.cbox_carrera, lista_carrera, 30)
         self.llenar_combobox(self.vinculacion.cbo_institucion, lista_institucion, 30)
         self.llenar_combobox(self.vinculacion.cbo_proyectos, lista_proyectos, 100)
         self.llenar_combobox(self.vinculacion.cbo_tutor, lista_tutores, 30)
+        
+        
+        fecha_actual = QtCore.QDate.currentDate()
+
+        self.vinculacion.fecha_inicio.dateChanged.connect(
+            lambda: self.vinculacion.fecha_final.setMinimumDate(self.vinculacion.fecha_inicio.date()))
+        
+        self.vinculacion.fecha_inicio.setDate(fecha_actual)
 
     def obtener_campos_vinculacion(self):
         
@@ -207,6 +220,11 @@ class Vinculacion(QtWidgets.QDialog):
             QMessageBox.information(self, "Correcto", "Datos válidos. Continuar con el procesamiento...")
 
     def cargar_datos_vinculacion(self, vinculacion_id):
+
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
         datos = self.conec_base.getDatosProcess_condicion("ObtenerDatosVinculacion", (vinculacion_id,))
  
         if datos:
@@ -241,6 +259,9 @@ class Vinculacion(QtWidgets.QDialog):
 
 
     def actualizar_vinculacion(self, dato_vinculacion):
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
         try:
             self.conec_base.setDatosProcess('ActualizarEstudianteYVinculacion', dato_vinculacion)
             QMessageBox.information(self, "Éxito", "Vinculación fue actualizado exitosamente.")
@@ -251,6 +272,11 @@ class Vinculacion(QtWidgets.QDialog):
             QMessageBox.critical(self, "Error", f"Error al actualizar vinculación: {str(e)}")
         
     def crear_nueva_vinculacion(self, dato_vinculacion):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
         try:
             self.conec_base.setDatosProcess('InsertarEstudianteYVinculacion', dato_vinculacion)
             QMessageBox.information(self, "Éxito", "Nueva vinculación creada exitosamente.")

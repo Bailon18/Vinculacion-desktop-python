@@ -10,7 +10,7 @@ class Conexion:
 
     __MINISIZE = 1
     __MAXISIZE = 5
-    __DATABASE = 'vinculaciondb'
+    __DATABASE = 'dbscmlul0fs4ii'
     __USERNAME = 'root'
     __PASSWORD = 'admin'
     __DB_PORT = 3306

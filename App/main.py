@@ -23,10 +23,13 @@ if __name__ == "__main__":
     traductor.load("qtbase_%s" % lugar, path)
     app.installTranslator(traductor)
 
-    add_font_app('fonts','ttf')
+    try:
+        add_font_app(r'source\fonts', 'ttf')
+    except Exception as e:
+        print(f"Error al cargar fuentes: {e}")
+
     
     ventana_ses = Login()
-    #ventana_ses = Tranferencia()
     ventana_ses.show()
     sys.exit(app.exec_())
    
