@@ -44,7 +44,7 @@ def mascara_campoespecifico(objeto):
 def val_codigo_ies(parent, objeto):
     # Validador para el formato de 4 dígitos del 1 al 9
     valCodigoIES = QRegExpValidator(parent)
-    valCodigoIES.setRegExp(QRegExp("^[1-9]{4}$"))
+    valCodigoIES.setRegExp(QRegExp("^[0-9]{4}$"))
     objeto.setValidator(valCodigoIES) 
 
 def mascara_codigo_ies(objeto):
@@ -54,7 +54,7 @@ def mascara_codigo_ies(objeto):
 
 import re
 
-import re
+
 
 def validar_correo_electronico(correo):
     

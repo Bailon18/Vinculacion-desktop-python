@@ -63,6 +63,10 @@ class Perfil(QtWidgets.QDialog):
 
         
 
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            pass
+
     def cerrar_ui_perfil(self):
         self.parent.raizOpacidad.close()
         self.close()

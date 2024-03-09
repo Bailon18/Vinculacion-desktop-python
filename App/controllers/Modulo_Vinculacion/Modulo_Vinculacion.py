@@ -28,7 +28,7 @@ class Vinculacion(QtWidgets.QDialog):
         self.vinculacion.setupUi(self)
         
         self.conec_base = BaseDatos()
-        self.configuracion_ventana()
+        
 
         self.parent = parent
         
@@ -51,6 +51,8 @@ class Vinculacion(QtWidgets.QDialog):
             self.vinculacion.vinculacion_titulo.hide()
             self.vinculacion.vinculacion_titulo_2.hide()
             
+        self.evento_tipo_institucion()
+            
         # Evento Opacidad -----------------------
         self.raizOpacidad = Clase_Opacidad(self.parent)
         self.raizOpacidad.close()
@@ -66,6 +68,8 @@ class Vinculacion(QtWidgets.QDialog):
         self.vinculacion.line_codigoies.textChanged.connect(lambda: self.vinculacion.line_codigoies.setToolTip('Formato: 4 digito númericos\n Ejm: 1003'))
         self.vinculacion.line_campoespecifico.textChanged.connect(lambda: self.vinculacion.line_campoespecifico.setToolTip('Ejm: 1-2A'))
         
+        self.vinculacion.cbo_institucion.activated.connect(lambda: self.evento_tipo_institucion())
+        
 
 
         # Validaciones y mascaras para los inputs
@@ -78,6 +82,8 @@ class Vinculacion(QtWidgets.QDialog):
 
         # boton guardar
         self.vinculacion.btn_guardar.clicked.connect(lambda: self.obtener_campos_vinculacion())
+        
+        self.configuracion_ventana()
 
                 
     def actualizar_titulo_estado(self):
@@ -92,8 +98,6 @@ class Vinculacion(QtWidgets.QDialog):
         estilo = f"color: {color_texto}; font-family: Roboto; font-style: normal; font-weight: 500; font-size: 17px; line-height: 40px; letter-spacing: 0.02em;"
         self.vinculacion.vinculacion_estado.setStyleSheet(estilo)
 
-
-            
     def keyPressEvent(self, event):
   
         if event.key() == QtCore.Qt.Key_Escape:
@@ -130,8 +134,8 @@ class Vinculacion(QtWidgets.QDialog):
         
         
         self.llenar_combobox(self.vinculacion.cbox_carrera, lista_carrera, 30)
-        self.llenar_combobox(self.vinculacion.cbo_institucion, lista_institucion, 30)
-        self.llenar_combobox(self.vinculacion.cbo_proyectos, lista_proyectos, 100)
+        self.llenar_combobox(self.vinculacion.cbo_institucion, lista_institucion, 100)
+        self.llenar_combobox(self.vinculacion.cbo_proyectos, lista_proyectos, 700)
         self.llenar_combobox(self.vinculacion.cbo_tutor, lista_tutores, 30)
         
         
@@ -239,6 +243,7 @@ class Vinculacion(QtWidgets.QDialog):
             self.vinculacion.spb_numerohoras.setValue(datos[8])
             self.vinculacion.line_codigoies.setText(str(datos[9]))
             self.vinculacion.line_campoespecifico.setText(str(datos[10]))
+            self.vinculacion.line_tipoinstitucion.setText(str(datos[14]))
 
             # Obteniendo los identificadores de los datos
             codigo_carrera = datos[3]
@@ -257,7 +262,6 @@ class Vinculacion(QtWidgets.QDialog):
         if index != -1:
             combobox.setCurrentIndex(index)
 
-
     def actualizar_vinculacion(self, dato_vinculacion):
         if not self.conec_base.verificarConexionInternet():
             QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
@@ -265,6 +269,7 @@ class Vinculacion(QtWidgets.QDialog):
         try:
             self.conec_base.setDatosProcess('ActualizarEstudianteYVinculacion', dato_vinculacion)
             QMessageBox.information(self, "Éxito", "Vinculación fue actualizado exitosamente.")
+            self.parent.configuracion_ventana()
             self.parent.listar_vinculacion()
             self.parent.raizOpacidad.close()
             self.close()
@@ -280,13 +285,29 @@ class Vinculacion(QtWidgets.QDialog):
         try:
             self.conec_base.setDatosProcess('InsertarEstudianteYVinculacion', dato_vinculacion)
             QMessageBox.information(self, "Éxito", "Nueva vinculación creada exitosamente.")
+            
+            self.parent.configuracion_ventana()
             self.parent.listar_vinculacion()
             self.parent.raizOpacidad.close()
+            
             self.close()
         except Exception as e:
             QMessageBox.critical(self, "Error", f"Error al crear la nueva vinculación: {str(e)}")
 
-
+    def evento_tipo_institucion(self):
+        
+        valorseleccion = self.vinculacion.cbo_institucion.currentText()
+        
+        print(valorseleccion)
+        
+        if(valorseleccion):
+        
+            resultado = self.conec_base.getDatos_condicion("select tipo_institucion from instituciones_educativas where nombre_institucion = %s",(valorseleccion,))
+            
+            print(resultado)
+            
+            self.vinculacion.line_tipoinstitucion.setText(""+resultado[0][0])
+        
 
         
         

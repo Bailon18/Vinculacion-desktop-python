@@ -2,6 +2,7 @@
 
 from PySide2 import QtCore, QtWidgets , QtGui
 from PySide2 import QtWidgets
+from PySide2.QtGui import QIcon
 
 
 def evento_menu(parent, parentRaiz, tr = 250):
@@ -124,7 +125,7 @@ def evento_seleccion_reporte(parent, boton, index):
 
     boton.setStyleSheet(estilo_clic)
 
-    for btn in [parent.venPri.radioEstudiante, parent.venPri.radioTutor]:
+    for btn in [parent.venPri.radioEstudiante, parent.venPri.radioTutor, parent.venPri.radioreporteentrega]:
         if btn != boton:
             btn.setStyleSheet("")  
 
@@ -134,8 +135,8 @@ def evento_seleccion_reporte(parent, boton, index):
         
 def evento_tabla(parent):
     """
-    Funcion que recibe como paramentro la clase ventana principal
-    funcionalidad es darle tamaño a las columnas 
+    Función que recibe como parámetro la clase ventana principal
+    La funcionalidad es darle tamaño a las columnas y ajustar el ancho de la cabecera
     """
 
     parent.venPri.tabla_principal.horizontalHeader().setVisible(True)
@@ -145,34 +146,49 @@ def evento_tabla(parent):
     parent.venPri.tabla_proyectos.horizontalHeader().setVisible(True)
     parent.venPri.tabla_reporte_tutores.horizontalHeader().setVisible(True)
     parent.venPri.tabla_reporte_estudiantes.horizontalHeader().setVisible(True)
-
+    parent.venPri.tabla_reporte_memorandum_tutor.horizontalHeader().setVisible(True)
+    parent.venPri.tabla_reporte_ficha_tutor.horizontalHeader().setVisible(True)
+    parent.venPri.tabla_reporte_informe_tutor.horizontalHeader().setVisible(True)
     
+    
+    
+
+    parent.venPri.tabla_principal_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_usuario.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_intituciones.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_proyectos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_reporte_tutores.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_reporte_ficha_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    parent.venPri.tabla_reporte_memorandum_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+    
+
+
     # Lista de tablas
-    lista_tabla=[parent.venPri.tabla_principal, parent.venPri.tabla_principal_tutor,
-                  parent.venPri.tabla_usuario, parent.venPri.tabla_intituciones, parent.venPri.tabla_proyectos,
-                  parent.venPri.tabla_reporte_tutores, parent.venPri.tabla_reporte_estudiantes
+    lista_tabla=[parent.venPri.tabla_principal, parent.venPri.tabla_reporte_estudiantes, parent.venPri.tabla_reporte_informe_tutor
                   ]
 
     # Lista de index
-    lista_index=[[0,6], [0,5], [0,7],[0,5], [0,2,3], [3], [3]]
+    lista_index=[[0,1,2,3,4, 5, 6],[0, 1, 2, 4, 5, 6, 11, 12, 13]]
 
     # Lista de tamaño
-    lista_tamano=[[70,160], [70, 160], [70, 120],[70,100], [70,80,100], [200], [200]]
+    lista_tamano=[[70,200,200,80,200,250 ,220, 150],[70, 150, 200, 200, 200, 200, 200, 200 , 200]]
 
-    for tabla,index,tamano in zip(lista_tabla,lista_index,lista_tamano):
-
+    for tabla, index, tamano in zip(lista_tabla, lista_index, lista_tamano):
         if index:
-            for ind,tam in zip(index,tamano):
-                tabla.setColumnWidth(ind,tam)
+            for ind, tam in zip(index, tamano):
+                tabla.setColumnWidth(ind, tam)
 
-        tabla.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
+        tabla.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
 
-    for tabla,index in zip(lista_tabla,lista_index):
+        for i in range(tabla.horizontalHeader().count()):
+            tabla.horizontalHeader().setMinimumSectionSize(tabla.horizontalHeader().sectionSizeHint(i))
+
+    for tabla, index in zip(lista_tabla, lista_index):
         if index:
             for ind in index:
                 tabla.horizontalHeader().setSectionResizeMode(ind, QtWidgets.QHeaderView.Fixed)
-            
-    
+
+
 def estilo(parent):
     estiloDefecto =QtWidgets.QStyleFactory.create('windowsvista')
     parent.venedit.bnt_ojoInv.setStyle(estiloDefecto)
@@ -195,7 +211,7 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(7)
+        tabla.setColumnCount(17)
    
         for fila in range(len(dato)):
             botoneditar = crearbotoneslista(
@@ -231,13 +247,13 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
             btn_eliminar(botoneliminar, fila, tabla, parent)
             btn_seguimiento(botonseguimiento, fila, tabla, parent)
 
-            tabla.setCellWidget(fila ,6,widget)
+            tabla.setCellWidget(fila ,16,widget)
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 
-                if columna == 5: 
+                if columna == 2: 
                     estado_columna = str(dato[fila][columna])
                     color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else \
                                 QtGui.QColor('blue') if estado_columna == 'En progreso' else \
@@ -279,15 +295,16 @@ def btn_editar_acciones(fila,parent):
     from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
 
     vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 2).text()
-    estado = parent.venPri.tabla_principal.item(fila, 5).text()
+    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
+    estado = parent.venPri.tabla_principal.item(fila, 2).text()
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
     Vinculacion(vinculacion_id, nombre_estudiante,estado,  "actualizar", parent).exec_()
 
 def btn_eliminar_acciones(fila, parent):
+    
     vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 2).text()
+    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
 
     mensaje = f"¿Está seguro(a) de eliminar la vinculación de {nombre_estudiante.upper()}? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
 
@@ -310,8 +327,8 @@ def btn_seguimiento_acciones(fila, parent):
     from controllers.Modulo_principal.seguimiento_admin import Seguimiento_admin
 
     vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 2).text()
-    nombre_tutor = parent.venPri.tabla_principal.item(fila, 4).text()
+    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
+    nombre_tutor = parent.venPri.tabla_principal.item(fila, 15).text()
 
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
@@ -321,7 +338,7 @@ def cargar_tabla(tabla,dato):
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(len(dato[0]))
+        tabla.setColumnCount(16)
    
         for fila in range(len(dato)):
            
@@ -329,14 +346,13 @@ def cargar_tabla(tabla,dato):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 
-                if columna == 3: 
+                if columna == 2: 
                     estado_columna = str(dato[fila][columna])
                     color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else \
                                 QtGui.QColor('blue') if estado_columna == 'En progreso' else \
                                 QtGui.QColor('green')
                     item.setForeground(QtGui.QBrush(color_texto))
 
-                    # Establecer negrita (bold) para los estados
                     font = QtGui.QFont()
                     font.setBold(True)
                     item.setFont(font)
@@ -640,3 +656,188 @@ def ver_eliminar_acccion_proyecto(fila, parent):
         parent.llenado_proyectos('Activo')
 
         QtWidgets.QMessageBox.information(parent, "Mensaje", f"El proyecto  se ha inabilitado exitosamente.")
+        
+        
+def llenar_tabla_tutores(parent, tabla, dato):
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(6)
+   
+        for fila in range(len(dato)):
+
+            botonEntrega = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
+                            QToolButton:hover{background-color:#82b5b9}""",
+                icono = u':/menu/agregar_entrega.png',
+                tooltip = 'Agregar Entrega')
+
+            layout = QtWidgets.QHBoxLayout()
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(botonEntrega)
+
+            widget = QtWidgets.QWidget()
+            widget.setLayout(layout)
+
+    
+            btn_entrega(botonEntrega, fila, tabla, parent)
+
+            tabla.setCellWidget(fila ,5,widget)
+
+            for columna in range(len(dato[fila])):
+                item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                tabla.setItem(fila, columna, item)
+
+
+    else:
+        tabla.setRowCount(0) 
+          
+def btn_entrega(boton,fila,tabla,parent):
+  
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: btn_entrega_acciones(fila,parent)) 
+    
+def btn_entrega_acciones(fila, parent):
+    
+    from controllers.Modulo_entrega.Modulo_entrega import Entrega
+    
+    idTutor = parent.venPri.tabla_reporte_tutores.item(fila, 0).text()
+    tutor = parent.venPri.tabla_reporte_tutores.item(fila, 1).text()
+    
+    nombre_completo = " ".join(tutor.split()[:3])
+    
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+
+    Entrega(parent, 'informe', [idTutor, nombre_completo] ).exec_()
+  
+    
+def cargar_tabla_reporte_informes(tabla, dato):
+    
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(13)
+   
+        for fila in range(len(dato)):
+            for columna in range(len(dato[fila])):
+                # Crear un widget personalizado para contener el icono
+                widget = QtWidgets.QWidget()
+                layout = QtWidgets.QHBoxLayout()
+                layout.setContentsMargins(0, 0, 0, 0)
+                layout.setAlignment(QtCore.Qt.AlignCenter)
+
+                item = dato[fila][columna]
+                
+                # Verificar el valor del item y agregar el icono correspondiente
+                if item == 'SI':
+                    icono = ":/menu/ok.png"
+                elif item == 'NO':
+                    icono = ":/menu/no.png"
+                else:
+                    icono = None
+
+                if icono:
+                    check_icon = QtGui.QIcon(icono)
+                    label = QtWidgets.QLabel()
+                    label.setPixmap(check_icon.pixmap(QtCore.QSize(20, 20)))
+                    layout.addWidget(label)
+                else:
+                    label = QtWidgets.QLabel(str(item))
+                    layout.addWidget(label)
+
+                widget.setLayout(layout)
+                
+                # Aplicar los estilos directamente al widget personalizado
+                widget.setStyleSheet("""
+                    QWidget {
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 19px;
+                        letter-spacing: 0.02em;
+                        color: #6B7280;
+                        outline: 0px;
+                    }
+                    QLabel {
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        line-height: 14px;
+                        letter-spacing: 0.04em;
+                        color: #6B7280;
+                    }
+                """)
+
+                tabla.setCellWidget(fila, columna, widget)
+
+    else:
+        tabla.setRowCount(0)
+
+
+def cargar_tabla_reporte_ficha_memorandum(tabla, dato):
+    
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(3)
+   
+        for fila in range(len(dato)):
+            for columna in range(len(dato[fila])):
+
+                widget = QtWidgets.QWidget()
+                layout = QtWidgets.QHBoxLayout()
+                layout.setContentsMargins(0, 0, 0, 0)
+                layout.setAlignment(QtCore.Qt.AlignCenter)
+
+                item = dato[fila][columna]
+                
+                if item == 'SI':
+                    icono = ":/menu/ok.png"
+                elif item == 'NO':
+                    icono = ":/menu/no.png"
+                else:
+                    icono = None
+
+                if icono:
+                    check_icon = QtGui.QIcon(icono)
+                    label = QtWidgets.QLabel()
+                    label.setPixmap(check_icon.pixmap(QtCore.QSize(20, 20)))
+                    layout.addWidget(label)
+                else:
+                    label = QtWidgets.QLabel(str(item))
+                    layout.addWidget(label)
+
+                widget.setLayout(layout)
+                
+                # Aplicar los estilos directamente al widget personalizado
+                widget.setStyleSheet("""
+                    QWidget {
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 16px;
+                        line-height: 19px;
+                        letter-spacing: 0.02em;
+                        color: #6B7280;
+                        outline: 0px;
+                    }
+                    QLabel {
+                        font-family: Roboto;
+                        font-style: normal;
+                        font-weight: normal;
+                        font-size: 15px;
+                        line-height: 14px;
+                        letter-spacing: 0.04em;
+                        color: #6B7280;
+                    }
+                """)
+
+                tabla.setCellWidget(fila, columna, widget)
+
+    else:
+        tabla.setRowCount(0)

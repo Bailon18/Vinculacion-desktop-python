@@ -1,5 +1,9 @@
 <RCC>
   <qresource prefix="menu">
+    <file>exportar.png</file>
+    <file>no.png</file>
+    <file>ok.png</file>
+    <file>agregar_entrega.png</file>
     <file>logito2.png</file>
     <file>logito.png</file>
     <file>acccion_editar.png</file>

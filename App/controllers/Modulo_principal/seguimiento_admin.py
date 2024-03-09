@@ -4,7 +4,6 @@ from PySide2 import QtWidgets , QtCore , QtGui
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
 
 import re, os
-from PIL import Image
 from datetime import datetime
 
 from controllers.Modulo_principal.funcion_general import *
@@ -24,7 +23,7 @@ class Seguimiento_admin(QtWidgets.QDialog):
         self.seguimiento.setupUi(self)
 
         # columnas de tabla a elastica (Stretch)
-        #self.seguimiento.tabla_admiseguimiento.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
+        self.seguimiento.tabla_admiseguimiento.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
 
         # Establecer el ancho fijo para la primera columna
         self.seguimiento.tabla_admiseguimiento.setColumnWidth(0, 170)  # Cambiar 100 al ancho deseado

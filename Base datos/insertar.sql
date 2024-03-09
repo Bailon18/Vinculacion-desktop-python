@@ -46,22 +46,36 @@ CREATE PROCEDURE ListarVinculaciones(
 BEGIN
     SELECT
         vinculaciones.vinculacion_id AS `Vinculación ID`,
-        DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        vinculaciones.periodo_academico AS 'Periodo acadenico',
+        vinculaciones.estado AS 'Estado',
+        vinculaciones.codigo_ies AS 'Codigo Es',
+        estudiantes.tipo_identificacion AS 'Tipo identificacion Estudiante ',
+        estudiantes.identificacion AS 'Identificacion estudiante',
         estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
-        vinculaciones.periodo_academico AS `Período Académico`,
-        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`,
-        vinculaciones.estado
+        ie.nombre_institucion  AS 'Nombre de institucion',
+        ie.tipo_institucion AS 'Tipo de institucion',
+        carreras.codigo_carrera AS 'Codigo Carrera',
+        DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        DATE_FORMAT(vinculaciones.fecha_fin, '%Y-%m-%d') AS `Fecha Fin`,
+        vinculaciones.numero_horas AS 'Numero de horas ' ,
+        vinculaciones.campo_especifico AS ' Campo especifico',
+        usuarios.identificacion AS 'Identificacion tutor',
+        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`
     FROM
         vinculaciones
     INNER JOIN
         estudiantes ON vinculaciones.estudiante_id = estudiantes.estudiante_id
     INNER JOIN
+        carreras ON estudiantes.codigo_carrera = carreras.id_carrera
+	INNER JOIN  
+		instituciones_educativas ie ON  vinculaciones.codigo_institucion = ie.id
+    INNER JOIN
         usuarios ON vinculaciones.identificacion_tutor = usuarios.user_id
-    ORDER BY `Vinculación ID` DESC -- Ordenar por Vinculación ID de forma descendente
-    LIMIT limite; -- Establecer el límite de resultados
+    LIMIT limite;
 END $$
 DELIMITER ;
 
+call ListarVinculaciones(100);
 
 
 DROP PROCEDURE IF EXISTS BuscarVinculaciones;
@@ -73,15 +87,29 @@ CREATE PROCEDURE BuscarVinculaciones(
 BEGIN
     SELECT
         vinculaciones.vinculacion_id AS `Vinculación ID`,
+        vinculaciones.periodo_academico AS 'Periodo acadenico',
+        vinculaciones.estado AS 'Estado',
+        vinculaciones.codigo_ies AS 'Codigo Es',
+        estudiantes.tipo_identificacion AS 'Tipo identificacion Estudiante ',
+        estudiantes.identificacion AS 'Identificacion estudiante',
         estudiantes.nombres_apellidos AS `Nombre del Estudiante`,
+        ie.nombre_institucion  AS 'Nombre de institucion',
+        ie.tipo_institucion AS 'Tipo de institucion',
+        carreras.codigo_carrera AS 'Codigo Carrera',
         DATE_FORMAT(vinculaciones.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
-        vinculaciones.periodo_academico AS `Período Académico`,
-        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`,
-        vinculaciones.estado
+        DATE_FORMAT(vinculaciones.fecha_fin, '%Y-%m-%d') AS `Fecha Fin`,
+        vinculaciones.numero_horas AS 'Numero de horas ' ,
+        vinculaciones.campo_especifico AS ' Campo especifico',
+        usuarios.identificacion AS 'Identificacion tutor',
+        CONCAT(usuarios.nombre, ' ', usuarios.apellido) AS `Nombre del Tutor`
     FROM
         vinculaciones
     INNER JOIN
         estudiantes ON vinculaciones.estudiante_id = estudiantes.estudiante_id
+    INNER JOIN
+        carreras ON estudiantes.codigo_carrera = carreras.id_carrera
+	INNER JOIN  
+		instituciones_educativas ie ON  vinculaciones.codigo_institucion = ie.id
     INNER JOIN
         usuarios ON vinculaciones.identificacion_tutor = usuarios.user_id
     WHERE
@@ -89,15 +117,13 @@ BEGIN
         usuarios.apellido LIKE CONCAT('%', criterio_busqueda, '%') OR
         estudiantes.identificacion LIKE CONCAT('%', criterio_busqueda, '%') OR
         estudiantes.nombres_apellidos LIKE CONCAT('%', criterio_busqueda, '%') OR
+        estudiantes.codigo_carrera LIKE CONCAT('%', criterio_busqueda, '%') OR
         vinculaciones.estado LIKE CONCAT('%', criterio_busqueda, '%') OR
         DATE_FORMAT(vinculaciones.fecha_inicio, "%Y-%m-%d") LIKE CONCAT('%', criterio_busqueda, '%') OR
         vinculaciones.periodo_academico LIKE CONCAT('%', criterio_busqueda, '%')
-    ORDER BY `Vinculación ID` DESC
     LIMIT limite; 
 END $$
 DELIMITER ;
-
-
 
 DROP PROCEDURE IF EXISTS ObtenerDatos;
 DELIMITER $$
@@ -131,12 +157,16 @@ BEGIN
         v.campo_especifico, 
         v.identificacion_tutor, 
         v.id_proyecto,
-        v.estado
+        v.estado,
+        ins.tipo_institucion
     FROM vinculaciones v
     INNER JOIN estudiantes e ON v.estudiante_id = e.estudiante_id
+    INNER JOIN instituciones_educativas ins ON v.codigo_institucion = ins.id
     WHERE v.vinculacion_id = vinculacion_id;
 END $$
 DELIMITER ;
+
+call ObtenerDatosVinculacion(1);
 
 
 DROP PROCEDURE IF EXISTS EliminarVinculacion;
@@ -897,22 +927,38 @@ CREATE PROCEDURE obtenerInformacionVinculacionesConEstado(
 )
 BEGIN
     SELECT
-        CONCAT(e.nombres_apellidos, ' - ', e.identificacion) AS 'Nombre y Apellidos Estudiante',
-        DATE_FORMAT(v.fecha_registro, '%Y-%m-%d %H:%i') AS 'Fecha Vinculación',
-        CONCAT(u.nombre, ' ', u.apellido) AS 'Nombre y Apellido Tutor',
-        v.estado AS 'Estado Vinculación'
+        v.vinculacion_id AS `Vinculación ID`,
+        v.periodo_academico AS 'Periodo acadenico',
+        v.estado AS 'Estado',
+        v.codigo_ies AS 'Codigo Es',
+        e.tipo_identificacion AS 'Tipo identificacion Estudiante ',
+        e.identificacion AS 'Identificacion estudiante',
+        e.nombres_apellidos AS `Nombre del Estudiante`,
+        ie.nombre_institucion  AS 'Nombre de institucion',
+        ie.tipo_institucion AS 'Tipo de institucion',
+        carreras.codigo_carrera AS 'Codigo Carrera',
+        DATE_FORMAT(v.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        DATE_FORMAT(v.fecha_fin, '%Y-%m-%d') AS `Fecha Fin`,
+        v.numero_horas AS 'Numero de horas ' ,
+        v.campo_especifico AS ' Campo especifico',
+        u.identificacion AS 'Identificacion tutor',
+        CONCAT(u.nombre, ' ', u.apellido) AS `Nombre del Tutor`
     FROM
         vinculaciones v
     JOIN
         estudiantes e ON v.estudiante_id = e.estudiante_id
+	INNER JOIN carreras ON e.codigo_carrera = carreras.id_carrera
     JOIN
         usuarios u ON v.identificacion_tutor = u.user_id
+	INNER JOIN  
+		instituciones_educativas ie ON  v.codigo_institucion = ie.id
     WHERE
         v.estado = estadoparametro
     LIMIT limit_param;
 END$$
-
 DELIMITER ;
+
+call obtenerInformacionVinculacionesConEstado('Pendiente', 100);
 
 DROP PROCEDURE IF EXISTS obtenerInformacionVinculacionesConEstadoYBusqueda;
 DELIMITER $$
@@ -921,23 +967,50 @@ CREATE PROCEDURE obtenerInformacionVinculacionesConEstadoYBusqueda(
 )
 BEGIN
     SELECT
-        CONCAT(e.nombres_apellidos, ' - ', e.identificacion) AS 'Nombre y Apellidos Estudiante',
-        DATE_FORMAT(v.fecha_registro, '%Y-%m-%d %H:%i') AS 'Fecha Vinculación',
-        CONCAT(u.nombre, ' ', u.apellido) AS 'Nombre y Apellido Tutor',
-        v.estado AS 'Estado Vinculación'
+        v.vinculacion_id AS `Vinculación ID`,
+        v.periodo_academico AS 'Periodo acadenico',
+        v.estado AS 'Estado',
+        v.codigo_ies AS 'Codigo Es',
+        e.tipo_identificacion AS 'Tipo identificacion Estudiante ',
+        e.identificacion AS 'Identificacion estudiante',
+        e.nombres_apellidos AS `Nombre del Estudiante`,
+        ie.nombre_institucion  AS 'Nombre de institucion',
+        ie.tipo_institucion AS 'Tipo de institucion',
+        carreras.codigo_carrera AS 'Codigo Carrera',
+        DATE_FORMAT(v.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        DATE_FORMAT(v.fecha_fin, '%Y-%m-%d') AS `Fecha Fin`,
+        v.numero_horas AS 'Numero de horas ' ,
+        v.campo_especifico AS ' Campo especifico',
+        u.identificacion AS 'Identificacion tutor',
+        CONCAT(u.nombre, ' ', u.apellido) AS `Nombre del Tutor`
     FROM
         vinculaciones v
-    JOIN
-        estudiantes e ON v.estudiante_id = e.estudiante_id
-    JOIN
-        usuarios u ON v.identificacion_tutor = u.user_id
+    JOIN estudiantes e ON v.estudiante_id = e.estudiante_id
+	INNER JOIN carreras ON e.codigo_carrera = carreras.id_carrera
+    JOIN usuarios u ON v.identificacion_tutor = u.user_id
+	INNER JOIN  instituciones_educativas ie ON  v.codigo_institucion = ie.id
     WHERE
         (
+
             e.nombres_apellidos LIKE CONCAT('%', paramatrobusqueda, '%')
             OR e.identificacion LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR v.periodo_academico LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR v.estado LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR ie.nombre_institucion LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR e.tipo_identificacion LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR v.codigo_ies LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR u.identificacion LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR CONCAT(u.nombre, ' ', u.apellido) LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR DATE_FORMAT(v.fecha_inicio, '%Y-%m-%d') LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR DATE_FORMAT(v.fecha_fin, '%Y-%m-%d') LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR v.numero_horas LIKE CONCAT('%', paramatrobusqueda, '%')
+            OR v.campo_especifico LIKE CONCAT('%', paramatrobusqueda, '%')
+            
         );
 END$$
 DELIMITER ;
+
+call obtenerInformacionVinculacionesConEstadoYBusqueda("P1");
 
 DROP PROCEDURE IF EXISTS ObtenerInfoVinculacionPorTutor;
 DELIMITER $$
@@ -963,7 +1036,151 @@ DELIMITER ;
 
 
 
-CALL ObtenerInfoVinculacionPorTutor('Pendiente',1, 2); 
+DELIMITER $$
+DROP TRIGGER IF EXISTS before_informe_insert$$
+CREATE TRIGGER before_informe_insert
+BEFORE INSERT ON informes
+FOR EACH ROW
+BEGIN
+    SET NEW.mes = CASE MONTH(NEW.fecha)
+        WHEN 1 THEN 'Enero'
+        WHEN 2 THEN 'Febrero'
+        WHEN 3 THEN 'Marzo'
+        WHEN 4 THEN 'Abril'
+        WHEN 5 THEN 'Mayo'
+        WHEN 6 THEN 'Junio'
+        WHEN 7 THEN 'Julio'
+        WHEN 8 THEN 'Agosto'
+        WHEN 9 THEN 'Septiembre'
+        WHEN 10 THEN 'Octubre'
+        WHEN 11 THEN 'Noviembre'
+        WHEN 12 THEN 'Diciembre'
+    END;
+END$$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_usuarios_tutor;
+DELIMITER $$
+CREATE PROCEDURE listar_usuarios_tutor(IN limite INT)
+BEGIN
+    SELECT 
+        u.user_id,
+        CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
+        u.identificacion,
+        r.role_name,
+        u.correo_electronico
+    FROM usuarios u
+    INNER JOIN roles r ON r.role_id = u.role_id
+    WHERE r.role_id = 2
+    LIMIT limite;
+END $$
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS buscar_tutor_criterio;
+DELIMITER $$
+CREATE PROCEDURE buscar_tutor_criterio(IN criterio VARCHAR(255))
+BEGIN
+    SELECT 
+        u.user_id,
+        CONCAT(u.nombre, ' ', u.apellido) AS nombre_completo,
+        u.identificacion,
+        r.role_name,
+        u.correo_electronico
+    FROM usuarios u
+    INNER JOIN roles r ON r.role_id = u.role_id
+    WHERE r.role_id = 2
+    AND (u.nombre LIKE CONCAT('%', criterio, '%')
+         OR u.apellido LIKE CONCAT('%', criterio, '%')
+         OR u.identificacion LIKE CONCAT('%', criterio, '%')
+         OR r.role_name LIKE CONCAT('%', criterio, '%')
+         OR u.correo_electronico LIKE CONCAT('%', criterio, '%'));
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS listar_informes_por_periodo_academico;
+DELIMITER $$
+CREATE PROCEDURE listar_informes_por_periodo_academico(IN periodo_academico VARCHAR(50))
+BEGIN
+	SELECT
+		CONCAT(u.nombre, ' ', u.apellido) AS Tutor,
+		IFNULL(MAX(CASE WHEN i.mes = 'Enero' THEN 'SI' ELSE 'NO' END), 'NO') AS Enero,
+		IFNULL(MAX(CASE WHEN i.mes = 'Febrero' THEN 'SI' ELSE 'NO' END), 'NO') AS Febrero,
+		IFNULL(MAX(CASE WHEN i.mes = 'Marzo' THEN 'SI' ELSE 'NO' END), 'NO') AS Marzo,
+		IFNULL(MAX(CASE WHEN i.mes = 'Abril' THEN 'SI' ELSE 'NO' END), 'NO') AS Abril,
+		IFNULL(MAX(CASE WHEN i.mes = 'Mayo' THEN 'SI' ELSE 'NO' END), 'NO') AS Mayo,
+		IFNULL(MAX(CASE WHEN i.mes = 'Junio' THEN 'SI' ELSE 'NO' END), 'NO') AS Junio,
+		IFNULL(MAX(CASE WHEN i.mes = 'Julio' THEN 'SI' ELSE 'NO' END), 'NO') AS Julio,
+		IFNULL(MAX(CASE WHEN i.mes = 'Agosto' THEN 'SI' ELSE 'NO' END), 'NO') AS Agosto,
+		IFNULL(MAX(CASE WHEN i.mes = 'Setiembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Setiembre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Octubre' THEN 'SI' ELSE 'NO' END), 'NO') AS Octubre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Noviembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Noviembre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Diciembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Diciembre
+	FROM (
+		SELECT user_id FROM usuarios WHERE usuarios.role_id = 2
+	) t
+	LEFT JOIN informes i ON t.user_id = i.tutor_id AND i.periodo_academico = periodo_academico
+	LEFT JOIN usuarios u ON u.user_id = t.user_id
+	GROUP BY t.user_id;
+
+END$$
+DELIMITER ;
+
+
+call listar_informes_por_periodo_academico('P1-2023');
+
+
+DROP PROCEDURE IF EXISTS consulta_fichas;
+DELIMITER $$
+CREATE PROCEDURE consulta_fichas(IN periodo_academico_param VARCHAR(50))
+BEGIN
+    SELECT
+        u.nombre,
+        CASE
+            WHEN f.is_ficha = 1 THEN 'SI'
+            ELSE ''
+        END AS SI,
+        CASE
+            WHEN f.is_ficha = 0 THEN 'NO'
+            WHEN f.tutor_id IS NULL THEN 'NO'
+            ELSE ''  
+        END AS NO
+    FROM
+        usuarios u
+    LEFT JOIN fichas f ON u.user_id = f.tutor_id AND f.periodo_academico = periodo_academico_param
+    WHERE u.role_id = 2
+    ;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS consulta_memorandum;
+DELIMITER $$
+CREATE PROCEDURE consulta_memorandum(IN periodo_academico_param VARCHAR(50))
+BEGIN
+    SELECT
+        u.nombre,
+        CASE
+            WHEN m.is_memorandum = 1 THEN 'SI'
+            ELSE ''
+        END AS SI,
+        CASE
+            WHEN m.is_memorandum = 0 THEN 'NO'
+            WHEN m.tutor_id IS NULL THEN 'NO'
+            ELSE ''  
+        END AS NO
+    FROM
+        usuarios u
+    LEFT JOIN memorandum m ON u.user_id = m.tutor_id AND m.periodo_academico = periodo_academico_param
+    WHERE u.role_id = 2
+    ;
+END$$
+DELIMITER ;
+
+call consulta_memorandum('P1-2023')
+
 
 
 

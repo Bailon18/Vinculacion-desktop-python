@@ -11,7 +11,6 @@ from views.ui_ventana_principal import Ui_principal
 
 
 import re, os
-from PIL import Image
 from datetime import datetime
 
 from controllers.Modulo_principal.funcion_general import *
@@ -33,6 +32,16 @@ class Principal(QtWidgets.QMainWindow):
         self.tutor_id = args[0][0]
         self.venPri.lbl_usuario.setText(str(args[0][1]))
         self.venPri.lbl_rol.setText(str(args[0][2]))
+        
+        self.lista_estudiante_filtro = []
+        self.lista_informes_filtro =[]
+        self.lista_ficha_filtro = []
+        self.lista_memorandun_filtro = []
+        
+        self.cambioPagina()
+        
+
+        
 
         if(self.rol != 'Administrador'):
             self.venPri.btn_afiliacion.setHidden(True)
@@ -49,7 +58,6 @@ class Principal(QtWidgets.QMainWindow):
         self.listar_vinculacion()
         self.listar_usuarios()
         
-        # self.configuracion()
         self.controlSalida = True
          # clase opacidad-----------------------
         self.raizOpacidad = Clase_Opacidad(self)
@@ -98,20 +106,18 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
         self.venPri.cbox_rango_tutor.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango_tutor(self.venPri.cbox_rango_tutor.currentText()))
         
-        evento_seleccion_reporte(self, self.venPri.radioEstudiante, 1)
-        self.venPri.radioEstudiante.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioEstudiante, 1))
+        evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2)
+        self.venPri.radioEstudiante.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2))
         self.venPri.radioTutor.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioTutor, 0))
+        self.venPri.radioreporteentrega.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioreporteentrega, 1))
+        
 
         self.listar_seguimiento_tutor()
         
         # evento reporte
-        self.venPri.cbo_tutores.activated.connect(lambda: self.evento_filtro_tutores())  
-        self.llenado_reporte('En Progreso',  self.venPri.tabla_reporte_tutores, 'ObtenerInfoVinculacionPorTutor', 5, self.venPri.cbo_tutores.itemData(self.venPri.cbo_tutores.currentIndex()))
-        self.venPri.radioProcesoT.clicked.connect(lambda: self.filtro_reporte('En Progreso','Tutor', 'ObtenerInfoVinculacionPorTutor'))
-        self.venPri.radioPendienteT.clicked.connect(lambda: self.filtro_reporte('Pendiente','Tutor', 'ObtenerInfoVinculacionPorTutor'))
-        self.venPri.radioCulminadoT.clicked.connect(lambda: self.filtro_reporte('Culminado','Tutor', 'ObtenerInfoVinculacionPorTutor'))
-        self.venPri.cbox_rango_reporte_tutor.activated.connect(lambda: self.evento_filtro_tutores()) 
-        
+        self.venPri.cbox_rango_reporte_tutor.activated.connect(lambda: self.evento_obtener_tutores_limite())
+        self.venPri.line_busqueda_reporte_tutor.textChanged.connect(lambda: self.busqueda_tutor_reporte())
+
         
         self.llenado_reporte('En Progreso',  self.venPri.tabla_reporte_estudiantes, 'obtenerInformacionVinculacionesConEstado', 5)
         self.venPri.check_todos_estudiantes.clicked.connect(lambda: self.evento_obtener_reporte_general())
@@ -119,6 +125,14 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.radioProcesoE.clicked.connect(lambda: self.filtro_reporte('En Progreso','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
         self.venPri.radioPendienteE.clicked.connect(lambda: self.filtro_reporte('Pendiente','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
         self.venPri.radioCulminadoE.clicked.connect(lambda: self.filtro_reporte('Culminado','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
+        
+        self.venPri.cbo_tipo_entrega.activated.connect(lambda: self.cambioPagina())
+        self.venPri.cbo_periodo_academico.activated.connect(lambda: self.eventoSeleccionPeriodo())
+        
+        self.venPri.btn_export.clicked.connect(lambda: self.reporte_estudiantes())
+        self.venPri.btn_export_2.clicked.connect(lambda: self.generarReporte_informe())
+        self.venPri.btn_export_3.clicked.connect(lambda: self.generarReporte_ficha())
+        self.venPri.btn_export_4.clicked.connect(lambda: self.generarReporte_memorandum())
         
 
     def evento_perfil(self):
@@ -138,6 +152,11 @@ class Principal(QtWidgets.QMainWindow):
                 event.accept()
             else:
                 event.ignore()
+    
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            pass
+        
             
     def cerrar_sesion(self):
         from controllers.Modulo_sesion.Modulo_inicio import Login
@@ -172,16 +191,27 @@ class Principal(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
             return
         
-        lista_carrera, lista_institucion, lista_proyectos, lista_tutores = self.conec_base.getDatosProcess("ObtenerDatos")
-        if(len(lista_tutores) > 0):
-            self.llenar_combobox(self.venPri.cbo_tutores, lista_tutores, 50)
-          
-            
+        limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+        
+        lista_tutores = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite, ))
+        
+        if(len(lista_tutores)> 0):
+            llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutores[0])
+        
+        periodo_academico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM ( SELECT periodo_academico FROM vinculaciones ORDER BY fecha_registro DESC ) AS subconsulta;')
+        
+        if(len(periodo_academico)):
+            self.venPri.cbo_periodo_academico.clear()
+            for periodo in periodo_academico:
+                self.venPri.cbo_periodo_academico.addItem(periodo[0])
+                
+        
+        self.cargaDatosEventoReporte()
+        
     def abrir_ventana_afiliacion(self):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         Vinculacion(parent = self).exec_()
-
 
     def abrir_ventana_perfil(self):
         self.raizOpacidad.resize(self.width(), self.height())
@@ -346,8 +376,11 @@ class Principal(QtWidgets.QMainWindow):
         else:                                                                 
             respuesta = self.conec_base.getDatosProcess_condicion( procedimiento , (estado,limite ))
             
+  
         if(respuesta):
             respuesta = respuesta[0]
+            self.lista_estudiante_filtro = respuesta
+            
             cargar_tabla(tabla, respuesta)
             
     def filtro_reporte(self, estado , tipo, consulta):
@@ -355,11 +388,7 @@ class Principal(QtWidgets.QMainWindow):
         if(tipo == 'Estudiante'):
             limite = int(self.venPri.cbox_rango_estudiantes.currentText())
             self.llenado_reporte(estado , self.venPri.tabla_reporte_estudiantes, consulta, limite)
-        else:
-            limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
-            tutor_id = self.venPri.cbo_tutores.itemData(self.venPri.cbo_tutores.currentIndex());
-            self.llenado_reporte(estado , self.venPri.tabla_reporte_tutores, consulta, limite, tutor_id)
-            
+
     def evento_obtener_reporte_general(self):
         if self.venPri.check_todos_estudiantes.isChecked():
             self.venPri.radioCulminadoE.setEnabled(True)
@@ -367,6 +396,7 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.radioPendienteE.setEnabled(True)
             self.venPri.line_busqueda_reporte_estudiantes.setEnabled(False)
             estado = ''
+            self.venPri.line_busqueda_reporte_estudiantes.setText('')
             
             if self.venPri.radioPendienteE.isChecked():
                 estado = 'Pendiente'
@@ -382,21 +412,6 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.radioProcesoE.setEnabled(False)
             self.venPri.radioPendienteE.setEnabled(False)
     
-    def evento_filtro_tutores(self):
-        
-        estado = ''
-            
-        if self.venPri.radioPendienteT.isChecked():
-            estado = 'Pendiente'
-        elif self.venPri.radioProcesoT.isChecked():
-            estado = 'En Progreso'
-        else:
-            estado = 'Culminado'
-    
-        self.filtro_reporte(estado, 'Tutor', 'ObtenerInfoVinculacionPorTutor')
-            
-        
-        
     def busqueda_datos_estudiante(self):
         
         if not self.conec_base.verificarConexionInternet():
@@ -407,10 +422,16 @@ class Principal(QtWidgets.QMainWindow):
         self.evento_obtener_reporte_general()
         parametro_busqueda = self.venPri.line_busqueda_reporte_estudiantes.text().strip()
         respuesta = self.conec_base.getDatosProcess_condicion( 'obtenerInformacionVinculacionesConEstadoYBusqueda' , (parametro_busqueda, ))
+        
+  
+        
         if(respuesta):
+        
             respuesta = respuesta[0]
-            cargar_tabla(self.venPri.tabla_reporte_estudiantes, respuesta)
             
+            self.lista_estudiante_filtro = respuesta
+            
+            cargar_tabla(self.venPri.tabla_reporte_estudiantes, respuesta)
             
     def llenar_combobox(self, combobox, lista, longitud_maxima):
         for elemento in lista:
@@ -418,3 +439,154 @@ class Principal(QtWidgets.QMainWindow):
             texto_truncado = nombre_elemento[:longitud_maxima]
             combobox.addItem(texto_truncado, userData=id_elemento)
             combobox.setItemData(combobox.count() - 1, nombre_elemento, Qt.ToolTipRole)
+            
+    def evento_obtener_tutores_limite(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+        
+        limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+        
+        lista_tutores = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite, ))
+        
+        if(len(lista_tutores)> 0):
+            
+            llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutores[0])
+            
+
+    def busqueda_tutor_reporte(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+
+        textobusqueda = self.venPri.line_busqueda_reporte_tutor.text()
+        limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+
+        if textobusqueda:
+            lista_tutor = self.conec_base.getDatosProcess_condicion("buscar_tutor_criterio", (textobusqueda,))
+        else:
+            lista_tutor = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite,))
+            
+        if not lista_tutor:
+            QtWidgets.QMessageBox.information(self, "Información", "No se encontraron resultados.")
+            return
+        
+        llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutor[0])
+
+        
+    def cambioPagina(self):
+        
+        tipo_accion = self.venPri.cbo_tipo_entrega.currentText()
+        
+        if(tipo_accion == 'Informe'):
+            self.venPri.stackedWidget_2.setCurrentIndex(0)
+        else:
+            self.venPri.stackedWidget_2.setCurrentIndex(1)
+        
+        self.cargaDatosEventoReporte()
+
+            
+    def cargaDatosEventoReporte(self):
+        
+        periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
+                
+        datos_informes = self.conec_base.getDatosProcess_condicion('listar_informes_por_periodo_academico', (periodo_actual_seleccionado, ))
+        
+        if(len(datos_informes)> 0):
+            
+            datos_informes = datos_informes[0]
+            
+            self.lista_informes_filtro = datos_informes
+            
+            cargar_tabla_reporte_informes(self.venPri.tabla_reporte_informe_tutor, datos_informes)
+            
+            
+        
+        datos_fichas = self.conec_base.getDatosProcess_condicion('consulta_fichas', (periodo_actual_seleccionado, ))
+        
+        if(len(datos_fichas)> 0):
+            
+            datos_fichas = datos_fichas[0]
+            
+            self.lista_ficha_filtro = datos_fichas
+            
+            cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_ficha_tutor, datos_fichas)
+            
+            
+        datos_memorandum = self.conec_base.getDatosProcess_condicion('consulta_memorandum', (periodo_actual_seleccionado, ))
+        
+        if(len(datos_memorandum)> 0):
+            
+            datos_memorandum = datos_memorandum[0]
+
+            self.lista_memorandun_filtro = datos_memorandum
+            
+            cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_memorandum_tutor, datos_memorandum)
+            
+    def eventoSeleccionPeriodo(self):
+        
+        self.cargaDatosEventoReporte()
+        
+    def reporte_estudiantes(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        
+        
+        if(len(self.lista_estudiante_filtro)> 0):
+            
+            print(self.lista_estudiante_filtro)
+        
+            FormRepoImforme(self.lista_estudiante_filtro, 'estudiantes', '').exec_()
+            
+        else:
+            
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+            
+    
+    def generarReporte_informe(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        
+        
+        if(len(self.lista_informes_filtro)> 0):
+            
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
+            FormRepoImforme(self.lista_informes_filtro, 'informe', periodo_actual_seleccionado).exec_()
+            
+        else:
+            
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+            
+            
+    def generarReporte_ficha(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        
+        
+        if(len(self.lista_ficha_filtro)> 0):
+            
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
+            
+            FormRepoImforme(self.lista_ficha_filtro, 'ficha', periodo_actual_seleccionado).exec_()
+            
+        else:
+            
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+            
+    def generarReporte_memorandum(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        
+        
+        if(len(self.lista_memorandun_filtro)> 0):
+            
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
+            
+            FormRepoImforme(self.lista_memorandun_filtro, 'memorandum', periodo_actual_seleccionado).exec_()
+            
+        else:
+            
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")

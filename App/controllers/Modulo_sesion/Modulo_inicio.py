@@ -104,12 +104,10 @@ class Login(QtWidgets.QDialog):
             
             QMessageBox.critical(self, "Error", "Hubo un problema al validar el inicio de sesión.")
 
-
-        
-
-
-
-            
+    def keyPressEvent(self, event):
+        if event.key() == QtCore.Qt.Key_Escape:
+            pass
+    
     def enviar_correo(self):
 
         if not self.conec_base.verificarConexionInternet():

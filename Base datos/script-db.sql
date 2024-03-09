@@ -119,3 +119,35 @@ CREATE TABLE seguimientos (
     FOREIGN KEY (vinculacion_id) REFERENCES vinculaciones(vinculacion_id) ON DELETE CASCADE,
     FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id) -- Clave foránea a la tabla usuarios
 );
+
+
+CREATE TABLE informes (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha DATE,
+    mes VARCHAR(255),
+    periodo_academico VARCHAR(50),
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id)
+);
+
+CREATE TABLE fichas (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    periodo_academico VARCHAR(50),
+    is_ficha BOOLEAN,
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id)
+);
+
+CREATE TABLE memorandum (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    periodo_academico VARCHAR(50),
+    is_memorandum BOOLEAN,
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES usuarios(user_id)
+);
+
+
+
+
