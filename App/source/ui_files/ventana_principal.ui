@@ -1138,8 +1138,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1232</width>
-                      <height>579</height>
+                      <width>412</width>
+                      <height>305</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2024,8 +2024,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1234</width>
-                      <height>568</height>
+                      <width>393</width>
+                      <height>272</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -3425,8 +3425,7 @@ QPushButton:pressed {
                                         <cursorShape>PointingHandCursor</cursorShape>
                                        </property>
                                        <property name="styleSheet">
-                                        <string notr="true">
-</string>
+                                        <string notr="true"/>
                                        </property>
                                        <property name="text">
                                         <string/>
