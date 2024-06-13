@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="menu">
+    <file>hacia-adelante.png</file>
+    <file>hacia-atras.png</file>
     <file>exportar.png</file>
     <file>no.png</file>
     <file>ok.png</file>
