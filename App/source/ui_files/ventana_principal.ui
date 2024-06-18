@@ -366,7 +366,7 @@ padding:0px 0px 0px 0px;
                 <property name="verticalSpacing">
                  <number>10</number>
                 </property>
-                <item row="8" column="0">
+                <item row="9" column="0">
                  <widget class="QPushButton" name="btn_reporte">
                   <property name="minimumSize">
                    <size>
@@ -404,39 +404,7 @@ padding:0px 0px 0px 0px;
                   </property>
                  </widget>
                 </item>
-                <item row="9" column="0">
-                 <widget class="QPushButton" name="btn_seguimientoo">
-                  <property name="minimumSize">
-                   <size>
-                    <width>0</width>
-                    <height>55</height>
-                   </size>
-                  </property>
-                  <property name="maximumSize">
-                   <size>
-                    <width>16777215</width>
-                    <height>55</height>
-                   </size>
-                  </property>
-                  <property name="toolTip">
-                   <string>Seguimiento</string>
-                  </property>
-                  <property name="text">
-                   <string>     Seguimiento</string>
-                  </property>
-                  <property name="icon">
-                   <iconset resource="../image/source.qrc">
-                    <normaloff>:/menu/menuseguimiento.png</normaloff>:/menu/menuseguimiento.png</iconset>
-                  </property>
-                  <property name="iconSize">
-                   <size>
-                    <width>30</width>
-                    <height>30</height>
-                   </size>
-                  </property>
-                 </widget>
-                </item>
-                <item row="5" column="0">
+                <item row="6" column="0">
                  <widget class="QPushButton" name="btn_afiliacion">
                   <property name="enabled">
                    <bool>true</bool>
@@ -477,7 +445,7 @@ padding:0px 0px 0px 0px;
                   </property>
                  </widget>
                 </item>
-                <item row="10" column="0">
+                <item row="11" column="0">
                  <widget class="QPushButton" name="btn_usuario">
                   <property name="minimumSize">
                    <size>
@@ -518,7 +486,39 @@ padding:0px 0px 0px 0px;
                   </property>
                  </widget>
                 </item>
-                <item row="11" column="0">
+                <item row="10" column="0">
+                 <widget class="QPushButton" name="btn_seguimientoo">
+                  <property name="minimumSize">
+                   <size>
+                    <width>0</width>
+                    <height>55</height>
+                   </size>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>55</height>
+                   </size>
+                  </property>
+                  <property name="toolTip">
+                   <string>Seguimiento</string>
+                  </property>
+                  <property name="text">
+                   <string>     Seguimiento</string>
+                  </property>
+                  <property name="icon">
+                   <iconset resource="../image/source.qrc">
+                    <normaloff>:/menu/menuseguimiento.png</normaloff>:/menu/menuseguimiento.png</iconset>
+                  </property>
+                  <property name="iconSize">
+                   <size>
+                    <width>30</width>
+                    <height>30</height>
+                   </size>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
                  <widget class="QPushButton" name="btn_home">
                   <property name="enabled">
                    <bool>true</bool>
@@ -545,7 +545,7 @@ padding:0px 0px 0px 0px;
                    <string notr="true"/>
                   </property>
                   <property name="text">
-                   <string>     Mantenimiento</string>
+                   <string>     Administracion</string>
                   </property>
                   <property name="icon">
                    <iconset resource="../image/source.qrc">
@@ -3004,7 +3004,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -3081,7 +3081,7 @@ color: #6B7280;</string>
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="btn_agregar_proyectos">
+                                      <widget class="QPushButton" name="btn_agregar_estudiantes_admin">
                                        <property name="minimumSize">
                                         <size>
                                          <width>195</width>
@@ -3291,11 +3291,6 @@ QHeaderView::section:horizontal {
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Estado</string>
-                                     </property>
-                                    </column>
-                                    <column>
-                                     <property name="text">
                                       <string>Acciones</string>
                                      </property>
                                     </column>
@@ -3401,48 +3396,26 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
                                     </property>
                                     <layout class="QGridLayout" name="gridLayout_20">
-                                     <item row="0" column="1">
-                                      <widget class="QPushButton" name="btn_pag_antes_estu">
-                                       <property name="minimumSize">
-                                        <size>
-                                         <width>29</width>
-                                         <height>29</height>
-                                        </size>
+                                     <item row="0" column="0">
+                                      <spacer name="horizontalSpacer_20">
+                                       <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
                                        </property>
-                                       <property name="maximumSize">
+                                       <property name="sizeHint" stdset="0">
                                         <size>
-                                         <width>110</width>
+                                         <width>40</width>
                                          <height>20</height>
                                         </size>
                                        </property>
-                                       <property name="cursor">
-                                        <cursorShape>PointingHandCursor</cursorShape>
-                                       </property>
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset resource="../image/source.qrc">
-                                         <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
-                                       </property>
-                                       <property name="iconSize">
-                                        <size>
-                                         <width>15</width>
-                                         <height>21</height>
-                                        </size>
-                                       </property>
-                                      </widget>
+                                      </spacer>
                                      </item>
-                                     <item row="0" column="4">
+                                     <item row="0" column="3">
                                       <widget class="QPushButton" name="btn_pag_desp_estu">
                                        <property name="minimumSize">
                                         <size>
@@ -3477,21 +3450,8 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="3">
-                                      <widget class="QLabel" name="pag_total_items_estu">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>2000</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
                                      <item row="0" column="2">
-                                      <widget class="QLabel" name="lbl9_7">
+                                      <widget class="QLabel" name="lbl_pagina_estudiantes">
                                        <property name="styleSheet">
                                         <string notr="true"/>
                                        </property>
@@ -3503,18 +3463,40 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="0">
-                                      <spacer name="horizontalSpacer_20">
-                                       <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                       </property>
-                                       <property name="sizeHint" stdset="0">
+                                     <item row="0" column="1">
+                                      <widget class="QPushButton" name="btn_pag_antes_estu">
+                                       <property name="minimumSize">
                                         <size>
-                                         <width>40</width>
+                                         <width>29</width>
+                                         <height>29</height>
+                                        </size>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>110</width>
                                          <height>20</height>
                                         </size>
                                        </property>
-                                      </spacer>
+                                       <property name="cursor">
+                                        <cursorShape>PointingHandCursor</cursorShape>
+                                       </property>
+                                       <property name="styleSheet">
+                                        <string notr="true"/>
+                                       </property>
+                                       <property name="text">
+                                        <string/>
+                                       </property>
+                                       <property name="icon">
+                                        <iconset resource="../image/source.qrc">
+                                         <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
+                                       </property>
+                                       <property name="iconSize">
+                                        <size>
+                                         <width>15</width>
+                                         <height>21</height>
+                                        </size>
+                                       </property>
+                                      </widget>
                                      </item>
                                     </layout>
                                    </widget>
@@ -3608,7 +3590,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -3895,11 +3877,6 @@ QHeaderView::section:horizontal {
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Estado</string>
-                                     </property>
-                                    </column>
-                                    <column>
-                                     <property name="text">
                                       <string>Acciones</string>
                                      </property>
                                     </column>
@@ -4005,12 +3982,25 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
                                     </property>
                                     <layout class="QGridLayout" name="gridLayout_33">
+                                     <item row="0" column="0">
+                                      <spacer name="horizontalSpacer_30">
+                                       <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>40</width>
+                                         <height>20</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
                                      <item row="0" column="1">
                                       <widget class="QPushButton" name="btn_pag_antes_tutor">
                                        <property name="minimumSize">
@@ -4046,7 +4036,7 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="4">
+                                     <item row="0" column="3">
                                       <widget class="QPushButton" name="btn_pag_desp_tutor">
                                        <property name="minimumSize">
                                         <size>
@@ -4081,21 +4071,8 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="3">
-                                      <widget class="QLabel" name="pag_total_items_tutor">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>2000</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
                                      <item row="0" column="2">
-                                      <widget class="QLabel" name="lbl9_12">
+                                      <widget class="QLabel" name="lbl_pagina_tutores">
                                        <property name="styleSheet">
                                         <string notr="true"/>
                                        </property>
@@ -4106,19 +4083,6 @@ QPushButton:pressed {
                                         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
                                        </property>
                                       </widget>
-                                     </item>
-                                     <item row="0" column="0">
-                                      <spacer name="horizontalSpacer_30">
-                                       <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                       </property>
-                                       <property name="sizeHint" stdset="0">
-                                        <size>
-                                         <width>40</width>
-                                         <height>20</height>
-                                        </size>
-                                       </property>
-                                      </spacer>
                                      </item>
                                     </layout>
                                    </widget>
@@ -4215,7 +4179,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -4292,7 +4256,7 @@ color: #6B7280;</string>
                                       </spacer>
                                      </item>
                                      <item>
-                                      <widget class="QPushButton" name="btn_agregar_proyectos_2">
+                                      <widget class="QPushButton" name="btn_agregar_proyectos">
                                        <property name="minimumSize">
                                         <size>
                                          <width>195</width>
@@ -4482,12 +4446,7 @@ QHeaderView::section:horizontal {
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Codigo</string>
-                                     </property>
-                                    </column>
-                                    <column>
-                                     <property name="text">
-                                      <string>Nombre proyecto</string>
+                                      <string>Nombre</string>
                                      </property>
                                     </column>
                                     <column>
@@ -4510,11 +4469,6 @@ QHeaderView::section:horizontal {
                                       <string>sqs</string>
                                      </property>
                                     </item>
-                                    <item row="0" column="2">
-                                     <property name="text">
-                                      <string>qsqs</string>
-                                     </property>
-                                    </item>
                                     <item row="1" column="0">
                                      <property name="text">
                                       <string>qsqs</string>
@@ -4523,11 +4477,6 @@ QHeaderView::section:horizontal {
                                     <item row="1" column="1">
                                      <property name="text">
                                       <string>qsq</string>
-                                     </property>
-                                    </item>
-                                    <item row="1" column="2">
-                                     <property name="text">
-                                      <string>sqs</string>
                                      </property>
                                     </item>
                                    </widget>
@@ -4582,48 +4531,39 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
                                     </property>
                                     <layout class="QGridLayout" name="gridLayout_34">
-                                     <item row="0" column="1">
-                                      <widget class="QPushButton" name="btn_pag_antes_proyecto">
-                                       <property name="minimumSize">
-                                        <size>
-                                         <width>29</width>
-                                         <height>29</height>
-                                        </size>
+                                     <item row="0" column="0">
+                                      <spacer name="horizontalSpacer_35">
+                                       <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
                                        </property>
-                                       <property name="maximumSize">
+                                       <property name="sizeHint" stdset="0">
                                         <size>
-                                         <width>110</width>
+                                         <width>40</width>
                                          <height>20</height>
                                         </size>
                                        </property>
-                                       <property name="cursor">
-                                        <cursorShape>PointingHandCursor</cursorShape>
-                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item row="0" column="2">
+                                      <widget class="QLabel" name="lbl_pagina_proyectos">
                                        <property name="styleSheet">
                                         <string notr="true"/>
                                        </property>
                                        <property name="text">
-                                        <string/>
+                                        <string>2000</string>
                                        </property>
-                                       <property name="icon">
-                                        <iconset resource="../image/source.qrc">
-                                         <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
-                                       </property>
-                                       <property name="iconSize">
-                                        <size>
-                                         <width>15</width>
-                                         <height>21</height>
-                                        </size>
+                                       <property name="alignment">
+                                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="4">
+                                     <item row="0" column="3">
                                       <widget class="QPushButton" name="btn_pag_desp_proyecto">
                                        <property name="minimumSize">
                                         <size>
@@ -4658,44 +4598,40 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="3">
-                                      <widget class="QLabel" name="pag_total_items_proyecto">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>2000</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="0" column="2">
-                                      <widget class="QLabel" name="lbl9_13">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>Pagina 1 de</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="0" column="0">
-                                      <spacer name="horizontalSpacer_35">
-                                       <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                       </property>
-                                       <property name="sizeHint" stdset="0">
+                                     <item row="0" column="1">
+                                      <widget class="QPushButton" name="btn_pag_antes_proyecto">
+                                       <property name="minimumSize">
                                         <size>
-                                         <width>40</width>
+                                         <width>29</width>
+                                         <height>29</height>
+                                        </size>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>110</width>
                                          <height>20</height>
                                         </size>
                                        </property>
-                                      </spacer>
+                                       <property name="cursor">
+                                        <cursorShape>PointingHandCursor</cursorShape>
+                                       </property>
+                                       <property name="styleSheet">
+                                        <string notr="true"/>
+                                       </property>
+                                       <property name="text">
+                                        <string/>
+                                       </property>
+                                       <property name="icon">
+                                        <iconset resource="../image/source.qrc">
+                                         <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
+                                       </property>
+                                       <property name="iconSize">
+                                        <size>
+                                         <width>15</width>
+                                         <height>21</height>
+                                        </size>
+                                       </property>
+                                      </widget>
                                      </item>
                                     </layout>
                                    </widget>
@@ -4792,7 +4728,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -5059,11 +4995,6 @@ QHeaderView::section:horizontal {
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Codigo</string>
-                                     </property>
-                                    </column>
-                                    <column>
-                                     <property name="text">
                                       <string>Nombre carrera</string>
                                      </property>
                                     </column>
@@ -5084,15 +5015,10 @@ QHeaderView::section:horizontal {
                                     </item>
                                     <item row="0" column="1">
                                      <property name="text">
-                                      <string>sqs</string>
-                                     </property>
-                                    </item>
-                                    <item row="0" column="2">
-                                     <property name="text">
                                       <string>qsqs</string>
                                      </property>
                                     </item>
-                                    <item row="0" column="3">
+                                    <item row="0" column="2">
                                      <property name="text">
                                       <string>qsq</string>
                                      </property>
@@ -5104,15 +5030,10 @@ QHeaderView::section:horizontal {
                                     </item>
                                     <item row="1" column="1">
                                      <property name="text">
-                                      <string>qsq</string>
-                                     </property>
-                                    </item>
-                                    <item row="1" column="2">
-                                     <property name="text">
                                       <string>sqs</string>
                                      </property>
                                     </item>
-                                    <item row="1" column="3">
+                                    <item row="1" column="2">
                                      <property name="text">
                                       <string>qsqs</string>
                                      </property>
@@ -5169,7 +5090,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -5210,7 +5131,20 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="4">
+                                     <item row="0" column="0">
+                                      <spacer name="horizontalSpacer_38">
+                                       <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>40</width>
+                                         <height>20</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
+                                     <item row="0" column="3">
                                       <widget class="QPushButton" name="btn_pag_desp_carrera">
                                        <property name="minimumSize">
                                         <size>
@@ -5245,8 +5179,8 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="3">
-                                      <widget class="QLabel" name="pag_total_items_carrera">
+                                     <item row="0" column="2">
+                                      <widget class="QLabel" name="lbl_pagina_carrera">
                                        <property name="styleSheet">
                                         <string notr="true"/>
                                        </property>
@@ -5257,32 +5191,6 @@ QPushButton:pressed {
                                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                                        </property>
                                       </widget>
-                                     </item>
-                                     <item row="0" column="2">
-                                      <widget class="QLabel" name="lbl9_14">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>Pagina 1 de</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="0" column="0">
-                                      <spacer name="horizontalSpacer_38">
-                                       <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                       </property>
-                                       <property name="sizeHint" stdset="0">
-                                        <size>
-                                         <width>40</width>
-                                         <height>20</height>
-                                        </size>
-                                       </property>
-                                      </spacer>
                                      </item>
                                     </layout>
                                    </widget>
@@ -5379,7 +5287,7 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
@@ -5646,12 +5554,12 @@ QHeaderView::section:horizontal {
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Codigo</string>
+                                      <string>Nombre</string>
                                      </property>
                                     </column>
                                     <column>
                                      <property name="text">
-                                      <string>Nombre institución</string>
+                                      <string>Telefono</string>
                                      </property>
                                     </column>
                                     <column>
@@ -5671,11 +5579,6 @@ QHeaderView::section:horizontal {
                                     </item>
                                     <item row="0" column="1">
                                      <property name="text">
-                                      <string>sqs</string>
-                                     </property>
-                                    </item>
-                                    <item row="0" column="2">
-                                     <property name="text">
                                       <string>qsqs</string>
                                      </property>
                                     </item>
@@ -5690,11 +5593,6 @@ QHeaderView::section:horizontal {
                                      </property>
                                     </item>
                                     <item row="1" column="1">
-                                     <property name="text">
-                                      <string>qsq</string>
-                                     </property>
-                                    </item>
-                                    <item row="1" column="2">
                                      <property name="text">
                                       <string>sqs</string>
                                      </property>
@@ -5756,12 +5654,60 @@ QPushButton:pressed {
 </string>
                                     </property>
                                     <property name="frameShape">
-                                     <enum>QFrame::StyledPanel</enum>
+                                     <enum>QFrame::NoFrame</enum>
                                     </property>
                                     <property name="frameShadow">
                                      <enum>QFrame::Raised</enum>
                                     </property>
                                     <layout class="QGridLayout" name="gridLayout_41">
+                                     <item row="0" column="3">
+                                      <widget class="QPushButton" name="btn_pag_desp_inst">
+                                       <property name="minimumSize">
+                                        <size>
+                                         <width>29</width>
+                                         <height>29</height>
+                                        </size>
+                                       </property>
+                                       <property name="maximumSize">
+                                        <size>
+                                         <width>110</width>
+                                         <height>20</height>
+                                        </size>
+                                       </property>
+                                       <property name="cursor">
+                                        <cursorShape>PointingHandCursor</cursorShape>
+                                       </property>
+                                       <property name="styleSheet">
+                                        <string notr="true"/>
+                                       </property>
+                                       <property name="text">
+                                        <string/>
+                                       </property>
+                                       <property name="icon">
+                                        <iconset resource="../image/source.qrc">
+                                         <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
+                                       </property>
+                                       <property name="iconSize">
+                                        <size>
+                                         <width>15</width>
+                                         <height>21</height>
+                                        </size>
+                                       </property>
+                                      </widget>
+                                     </item>
+                                     <item row="0" column="0">
+                                      <spacer name="horizontalSpacer_42">
+                                       <property name="orientation">
+                                        <enum>Qt::Horizontal</enum>
+                                       </property>
+                                       <property name="sizeHint" stdset="0">
+                                        <size>
+                                         <width>40</width>
+                                         <height>20</height>
+                                        </size>
+                                       </property>
+                                      </spacer>
+                                     </item>
                                      <item row="0" column="1">
                                       <widget class="QPushButton" name="btn_pag_antes_inst">
                                        <property name="minimumSize">
@@ -5797,43 +5743,8 @@ QPushButton:pressed {
                                        </property>
                                       </widget>
                                      </item>
-                                     <item row="0" column="4">
-                                      <widget class="QPushButton" name="btn_pag_desp_inst">
-                                       <property name="minimumSize">
-                                        <size>
-                                         <width>29</width>
-                                         <height>29</height>
-                                        </size>
-                                       </property>
-                                       <property name="maximumSize">
-                                        <size>
-                                         <width>110</width>
-                                         <height>20</height>
-                                        </size>
-                                       </property>
-                                       <property name="cursor">
-                                        <cursorShape>PointingHandCursor</cursorShape>
-                                       </property>
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string/>
-                                       </property>
-                                       <property name="icon">
-                                        <iconset resource="../image/source.qrc">
-                                         <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
-                                       </property>
-                                       <property name="iconSize">
-                                        <size>
-                                         <width>15</width>
-                                         <height>21</height>
-                                        </size>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="0" column="3">
-                                      <widget class="QLabel" name="pag_total_items_inst">
+                                     <item row="0" column="2">
+                                      <widget class="QLabel" name="lbl_pagina_instituto">
                                        <property name="styleSheet">
                                         <string notr="true"/>
                                        </property>
@@ -5844,32 +5755,6 @@ QPushButton:pressed {
                                         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
                                        </property>
                                       </widget>
-                                     </item>
-                                     <item row="0" column="2">
-                                      <widget class="QLabel" name="lbl9_15">
-                                       <property name="styleSheet">
-                                        <string notr="true"/>
-                                       </property>
-                                       <property name="text">
-                                        <string>Pagina 1 de</string>
-                                       </property>
-                                       <property name="alignment">
-                                        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-                                       </property>
-                                      </widget>
-                                     </item>
-                                     <item row="0" column="0">
-                                      <spacer name="horizontalSpacer_42">
-                                       <property name="orientation">
-                                        <enum>Qt::Horizontal</enum>
-                                       </property>
-                                       <property name="sizeHint" stdset="0">
-                                        <size>
-                                         <width>40</width>
-                                         <height>20</height>
-                                        </size>
-                                       </property>
-                                      </spacer>
                                      </item>
                                     </layout>
                                    </widget>
@@ -9329,6 +9214,7 @@ border-radius: 8px;
  </widget>
  <resources>
   <include location="../image/source.qrc"/>
+  <include location="../../../../../../.designer/image/source.qrc"/>
  </resources>
  <connections/>
 </ui>

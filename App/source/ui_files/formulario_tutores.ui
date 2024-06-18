@@ -1,0 +1,1520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormularioTutor</class>
+ <widget class="QDialog" name="FormularioTutor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>486</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>486</width>
+    <height>557</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>486</width>
+    <height>557</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Formulario Tutor</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">#frame{background-color: #f1f1f1;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>488</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_2{background: #3A4F50 ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QToolButton" name="btn_close">
+       <property name="geometry">
+        <rect>
+         <x>454</x>
+         <y>6</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string>Cerrar</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#btn_close{
+font-family: Roboto;
+font-weight: normal;
+font-size: 14px;
+background-color: #d5d5d8;
+color: #6B7280;
+border-radius:11px
+}
+
+
+#btn_close:hover{background:#ce4d3a ;
+border-radius:11px; }
+
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/x.png</normaloff>:/menu/x.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>13</width>
+         <height>13</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_titulo_ventana">
+       <property name="geometry">
+        <rect>
+         <x>19</x>
+         <y>15</y>
+         <width>401</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0.02em;
+color: #FFFFFF;}</string>
+       </property>
+       <property name="text">
+        <string>Registrar Nuevo Tutor</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>491</width>
+        <height>461</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">
+QLabel{
+font-family: Roboto;
+font-style: normal;
+font-weight: 450;
+font-size: 14px;
+letter-spacing: 0.02em;
+color: #6B7280;}
+
+
+QLineEdit{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+border: 2px solid #F3F4F6;
+border-radius: 8px;
+color:#9CA3AF;
+padding:10px}
+
+QLineEdit::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+
+
+QDateEdit {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    background: #F3F4F6;
+    color: #9CA3AF;
+    padding: 8px;
+    border-radius: 8px;
+}
+
+QDateEdit::up-button {
+    min-width: 25px;
+    min-height: 12px;
+    background-color: #F3F4F6; 
+    border-radius: 6px;
+}
+
+QDateEdit::down-button {
+    min-width: 25px;
+    min-height: 12px;
+    background-color: #F3F4F6; 
+    border-radius: 6px;
+}
+
+QDateEdit::up-arrow {
+    image: url(:/menu/contraerarriba.png);
+    width: 11px;
+    height: 11px;
+}
+
+QDateEdit::down-arrow {
+    image: url(:/menu/contraerabajo.png);
+    width: 11px;
+    height: 11px;
+}
+
+QDateEdit:focus {
+    background: #FFFFFF;
+    border: 2px solid #344647;
+    border-radius: 8px;
+}
+
+/* Estilo para el QCalendarWidget */
+QCalendarWidget {
+    font-family: Roboto;
+    background: #F3F4F6;
+    color: #344647;
+    border: 2px solid #344647;
+    border-radius: 8px;
+}
+
+QCalendarWidget QToolButton {
+    background-color: #F3F4F6;
+    color: #344647;
+    font-size: 14px;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #E2E3E4;
+}
+
+QCalendarWidget QMenu {
+    background-color: #F3F4F6;
+    color: #344647;
+}
+
+QCalendarWidget QSpinBox {
+    background: #F3F4F6;
+    color: #344647;
+    font-size: 14px;
+    border: 1px solid #E2E3E4;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+QCalendarWidget QSpinBox::up-button, QCalendarWidget QSpinBox::down-button {
+    subcontrol-origin: border;
+    background: #E2E3E4;
+    border: none;
+}
+
+QCalendarWidget QSpinBox::up-arrow, QCalendarWidget QSpinBox::down-arrow {
+    width: 10px;
+    height: 10px;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    font-size: 14px;
+    color: #344647;
+    background-color: #FFFFFF;
+    selection-background-color: #689091;
+    selection-color: #FFFFFF;
+    outline: none;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+    color: #9CA3AF;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #F3F4F6;
+    border-bottom: 1px solid #E2E3E4;
+}
+
+/* COMBOBOX */
+
+QComboBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+border-radius:8px;
+padding:10px;
+combobox-popup: 0;
+border: 2px solid #F3F4F6;
+
+}
+
+
+QComboBox::drop-down
+{
+    width: 20px;
+    border-left-width: 1px;
+	padding: 10px 10px 10px 20px;
+ }
+
+
+QComboBox QAbstractItemView {
+	color:#9CA3AF;
+	font-size:14px;
+	background-color: #F3F4F6;
+	selection-background-color:#344647;
+	selection-color:#ffffff;
+	outline: 0px;
+   border: 1px solid #344647;
+ border-radius:8px;
+padding:10px
+}
+
+
+
+QComboBox::down-arrow
+{
+	image: url(:/menu/contraerabajo.png);
+     width: 11px;
+     height: 11px;
+}
+
+QComboBox::focus{
+background: #FFFFFF;
+border: 2px solid #344647;
+border-radius: 8px;
+}
+
+/* QLabel para Mostrar Error */
+QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimiento, #errorCorreo, #errorTelefono, #errorDireccion, #errorContrasena{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    color: #D32F2F; 
+}
+
+
+
+</string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scroll_registro_estudiante">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>-411</y>
+         <width>472</width>
+         <height>870</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>870</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#scroll_registro_estudiante{
+	background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <widget class="QLabel" name="datospersonales">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>20</y>
+          <width>161</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datospersonales {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Datos Personales</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_nombres">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>76</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese  nombres</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>50</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Nombres*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_2">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>54</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Apellidos*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_apellidos">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>77</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese apellidos</string>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cbo_tipoIdentificacion">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>170</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>Cedula</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Carnet extranjeria</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Pasaporte</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="lbl9_2">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>144</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Tipo identificación*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_identificacion">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>170</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="cursorPosition">
+         <number>0</number>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="dragEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="readOnly">
+         <bool>false</bool>
+        </property>
+        <property name="placeholderText">
+         <string>Ejm:  992928983-3</string>
+        </property>
+        <property name="cursorMoveStyle">
+         <enum>Qt::LogicalMoveStyle</enum>
+        </property>
+        <property name="clearButtonEnabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl9_4">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>144</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Nro Identificacion*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="label_97">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>234</y>
+          <width>161</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Fecha Nacimiento</string>
+        </property>
+       </widget>
+       <widget class="QDateEdit" name="date_fechaNacimiento">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>263</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="displayFormat">
+         <string>yyyy-MM-d</string>
+        </property>
+        <property name="calendarPopup">
+         <bool>true</bool>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl9_3">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>238</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Genero*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cbo_genero">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>263</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>Masculino</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Femenino</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Otro</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="datoscontacto">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>330</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datoscontacto {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Datos Contacto</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_3">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>364</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Correo*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_correo">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>390</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese correo</string>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_contrasena">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>390</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>admin</string>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="echoMode">
+         <enum>QLineEdit::Password</enum>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese contraseña</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_4">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>364</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Contraseña*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_direccion">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>576</y>
+          <width>451</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese calle , pais</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_5">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>494</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Dirección*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="datosacademicos">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>650</y>
+          <width>231</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datosacademicos {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Información profesional</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl9_5">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>687</y>
+          <width>131</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Profesión*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QComboBox" name="cbo_carrera">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>710</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <item>
+         <property name="text">
+          <string>Ingeniero en Sistemas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ingeniero de Software</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Ingeniero en Telecomunicaciones</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Analista de Sistemas</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Administrador de Base de Datos</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Especialista en Seguridad Informática</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Otro</string>
+         </property>
+        </item>
+       </widget>
+       <widget class="QLabel" name="errorNombres">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>115</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorApellidos">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>120</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorIdentificacion">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>210</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorFechaNacimiento">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>300</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorCorreo">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>430</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorContrasena">
+        <property name="geometry">
+         <rect>
+          <x>250</x>
+          <y>430</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorTelefono">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>520</y>
+          <width>221</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_6">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>460</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Teléfono*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLineEdit" name="line_telefono">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>481</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="maxLength">
+         <number>30</number>
+        </property>
+        <property name="frame">
+         <bool>true</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+        <property name="placeholderText">
+         <string>Ingrese telefono</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl11_7">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>553</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Direccion*</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorDireccion">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>616</y>
+          <width>441</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_subir_cv">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>780</y>
+          <width>221</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>242</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #e06666;
+    border: none; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+QPushButton:hover {
+    background: #b95454; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Subir cv en  PDF</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../image/source.qrc">
+          <normaloff>:/menu/exportar.png</normaloff>:/menu/exportar.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>21</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl_nombre_archivo_seleccionado">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>804</y>
+          <width>171</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">color:rgb(48, 165, 255);
+font: italic 10pt &quot;Roboto&quot;;</string>
+        </property>
+        <property name="text">
+         <string>ningun archivo seleccionado</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="lbl9_6">
+        <property name="geometry">
+         <rect>
+          <x>260</x>
+          <y>780</y>
+          <width>201</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Archivo seleccionado</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_descargar_archivo">
+        <property name="geometry">
+         <rect>
+          <x>440</x>
+          <y>793</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Descargar archivo</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../image/source.qrc">
+          <normaloff>:/menu/descargar.png</normaloff>:/menu/descargar.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <zorder>btn_descargar_archivo</zorder>
+       <zorder>datospersonales</zorder>
+       <zorder>line_nombres</zorder>
+       <zorder>lbl11</zorder>
+       <zorder>lbl11_2</zorder>
+       <zorder>line_apellidos</zorder>
+       <zorder>cbo_tipoIdentificacion</zorder>
+       <zorder>lbl9_2</zorder>
+       <zorder>line_identificacion</zorder>
+       <zorder>lbl9_4</zorder>
+       <zorder>label_97</zorder>
+       <zorder>date_fechaNacimiento</zorder>
+       <zorder>lbl9_3</zorder>
+       <zorder>cbo_genero</zorder>
+       <zorder>datoscontacto</zorder>
+       <zorder>lbl11_3</zorder>
+       <zorder>line_correo</zorder>
+       <zorder>line_contrasena</zorder>
+       <zorder>lbl11_4</zorder>
+       <zorder>line_direccion</zorder>
+       <zorder>lbl11_5</zorder>
+       <zorder>datosacademicos</zorder>
+       <zorder>lbl9_5</zorder>
+       <zorder>cbo_carrera</zorder>
+       <zorder>errorNombres</zorder>
+       <zorder>errorApellidos</zorder>
+       <zorder>errorIdentificacion</zorder>
+       <zorder>errorFechaNacimiento</zorder>
+       <zorder>errorCorreo</zorder>
+       <zorder>errorContrasena</zorder>
+       <zorder>errorTelefono</zorder>
+       <zorder>lbl11_6</zorder>
+       <zorder>line_telefono</zorder>
+       <zorder>lbl11_7</zorder>
+       <zorder>errorDireccion</zorder>
+       <zorder>btn_subir_cv</zorder>
+       <zorder>lbl_nombre_archivo_seleccionado</zorder>
+       <zorder>lbl9_6</zorder>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_pie_pagina">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>491</y>
+        <width>491</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_pie_pagina{background-color: #f1f1f1; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+
+/*  BOTON */
+
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QPushButton" name="btn_agregar_tutor">
+       <property name="geometry">
+        <rect>
+         <x>290</x>
+         <y>14</y>
+         <width>180</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>180</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>110</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Guardar tutor</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>21</height>
+        </size>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="cancelButton">
+       <property name="geometry">
+        <rect>
+         <x>160</x>
+         <y>14</y>
+         <width>120</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>120</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>120</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="styleSheet">
+        <string notr="true"/>
+       </property>
+       <property name="text">
+        <string>Cancelar</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/no.png</normaloff>:/menu/no.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>21</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../image/source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

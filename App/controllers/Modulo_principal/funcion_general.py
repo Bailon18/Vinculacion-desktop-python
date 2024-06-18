@@ -5,25 +5,30 @@ from PySide2 import QtWidgets
 from PySide2.QtGui import QIcon
 
 
-def evento_menu(parent, parentRaiz, tr = 250):
-    """ Funcion de evento de animacion del menu """
-    
-    # ancho actual del frame
+def evento_menu(parent, parentRaiz, tr = 200, imagen=None):
+
     width = parentRaiz.frame_menu.width()
-    
     
     if width == 91:
         newWidth = 220
     else:
         newWidth = 91
-        
+
     parent.animation = QtCore.QPropertyAnimation(parentRaiz.frame_menu, b"minimumWidth")
     parent.animation.setDuration(tr)
     parent.animation.setStartValue(width)
     parent.animation.setEndValue(newWidth)
     parent.animation.setEasingCurve(QtCore.QEasingCurve.InOutQuart)
-    
     parent.animation.start()
+
+    if imagen:
+        imagen.setScaledContents(True) 
+        if newWidth == 91:
+            imagen.setMaximumWidth(newWidth)  
+            imagen.setMaximumHeight(140)  
+        else:
+            imagen.setMaximumHeight(140) 
+            imagen.setMaximumWidth(170) 
     
 def evento_hora(self):
 
@@ -61,14 +66,16 @@ def evento_pagina_mantenimiento(parent, index, boton):
     # Establecer el estilo al botón
     boton.setStyleSheet(estilo_clic)
 
-    # Restablecer el estilo de los otros botones si es necesario
-    for btn in [parent.venPri.btn_menu_institucion, parent.venPri.btn_menu_proyectos]:
+   
+    for btn in [parent.venPri.btn_menu_estudiantes, parent.venPri.btn_menu_tutores, 
+                parent.venPri.btn_menu_proyectos, parent.venPri.btn_menu_carreras,
+                parent.venPri.btn_menu_instituciones]:
+        
         if btn != boton:
-            btn.setStyleSheet("")  # Establecer un estilo vacío o inicial si es necesario
+            btn.setStyleSheet("")  
 
     # Cambiar la página actual
-    parent.venPri.stackedWidget_6.setCurrentIndex(index)
-
+    parent.venPri.stacked_administracion.setCurrentIndex(index)
 
 
 def evento_pagina(parent,index,boton):
@@ -88,7 +95,6 @@ def evento_pagina(parent,index,boton):
     # Pinta
     boton.setStyleSheet("#"+boton.objectName()+"{color: white;background:#8cc0c2;border-top-left-radius:25px;border-bottom-left-radius: 25px}")
     parent.venPri.stackedWidget.setCurrentIndex(index)
-
 
 def evento_ocultar(tol_inv,tol_vis,line,dato):
     """ 
@@ -131,63 +137,31 @@ def evento_seleccion_reporte(parent, boton, index):
 
 
     parent.venPri.stackedWidget_5.setCurrentIndex(index)
-
-        
+   
 def evento_tabla(parent):
-    """
-    Función que recibe como parámetro la clase ventana principal
-    La funcionalidad es darle tamaño a las columnas y ajustar el ancho de la cabecera
-    """
 
-    parent.venPri.tabla_principal.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_principal_tutor.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_usuario.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_intituciones.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_proyectos.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_reporte_tutores.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_reporte_estudiantes.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_reporte_memorandum_tutor.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_reporte_ficha_tutor.horizontalHeader().setVisible(True)
-    parent.venPri.tabla_reporte_informe_tutor.horizontalHeader().setVisible(True)
-    
-    
-    
+    configuraciones_columnas = {
+        parent.venPri.tabla_estudiantes: {0: 50, 4: 400},
+        parent.venPri.tabla_tutores: {0: 50, 4: 300},
+        parent.venPri.tabla_proyecto: {0: 50, 2: 140, 3: 140},
+        parent.venPri.tabla_carrera: {0: 50, 2: 140, 3: 140},
+        parent.venPri.tabla_institucion: {0: 50, 1: 450},
+        parent.venPri.tabla_reporte_tutores: {0: 50},
+        parent.venPri.tabla_reporte_estudiantes: {0: 50},
+        parent.venPri.tabla_reporte_memorandum_tutor: {0: 50},
+        parent.venPri.tabla_reporte_ficha_tutor: {0: 50},
+        parent.venPri.tabla_reporte_informe_tutor: {0: 50}
+    }
 
-    parent.venPri.tabla_principal_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_usuario.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_intituciones.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_proyectos.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_reporte_tutores.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_reporte_ficha_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    parent.venPri.tabla_reporte_memorandum_tutor.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch) 
-    
-
-
-    # Lista de tablas
-    lista_tabla=[parent.venPri.tabla_principal, parent.venPri.tabla_reporte_estudiantes, parent.venPri.tabla_reporte_informe_tutor
-                  ]
-
-    # Lista de index
-    lista_index=[[0,1,2,3,4, 5, 6],[0, 1, 2, 4, 5, 6, 11, 12, 13]]
-
-    # Lista de tamaño
-    lista_tamano=[[70,200,200,80,200,250 ,220, 150],[70, 150, 200, 200, 200, 200, 200, 200 , 200]]
-
-    for tabla, index, tamano in zip(lista_tabla, lista_index, lista_tamano):
-        if index:
-            for ind, tam in zip(index, tamano):
-                tabla.setColumnWidth(ind, tam)
-
-        tabla.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.ResizeToContents)
-
-        for i in range(tabla.horizontalHeader().count()):
-            tabla.horizontalHeader().setMinimumSectionSize(tabla.horizontalHeader().sectionSizeHint(i))
-
-    for tabla, index in zip(lista_tabla, lista_index):
-        if index:
-            for ind in index:
-                tabla.horizontalHeader().setSectionResizeMode(ind, QtWidgets.QHeaderView.Fixed)
-
+    for tabla in configuraciones_columnas:
+        header = tabla.horizontalHeader()
+        header.setVisible(True)       
+        header.setSectionResizeMode(0, QtWidgets.QHeaderView.Fixed)
+        for columna, ancho in configuraciones_columnas[tabla].items():
+            tabla.setColumnWidth(columna, ancho)
+        for i in range(1, tabla.columnCount()):
+            if i not in configuraciones_columnas[tabla]:
+                header.setSectionResizeMode(i, QtWidgets.QHeaderView.Stretch)
 
 def estilo(parent):
     estiloDefecto =QtWidgets.QStyleFactory.create('windowsvista')
@@ -289,7 +263,6 @@ def btn_seguimiento(boton,fila,tabla,parent):
     boton.clicked.connect(lambda: tabla.selectRow(fila))              
     boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 
     
-    
 def btn_editar_acciones(fila,parent):
     
     from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
@@ -333,6 +306,7 @@ def btn_seguimiento_acciones(fila, parent):
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
     Seguimiento_admin([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
+
 
 def cargar_tabla(tabla,dato):
     if dato:
@@ -486,7 +460,7 @@ def ver_editar_acccion(fila, parent):
 
 
 # ------------------------------------------------------------------
-def llenar_tabla_institucion(parent, tabla, dato):
+def llenar_tabla_estudiantes(parent, tabla, dato):
     
     if dato:
         tabla.setRowCount(0)
@@ -495,29 +469,29 @@ def llenar_tabla_institucion(parent, tabla, dato):
    
         for fila in range(len(dato)):
 
-            boton_editar_institucion = crearbotoneslista(
+            boton_editar_estudiante = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
                             QToolButton:hover{background-color:#cbe1e3}""",
                 icono = u':/menu/acccion_editar.png',
-                tooltip = 'Editar Instutición')
+                tooltip = 'Editar Estudiante')
             
-            boton_eliminar_institucion = crearbotoneslista(
-                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
-                            QToolButton:hover{background-color:#ebdada}""",
-                icono = u':/menu/accion_eliminar.png',
-                tooltip = 'Inabilitar Instutición')
+            # boton_eliminar_institucion = crearbotoneslista(
+            #     stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+            #                 QToolButton:hover{background-color:#ebdada}""",
+            #     icono = u':/menu/accion_eliminar.png',
+            #     tooltip = 'Inabilitar Estudiante')
 
             layout = QtWidgets.QHBoxLayout()
             layout.setContentsMargins(1,1,1,1)
             layout.setSpacing(3)
-            layout.addWidget(boton_editar_institucion)
-            layout.addWidget(boton_eliminar_institucion)
+            layout.addWidget(boton_editar_estudiante)
+            # layout.addWidget(boton_eliminar_institucion)
  
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
 
-            btn_editar_institucion(boton_editar_institucion, fila, tabla, parent)
-            btn_eliminar_institucion(boton_eliminar_institucion, fila, tabla, parent)
+            btn_editar_estudiante(boton_editar_estudiante, fila, tabla, parent)
+            # btn_eliminar_institucion(boton_eliminar_institucion, fila, tabla, parent)
           
             tabla.setCellWidget(fila ,5,widget)
 
@@ -526,11 +500,11 @@ def llenar_tabla_institucion(parent, tabla, dato):
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 tabla.setItem(fila, columna, item)
                 
-def btn_editar_institucion(boton,fila,tabla,parent):
+def btn_editar_estudiante(boton,fila,tabla,parent):
     
     """eventos  del boton agregar seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))          
-    boton.clicked.connect(lambda: ver_editar_acccion_institucion(fila,parent)) 
+    boton.clicked.connect(lambda: ver_editar_acccion_estudiante(fila,parent)) 
 
 def btn_eliminar_institucion(boton,fila,tabla,parent):
     
@@ -538,17 +512,16 @@ def btn_eliminar_institucion(boton,fila,tabla,parent):
     boton.clicked.connect(lambda: tabla.selectRow(fila))          
     boton.clicked.connect(lambda: ver_eliminar_acccion(fila,parent)) 
     
-def ver_editar_acccion_institucion(fila, parent):
+def ver_editar_acccion_estudiante(fila, parent):
     
-    from controllers.Modulo_mantenimiento.Mantenimiento_instituciones import Instituciones
-
-    institucion_id = parent.venPri.tabla_intituciones.item(fila, 0).text()
-    nombre_institucion = parent.venPri.tabla_intituciones.item(fila, 1).text()
-
+    from controllers.Modulo_administracion.Estudiantes_administracion import EstudiantesAdmin
+    
+    estudiante_id = parent.venPri.tabla_estudiantes.item(fila, 0).text()
+    
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
 
-    Instituciones(parent, 'Editar', [institucion_id, nombre_institucion]).exec_()
+    EstudiantesAdmin(parent, 'editar', estudiante_id).exec_()
 
 def ver_eliminar_acccion(fila, parent):
     
@@ -573,7 +546,89 @@ def ver_eliminar_acccion(fila, parent):
 
 
 # -----------------------------------------------------------------------
+
+def lenar_tabla_tutores(parent, tabla, dato):
+    
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(6)
+   
+        for fila in range(len(dato)):
+
+            boton_editar_tutores = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                            QToolButton:hover{background-color:#cbe1e3}""",
+                icono = u':/menu/acccion_editar.png',
+                tooltip = 'Editar Tutor')
         
+            layout = QtWidgets.QHBoxLayout()
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(boton_editar_tutores)
+            # layout.addWidget(boton_eliminar_institucion)
+ 
+            widget = QtWidgets.QWidget()
+            widget.setLayout(layout)
+
+            btn_editar_tutores(boton_editar_tutores, fila, tabla, parent)
+            # btn_eliminar_institucion(boton_eliminar_institucion, fila, tabla, parent)
+          
+            tabla.setCellWidget(fila ,5,widget)
+
+            for columna in range(len(dato[fila])):
+                item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                tabla.setItem(fila, columna, item)
+                        
+def btn_editar_tutores(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_editar_acccion_tutor(fila,parent)) 
+
+def btn_eliminar_institucion(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_eliminar_acccion(fila,parent)) 
+    
+def ver_editar_acccion_tutor(fila, parent):
+
+   
+    from controllers.Modulo_administracion.Tutores_administracion import TutoresAdmin
+    
+    tutor_id = parent.venPri.tabla_tutores.item(fila, 0).text()
+    
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+
+    TutoresAdmin(parent, 'editar', tutor_id).exec_()
+
+def ver_eliminar_acccion(fila, parent):
+    
+    institucion_id = parent.venPri.tabla_intituciones.item(fila, 0).text()
+    nombre_institucion = parent.venPri.tabla_intituciones.item(fila, 1).text()
+
+    mensaje = f"¿Está seguro(a) de inabilitar la institución  {nombre_institucion.upper()}? Al aceptar ya no se mostrará la institucíon en vinculacíon como opción."
+
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+    if respuesta == QtWidgets.QMessageBox.Yes:
+        
+        if not parent.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+            return
+        
+        parent.conec_base.getDatosProcess_condicion("CambiarEstadoInstitucion", (institucion_id,'Inactivo'))
+        parent.llenado_instituciones('Activo')
+
+        QtWidgets.QMessageBox.information(parent, "Mensaje", f"La institución  {nombre_institucion.upper()} se ha inabilitado exitosamente.")
+
+# -------------------------------------------------------------------------------------------------------------------------------------------------------- 
+        
+    
 def llenar_tabla_proyectos(parent, tabla, dato):
     
     if dato:
@@ -611,9 +666,24 @@ def llenar_tabla_proyectos(parent, tabla, dato):
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                
+                if columna == 2:
+                    estado_columna = str(dato[fila][columna])
+                    print('c ', estado_columna)
+                    color_texto = QtGui.QColor('green') if estado_columna == '1' else \
+                                QtGui.QColor('red')
+                    item.setForeground(QtGui.QBrush(color_texto))
+
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    item.setFont(font)
+                    
+                    texto = "Activo" if estado_columna == '1' else "Inactivo"
+                    item.setText(texto)
+
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 tabla.setItem(fila, columna, item)
-                
+          
 def btn_editar_proyecto(boton,fila,tabla,parent):
     
     """eventos  del boton agregar seguimiento """
@@ -628,15 +698,110 @@ def btn_eliminar_proyecto(boton,fila,tabla,parent):
     
 def ver_editar_acccion_proyecto(fila, parent):
     
-    from controllers.Modulo_mantenimiento.Mantenimiento_proyectos import Proyectos
-
-    proyecto_id = parent.venPri.tabla_proyectos.item(fila, 0).text()
-
+    from controllers.Modulo_administracion.Proyectos_administracion import ProyectosAdmin
+    proyecto_id = parent.venPri.tabla_proyecto.item(fila, 0).text()
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
+    ProyectosAdmin(parent, 'editar', proyecto_id).exec_()
+    
+def ver_eliminar_acccion_proyecto(fila, parent):
+    
+    proyecto_id = parent.venPri.tabla_proyectos.item(fila, 0).text()
+   
+    mensaje = f"¿Está seguro(a) de inabilitar el proyecto? Al aceptar ya no se mostrará la institucíon en vinculacíon como opción."
 
-    Proyectos(parent, 'Editar', proyecto_id).exec_()
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
 
+    if respuesta == QtWidgets.QMessageBox.Yes:
+        
+        if not parent.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+            return
+        
+        parent.conec_base.getDatosProcess_condicion("CambiarEstadoProyecto", (proyecto_id,'Inactivo'))
+        parent.llenado_proyectos('Activo')
+
+        QtWidgets.QMessageBox.information(parent, "Mensaje", f"El proyecto  se ha inabilitado exitosamente.")
+       
+       
+# -------------------------------------------------------------------------------------------------------------- 
+        
+def llenar_tabla_carreras(parent, tabla, dato):
+    
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(4)
+   
+        for fila in range(len(dato)):
+
+            boton_editar_carrera = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                            QToolButton:hover{background-color:#cbe1e3}""",
+                icono = u':/menu/acccion_editar.png',
+                tooltip = 'Editar Carrera')
+            
+            boton_eliminar_carrera = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+                            QToolButton:hover{background-color:#ebdada}""",
+                icono = u':/menu/accion_eliminar.png',
+                tooltip = 'Inabilitar Carrera')
+
+            layout = QtWidgets.QHBoxLayout()
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(boton_editar_carrera)
+            layout.addWidget(boton_eliminar_carrera)
+ 
+            widget = QtWidgets.QWidget()
+            widget.setLayout(layout)
+
+            btn_editar_carrera(boton_editar_carrera, fila, tabla, parent)
+            btn_eliminar_carrera(boton_eliminar_carrera, fila, tabla, parent)
+          
+            tabla.setCellWidget(fila , 3 ,widget)
+
+            for columna in range(len(dato[fila])):
+                item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                
+                if columna == 2:
+                    estado_columna = str(dato[fila][columna])
+                    print('c ', estado_columna)
+                    color_texto = QtGui.QColor('green') if estado_columna == '1' else \
+                                QtGui.QColor('red')
+                    item.setForeground(QtGui.QBrush(color_texto))
+
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    item.setFont(font)
+                    
+                    texto = "Activo" if estado_columna == '1' else "Inactivo"
+                    item.setText(texto)
+
+                item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                tabla.setItem(fila, columna, item)
+          
+def btn_editar_carrera(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_editar_acccion_proyecto(fila,parent)) 
+
+def btn_eliminar_carrera(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_eliminar_acccion_proyecto(fila,parent)) 
+    
+def ver_editar_acccion_proyecto(fila, parent):
+    
+    from controllers.Modulo_administracion.Carreras_administracion import CarrerasAdmin
+    carrera_id = parent.venPri.tabla_carrera.item(fila, 0).text()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    CarrerasAdmin(parent, 'editar', carrera_id).exec_()
+    
 def ver_eliminar_acccion_proyecto(fila, parent):
     
     proyecto_id = parent.venPri.tabla_proyectos.item(fila, 0).text()
@@ -658,6 +823,109 @@ def ver_eliminar_acccion_proyecto(fila, parent):
         QtWidgets.QMessageBox.information(parent, "Mensaje", f"El proyecto  se ha inabilitado exitosamente.")
         
         
+        
+# --------------------------------------------------------------------------------------------------------------
+
+def llenar_tabla_institucion(parent, tabla, dato):
+    
+    if dato:
+        tabla.setRowCount(0)
+        tabla.setRowCount(len(dato))
+        tabla.setColumnCount(5)
+   
+        for fila in range(len(dato)):
+
+            boton_editar_institucion = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                            QToolButton:hover{background-color:#cbe1e3}""",
+                icono = u':/menu/acccion_editar.png',
+                tooltip = 'Editar Institucion')
+            
+            boton_eliminar_institucion = crearbotoneslista(
+                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+                            QToolButton:hover{background-color:#ebdada}""",
+                icono = u':/menu/accion_eliminar.png',
+                tooltip = 'Inabilitar Institucion')
+
+            layout = QtWidgets.QHBoxLayout()
+            layout.setContentsMargins(1,1,1,1)
+            layout.setSpacing(3)
+            layout.addWidget(boton_editar_institucion)
+            layout.addWidget(boton_eliminar_institucion)
+ 
+            widget = QtWidgets.QWidget()
+            widget.setLayout(layout)
+
+            btn_editar_institucion(boton_editar_institucion, fila, tabla, parent)
+            btn_eliminar_eliminar(boton_eliminar_institucion, fila, tabla, parent)
+          
+            tabla.setCellWidget(fila , 4 ,widget)
+
+            for columna in range(len(dato[fila])):
+                item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
+                
+                if columna == 3:
+                    estado_columna = str(dato[fila][columna])
+                    print('c ', estado_columna)
+                    color_texto = QtGui.QColor('green') if estado_columna == '1' else \
+                                QtGui.QColor('red')
+                    item.setForeground(QtGui.QBrush(color_texto))
+
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    item.setFont(font)
+                    
+                    texto = "Activo" if estado_columna == '1' else "Inactivo"
+                    item.setText(texto)
+
+                item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
+                tabla.setItem(fila, columna, item)
+          
+def btn_editar_institucion(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_editar_acccion_proyecto(fila,parent)) 
+
+def btn_eliminar_eliminar(boton,fila,tabla,parent):
+    
+    """eventos  del boton agregar seguimiento """
+    boton.clicked.connect(lambda: tabla.selectRow(fila))          
+    boton.clicked.connect(lambda: ver_eliminar_acccion_proyecto(fila,parent)) 
+    
+def ver_editar_acccion_proyecto(fila, parent):
+    
+    from controllers.Modulo_administracion.Instituciones_administracion import InstitucionesAdmin
+    institucion_id = parent.venPri.tabla_institucion.item(fila, 0).text()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    InstitucionesAdmin(parent, 'editar', institucion_id).exec_()
+    
+def ver_eliminar_acccion_proyecto(fila, parent):
+    
+    proyecto_id = parent.venPri.tabla_institucion.item(fila, 0).text()
+   
+    mensaje = f"¿Está seguro(a) de inabilitar el proyecto? Al aceptar ya no se mostrará la institucíon en vinculacíon como opción."
+
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+    if respuesta == QtWidgets.QMessageBox.Yes:
+        
+        if not parent.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+            return
+        
+        parent.conec_base.getDatosProcess_condicion("CambiarEstadoProyecto", (proyecto_id,'Inactivo'))
+        parent.llenado_proyectos('Activo')
+
+        QtWidgets.QMessageBox.information(parent, "Mensaje", f"El proyecto  se ha inabilitado exitosamente.")
+       
+       
+
+
+
+# --------------------------------------------------------------------------------------------------------------
 def llenar_tabla_tutores(parent, tabla, dato):
     if dato:
         tabla.setRowCount(0)

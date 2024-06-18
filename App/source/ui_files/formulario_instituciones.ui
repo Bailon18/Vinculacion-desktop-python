@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Institucion</class>
- <widget class="QDialog" name="Institucion">
+ <class>FormularioInstitucion</class>
+ <widget class="QDialog" name="FormularioInstitucion">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>476</width>
-    <height>406</height>
+    <height>520</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>476</width>
-    <height>406</height>
+    <height>520</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>476</width>
-    <height>406</height>
+    <height>520</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Dialog</string>
+   <string>Formulario Institucion</string>
   </property>
   <property name="windowIcon">
    <iconset>
@@ -50,6 +50,14 @@
    </property>
    <item row="0" column="0">
     <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">#frame{background-color: #f1f1f1;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+</string>
+     </property>
      <property name="frameShape">
       <enum>QFrame::NoFrame</enum>
      </property>
@@ -202,6 +210,69 @@ font-weight: normal;
 font-size: 14px;
 color:#9CA3AF}
 
+#frame_pie_pagina{background-color: #f1f1f1; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+
+/*  BOTON */
+
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+
+
+
 
 
 
@@ -215,68 +286,13 @@ color:#9CA3AF}
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QPushButton" name="btn_guardar_institiucion">
-         <property name="geometry">
-          <rect>
-           <x>330</x>
-           <y>300</y>
-           <width>120</width>
-           <height>40</height>
-          </rect>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>120</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>120</width>
-           <height>40</height>
-          </size>
-         </property>
-         <property name="cursor">
-          <cursorShape>PointingHandCursor</cursorShape>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::NoFocus</enum>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">/*  BOTON */
-
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #3A4F50;
-border-radius: 8px;}
-
-QPushButton:hover{background: #344748;
-border-radius: 8px; }
-</string>
-         </property>
-         <property name="text">
-          <string>Guardar</string>
-         </property>
-         <property name="iconSize">
-          <size>
-           <width>15</width>
-           <height>21</height>
-          </size>
-         </property>
-        </widget>
         <widget class="QFrame" name="frame_4">
          <property name="geometry">
           <rect>
            <x>10</x>
            <y>10</y>
            <width>461</width>
-           <height>271</height>
+           <height>391</height>
           </rect>
          </property>
          <property name="minimumSize">
@@ -286,7 +302,15 @@ border-radius: 8px; }
           </size>
          </property>
          <property name="styleSheet">
-          <string notr="true"/>
+          <string notr="true">/* QLabel para Mostrar Error */
+QLabel#errorNombre, #errorTelefono, #errorDireccion{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 14px;
+    color: #D32F2F; 
+}
+</string>
          </property>
          <property name="frameShape">
           <enum>QFrame::NoFrame</enum>
@@ -298,7 +322,7 @@ border-radius: 8px; }
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>93</y>
+            <y>103</y>
             <width>151</width>
             <height>21</height>
            </rect>
@@ -360,39 +384,11 @@ border-radius: 8px; }
            <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
           </property>
          </widget>
-         <widget class="QLineEdit" name="line_tipo_institucion">
-          <property name="enabled">
-           <bool>true</bool>
-          </property>
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>118</y>
-            <width>205</width>
-            <height>40</height>
-           </rect>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="maxLength">
-           <number>100</number>
-          </property>
-          <property name="frame">
-           <bool>true</bool>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-          </property>
-          <property name="placeholderText">
-           <string>Ingrese tipo de institucion</string>
-          </property>
-         </widget>
          <widget class="QLabel" name="lbl3">
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>180</y>
+            <y>196</y>
             <width>151</width>
             <height>21</height>
            </rect>
@@ -401,7 +397,7 @@ border-radius: 8px; }
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>Dirección*</string>
+           <string>Dirección ( Opcional )</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -414,7 +410,7 @@ border-radius: 8px; }
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>204</y>
+            <y>220</y>
             <width>431</width>
             <height>40</height>
            </rect>
@@ -439,7 +435,7 @@ border-radius: 8px; }
           <property name="geometry">
            <rect>
             <x>242</x>
-            <y>95</y>
+            <y>105</y>
             <width>81</width>
             <height>21</height>
            </rect>
@@ -458,7 +454,7 @@ border-radius: 8px; }
           <property name="geometry">
            <rect>
             <x>240</x>
-            <y>120</y>
+            <y>130</y>
             <width>205</width>
             <height>40</height>
            </rect>
@@ -482,6 +478,284 @@ border-radius: 8px; }
             <string>Activo</string>
            </property>
           </item>
+         </widget>
+         <widget class="QComboBox" name="cbo_tipoIdentificacion">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>130</y>
+            <width>221</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <item>
+           <property name="text">
+            <string>Publica</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Privada</string>
+           </property>
+          </item>
+          <item>
+           <property name="text">
+            <string>Otro</string>
+           </property>
+          </item>
+         </widget>
+         <widget class="QLabel" name="errorNombre">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>80</y>
+            <width>431</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="lbl11_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>290</y>
+            <width>221</width>
+            <height>21</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Teléfono</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+          </property>
+         </widget>
+         <widget class="QLineEdit" name="line_telefono">
+          <property name="enabled">
+           <bool>true</bool>
+          </property>
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>316</y>
+            <width>221</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="maxLength">
+           <number>30</number>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+          </property>
+          <property name="placeholderText">
+           <string>Ingrese telefono</string>
+          </property>
+         </widget>
+         <widget class="QLabel" name="errorDireccion">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>261</y>
+            <width>431</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+         <widget class="QLabel" name="errorTelefono">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>360</y>
+            <width>221</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </widget>
+        <widget class="QFrame" name="frame_5">
+         <property name="geometry">
+          <rect>
+           <x>0</x>
+           <y>409</y>
+           <width>481</width>
+           <height>61</height>
+          </rect>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">#frame_5{background-color: #f1f1f1; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+
+/*  BOTON */
+
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+</string>
+         </property>
+         <property name="frameShape">
+          <enum>QFrame::StyledPanel</enum>
+         </property>
+         <property name="frameShadow">
+          <enum>QFrame::Raised</enum>
+         </property>
+         <widget class="QPushButton" name="btn_guardar_institiucion">
+          <property name="geometry">
+           <rect>
+            <x>280</x>
+            <y>10</y>
+            <width>180</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>180</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Guardar institucion</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../image/source.qrc">
+            <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>15</width>
+            <height>21</height>
+           </size>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="cancelButton">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>10</y>
+            <width>120</width>
+            <height>40</height>
+           </rect>
+          </property>
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>40</height>
+           </size>
+          </property>
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
+          <property name="focusPolicy">
+           <enum>Qt::NoFocus</enum>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>Cancelar</string>
+          </property>
+          <property name="icon">
+           <iconset resource="../image/source.qrc">
+            <normaloff>:/menu/no.png</normaloff>:/menu/no.png</iconset>
+          </property>
+          <property name="iconSize">
+           <size>
+            <width>15</width>
+            <height>21</height>
+           </size>
+          </property>
          </widget>
         </widget>
        </widget>
@@ -510,11 +784,11 @@ border-top-right-radius: 10px;}</string>
         <property name="frameShadow">
          <enum>QFrame::Raised</enum>
         </property>
-        <widget class="QToolButton" name="btn_closeedit">
+        <widget class="QToolButton" name="btn_close">
          <property name="geometry">
           <rect>
            <x>445</x>
-           <y>6</y>
+           <y>11</y>
            <width>25</width>
            <height>25</height>
           </rect>
@@ -526,7 +800,7 @@ border-top-right-radius: 10px;}</string>
           <string>Cerrar</string>
          </property>
          <property name="styleSheet">
-          <string notr="true">#btn_closeedit{
+          <string notr="true">#btn_close{
 font-family: Roboto;
 font-weight: normal;
 font-size: 14px;
@@ -537,7 +811,7 @@ border-radius:11px
 
 
 
-#btn_closeedit:hover{background:#ce4d3a ;
+#btn_close:hover{background:#ce4d3a ;
 border-radius:11px; }
 
 </string>
@@ -563,8 +837,8 @@ border-radius:11px; }
          <property name="geometry">
           <rect>
            <x>19</x>
-           <y>4</y>
-           <width>241</width>
+           <y>16</y>
+           <width>341</width>
            <height>19</height>
           </rect>
          </property>
@@ -578,7 +852,7 @@ letter-spacing: 0.02em;
 color: #FFFFFF;}</string>
          </property>
          <property name="text">
-          <string>Nueva Institución</string>
+          <string>Formulario de registro de instituciones</string>
          </property>
         </widget>
         <widget class="QLabel" name="lbl_instituto_seleccionado">
@@ -612,7 +886,6 @@ color: #FFFFFF;}</string>
  </widget>
  <tabstops>
   <tabstop>line_nombre_institucion</tabstop>
-  <tabstop>line_tipo_institucion</tabstop>
   <tabstop>cbox_estado_intitucion</tabstop>
   <tabstop>line_direccion_institucion</tabstop>
  </tabstops>

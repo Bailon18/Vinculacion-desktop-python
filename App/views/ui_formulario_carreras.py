@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_proyectospSWPjS.ui'
+## Form generated from reading UI file 'formulario_carrerasACoKal.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -14,18 +14,18 @@ from PySide2.QtWidgets import *
 
 from source.image import source
 
-class Ui_FormularioProyectos(object):
-    def setupUi(self, FormularioProyectos):
-        if not FormularioProyectos.objectName():
-            FormularioProyectos.setObjectName(u"FormularioProyectos")
-        FormularioProyectos.resize(486, 480)
-        FormularioProyectos.setMinimumSize(QSize(486, 480))
-        FormularioProyectos.setMaximumSize(QSize(486, 480))
-        self.gridLayout = QGridLayout(FormularioProyectos)
+class Ui_FormularioCarreras(object):
+    def setupUi(self, FormularioCarreras):
+        if not FormularioCarreras.objectName():
+            FormularioCarreras.setObjectName(u"FormularioCarreras")
+        FormularioCarreras.resize(486, 452)
+        FormularioCarreras.setMinimumSize(QSize(486, 452))
+        FormularioCarreras.setMaximumSize(QSize(486, 452))
+        self.gridLayout = QGridLayout(FormularioCarreras)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(FormularioProyectos)
+        self.frame = QFrame(FormularioCarreras)
         self.frame.setObjectName(u"frame")
         self.frame.setStyleSheet(u"#frame{background-color: #f1f1f1;\n"
 "border-top-left-radius: 10px;\n"
@@ -37,9 +37,9 @@ class Ui_FormularioProyectos(object):
         self.frame.setFrameShadow(QFrame.Raised)
         self.frame_2 = QFrame(self.frame)
         self.frame_2.setObjectName(u"frame_2")
-        self.frame_2.setGeometry(QRect(0, 0, 488, 50))
-        self.frame_2.setMinimumSize(QSize(488, 50))
-        self.frame_2.setMaximumSize(QSize(488, 50))
+        self.frame_2.setGeometry(QRect(0, 0, 489, 50))
+        self.frame_2.setMinimumSize(QSize(489, 50))
+        self.frame_2.setMaximumSize(QSize(489, 50))
         self.frame_2.setStyleSheet(u"#frame_2{background: #3A4F50 ;border-top-left-radius: 10px;\n"
 "border-top-right-radius: 10px;}")
         self.frame_2.setFrameShape(QFrame.NoFrame)
@@ -80,7 +80,7 @@ class Ui_FormularioProyectos(object):
 "color: #FFFFFF;}")
         self.scrollArea = QScrollArea(self.frame)
         self.scrollArea.setObjectName(u"scrollArea")
-        self.scrollArea.setGeometry(QRect(0, 50, 491, 371))
+        self.scrollArea.setGeometry(QRect(0, 50, 491, 341))
         self.scrollArea.setStyleSheet(u"\n"
 "QLabel{\n"
 "font-family: Roboto;\n"
@@ -199,11 +199,19 @@ class Ui_FormularioProyectos(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 489, 369))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 489, 339))
         self.scroll_registro_estudiante.setMinimumSize(QSize(0, 250))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"
 "}")
+        self.line_nombre = QLineEdit(self.scroll_registro_estudiante)
+        self.line_nombre.setObjectName(u"line_nombre")
+        self.line_nombre.setEnabled(True)
+        self.line_nombre.setGeometry(QRect(20, 45, 441, 40))
+        self.line_nombre.setStyleSheet(u"")
+        self.line_nombre.setMaxLength(30)
+        self.line_nombre.setFrame(True)
+        self.line_nombre.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lbl11 = QLabel(self.scroll_registro_estudiante)
         self.lbl11.setObjectName(u"lbl11")
         self.lbl11.setGeometry(QRect(20, 20, 171, 21))
@@ -211,38 +219,32 @@ class Ui_FormularioProyectos(object):
         self.lbl11.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.plain_descripcion = QPlainTextEdit(self.scroll_registro_estudiante)
         self.plain_descripcion.setObjectName(u"plain_descripcion")
-        self.plain_descripcion.setGeometry(QRect(20, 180, 441, 91))
+        self.plain_descripcion.setGeometry(QRect(20, 139, 441, 91))
         self.plain_descripcion.setMinimumSize(QSize(0, 0))
         self.plain_descripcion.setMaximumSize(QSize(16777215, 16777215))
         self.plain_descripcion.setStyleSheet(u"")
         self.lbl11_2 = QLabel(self.scroll_registro_estudiante)
         self.lbl11_2.setObjectName(u"lbl11_2")
-        self.lbl11_2.setGeometry(QRect(20, 150, 171, 21))
+        self.lbl11_2.setGeometry(QRect(20, 114, 171, 21))
         self.lbl11_2.setStyleSheet(u"")
         self.lbl11_2.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.errorNombre = QLabel(self.scroll_registro_estudiante)
         self.errorNombre.setObjectName(u"errorNombre")
-        self.errorNombre.setGeometry(QRect(20, 117, 441, 16))
+        self.errorNombre.setGeometry(QRect(20, 85, 441, 16))
         self.lbl11_3 = QLabel(self.scroll_registro_estudiante)
         self.lbl11_3.setObjectName(u"lbl11_3")
-        self.lbl11_3.setGeometry(QRect(20, 290, 171, 21))
+        self.lbl11_3.setGeometry(QRect(20, 260, 171, 21))
         self.lbl11_3.setStyleSheet(u"")
         self.lbl11_3.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.cbo_estado = QComboBox(self.scroll_registro_estudiante)
         self.cbo_estado.addItem("")
         self.cbo_estado.addItem("")
         self.cbo_estado.setObjectName(u"cbo_estado")
-        self.cbo_estado.setGeometry(QRect(20, 312, 221, 40))
-        self.line_nombre = QPlainTextEdit(self.scroll_registro_estudiante)
-        self.line_nombre.setObjectName(u"line_nombre")
-        self.line_nombre.setGeometry(QRect(20, 44, 441, 71))
-        self.line_nombre.setMinimumSize(QSize(0, 0))
-        self.line_nombre.setMaximumSize(QSize(16777215, 16777215))
-        self.line_nombre.setStyleSheet(u"")
+        self.cbo_estado.setGeometry(QRect(20, 282, 221, 40))
         self.scrollArea.setWidget(self.scroll_registro_estudiante)
         self.frame_pie_pagina = QFrame(self.frame)
         self.frame_pie_pagina.setObjectName(u"frame_pie_pagina")
-        self.frame_pie_pagina.setGeometry(QRect(0, 418, 491, 61))
+        self.frame_pie_pagina.setGeometry(QRect(0, 390, 491, 61))
         self.frame_pie_pagina.setStyleSheet(u"#frame_pie_pagina{background-color: #f1f1f1; \n"
 "border-bottom-right-radius: 10px;\n"
 "border-bottom-left-radius: 10px;}\n"
@@ -308,20 +310,20 @@ class Ui_FormularioProyectos(object):
 "")
         self.frame_pie_pagina.setFrameShape(QFrame.StyledPanel)
         self.frame_pie_pagina.setFrameShadow(QFrame.Raised)
-        self.btn_agregar_proyecto = QPushButton(self.frame_pie_pagina)
-        self.btn_agregar_proyecto.setObjectName(u"btn_agregar_proyecto")
-        self.btn_agregar_proyecto.setGeometry(QRect(290, 13, 180, 40))
-        self.btn_agregar_proyecto.setMinimumSize(QSize(180, 40))
-        self.btn_agregar_proyecto.setMaximumSize(QSize(110, 40))
-        self.btn_agregar_proyecto.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_agregar_proyecto.setStyleSheet(u"")
+        self.btn_agregar_carrera = QPushButton(self.frame_pie_pagina)
+        self.btn_agregar_carrera.setObjectName(u"btn_agregar_carrera")
+        self.btn_agregar_carrera.setGeometry(QRect(290, 10, 180, 40))
+        self.btn_agregar_carrera.setMinimumSize(QSize(180, 40))
+        self.btn_agregar_carrera.setMaximumSize(QSize(110, 40))
+        self.btn_agregar_carrera.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_agregar_carrera.setStyleSheet(u"")
         icon1 = QIcon()
         icon1.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_agregar_proyecto.setIcon(icon1)
-        self.btn_agregar_proyecto.setIconSize(QSize(15, 21))
+        self.btn_agregar_carrera.setIcon(icon1)
+        self.btn_agregar_carrera.setIconSize(QSize(15, 21))
         self.cancelButton = QPushButton(self.frame_pie_pagina)
         self.cancelButton.setObjectName(u"cancelButton")
-        self.cancelButton.setGeometry(QRect(160, 13, 120, 40))
+        self.cancelButton.setGeometry(QRect(160, 10, 120, 40))
         self.cancelButton.setMinimumSize(QSize(120, 40))
         self.cancelButton.setMaximumSize(QSize(120, 40))
         self.cancelButton.setCursor(QCursor(Qt.PointingHandCursor))
@@ -335,26 +337,27 @@ class Ui_FormularioProyectos(object):
         self.gridLayout.addWidget(self.frame, 0, 0, 1, 1)
 
 
-        self.retranslateUi(FormularioProyectos)
+        self.retranslateUi(FormularioCarreras)
 
-        QMetaObject.connectSlotsByName(FormularioProyectos)
+        QMetaObject.connectSlotsByName(FormularioCarreras)
     # setupUi
 
-    def retranslateUi(self, FormularioProyectos):
-        FormularioProyectos.setWindowTitle(QCoreApplication.translate("FormularioProyectos", u"Formulario Proyecto", None))
+    def retranslateUi(self, FormularioCarreras):
+        FormularioCarreras.setWindowTitle(QCoreApplication.translate("FormularioCarreras", u"Formulario Carrera", None))
 #if QT_CONFIG(tooltip)
-        self.btn_close.setToolTip(QCoreApplication.translate("FormularioProyectos", u"Cerrar", None))
+        self.btn_close.setToolTip(QCoreApplication.translate("FormularioCarreras", u"Cerrar", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_close.setText("")
-        self.lbl_titulo_ventana.setText(QCoreApplication.translate("FormularioProyectos", u"Registra nuevo proyecto", None))
-        self.lbl11.setText(QCoreApplication.translate("FormularioProyectos", u"Nombre*", None))
-        self.lbl11_2.setText(QCoreApplication.translate("FormularioProyectos", u"Descripci\u00f3n ( Opcional )", None))
+        self.lbl_titulo_ventana.setText(QCoreApplication.translate("FormularioCarreras", u"Formulario de registro de carrera", None))
+        self.line_nombre.setPlaceholderText(QCoreApplication.translate("FormularioCarreras", u"Ingrese  nombres", None))
+        self.lbl11.setText(QCoreApplication.translate("FormularioCarreras", u"Nombre*", None))
+        self.lbl11_2.setText(QCoreApplication.translate("FormularioCarreras", u"Descripci\u00f3n ( Opcional )", None))
         self.errorNombre.setText("")
-        self.lbl11_3.setText(QCoreApplication.translate("FormularioProyectos", u"Estado", None))
-        self.cbo_estado.setItemText(0, QCoreApplication.translate("FormularioProyectos", u"Activo", None))
-        self.cbo_estado.setItemText(1, QCoreApplication.translate("FormularioProyectos", u"Inactivo", None))
+        self.lbl11_3.setText(QCoreApplication.translate("FormularioCarreras", u"Estado", None))
+        self.cbo_estado.setItemText(0, QCoreApplication.translate("FormularioCarreras", u"Activo", None))
+        self.cbo_estado.setItemText(1, QCoreApplication.translate("FormularioCarreras", u"Inactivo", None))
 
-        self.btn_agregar_proyecto.setText(QCoreApplication.translate("FormularioProyectos", u"Guardar proyecto", None))
-        self.cancelButton.setText(QCoreApplication.translate("FormularioProyectos", u"Cancelar", None))
+        self.btn_agregar_carrera.setText(QCoreApplication.translate("FormularioCarreras", u"Guardar carrera", None))
+        self.cancelButton.setText(QCoreApplication.translate("FormularioCarreras", u"Cancelar", None))
     # retranslateUi
 

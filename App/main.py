@@ -1,5 +1,6 @@
 
 # ------ Importacion Modulo error ------
+from controllers.Modulo_principal.Modulo_general import Principal
 from controllers.Modulo_sesion.funcion_inicio import suppress_qt_warnings , add_font_app
 import sys
 
@@ -12,6 +13,7 @@ from controllers.Modulo_sesion.Modulo_inicio import Login
 
 # aqui se ejecuta todo el programa
 if __name__ == "__main__":
+    
     suppress_qt_warnings()
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("Fusion")
@@ -29,7 +31,7 @@ if __name__ == "__main__":
         print(f"Error al cargar fuentes: {e}")
 
     
-    ventana_ses = Login()
+    ventana_ses = Principal()
     ventana_ses.show()
     sys.exit(app.exec_())
    
