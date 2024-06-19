@@ -76,6 +76,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_agregar_proyectos.clicked.connect(lambda: self.abrir_ventana_proyectos())
         self.venPri.btn_agregar_carrera.clicked.connect(lambda: self.abrir_ventana_carreras())
         self.venPri.btn_agregar_insti.clicked.connect(lambda: self.abrir_ventana_instituciones())
+        self.venPri.btn_nueva_vinculacion.clicked.connect(lambda: self.abrir_ventana_vinculacion())
         
         
         # filtro evento busquedas
@@ -205,9 +206,10 @@ class Principal(QtWidgets.QMainWindow):
         
         
         # Eventos de combobox filtro en vinculacion
-        self.venPri.cbo_filtro_proyecto.currentIndexChanged.connect(self.consultar_basedatos)
-        self.venPri.cbo_filtro_periodo.currentIndexChanged.connect(self.consultar_basedatos)
-        self.venPri.cbo_filtro_tutor.currentIndexChanged.connect(self.consultar_basedatos)
+        self.venPri.cbo_filtro_proyecto.currentIndexChanged.connect(lambda: self.consultar_basedatos('proyecto'))
+        self.venPri.cbo_filtro_periodo.currentIndexChanged.connect(lambda: self.consultar_basedatos('periodo'))
+        self.venPri.cbo_filtro_tutor.currentIndexChanged.connect(lambda: self.consultar_basedatos('tutor'))
+        self.venPri.line_filtro_estudiante.textChanged.connect(lambda: self.consultar_basedatos('estudiante'))
 
 
         
@@ -233,8 +235,7 @@ class Principal(QtWidgets.QMainWindow):
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
             pass
-        
-            
+          
     def cerrar_sesion(self):
         from controllers.Modulo_sesion.Modulo_inicio import Login
         
@@ -286,6 +287,11 @@ class Principal(QtWidgets.QMainWindow):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         InstitucionesAdmin(self, 'nuevo', 0).exec_()
+        
+    def abrir_ventana_vinculacion(self):
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        Vinculacion(parent=self).exec_()
        
        
     def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
@@ -303,6 +309,17 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_institucion(self, tabla_diseno, datoresultante[0])
         elif(tabla == 'vinculacion' and datoresultante):
             llenar_tabla_vinculacion(self, tabla_diseno, datoresultante[0])
+            
+    def llenarTablaFiltro(self, procedimiento, tabla_diseno, param, tipo):
+        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [tipo, param,  self.offset, self.limit])
+        
+        if len(datoresultante) > 0 and len(datoresultante[0]) > 0:
+            llenar_tabla_vinculacion(self, tabla_diseno, datoresultante[0])
+        else:
+            QtWidgets.QMessageBox.warning(self, 'Información', f'No se encontró ninguna vinculación con el nombre del {tipo} seleccionado.')
+            self.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.venPri.tabla_vinculacion)
+            self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion)
+
           
     def next_page(self, procedimiento, tabla, labels, tabla_diseno):
         self.offset += self.limit
@@ -498,10 +515,57 @@ class Principal(QtWidgets.QMainWindow):
         for id, nombres in respuesta_tutores:
             self.venPri.cbo_filtro_tutor.addItem(nombres, id)
 
+    def consultar_basedatos(self, tipo):
+        if tipo == 'proyecto':
+            proyecto_id = self.venPri.cbo_filtro_proyecto.currentData()
+            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, proyecto_id, 'proyecto')
+            self.venPri.cbo_filtro_periodo.blockSignals(True)
+            self.venPri.cbo_filtro_tutor.blockSignals(True)
+            self.venPri.line_filtro_estudiante.blockSignals(True)
+            self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
+            self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
+            self.venPri.line_filtro_estudiante.setText('')
+            self.venPri.cbo_filtro_periodo.blockSignals(False)
+            self.venPri.cbo_filtro_tutor.blockSignals(False)
+            self.venPri.line_filtro_estudiante.blockSignals(False)
+        elif tipo == 'periodo':
+            periodo = self.venPri.cbo_filtro_periodo.currentData()
+            print('periodo ', periodo)
+            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, periodo, 'periodo')
+            self.venPri.cbo_filtro_proyecto.blockSignals(True)
+            self.venPri.cbo_filtro_tutor.blockSignals(True)
+            self.venPri.line_filtro_estudiante.blockSignals(True)
+            self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
+            self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
+            self.venPri.line_filtro_estudiante.setText('')
+            self.venPri.cbo_filtro_proyecto.blockSignals(False)
+            self.venPri.cbo_filtro_tutor.blockSignals(False)
+            self.venPri.line_filtro_estudiante.blockSignals(False)
+        elif tipo == 'tutor':
+            tutor_id = self.venPri.cbo_filtro_tutor.currentData()
+            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, tutor_id, 'tutor')
+            self.venPri.cbo_filtro_proyecto.blockSignals(True)
+            self.venPri.cbo_filtro_periodo.blockSignals(True)
+            self.venPri.line_filtro_estudiante.blockSignals(True)
+            self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
+            self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
+            self.venPri.line_filtro_estudiante.setText('')
+            self.venPri.cbo_filtro_proyecto.blockSignals(False)
+            self.venPri.cbo_filtro_periodo.blockSignals(False)
+            self.venPri.line_filtro_estudiante.blockSignals(False)
+        elif tipo == 'estudiante':
+            text_param = self.venPri.line_filtro_estudiante.text().strip()
+            self.llenarTablaFiltro('ObtenerListaVinculacionesPorEstudiante', self.venPri.tabla_vinculacion, text_param, 'estudiante')
+            self.venPri.cbo_filtro_proyecto.blockSignals(True)
+            self.venPri.cbo_filtro_periodo.blockSignals(True)
+            self.venPri.cbo_filtro_tutor.blockSignals(True)
+            self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
+            self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
+            self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
+            self.venPri.cbo_filtro_proyecto.blockSignals(False)
+            self.venPri.cbo_filtro_periodo.blockSignals(False)
+            self.venPri.cbo_filtro_tutor.blockSignals(False)
 
-        
-
-       
     # def configuracion_ventana(self):
         
     #     if not self.conec_base.verificarConexionInternet():

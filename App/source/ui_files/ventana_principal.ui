@@ -1687,9 +1687,9 @@ QPushButton:pressed {
                              <widget class="QPushButton" name="btn_nueva_vinculacion">
                               <property name="geometry">
                                <rect>
-                                <x>183</x>
+                                <x>176</x>
                                 <y>1</y>
-                                <width>164</width>
+                                <width>171</width>
                                 <height>40</height>
                                </rect>
                               </property>
@@ -2072,8 +2072,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1234</width>
-                      <height>575</height>
+                      <width>393</width>
+                      <height>272</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2895,8 +2895,8 @@ color: #000000;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1232</width>
-                      <height>579</height>
+                      <width>930</width>
+                      <height>296</height>
                      </rect>
                     </property>
                     <property name="styleSheet">

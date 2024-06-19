@@ -633,5 +633,97 @@ BEGIN
 END //
 DELIMITER ;
 
-call ObtenerListaVinculaciones(0, 5)
+
+
+
+DROP PROCEDURE IF EXISTS ObtenerListaVinculacionesPorFiltro;
+DELIMITER //
+CREATE PROCEDURE ObtenerListaVinculacionesPorFiltro(
+    IN p_filtro VARCHAR(50), -- Tipo de filtro ('proyecto', 'tutor', 'periodo')
+    IN p_id VARCHAR(50),     -- Valor del filtro
+    IN p_offset INT, 
+    IN p_limit INT
+)
+BEGIN
+    SET @sql_query = CONCAT('
+        SELECT 
+            v.id AS id_vinculacion,
+            p.nombre AS nombre_proyecto,
+            v.fecha_inicio,
+            v.periodo_academico,
+            COUNT(ev.estudiantes_id) AS cantidad_alumnos_asignados
+        FROM vinculacion v
+        JOIN proyecto p ON v.proyecto_id = p.id
+        LEFT JOIN estudiantes_vinculacion ev ON v.id = ev.vinculacion_id
+        WHERE 1=1 '); -- 1=1 para facilitar la concatenación de condiciones
+    
+    -- Agregar la condición según el tipo de filtro
+    IF p_filtro = 'proyecto' THEN
+        SET @sql_query = CONCAT(@sql_query, ' AND v.proyecto_id = ', CAST(p_id AS UNSIGNED));
+    ELSEIF p_filtro = 'tutor' THEN
+        SET @sql_query = CONCAT(@sql_query, ' AND v.tutores_id = ', CAST(p_id AS UNSIGNED));
+    ELSEIF p_filtro = 'periodo' THEN
+        SET @sql_query = CONCAT(@sql_query, ' AND v.periodo_academico LIKE CONCAT("%", "', p_id, '%")');
+    END IF;
+    
+    -- Completar la consulta
+    SET @sql_query = CONCAT(@sql_query, '
+        GROUP BY v.id, p.nombre, v.fecha_inicio, v.periodo_academico
+        ORDER BY v.id DESC 
+        LIMIT ', p_limit, ' OFFSET ', p_offset);
+    
+    -- Ejecutar la consulta dinámica
+    PREPARE stmt FROM @sql_query;
+    EXECUTE stmt;
+    DEALLOCATE PREPARE stmt;
+END //
+DELIMITER ;
+
+
+
+DROP PROCEDURE IF EXISTS ObtenerListaVinculacionesPorEstudiante;
+DELIMITER //
+CREATE PROCEDURE ObtenerListaVinculacionesPorEstudiante(
+	IN p_filtro VARCHAR(50),
+    IN search_term VARCHAR(100),
+    IN p_offset INT,
+    IN p_limit INT
+)
+BEGIN
+    SELECT 
+        v.id AS id_vinculacion,
+        p.nombre AS nombre_proyecto,
+        v.fecha_inicio,
+        v.periodo_academico,
+        COUNT(DISTINCT ev.estudiantes_id) AS cantidad_alumnos_asignados
+    FROM 
+        vinculacion v
+        JOIN proyecto p ON v.proyecto_id = p.id
+        LEFT JOIN estudiantes_vinculacion ev ON v.id = ev.vinculacion_id
+        LEFT JOIN estudiantes e ON ev.estudiantes_id = e.id
+    WHERE 
+        v.id IN (
+            SELECT DISTINCT vinculacion_id
+            FROM estudiantes_vinculacion
+            WHERE estudiantes_id IN (
+                SELECT id
+                FROM estudiantes
+                WHERE nombres LIKE CONCAT('%', search_term, '%')
+                    OR apellidos LIKE CONCAT('%', search_term, '%')
+                    OR nro_identificacion LIKE CONCAT('%', search_term, '%')
+            )
+        )
+    GROUP BY 
+        v.id, p.nombre, v.fecha_inicio, v.periodo_academico
+    ORDER BY 
+        v.id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+
+
+
+CALL ObtenerListaVinculacionesPorEstudiante('estudiante','carlos', 0, 10);
+
 

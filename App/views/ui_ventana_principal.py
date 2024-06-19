@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ventana_principalcXYSjh.ui'
+## Form generated from reading UI file 'ventana_principalVsBNOB.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -826,7 +826,7 @@ class Ui_principal(object):
         self.frame_42.setFrameShadow(QFrame.Raised)
         self.btn_nueva_vinculacion = QPushButton(self.frame_42)
         self.btn_nueva_vinculacion.setObjectName(u"btn_nueva_vinculacion")
-        self.btn_nueva_vinculacion.setGeometry(QRect(183, 1, 164, 40))
+        self.btn_nueva_vinculacion.setGeometry(QRect(176, 1, 171, 40))
         self.btn_nueva_vinculacion.setMinimumSize(QSize(164, 40))
         self.btn_nueva_vinculacion.setMaximumSize(QSize(171, 150))
         self.btn_nueva_vinculacion.setCursor(QCursor(Qt.PointingHandCursor))
@@ -1015,7 +1015,7 @@ class Ui_principal(object):
         self.Scrollprincipal_2.setWidgetResizable(True)
         self.scrollAreaWidgetContents_2 = QWidget()
         self.scrollAreaWidgetContents_2.setObjectName(u"scrollAreaWidgetContents_2")
-        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 1234, 575))
+        self.scrollAreaWidgetContents_2.setGeometry(QRect(0, 0, 393, 272))
         self.scrollAreaWidgetContents_2.setStyleSheet(u"#scrollAreaWidgetContents_2{background-color: rgb(255, 255, 255); border-radius:10px}\n"
 "\n"
 "")
@@ -1514,7 +1514,7 @@ class Ui_principal(object):
         self.Scrollprincipal_3.setWidgetResizable(True)
         self.scrollAreaWidgetContents_3 = QWidget()
         self.scrollAreaWidgetContents_3.setObjectName(u"scrollAreaWidgetContents_3")
-        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 1232, 579))
+        self.scrollAreaWidgetContents_3.setGeometry(QRect(0, 0, 930, 296))
         self.scrollAreaWidgetContents_3.setStyleSheet(u"#scrollAreaWidgetContents_3{background-color: rgb(255, 255, 255); border-radius:10px}\n"
 "\n"
 "")
