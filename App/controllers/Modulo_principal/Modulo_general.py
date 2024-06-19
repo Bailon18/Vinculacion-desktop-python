@@ -43,6 +43,7 @@ class Principal(QtWidgets.QMainWindow):
         # self.lista_memorandun_filtro = []
         
         # self.cambioPagina()
+        self.datos_inicializacion()
         
 
         
@@ -178,9 +179,11 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_pag_antes_inst.clicked.connect(lambda: self.prev_page('listar_institucion', 'institucion', self.venPri.lbl_pagina_instituto, self.venPri.tabla_institucion))
         self.venPri.btn_pag_desp_inst.clicked.connect(lambda: self.next_page('listar_institucion', 'institucion', self.venPri.lbl_pagina_instituto, self.venPri.tabla_institucion))
         
+        self.venPri.btn_pag_antes_vinculacion.clicked.connect(lambda: self.prev_page('ObtenerListaVinculaciones', 'vinculacion', self.venPri.lbl_pagina_vinculacion, self.venPri.tabla_vinculacion))
+        self.venPri.btn_pag_desp_vinculacion.clicked.connect(lambda: self.next_page('ObtenerListaVinculaciones', 'vinculacion', self.venPri.lbl_pagina_vinculacion, self.venPri.tabla_vinculacion))
         
         
-        
+    
         # Inicializar la tabla con la primera página
         self.llenarTabla('listar_estudiantes', 'estudiantes', self.venPri.tabla_estudiantes)
         self.actualizarInfoPaginacion('estudiantes', self.venPri.lbl_pagina_estudiantes)
@@ -196,6 +199,16 @@ class Principal(QtWidgets.QMainWindow):
         
         self.llenarTabla('listar_institucion', 'institucion', self.venPri.tabla_institucion)
         self.actualizarInfoPaginacion('institucion', self.venPri.lbl_pagina_instituto)
+        
+        self.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.venPri.tabla_vinculacion)
+        self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion)
+        
+        
+        # Eventos de combobox filtro en vinculacion
+        self.venPri.cbo_filtro_proyecto.currentIndexChanged.connect(self.consultar_basedatos)
+        self.venPri.cbo_filtro_periodo.currentIndexChanged.connect(self.consultar_basedatos)
+        self.venPri.cbo_filtro_tutor.currentIndexChanged.connect(self.consultar_basedatos)
+
 
         
 
@@ -288,6 +301,8 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_carreras(self, tabla_diseno, datoresultante[0])
         elif(tabla == 'institucion' and datoresultante):
             llenar_tabla_institucion(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'vinculacion' and datoresultante):
+            llenar_tabla_vinculacion(self, tabla_diseno, datoresultante[0])
           
     def next_page(self, procedimiento, tabla, labels, tabla_diseno):
         self.offset += self.limit
@@ -451,7 +466,37 @@ class Principal(QtWidgets.QMainWindow):
             self.offset = max(0, self.offset - self.limit)
         self.actualizarInfoPaginacion("institucion", self.venPri.lbl_pagina_instituto)
 
+    def datos_inicializacion(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+   
+        respuesta_proyecto = self.conec_base.getDatos('SELECT id, nombre FROM proyecto')
+        respuesta_periodoacademico = self.conec_base.getDatos('SELECT COALESCE((SELECT DISTINCT periodo_academico FROM vinculacion),"P1-2023") AS periodo_academico;')
+        respuesta_tutores = self.conec_base.getDatos('SELECT id, CONCAT(nombres, " ", apellidos) AS nombres FROM tutores')
 
+
+        self.venPri.cbo_filtro_proyecto.clear()
+        self.venPri.cbo_filtro_proyecto.addItem("Seleccione proyecto", None)
+
+        for id, nombre in respuesta_proyecto:
+            self.venPri.cbo_filtro_proyecto.addItem(nombre, id)
+
+        self.venPri.cbo_filtro_periodo.clear()
+        self.venPri.cbo_filtro_periodo.addItem("Seleccione periodo academico", "P1-2023")
+
+        for nombre_tuple in respuesta_periodoacademico:
+            nombre = nombre_tuple[0]  
+            self.venPri.cbo_filtro_periodo.addItem(nombre, nombre)
+
+
+        self.venPri.cbo_filtro_tutor.clear()
+        self.venPri.cbo_filtro_tutor.addItem("Seleccione tutor", None)
+
+        for id, nombres in respuesta_tutores:
+            self.venPri.cbo_filtro_tutor.addItem(nombres, id)
 
 
         

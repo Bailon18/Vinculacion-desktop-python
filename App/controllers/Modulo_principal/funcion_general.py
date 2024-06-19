@@ -146,6 +146,7 @@ def evento_tabla(parent):
         parent.venPri.tabla_proyecto: {0: 50, 2: 140, 3: 140},
         parent.venPri.tabla_carrera: {0: 50, 2: 140, 3: 140},
         parent.venPri.tabla_institucion: {0: 50, 1: 450},
+        parent.venPri.tabla_vinculacion: {0: 50, 2:140, 3:150, 4:140, 5: 140},
         parent.venPri.tabla_reporte_tutores: {0: 50},
         parent.venPri.tabla_reporte_estudiantes: {0: 50},
         parent.venPri.tabla_reporte_memorandum_tutor: {0: 50},
@@ -168,6 +169,7 @@ def estilo(parent):
     parent.venedit.bnt_ojoInv.setStyle(estiloDefecto)
     parent.venedit.bnt_ojoVis.setStyle(estiloDefecto)
 
+# -------------------------------------------------------------------------------------------------------
 # tabla principal
 def crearbotoneslista(stilo,icono,tooltip):
     
@@ -185,7 +187,7 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(17)
+        tabla.setColumnCount(6)
    
         for fila in range(len(dato)):
             botoneditar = crearbotoneslista(
@@ -201,43 +203,43 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
                 tooltip = 'Eliminar vinculacion')
 
 
-            botonseguimiento = crearbotoneslista(
+            botondetalle = crearbotoneslista(
                 stilo = u"""QToolButton{background-color: #91cbcf; border-radius:8px}
                             QToolButton:hover{background-color:#82b5b9}""",
                 icono = u':/menu/detalle.png',
-                tooltip = 'Ver seguimiento')
+                tooltip = 'Detalle vinculacion')
 
             layout = QtWidgets.QHBoxLayout()
             layout.setContentsMargins(1,1,1,1)
             layout.setSpacing(3)
             layout.addWidget(botoneditar)
             layout.addWidget(botoneliminar)
-            layout.addWidget(botonseguimiento)
+            layout.addWidget(botondetalle)
 
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
 
-            btn_editar(botoneditar, fila, tabla, parent)
-            btn_eliminar(botoneliminar, fila, tabla, parent)
-            btn_seguimiento(botonseguimiento, fila, tabla, parent)
+            btn_editar_vinculacion(botoneditar, fila, tabla, parent)
+            btn_eliminar_vinculacion(botoneliminar, fila, tabla, parent)
+            btn_detalle_vinculacion(botondetalle, fila, tabla, parent)
 
-            tabla.setCellWidget(fila ,16,widget)
+            tabla.setCellWidget(fila ,5,widget)
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
                 
-                if columna == 2: 
-                    estado_columna = str(dato[fila][columna])
-                    color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else \
-                                QtGui.QColor('blue') if estado_columna == 'En progreso' else \
-                                QtGui.QColor('green')
-                    item.setForeground(QtGui.QBrush(color_texto))
+                # if columna == 2: 
+                #     estado_columna = str(dato[fila][columna])
+                #     color_texto = QtGui.QColor('red') if estado_columna == 'Pendiente' else \
+                #                 QtGui.QColor('blue') if estado_columna == 'En progreso' else \
+                #                 QtGui.QColor('green')
+                #     item.setForeground(QtGui.QBrush(color_texto))
 
-                    # Establecer negrita (bold) para los estados
-                    font = QtGui.QFont()
-                    font.setBold(True)
-                    item.setFont(font)
+                #     # Establecer negrita (bold) para los estados
+                #     font = QtGui.QFont()
+                #     font.setBold(True)
+                #     item.setFont(font)
 
                 tabla.setItem(fila, columna, item)
 
@@ -245,69 +247,72 @@ def llenar_tabla_vinculacion(parent, tabla, dato):
     else:
         tabla.setRowCount(0) 
           
-def btn_editar(boton,fila,tabla,parent):
+def btn_editar_vinculacion(boton,fila,tabla,parent):
     
     """eventos  del boton editar """
     boton.clicked.connect(lambda: tabla.selectRow(fila))          
-    boton.clicked.connect(lambda: btn_editar_acciones(fila,parent)) 
+    boton.clicked.connect(lambda: btn_editar_acciones_vinculacion(fila,parent)) 
     
-def btn_eliminar(boton,fila,tabla,parent):
+def btn_eliminar_vinculacion(boton,fila,tabla,parent):
     
     """eventos  del boton eleminar """
     boton.clicked.connect(lambda: tabla.selectRow(fila))            
-    boton.clicked.connect(lambda: btn_eliminar_acciones(fila,parent)) 
+    boton.clicked.connect(lambda: btn_eliminar_acciones_vinculacion(fila,parent)) 
     
-def btn_seguimiento(boton,fila,tabla,parent):
+def btn_detalle_vinculacion(boton,fila,tabla,parent):
     
     """eventos  del boton seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))              
-    boton.clicked.connect(lambda: btn_seguimiento_acciones(fila,parent)) 
+    boton.clicked.connect(lambda: btn_detalle_acciones_vinculacion(fila,parent)) 
     
-def btn_editar_acciones(fila,parent):
+def btn_editar_acciones_vinculacion(fila,parent):
+    pass
     
-    from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
+    # from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
 
-    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
-    estado = parent.venPri.tabla_principal.item(fila, 2).text()
-    parent.raizOpacidad.resize(parent.width(), parent.height())
-    parent.raizOpacidad.show()
-    Vinculacion(vinculacion_id, nombre_estudiante,estado,  "actualizar", parent).exec_()
+    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
+    # estado = parent.venPri.tabla_principal.item(fila, 2).text()
+    # parent.raizOpacidad.resize(parent.width(), parent.height())
+    # parent.raizOpacidad.show()
+    # Vinculacion(vinculacion_id, nombre_estudiante,estado,  "actualizar", parent).exec_()
 
-def btn_eliminar_acciones(fila, parent):
+def btn_eliminar_acciones_vinculacion(fila, parent):
+    pass
     
-    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
+    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
 
-    mensaje = f"¿Está seguro(a) de eliminar la vinculación de {nombre_estudiante.upper()}? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
+    # mensaje = f"¿Está seguro(a) de eliminar la vinculación de {nombre_estudiante.upper()}? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
 
-    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
-        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    # respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+    #     QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
 
-    if respuesta == QtWidgets.QMessageBox.Yes:
+    # if respuesta == QtWidgets.QMessageBox.Yes:
         
-        if not parent.conec_base.verificarConexionInternet():
-            QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
-            return
+    #     if not parent.conec_base.verificarConexionInternet():
+    #         QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+    #         return
         
-        parent.conec_base.getDatosProcess_condicion("EliminarVinculacion", (vinculacion_id,))
-        parent.listar_vinculacion()
+    #     parent.conec_base.getDatosProcess_condicion("EliminarVinculacion", (vinculacion_id,))
+    #     parent.listar_vinculacion()
 
-        QtWidgets.QMessageBox.information(parent, "Mensaje", f"La vinculación de {nombre_estudiante.upper()} se ha eliminado exitosamente.")
+    #     QtWidgets.QMessageBox.information(parent, "Mensaje", f"La vinculación de {nombre_estudiante.upper()} se ha eliminado exitosamente.")
 
-def btn_seguimiento_acciones(fila, parent):
+def btn_detalle_acciones_vinculacion(fila, parent):
+    pass
 
-    from controllers.Modulo_principal.seguimiento_admin import Seguimiento_admin
+    # from controllers.Modulo_principal.seguimiento_admin import Seguimiento_admin
 
-    vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
-    nombre_tutor = parent.venPri.tabla_principal.item(fila, 15).text()
+    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
+    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
+    # nombre_tutor = parent.venPri.tabla_principal.item(fila, 15).text()
 
-    parent.raizOpacidad.resize(parent.width(), parent.height())
-    parent.raizOpacidad.show()
-    Seguimiento_admin([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
+    # parent.raizOpacidad.resize(parent.width(), parent.height())
+    # parent.raizOpacidad.show()
+    # Seguimiento_admin([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
 
-
+# -------------------------------------------------------------------------------------------------------
 def cargar_tabla(tabla,dato):
     if dato:
         tabla.setRowCount(0)

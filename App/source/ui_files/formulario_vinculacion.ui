@@ -146,7 +146,7 @@ border-radius:11px; }
         </rect>
        </property>
        <property name="styleSheet">
-        <string notr="true">QLabel{font-family: Roboto;
+        <string notr="true">QLabel{font-family: &quot;Roboto&quot;;
 font-style: normal;
 font-weight: normal;
 font-size: 18px;
@@ -381,7 +381,7 @@ QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimient
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-119</y>
+         <y>-450</y>
          <width>802</width>
          <height>930</height>
         </rect>

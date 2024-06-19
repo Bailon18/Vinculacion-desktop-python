@@ -1199,29 +1199,44 @@ background-color:#f1f1f1;
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QLabel{font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #6B7280;}
+                           <string notr="true">/* Estilo de la Etiqueta */
+QLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
+    margin-top: 20px; /* Incrementamos el margen superior para más espacio */
+}
 
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #3f5758;
-border-radius: 4px;}
+/* Estilo Base del Botón de la Paginación */
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 10px 20px; /* Incrementamos el padding para un mejor tamaño de botón */
+    background: #3f5758;
+    border: none; /* Eliminamos el borde por defecto */
+    border-radius: 8px; /* Ajustamos el border-radius */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+}
 
-QPushButton:hover{background: #3f5758;
-border-radius: 4px; }
-</string>
+/* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
+QPushButton:hover {
+    background: #4a6b6c; /* Color de fondo más claro */
+    border-radius: 8px;
+}
+
+/* Estilo del Botón de la Paginación al Hacer Clic (Pressed) */
+QPushButton:pressed {
+    background: #2e4546; /* Color de fondo más oscuro */
+    border-radius: 8px;
+}</string>
                           </property>
                           <property name="frameShadow">
                            <enum>QFrame::Plain</enum>
@@ -1636,19 +1651,32 @@ color: #6B7280;}</string>
                               </size>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:4px;
-background: #3f5758;
-border-radius: 4px;}
+                              <string notr="true">QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+    transition: background-color 0.3s ease, color 0.3s ease; 
+}
 
-QPushButton:hover{background: #3f5758;
-border-radius: 4px; }</string>
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}</string>
                              </property>
                              <property name="frameShape">
                               <enum>QFrame::NoFrame</enum>
@@ -1705,70 +1733,68 @@ border-radius: 4px; }</string>
                               <bool>false</bool>
                              </property>
                              <property name="styleSheet">
-                              <string notr="true">QTableWidget {
-outline: 0px;
-border:5px solid #f3f4f6;
-border-radius:15px;
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-line-height: 19px;
-letter-spacing: 0.02em;
-color: #6B7280;
+                              <string notr="true">/* Estilo Base del QTableWidget */
+QTableWidget {
+    outline: 0px;
+    border: 5px solid #f3f4f6;
+    border-radius: 15px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    color: #6B7280;
+    gridline-color: #e0e0e0; /* Color de las líneas de la cuadrícula */
 }
 
-
-/* cabezera*/
-QHeaderView::section {
-background-color:#f1f2f3;
-border-style: none;
-height:40px;
-font-family: &quot;Roboto&quot;;
-font-style: normal;
-font-weight: 700;
-font-size: 13px;
-line-height: 14px;
-letter-spacing: 0.04em;
-color: #6B7280;
-
-
+/* Estilo de las Celdas */
+QTableWidget::item {
+    border-bottom: 3px solid #f3f4f6;
+    padding: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
-
-QHeaderView::section:horizontal{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #212529;
-
+/* Estilo de las Celdas Seleccionadas */
+QTableWidget::item:selected {
+    background: #465e5f; /* Fondo más claro para la celda seleccionada */
+    color: #ffffff; /* Color de texto claro para las celdas seleccionadas */
 }
 
-
-QTableWidget::disabled{
-    background-color:#acacac;
+/* Estilo de las Celdas Deshabilitadas */
+QTableWidget::disabled {
+    background-color: #acacac;
     border: 1px solid #32414B;
     color: #656565;
-    gridline-color: #656565;}
-
-/*bordes internos*/
-QTableWidget::item {
-	border-bottom: 3px solid #f3f4f6;
-
+    gridline-color: #656565;
 }
 
-QTableWidget:item:selected{
-	background:white;/*color-seleccion*/
-color: #2c3d3e;
+/* Estilo de las Secciones de la Cabecera */
+QHeaderView::section {
+    background-color: #f1f2f3;
+    border-style: none;
+    height: 40px;
+    font-family: &quot;Roboto&quot;;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px; /* Tamaño de la letra de la cabecera */
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
 }
 
-
-
-
+/* Estilo de las Secciones Horizontales de la Cabecera */
+QHeaderView::section:horizontal {
+    font-size: 14px; /* Tamaño de la letra de la cabecera */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+   text-transform: uppercase; /* Convertir texto a mayúsculas */;
+    color: #212529;
+    border-bottom: 2px solid #e0e0e0; /* Separador inferior */
+}
 </string>
                              </property>
                              <property name="frameShape">
@@ -1811,7 +1837,7 @@ color: #2c3d3e;
                               <bool>false</bool>
                              </property>
                              <attribute name="horizontalHeaderVisible">
-                              <bool>false</bool>
+                              <bool>true</bool>
                              </attribute>
                              <attribute name="horizontalHeaderCascadingSectionResizes">
                               <bool>false</bool>
@@ -1874,7 +1900,7 @@ color: #2c3d3e;
                              </column>
                              <column>
                               <property name="text">
-                               <string>CANTIDAD ALUMNOS ASIGNADOS</string>
+                               <string>NRO ESTUDIANTES</string>
                               </property>
                              </column>
                              <column>
@@ -2046,8 +2072,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>393</width>
-                      <height>272</height>
+                      <width>1234</width>
+                      <height>575</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2869,8 +2895,8 @@ color: #000000;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>930</width>
-                      <height>296</height>
+                      <width>1232</width>
+                      <height>579</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
