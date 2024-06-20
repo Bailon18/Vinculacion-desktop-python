@@ -722,6 +722,54 @@ END //
 DELIMITER ;
 
 
+DROP PROCEDURE IF EXISTS guardar_vinculacion_procedure;
+DELIMITER //
+CREATE PROCEDURE guardar_vinculacion_procedure(
+    IN p_fecha_inicio DATE,
+    IN p_codigo_ies VARCHAR(255),
+    IN p_campo_especifico VARCHAR(255),
+    IN p_periodo_academico VARCHAR(255),
+    IN p_intitucion_id INT,
+    IN p_tutor_id INT,
+    IN p_proyecto_id INT,
+    IN p_estado BOOLEAN,
+    OUT p_id_generado INT
+)
+BEGIN
+    -- Insertar los datos de vinculación
+    INSERT INTO vinculacion (
+        fecha_inicio, codigo_ies, campo_especifico, periodo_academico,
+        institucion_id, tutores_id, proyecto_id, estado
+    ) VALUES (
+        p_fecha_inicio, p_codigo_ies, p_campo_especifico, p_periodo_academico,
+        p_intitucion_id, p_tutor_id, p_proyecto_id, p_estado
+    );
+
+    -- Obtener el ID generado automáticamente
+    SET p_id_generado = LAST_INSERT_ID();
+END //
+DELIMITER ;
+
+-- Definición de variables para los parámetros de entrada
+SET @p_fecha_inicio = '2024-06-21';
+SET @p_codigo_ies = 'ABC123';
+SET @p_campo_especifico = '1-2A';
+SET @p_periodo_academico = 'P1-2023';
+SET @p_intitucion_id = 1;
+SET @p_tutor_id = 2;
+SET @p_proyecto_id = 3;
+SET @p_estado = TRUE;
+
+-- Llamar al procedimiento almacenado y obtener el ID generado
+CALL guardar_vinculacion_procedure(
+    @p_fecha_inicio, @p_codigo_ies, @p_campo_especifico, @p_periodo_academico,
+    @p_intitucion_id, @p_tutor_id, @p_proyecto_id, @p_estado, @p_id_generado
+);
+
+-- Mostrar el ID generado
+SELECT @p_id_generado AS id_generado;
+
+
 
 
 CALL ObtenerListaVinculacionesPorEstudiante('estudiante','carlos', 0, 10);

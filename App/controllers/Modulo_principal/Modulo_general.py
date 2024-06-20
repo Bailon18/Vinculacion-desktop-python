@@ -491,7 +491,7 @@ class Principal(QtWidgets.QMainWindow):
         
    
         respuesta_proyecto = self.conec_base.getDatos('SELECT id, nombre FROM proyecto')
-        respuesta_periodoacademico = self.conec_base.getDatos('SELECT COALESCE((SELECT DISTINCT periodo_academico FROM vinculacion),"P1-2023") AS periodo_academico;')
+        respuesta_periodoacademico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM vinculacion;')
         respuesta_tutores = self.conec_base.getDatos('SELECT id, CONCAT(nombres, " ", apellidos) AS nombres FROM tutores')
 
 

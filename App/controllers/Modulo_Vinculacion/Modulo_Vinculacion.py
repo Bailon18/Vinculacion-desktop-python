@@ -7,7 +7,7 @@ from PySide2.QtWidgets import QMessageBox
 import re
 
 from datetime import datetime
-from controllers.Modulo_Vinculacion.funciona_vinculacion import evento_tabla
+from controllers.Modulo_Vinculacion.funciona_vinculacion import evento_tabla, llenar_tabla_estudiantes_seleccinados
 from controllers.Modulo_utils.Funcion_validaciones import *
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
 
@@ -28,10 +28,16 @@ class Vinculacion(QtWidgets.QDialog):
         
         self.conec_base = BaseDatos()
         
+        self.vinculacion.id_estudiante_seleccionado.setVisible(False)
+        
+        self.lista_id_estudiantes = []
+        
 
         self.parent = parent
         
         evento_tabla(self)
+        
+        
         
         self.datos_inicializacion()
         
@@ -67,10 +73,20 @@ class Vinculacion(QtWidgets.QDialog):
         
         self.vinculacion.line_buscar_estudiante.textChanged.connect(self.buscar_estudiante)
         
+        self.vinculacion.line_codigo_ies.textChanged.connect(self.validar_codigo_ies)
+        self.vinculacion.line_campo_especifico.textChanged.connect(self.validar_campo_especifico)
+        self.vinculacion.line_periodo_academico.textChanged.connect(self.validar_periodo_academico)
+        self.vinculacion.cbo_institucion.currentIndexChanged.connect(self.on_validar_combobox_institucion)
+        self.vinculacion.cbo_proyecto.currentIndexChanged.connect(self.on_validar_combobox_proyecto)
+        self.vinculacion.cbo_tutor.currentIndexChanged.connect(self.on_validar_combobox_tutor)
+        
         
         self.STYLE_ERROR = "color: #D32F2F; font-family: Roboto; font-style: normal; font-weight: bold; font-size: 12px; visibility: visible;"
         self.STYLE_VALID = "border: 2px solid green;"
         self.STYLE_INVALID = "border: 2px solid red;"
+        
+        self.vinculacion.btn_agregar_estu_seleccionado.clicked.connect(lambda: self.agregar_estudiante_seleccionado())
+        self.vinculacion.btn_agregar_vinculacion.clicked.connect(lambda: self.guardar_vinculacion())
         
 
         # self.vinculacion.line_identificacion.textChanged.connect(lambda: self.vinculacion.line_identificacion.setToolTip('Formato: 10 digitos\n Ejm: 992929394-9'))
@@ -126,9 +142,107 @@ class Vinculacion(QtWidgets.QDialog):
             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
         else:
             super().keyPressEvent(qKeyEvent)
-           
-           
-           
+    
+    def validar_codigo_es(self, codigo_ies):
+        codigo_ies_stripped = codigo_ies.strip()
+        if not codigo_ies_stripped:
+            return "Campo vacío"
+        elif not codigo_ies_stripped.isdigit():
+            return "Debe contener solo números."
+        elif len(codigo_ies_stripped) != 4:
+            return "Debe tener 4 dígitos."
+        return ""
+    
+    def validar_campo_especifico_es(self,campo_especifico):
+        campo_especifico_stripped = campo_especifico.strip()
+        if not campo_especifico_stripped:
+            return "Campo vacío"
+        elif not re.match(r'^\d-\d[A-Za-z]$', campo_especifico_stripped):
+            return "Formato inválido. Ejemplo: 1-2A"
+        return ""
+    
+    def validar_periodo_academico_es(self, periodo_academico):
+        campo_periodo_stripped = periodo_academico.strip()
+        if not campo_periodo_stripped:
+            return "Campo vacío"
+        elif not re.match(r'^P[0-9]-20[0-9]{2}$', campo_periodo_stripped):
+            return "Formato inválido. Ejemplo: P1-2023, P2-2023 ..."
+        return ""
+
+    def validar_codigo_ies(self):
+        codigo_ies = self.vinculacion.line_codigo_ies.text()
+        respuesta = self.validar_codigo_es(codigo_ies)
+        if respuesta:
+            self.vinculacion.line_codigo_ies.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorCodigoies.setText(respuesta)
+            self.vinculacion.errorCodigoies.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.line_codigo_ies.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorCodigoies.setStyleSheet("")
+            self.vinculacion.errorCodigoies.setText("")
+            
+    def validar_campo_especifico(self):
+        campo_escifico = self.vinculacion.line_campo_especifico.text()
+        respuesta = self.validar_campo_especifico_es(campo_escifico)
+        if respuesta:
+            self.vinculacion.line_campo_especifico.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorCampoEspecifico.setText(respuesta)
+            self.vinculacion.errorCampoEspecifico.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.line_campo_especifico.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorCampoEspecifico.setStyleSheet("")
+            self.vinculacion.errorCampoEspecifico.setText("")
+            
+    def validar_periodo_academico(self):
+        periodo_academico = self.vinculacion.line_periodo_academico.text()
+        respuesta = self.validar_periodo_academico_es(periodo_academico)
+        if respuesta:
+            self.vinculacion.line_periodo_academico.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorCampoPeriodo.setText(respuesta)
+            self.vinculacion.errorCampoPeriodo.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.line_periodo_academico.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorCampoPeriodo.setStyleSheet("")
+            self.vinculacion.errorCampoPeriodo.setText("")
+            
+    def on_validar_combobox_institucion(self):
+
+        codigo_institucion = self.vinculacion.cbo_institucion.currentIndex()
+        if codigo_institucion == 0:
+            self.vinculacion.cbo_institucion.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorInstitucion.setText('Debe seleccionar una institución.')
+            self.vinculacion.errorInstitucion.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.cbo_institucion.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorInstitucion.setStyleSheet("")
+            self.vinculacion.errorInstitucion.setText("")
+            
+    def on_validar_combobox_proyecto(self):
+ 
+        codigo_proyecto = self.vinculacion.cbo_proyecto.currentIndex()
+        if codigo_proyecto == 0:
+            self.vinculacion.cbo_proyecto.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorProyecto.setText('Debe seleccionar un proyecto.')
+            self.vinculacion.errorProyecto.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.cbo_proyecto.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorProyecto.setStyleSheet("")
+            self.vinculacion.errorProyecto.setText("")
+            
+    def on_validar_combobox_tutor(self):
+ 
+        codigo_tutor = self.vinculacion.cbo_tutor.currentIndex()
+        
+        if codigo_tutor == 0:
+            self.vinculacion.cbo_tutor.setStyleSheet(self.STYLE_INVALID)
+            self.vinculacion.errorTutor.setText('Debe seleccionar un tutor.')
+            self.vinculacion.errorTutor.setStyleSheet(self.STYLE_ERROR)
+        else:
+            self.vinculacion.cbo_tutor.setStyleSheet(self.STYLE_VALID)
+            self.vinculacion.errorTutor.setStyleSheet("")
+            self.vinculacion.errorTutor.setText("")
+        
+
     def datos_inicializacion(self):
         
         self.vinculacion.date_fecha_inicio.setDate(QDate.currentDate())
@@ -139,39 +253,51 @@ class Vinculacion(QtWidgets.QDialog):
     
 
         self.vinculacion.cbo_institucion.clear()
-        #self.vinculacion.cbo_institucion.addItem("Seleccione institucion practica", None)
+        self.vinculacion.cbo_institucion.addItem("Seleccione institucion practica", None)
         for id, nombre in respuestaintitucion:
             self.vinculacion.cbo_institucion.addItem(nombre, id)
             
 
         self.vinculacion.cbo_tutor.clear()
-        #self.vinculacion.cbo_tutor.addItem("Seleccione tutor", None)
+        self.vinculacion.cbo_tutor.addItem("Seleccione tutor", None)
         for id, nombres in respuesta_tutores:
             self.vinculacion.cbo_tutor.addItem(nombres, id)
             
             
         self.vinculacion.cbo_proyecto.clear()
-        #self.vinculacion.cbo_proyecto.addItem("Seleccione proyecto", None)
+        self.vinculacion.cbo_proyecto.addItem("Seleccione proyecto", None)
         for id, nombres in respuesta_proyecto:
             self.vinculacion.cbo_proyecto.addItem(nombres, id)
-            
-            
+               
     def buscar_estudiante(self):
         search_text = self.vinculacion.line_buscar_estudiante.text().strip()
         
         if search_text:
-            query = ("SELECT id, CONCAT(nombres, ' ', apellidos) AS nombre_completo, nro_identificacion "
-                    "FROM estudiantes "
-                    "WHERE nombres LIKE %s OR apellidos LIKE %s OR nro_identificacion LIKE %s")
+            
+            query = (
+                "SELECT id, CONCAT(nombres, ' ', apellidos) AS nombre_completo, nro_identificacion "
+                "FROM estudiantes "
+                "WHERE (nombres LIKE %s OR apellidos LIKE %s OR nro_identificacion LIKE %s) "
+                "AND NOT EXISTS ("
+                "    SELECT 1 FROM estudiantes_vinculacion "
+                "    WHERE estudiantes.id = estudiantes_vinculacion.estudiantes_id"
+                ")"
+            )
             
             search_term = f"%{search_text}%"
+            
+            
+            
             result = self.conec_base.getDatos_condicion(query, (search_term, search_term, search_term))
         
             if result:
                 self.vinculacion.line_nombre_seleccionado.setText(result[0][1])
                 self.vinculacion.line_cedula_seleccionado.setText(result[0][2])
+                self.vinculacion.id_estudiante_seleccionado.setText(str(result[0][0]))
                 self.vinculacion.line_nombre_seleccionado.setStyleSheet(self.STYLE_VALID)
                 self.vinculacion.line_cedula_seleccionado.setStyleSheet(self.STYLE_VALID)
+                self.vinculacion.errorBuscar.setText("")
+                self.vinculacion.line_buscar_estudiante.setStyleSheet(self.STYLE_VALID)
                 self.vinculacion.errorEstudianteNoEncontrado.setText("")
             else:
                 self.vinculacion.line_nombre_seleccionado.setStyleSheet(self.STYLE_INVALID)
@@ -187,6 +313,109 @@ class Vinculacion(QtWidgets.QDialog):
             self.vinculacion.line_nombre_seleccionado.clear()
             self.vinculacion.line_cedula_seleccionado.clear()
                 
+    def agregar_estudiante_seleccionado(self):
+        nombre_estudiante = self.vinculacion.line_nombre_seleccionado.text().strip()
+        
+        if not nombre_estudiante:
+            QtWidgets.QMessageBox.warning(self, 'Advertencia', 'Debe buscar un estudiante antes de asignarlo.')
+            return
+        
+        id_estudiante = self.vinculacion.id_estudiante_seleccionado.text()
+        
+        for estudiante in self.lista_id_estudiantes:
+            if estudiante[0] == id_estudiante:
+                QtWidgets.QMessageBox.warning(self, 'Advertencia', 'El estudiante ya está en la lista.')
+                return
+        
+        cedula_estudiante = self.vinculacion.line_cedula_seleccionado.text().strip()
+        estado_vinculacion = self.vinculacion.cbo_estado_vinculacion.currentText()
+        
+        self.lista_id_estudiantes.append([id_estudiante, cedula_estudiante, nombre_estudiante, estado_vinculacion])
+        
+        llenar_tabla_estudiantes_seleccinados(self, self.vinculacion.tabla_estudiante_seleccionado, self.lista_id_estudiantes)
+        
+        # Limpiar los campos y estilos después de agregar
+        self.vinculacion.line_cedula_seleccionado.setText("")
+        self.vinculacion.line_nombre_seleccionado.setText("")
+        self.vinculacion.line_buscar_estudiante.setText("")
+        self.vinculacion.line_cedula_seleccionado.setStyleSheet("")
+        self.vinculacion.line_nombre_seleccionado.setStyleSheet("")
+        self.vinculacion.line_buscar_estudiante.setStyleSheet("")
+        self.vinculacion.errorBuscar.setText("")
+
+    def campos_validados(self):
+        return (self.vinculacion.line_codigo_ies.styleSheet() == self.STYLE_VALID and
+                self.vinculacion.line_campo_especifico.styleSheet() == self.STYLE_VALID and
+                self.vinculacion.line_periodo_academico.styleSheet() == self.STYLE_VALID and
+                self.vinculacion.cbo_institucion.styleSheet() == self.STYLE_VALID and
+                self.vinculacion.cbo_tutor.styleSheet() == self.STYLE_VALID and
+                self.vinculacion.cbo_proyecto.styleSheet() == self.STYLE_VALID)
+    
+    def guardar_vinculacion(self):
+        if not self.conec_base.verificarConexionInternet():
+            QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+            return
+            
+        self.validar_codigo_ies()
+        self.validar_campo_especifico()
+        self.validar_periodo_academico()
+        self.on_validar_combobox_institucion()
+        self.on_validar_combobox_proyecto()
+        self.on_validar_combobox_tutor()
+        
+        tiene_data = self.vinculacion.tabla_estudiante_seleccionado.findItems("*", QtCore.Qt.MatchWildcard)
+        if not tiene_data:
+            QMessageBox.warning(self, "Error", "Debe seleccionar al menos un estudiante para vinculación.")
+            return
+        
+        if self.campos_validados():
+            confirmacion = QMessageBox.question(self, "Confirmar Guardar", "¿Está seguro de guardar la nueva vinculación?", QMessageBox.Yes | QMessageBox.No)
+            
+          
+            fecha_inicio = self.vinculacion.date_fecha_inicio.date().toString("yyyy-MM-dd")
+            cogido_ies = self.vinculacion.line_codigo_ies.text().strip()
+            campo_especifico = self.vinculacion.line_campo_especifico.text().strip()
+            periodo_academico = self.vinculacion.line_periodo_academico.text().strip()
+            
+            intitucion_id = self.vinculacion.cbo_institucion.currentData()
+            tutor_id = self.vinculacion.cbo_tutor.currentData()
+            proyecto_id = self.vinculacion.cbo_proyecto.currentData()
+            
+            data_vinculacion = (fecha_inicio, cogido_ies, campo_especifico, periodo_academico, intitucion_id, tutor_id, proyecto_id, True)
+            
+            try:
+                id_vinculacion = self.conec_base.setDatosProcess("guardar_vinculacion_procedure", data_vinculacion)
+                
+                print(f"Vinculación guardada con ID: {id_vinculacion}")
+                
+                if id_vinculacion :
+                    datos_estudiantes_vinculados = self.preparar_datos_estudiantes(id_vinculacion)
+                    
+                    consulta_insert = (
+                        "INSERT INTO estudiantes_vinculacion "
+                        "(estudiantes_id, vinculacion_id, fecha_final, estado_vinculacion, nro_horas) "
+                        "VALUES (%s, %s, %s, %s, %s)"
+                    )
+                    self.conec_base.setDatosListFor(consulta_insert, datos_estudiantes_vinculados)
+                    
+                    QMessageBox.information(self, "Éxito", "Vinculación guardada correctamente.")
+                    self.parent.raizOpacidad.close()
+                    self.close()
+                    self.parent.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.parent.venPri.tabla_vinculacion)
+                    self.parent.actualizarInfoPaginacion('vinculacion', self.parent.venPri.lbl_pagina_vinculacion)
+
+            except Exception as e:
+                QMessageBox.critical(self, "Error de Base de Datos", f"Error al guardar la vinculación: {str(e)}")
+        
+
+    def preparar_datos_estudiantes(self, id_vinculacion):
+        datos_estudiantes_vinculados = []
+        for estudiante in self.lista_id_estudiantes:
+            datos_estudiante = [estudiante[0], id_vinculacion, None, 'Pendiente', 0]
+            datos_estudiantes_vinculados.append(datos_estudiante)
+        
+        return datos_estudiantes_vinculados
+      
     # def llenar_combobox(self, combobox, lista, longitud_maxima):
     #     for elemento in lista:
     #         id_elemento, nombre_elemento = elemento
