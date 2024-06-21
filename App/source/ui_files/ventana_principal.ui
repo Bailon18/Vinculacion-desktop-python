@@ -1223,7 +1223,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -1662,7 +1661,6 @@ color: #6B7280;}</string>
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 QPushButton:hover {
@@ -1752,7 +1750,6 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -1837,7 +1834,7 @@ QHeaderView::section:horizontal {
                               <bool>false</bool>
                              </property>
                              <attribute name="horizontalHeaderVisible">
-                              <bool>true</bool>
+                              <bool>false</bool>
                              </attribute>
                              <attribute name="horizontalHeaderCascadingSectionResizes">
                               <bool>false</bool>
@@ -2072,8 +2069,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>393</width>
-                      <height>272</height>
+                      <width>1234</width>
+                      <height>575</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2895,8 +2892,8 @@ color: #000000;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>930</width>
-                      <height>296</height>
+                      <width>1232</width>
+                      <height>579</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2964,7 +2961,7 @@ border-radius: 10px;
                            <item row="0" column="0">
                             <widget class="QStackedWidget" name="stacked_administracion">
                              <property name="currentIndex">
-                              <number>4</number>
+                              <number>0</number>
                              </property>
                              <widget class="QWidget" name="page_estudiantes">
                               <layout class="QGridLayout" name="gridLayout_67">
@@ -3034,7 +3031,6 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
 }
 
 QPushButton:hover {
@@ -3188,7 +3184,6 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -3427,7 +3422,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -3620,7 +3614,7 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+
 }
 
 QPushButton:hover {
@@ -3774,7 +3768,6 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -4013,7 +4006,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -4209,7 +4201,7 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+
 }
 
 QPushButton:hover {
@@ -4363,7 +4355,6 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -4562,7 +4553,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -4758,7 +4748,7 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+ 
 }
 
 QPushButton:hover {
@@ -4912,7 +4902,6 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -5121,7 +5110,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -5317,7 +5305,7 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+
 }
 
 QPushButton:hover {
@@ -5471,7 +5459,7 @@ QTableWidget {
 QTableWidget::item {
     border-bottom: 3px solid #f3f4f6;
     padding: 5px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transición suave */
+
 }
 
 /* Estilo de las Celdas Seleccionadas */
@@ -5685,7 +5673,6 @@ QPushButton {
     background: #3f5758;
     border: none; /* Eliminamos el borde por defecto */
     border-radius: 8px; /* Ajustamos el border-radius */
-    transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
 }
 
 /* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
@@ -5843,7 +5830,6 @@ QPushButton {
     color: #6B7280;
     border-bottom: 3px solid transparent;
     padding: 10px 20px;
-    transition: color 0.3s ease, border-bottom 0.3s ease, font-size 0.3s ease; /* Transición suave */
 	text-transform: uppercase; /* Convertir texto a mayúsculas */
 }
 

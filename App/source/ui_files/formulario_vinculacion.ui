@@ -381,7 +381,7 @@ QLabel#errorCodigoies, #errorCampoEspecifico, #errorEstudianteNoEncontrado,#erro
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-375</y>
          <width>802</width>
          <height>950</height>
         </rect>
@@ -1009,7 +1009,6 @@ QPushButton#btn_agregar_estu_seleccionado {
     background: transparent;
     border: 2px solid #3f5758; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
 }
 
 QPushButton#btn_agregar_estu_seleccionado:hover {
@@ -1379,7 +1378,7 @@ QPushButton {
     background: #3f5758;
     border: none; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease; 
+
 }
 
 QPushButton:hover {
@@ -1408,7 +1407,6 @@ QPushButton#cancelButton {
     background: transparent;
     border: 2px solid #3f5758; 
     border-radius: 8px; 
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; 
 }
 
 QPushButton#cancelButton:hover {
@@ -1434,21 +1432,21 @@ QPushButton#cancelButton:pressed {
       <widget class="QPushButton" name="btn_agregar_vinculacion">
        <property name="geometry">
         <rect>
-         <x>610</x>
+         <x>580</x>
          <y>10</y>
-         <width>180</width>
+         <width>200</width>
          <height>40</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
-         <width>180</width>
+         <width>200</width>
          <height>40</height>
         </size>
        </property>
        <property name="maximumSize">
         <size>
-         <width>110</width>
+         <width>200</width>
          <height>40</height>
         </size>
        </property>
@@ -1475,7 +1473,7 @@ QPushButton#cancelButton:pressed {
       <widget class="QPushButton" name="cancelButton">
        <property name="geometry">
         <rect>
-         <x>480</x>
+         <x>450</x>
          <y>10</y>
          <width>120</width>
          <height>40</height>

@@ -266,16 +266,14 @@ def btn_detalle_vinculacion(boton,fila,tabla,parent):
     boton.clicked.connect(lambda: btn_detalle_acciones_vinculacion(fila,parent)) 
     
 def btn_editar_acciones_vinculacion(fila,parent):
-    pass
-    
-    # from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
+ 
+    from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
 
-    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
-    # estado = parent.venPri.tabla_principal.item(fila, 2).text()
-    # parent.raizOpacidad.resize(parent.width(), parent.height())
-    # parent.raizOpacidad.show()
-    # Vinculacion(vinculacion_id, nombre_estudiante,estado,  "actualizar", parent).exec_()
+    vinculacion_id = parent.venPri.tabla_vinculacion.item(fila, 0).text()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    
+    Vinculacion(vinculacion_id, "editar", parent).exec_()
 
 def btn_eliminar_acciones_vinculacion(fila, parent):
     pass
@@ -674,7 +672,7 @@ def llenar_tabla_proyectos(parent, tabla, dato):
                 
                 if columna == 2:
                     estado_columna = str(dato[fila][columna])
-                    print('c ', estado_columna)
+                    # print('c ', estado_columna)
                     color_texto = QtGui.QColor('green') if estado_columna == '1' else \
                                 QtGui.QColor('red')
                     item.setForeground(QtGui.QBrush(color_texto))
@@ -772,7 +770,7 @@ def llenar_tabla_carreras(parent, tabla, dato):
                 
                 if columna == 2:
                     estado_columna = str(dato[fila][columna])
-                    print('c ', estado_columna)
+                    # print('c ', estado_columna)
                     color_texto = QtGui.QColor('green') if estado_columna == '1' else \
                                 QtGui.QColor('red')
                     item.setForeground(QtGui.QBrush(color_texto))
@@ -871,7 +869,7 @@ def llenar_tabla_institucion(parent, tabla, dato):
                 
                 if columna == 3:
                     estado_columna = str(dato[fila][columna])
-                    print('c ', estado_columna)
+                    # print('c ', estado_columna)
                     color_texto = QtGui.QColor('green') if estado_columna == '1' else \
                                 QtGui.QColor('red')
                     item.setForeground(QtGui.QBrush(color_texto))

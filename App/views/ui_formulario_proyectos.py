@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_proyectospSWPjS.ui'
+## Form generated from reading UI file 'formulario_proyectosUyMVCb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -260,7 +260,6 @@ class Ui_FormularioProyectos(object):
 "    background: #3f5758;\n"
 "    border: none; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease; \n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -286,11 +285,10 @@ class Ui_FormularioProyectos(object):
 "    letter-spacing: 0.02em;\n"
 "    color: #3f5758;\n"
 "    padding: 8px 16px;\n"
-"    back"
-                        "ground: transparent;\n"
+"    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
-"    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
+"    b"
+                        "order-radius: 8px; \n"
 "}\n"
 "\n"
 "QPushButton#cancelButton:hover {\n"

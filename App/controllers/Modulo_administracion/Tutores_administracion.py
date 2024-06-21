@@ -116,8 +116,8 @@ class TutoresAdmin(QtWidgets.QDialog):
 
     def consultar_existencia_correo(self, correo):
         
-        print('correo ', correo)
-        print('correo_actual ', self.correo_actual)
+        # print('correo ', correo)
+        # print('correo_actual ', self.correo_actual)
         if correo != self.correo_actual:
             consulta = "SELECT COUNT(*) FROM tutores WHERE correo = %s"
             respuesta = self.control_base.getDatos_condicion(consulta, (correo,))
@@ -390,7 +390,7 @@ class TutoresAdmin(QtWidgets.QDialog):
             
             self.identificacion_actual = tutor[4]
             self.correo_actual = tutor[7]
-            print('self.correo_actual ', self.correo_actual)
+            # print('self.correo_actual ', self.correo_actual)
             self.telefono_actual = tutor[9]
             
             # Asignar nombre de archivo si existe

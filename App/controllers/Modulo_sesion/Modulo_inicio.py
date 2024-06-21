@@ -79,7 +79,7 @@ class Login(QtWidgets.QDialog):
             
                 datos_usuario = resultado[0][0]
 
-                print('RESULADTA ', datos_usuario)
+                # print('RESULADTA ', datos_usuario)
 
                 estado_usuario = datos_usuario[6]
                 if estado_usuario == 'Activo':

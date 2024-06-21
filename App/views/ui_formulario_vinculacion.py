@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_vinculacionYklVMu.ui'
+## Form generated from reading UI file 'formulario_vinculacionODpFrs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -291,7 +291,7 @@ class Ui_FormularioVinculacion(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 802, 950))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, -375, 802, 950))
         self.scroll_registro_estudiante.setMinimumSize(QSize(0, 950))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"
@@ -490,7 +490,6 @@ class Ui_FormularioVinculacion(object):
 "    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
 "}\n"
 "\n"
 "QPushButton#btn_agregar_estu_seleccionado:hover {\n"
@@ -673,7 +672,7 @@ class Ui_FormularioVinculacion(object):
 "    background: #3f5758;\n"
 "    border: none; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease; \n"
+"\n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -699,11 +698,10 @@ class Ui_FormularioVinculacion(object):
 "    letter-spacing: 0.02em;\n"
 "    color: #3f5758;\n"
 "    padding: 8px 16px;\n"
-"    back"
-                        "ground: transparent;\n"
+"    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
-"    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
+""
+                        "    border-radius: 8px; \n"
 "}\n"
 "\n"
 "QPushButton#cancelButton:hover {\n"
@@ -723,9 +721,9 @@ class Ui_FormularioVinculacion(object):
         self.frame_pie_pagina.setFrameShadow(QFrame.Raised)
         self.btn_agregar_vinculacion = QPushButton(self.frame_pie_pagina)
         self.btn_agregar_vinculacion.setObjectName(u"btn_agregar_vinculacion")
-        self.btn_agregar_vinculacion.setGeometry(QRect(610, 10, 180, 40))
-        self.btn_agregar_vinculacion.setMinimumSize(QSize(180, 40))
-        self.btn_agregar_vinculacion.setMaximumSize(QSize(110, 40))
+        self.btn_agregar_vinculacion.setGeometry(QRect(580, 10, 200, 40))
+        self.btn_agregar_vinculacion.setMinimumSize(QSize(200, 40))
+        self.btn_agregar_vinculacion.setMaximumSize(QSize(200, 40))
         self.btn_agregar_vinculacion.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_agregar_vinculacion.setStyleSheet(u"")
         icon2 = QIcon()
@@ -734,7 +732,7 @@ class Ui_FormularioVinculacion(object):
         self.btn_agregar_vinculacion.setIconSize(QSize(15, 21))
         self.cancelButton = QPushButton(self.frame_pie_pagina)
         self.cancelButton.setObjectName(u"cancelButton")
-        self.cancelButton.setGeometry(QRect(480, 10, 120, 40))
+        self.cancelButton.setGeometry(QRect(450, 10, 120, 40))
         self.cancelButton.setMinimumSize(QSize(120, 40))
         self.cancelButton.setMaximumSize(QSize(120, 40))
         self.cancelButton.setCursor(QCursor(Qt.PointingHandCursor))

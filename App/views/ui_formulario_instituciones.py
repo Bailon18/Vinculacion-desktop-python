@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_institucionesmvWlRN.ui'
+## Form generated from reading UI file 'formulario_institucionesxWMFvO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -186,7 +186,6 @@ class Ui_FormularioInstitucion(object):
 "    background: #3f5758;\n"
 "    border: none; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease; \n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -199,12 +198,12 @@ class Ui_FormularioInstitucion(object):
 "QPushButton:pressed {\n"
 "    background: #2e4546;\n"
 "    border: none;\n"
-""
-                        "    border-radius: 8px;\n"
+"    border-radius: 8px;\n"
 "}\n"
 "\n"
 "\n"
-"/* Bot\u00f3n Cancelar */\n"
+"/* Bot\u00f3n Cance"
+                        "lar */\n"
 "QPushButton#cancelButton {\n"
 "    font-family: Roboto;\n"
 "    font-style: normal;\n"
@@ -216,7 +215,7 @@ class Ui_FormularioInstitucion(object):
 "    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
+"\n"
 "}\n"
 "\n"
 "QPushButton#cancelButton:hover {\n"
@@ -307,7 +306,7 @@ class Ui_FormularioInstitucion(object):
         self.cbo_tipoIdentificacion.setGeometry(QRect(10, 130, 221, 40))
         self.errorNombre = QLabel(self.frame_4)
         self.errorNombre.setObjectName(u"errorNombre")
-        self.errorNombre.setGeometry(QRect(10, 80, 431, 16))
+        self.errorNombre.setGeometry(QRect(10, 76, 431, 16))
         self.lbl11_4 = QLabel(self.frame_4)
         self.lbl11_4.setObjectName(u"lbl11_4")
         self.lbl11_4.setGeometry(QRect(10, 290, 221, 21))
@@ -347,7 +346,6 @@ class Ui_FormularioInstitucion(object):
 "    background: #3f5758;\n"
 "    border: none; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease; \n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -373,11 +371,10 @@ class Ui_FormularioInstitucion(object):
 "    letter-spacing: 0.02em;\n"
 "    color: #3f5758;\n"
 "    padding: 8px 16px;\n"
-"    background: t"
-                        "ransparent;\n"
+"    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
-"    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
+"    border-rad"
+                        "ius: 8px; \n"
 "}\n"
 "\n"
 "QPushButton#cancelButton:hover {\n"

@@ -291,7 +291,7 @@ class Principal(QtWidgets.QMainWindow):
     def abrir_ventana_vinculacion(self):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
-        Vinculacion(parent=self).exec_()
+        Vinculacion(parent=self, modo='nuevo').exec_()
        
        
     def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
@@ -319,8 +319,7 @@ class Principal(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.warning(self, 'Información', f'No se encontró ninguna vinculación con el nombre del {tipo} seleccionado.')
             self.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.venPri.tabla_vinculacion)
             self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion)
-
-          
+  
     def next_page(self, procedimiento, tabla, labels, tabla_diseno):
         self.offset += self.limit
         datoretorno = self.conec_base.getDatosProcess_condicion(procedimiento, [self.offset, self.limit])
@@ -530,7 +529,7 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.line_filtro_estudiante.blockSignals(False)
         elif tipo == 'periodo':
             periodo = self.venPri.cbo_filtro_periodo.currentData()
-            print('periodo ', periodo)
+            # print('periodo ', periodo)
             self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, periodo, 'periodo')
             self.venPri.cbo_filtro_proyecto.blockSignals(True)
             self.venPri.cbo_filtro_tutor.blockSignals(True)
@@ -565,6 +564,35 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.cbo_filtro_proyecto.blockSignals(False)
             self.venPri.cbo_filtro_periodo.blockSignals(False)
             self.venPri.cbo_filtro_tutor.blockSignals(False)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     # def configuracion_ventana(self):
         

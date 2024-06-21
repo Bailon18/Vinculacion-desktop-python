@@ -20,45 +20,33 @@ from db.Modulo_base import BaseDatos
 
 class Vinculacion(QtWidgets.QDialog):
 
-    def __init__(self, vinculacion_id = None , nombre_estudiante = '', estado = '', modo="" , parent=None):
+    def __init__(self, vinculacion_id = None , modo="" , parent=None):
         
         super(Vinculacion, self).__init__(parent)
         self.vinculacion = Ui_FormularioVinculacion()
         self.vinculacion.setupUi(self)
         
         self.conec_base = BaseDatos()
-        
         self.vinculacion.id_estudiante_seleccionado.setVisible(False)
         
         self.lista_id_estudiantes = []
-        
-
+        self.lista_id_estudiantes_originales = []
         self.parent = parent
+        self.id_vinculacion_editado_db = 0
         
         evento_tabla(self)
         
-        
-        
         self.datos_inicializacion()
         
-        # self.vinculacion_id = vinculacion_id 
-        # self.nombre_estudiante = nombre_estudiante
-        # self.estado = estado
-        # self.modo = modo
+        self.vinculacion_id = vinculacion_id 
+        self.modo = modo
 
-        # if self.vinculacion_id and self.modo == "actualizar":
-        #     self.cargar_datos_vinculacion(self.vinculacion_id)
-        #     self.vinculacion.axax.setText('Actualizar Vinculación: ')
-        #     self.vinculacion.vinculacion_titulo.setText(self.nombre_estudiante)
+        if self.vinculacion_id and self.modo == "editar":
             
-        #     self.actualizar_titulo_estado()
-        #     self.vinculacion.vinculacion_estado.setText(self.estado)
-        #     self.vinculacion.btn_guardar.setText('Actualizar')
-            
-        # else:
-        #     self.vinculacion.vinculacion_estado.hide()
-        #     self.vinculacion.vinculacion_titulo.hide()
-        #     self.vinculacion.vinculacion_titulo_2.hide()
+            self.obtener_vinculacion_y_estudiantes(self.vinculacion_id)
+            self.vinculacion.lbl_titulo_ventana.setText('Editar vinculación')
+            self.vinculacion.btn_agregar_vinculacion.setText('Actualizar Vinculación')
+
             
         # self.evento_tipo_institucion()
             
@@ -70,6 +58,7 @@ class Vinculacion(QtWidgets.QDialog):
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint |QtCore.Qt.Tool | QtCore.Qt.MSWindowsFixedSizeDialogHint)
         self.vinculacion.btn_close.clicked.connect(lambda: self.cerrar_ui_vinculacion())
+        self.vinculacion.cancelButton.clicked.connect(lambda: self.cerrar_ui_vinculacion())
         
         self.vinculacion.line_buscar_estudiante.textChanged.connect(self.buscar_estudiante)
         
@@ -369,9 +358,126 @@ class Vinculacion(QtWidgets.QDialog):
             return
         
         if self.campos_validados():
-            confirmacion = QMessageBox.question(self, "Confirmar Guardar", "¿Está seguro de guardar la nueva vinculación?", QMessageBox.Yes | QMessageBox.No)
             
-          
+            if self.vinculacion_id == 0:
+                self.guardar_nueva_vinculacion()
+            else:
+                self.actualizar_vinculacion()
+            
+            # if(self.vinculacion_id  != 0 ):
+                
+            #     confirmacion = QMessageBox.question(self, "Confirmar Guardar", "¿Está seguro de guardar la nueva vinculación?", QMessageBox.Yes | QMessageBox.No)
+                
+            
+            #     if confirmacion == QMessageBox.Yes:
+            
+            #         fecha_inicio = self.vinculacion.date_fecha_inicio.date().toString("yyyy-MM-dd")
+            #         cogido_ies = self.vinculacion.line_codigo_ies.text().strip()
+            #         campo_especifico = self.vinculacion.line_campo_especifico.text().strip()
+            #         periodo_academico = self.vinculacion.line_periodo_academico.text().strip()
+                    
+            #         intitucion_id = self.vinculacion.cbo_institucion.currentData()
+            #         tutor_id = self.vinculacion.cbo_tutor.currentData()
+            #         proyecto_id = self.vinculacion.cbo_proyecto.currentData()
+                    
+            #         data_vinculacion = (fecha_inicio, cogido_ies, campo_especifico, periodo_academico, intitucion_id, tutor_id, proyecto_id, True)
+                    
+            #         try:
+            #             self.conec_base.setDatosProcess("guardar_vinculacion_procedure", data_vinculacion)
+            #             id_vinculacion = self.conec_base.getDatos("SELECT LAST_INSERT_ID()")
+                        
+            #             if id_vinculacion :
+            #                 datos_estudiantes_vinculados = self.preparar_datos_estudiantes(id_vinculacion[0][0])
+                            
+            #                 consulta_insert = (
+            #                     "INSERT INTO estudiantes_vinculacion "
+            #                     "(estudiantes_id, vinculacion_id, fecha_final, estado_vinculacion, nro_horas) "
+            #                     "VALUES (%s, %s, %s, %s, %s)"
+            #                 )
+            #                 self.conec_base.setDatosListFor(consulta_insert, datos_estudiantes_vinculados)
+                            
+            #                 QMessageBox.information(self, "Éxito", "Vinculación guardada correctamente.")
+            #                 self.parent.raizOpacidad.close()
+            #                 self.close()
+            #                 self.parent.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.parent.venPri.tabla_vinculacion)
+            #                 self.parent.actualizarInfoPaginacion('vinculacion', self.parent.venPri.lbl_pagina_vinculacion)
+
+            #         except Exception as e:
+            #             QMessageBox.critical(self, "Error de Base de Datos", f"Error al guardar la vinculación: {str(e)}")
+                        
+            # else:
+            #     self.actualizar_vinculacion()
+        
+    def preparar_datos_estudiantes(self, id_vinculacion):
+        datos_estudiantes_vinculados = []
+        for estudiante in self.lista_id_estudiantes:
+            datos_estudiante = [estudiante[0], id_vinculacion, None, 'Pendiente', 0]
+            datos_estudiantes_vinculados.append(datos_estudiante)
+        
+        return datos_estudiantes_vinculados
+    
+    
+    def obtener_vinculacion_y_estudiantes(self, vinculacion_id):
+        try:
+            # Paso 1: Obtener los datos de la vinculación
+            consulta_vinculacion = f"SELECT * FROM vinculacion WHERE id = {vinculacion_id}"
+            vinculacion_datos = self.conec_base.getDatos(consulta_vinculacion)
+            
+            if not vinculacion_datos:
+                QMessageBox.warning(self, "Error", "No se encontró la vinculación especificada.")
+                return
+            
+            vinculacion = vinculacion_datos[0]
+            
+            # print(f"Vinculación: {vinculacion}")
+            # Vinculación: (5, datetime.datetime(2024, 6, 19, 3, 19, 41), datetime.date(2023, 5, 5), '1036', '1-6A', 'P1-2024', 5, 5, 5, 1)
+            self.id_vinculacion_editado_db = vinculacion[0]
+            self.vinculacion.date_fecha_inicio.setDate(vinculacion[2])
+            self.vinculacion.line_codigo_ies.setText(vinculacion[3])
+            self.vinculacion.line_campo_especifico.setText(vinculacion[4])
+            self.vinculacion.line_periodo_academico.setText(vinculacion[5])
+            
+            self.set_combobox_by_user_data(self.vinculacion.cbo_institucion, vinculacion[6])
+            self.set_combobox_by_user_data(self.vinculacion.cbo_tutor, vinculacion[7])
+            self.set_combobox_by_user_data(self.vinculacion.cbo_proyecto, vinculacion[8])
+            
+            
+        
+            # Paso 2: Obtener los estudiantes vinculados
+            consulta_estudiantes = f"""
+                SELECT ev.estudiantes_id, e.nro_identificacion, e.nombres, ev.estado_vinculacion
+                FROM estudiantes_vinculacion ev
+                JOIN estudiantes e ON ev.estudiantes_id = e.id
+                WHERE ev.vinculacion_id = {vinculacion_id}
+            """
+            estudiantes_datos = self.conec_base.getDatos(consulta_estudiantes)
+            # print(f"Estudiantes vinculados: {estudiantes_datos}")
+            
+
+            # Paso 3: Formatear los datos de los estudiantes
+
+            for estudiante in estudiantes_datos:
+                id_estudiante, cedula_estudiante, nombre_estudiante, estado_vinculacion = estudiante
+                self.lista_id_estudiantes.append([id_estudiante, cedula_estudiante, nombre_estudiante, estado_vinculacion])
+                self.lista_id_estudiantes_originales.append([id_estudiante, cedula_estudiante, nombre_estudiante, estado_vinculacion])
+                # print("lista_id_estudiantes: ", self.lista_id_estudiantes)
+                # print("lista_id_estudiantes_originales: ", self.lista_id_estudiantes_originales)
+                llenar_tabla_estudiantes_seleccinados(self, self.vinculacion.tabla_estudiante_seleccionado, self.lista_id_estudiantes)
+
+        except Exception as e:
+            QMessageBox.critical(self, "Error de Base de Datos", f"Error al obtener los datos: {str(e)}")
+    
+    def set_combobox_by_user_data(self, combobox, user_data):
+        index = combobox.findData(user_data, role=Qt.UserRole) 
+        if index != -1:
+            combobox.setCurrentIndex(index)
+    
+
+    def guardar_nueva_vinculacion(self):
+        
+        confirmacion = QMessageBox.question(self, "Confirmar Guardar", "¿Está seguro de guardar la nueva vinculación?", QMessageBox.Yes | QMessageBox.No)
+        if confirmacion == QMessageBox.Yes:
+    
             fecha_inicio = self.vinculacion.date_fecha_inicio.date().toString("yyyy-MM-dd")
             cogido_ies = self.vinculacion.line_codigo_ies.text().strip()
             campo_especifico = self.vinculacion.line_campo_especifico.text().strip()
@@ -384,12 +490,11 @@ class Vinculacion(QtWidgets.QDialog):
             data_vinculacion = (fecha_inicio, cogido_ies, campo_especifico, periodo_academico, intitucion_id, tutor_id, proyecto_id, True)
             
             try:
-                id_vinculacion = self.conec_base.setDatosProcess("guardar_vinculacion_procedure", data_vinculacion)
-                
-                print(f"Vinculación guardada con ID: {id_vinculacion}")
+                self.conec_base.setDatosProcess("guardar_vinculacion_procedure", data_vinculacion)
+                id_vinculacion = self.conec_base.getDatos("SELECT LAST_INSERT_ID()")
                 
                 if id_vinculacion :
-                    datos_estudiantes_vinculados = self.preparar_datos_estudiantes(id_vinculacion)
+                    datos_estudiantes_vinculados = self.preparar_datos_estudiantes(id_vinculacion[0][0])
                     
                     consulta_insert = (
                         "INSERT INTO estudiantes_vinculacion "
@@ -405,16 +510,81 @@ class Vinculacion(QtWidgets.QDialog):
                     self.parent.actualizarInfoPaginacion('vinculacion', self.parent.venPri.lbl_pagina_vinculacion)
 
             except Exception as e:
-                QMessageBox.critical(self, "Error de Base de Datos", f"Error al guardar la vinculación: {str(e)}")
-        
+                        QMessageBox.critical(self, "Error de Base de Datos", f"Error al guardar la vinculación: {str(e)}")
 
-    def preparar_datos_estudiantes(self, id_vinculacion):
-        datos_estudiantes_vinculados = []
-        for estudiante in self.lista_id_estudiantes:
-            datos_estudiante = [estudiante[0], id_vinculacion, None, 'Pendiente', 0]
-            datos_estudiantes_vinculados.append(datos_estudiante)
+    def actualizar_vinculacion(self):
         
-        return datos_estudiantes_vinculados
+        confirmacion = QMessageBox.question(self, "Confirmar Actualización", "¿Está seguro de actualizar la vinculación?", QMessageBox.Yes | QMessageBox.No)
+        if confirmacion == QMessageBox.Yes:
+    
+            try:
+                # Actualizar datos de la vinculación
+                fecha_inicio = self.vinculacion.date_fecha_inicio.date().toString("yyyy-MM-dd")
+                cogido_ies = self.vinculacion.line_codigo_ies.text().strip()
+                campo_especifico = self.vinculacion.line_campo_especifico.text().strip()
+                periodo_academico = self.vinculacion.line_periodo_academico.text().strip()
+                intitucion_id = self.vinculacion.cbo_institucion.currentData()
+                tutor_id = self.vinculacion.cbo_tutor.currentData()
+                proyecto_id = self.vinculacion.cbo_proyecto.currentData()
+
+                consulta_update = """
+                    UPDATE vinculacion SET
+                    fecha_inicio = %s,
+                    codigo_ies = %s,
+                    campo_especifico = %s,
+                    periodo_academico = %s,
+                    institucion_id = %s,
+                    tutores_id = %s,
+                    proyecto_id = %s
+                    WHERE id = %s
+                """
+                self.conec_base.setDatos(consulta_update, (fecha_inicio, cogido_ies, campo_especifico, periodo_academico, intitucion_id, tutor_id, proyecto_id, self.id_vinculacion_editado_db))
+                
+                # Identificar los estudiantes a eliminar
+                estudiantes_a_eliminar = [est for est in self.lista_id_estudiantes_originales if est not in self.lista_id_estudiantes]
+                for estudiante in estudiantes_a_eliminar:
+                    consulta_delete = "DELETE FROM estudiantes_vinculacion WHERE vinculacion_id = %s AND estudiantes_id = %s"
+                    self.conec_base.setDatos(consulta_delete, (self.id_vinculacion_editado_db, estudiante[0]))
+
+                # Identificar los estudiantes a agregar
+                estudiantes_a_agregar = [est for est in self.lista_id_estudiantes if est not in self.lista_id_estudiantes_originales]
+                consulta_insert = """
+                    INSERT INTO estudiantes_vinculacion (estudiantes_id, vinculacion_id, fecha_final, estado_vinculacion, nro_horas)
+                    VALUES (%s, %s, %s, %s, %s)
+                """
+                for estudiante in estudiantes_a_agregar:
+                    self.conec_base.setDatos(consulta_insert, (estudiante[0], self.id_vinculacion_editado_db, None, estudiante[3], 0))
+                
+                QMessageBox.information(self, "Éxito", "Vinculación actualizada correctamente.")
+                self.parent.raizOpacidad.close()
+                self.close()
+                self.parent.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.parent.venPri.tabla_vinculacion)
+                self.parent.actualizarInfoPaginacion('vinculacion', self.parent.venPri.lbl_pagina_vinculacion)
+            except Exception as e:
+                QMessageBox.critical(self, "Error de Base de Datos", f"Error al actualizar la vinculación: {str(e)}")
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
       
     # def llenar_combobox(self, combobox, lista, longitud_maxima):
     #     for elemento in lista:

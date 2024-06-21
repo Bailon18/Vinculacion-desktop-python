@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_estudiantesPROWAK.ui'
+## Form generated from reading UI file 'formulario_estudiantesXyDZbi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -256,7 +256,7 @@ class Ui_FormularioEstudiante(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, -229, 474, 690))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 474, 690))
         self.scroll_registro_estudiante.setMinimumSize(QSize(0, 690))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"
@@ -469,7 +469,6 @@ class Ui_FormularioEstudiante(object):
 "    background: #3f5758;\n"
 "    border: none; \n"
 "    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease; \n"
 "}\n"
 "\n"
 "QPushButton:hover {\n"
@@ -495,11 +494,10 @@ class Ui_FormularioEstudiante(object):
 "    letter-spacing: 0.02em;\n"
 "    color: #3f5758;\n"
 "    padding: 8px 16px;\n"
-"    back"
-                        "ground: transparent;\n"
+"    background: transparent;\n"
 "    border: 2px solid #3f5758; \n"
-"    border-radius: 8px; \n"
-"    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; \n"
+"    b"
+                        "order-radius: 8px; \n"
 "}\n"
 "\n"
 "QPushButton#cancelButton:hover {\n"

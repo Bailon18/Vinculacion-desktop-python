@@ -120,7 +120,7 @@ class Seguimiento(QtWidgets.QDialog):
                 QMessageBox.information(self, 'Correcto', 'Seguimiento registrado correctamente')
             else:
              
-                print('Id seguimiento: ', self.seguimiento_seleccionado)
+                # print('Id seguimiento: ', self.seguimiento_seleccionado)
 
                 dato = [ self.seguimiento_seleccionado, fecha_seleccionada , observacion, int(hora_seguimiento) ]
                 self.conec_base.setDatosProcess('ActualizarSeguimientoTutor', (dato))
