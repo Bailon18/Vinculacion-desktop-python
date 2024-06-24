@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'ventana_principalLsgckb.ui'
+## Form generated from reading UI file 'ventana_principaleZRciZ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -1003,6 +1003,18 @@ class Ui_principal(object):
 
         self.gridLayout_17.addItem(self.verticalSpacer_4, 2, 1, 1, 1)
 
+        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.gridLayout_17.addItem(self.verticalSpacer_5, 0, 1, 1, 1)
+
+        self.horizontalSpacer_2 = QSpacerItem(19, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
+
+        self.gridLayout_17.addItem(self.horizontalSpacer_2, 1, 2, 1, 1)
+
+        self.verticalSpacer_6 = QSpacerItem(20, 19, QSizePolicy.Minimum, QSizePolicy.Fixed)
+
+        self.gridLayout_17.addItem(self.verticalSpacer_6, 3, 1, 1, 1)
+
         self.Scrollprincipal_2 = QScrollArea(self.pag2)
         self.Scrollprincipal_2.setObjectName(u"Scrollprincipal_2")
         self.Scrollprincipal_2.setStyleSheet(u"#Scrollprincipal_2{\n"
@@ -1028,88 +1040,6 @@ class Ui_principal(object):
         self.gridLayout_13.setSpacing(6)
         self.gridLayout_13.setObjectName(u"gridLayout_13")
         self.gridLayout_13.setContentsMargins(9, 16, -1, -1)
-        self.frame_8 = QFrame(self.frp1_2)
-        self.frame_8.setObjectName(u"frame_8")
-        self.frame_8.setMinimumSize(QSize(0, 60))
-        self.frame_8.setMaximumSize(QSize(16777215, 60))
-        self.frame_8.setStyleSheet(u"/* Estilo de la Etiqueta */\n"
-"QLabel {\n"
-"    font-family: Roboto;\n"
-"    font-style: normal;\n"
-"    font-weight: normal;\n"
-"    font-size: 14px;\n"
-"    line-height: 14px;\n"
-"    letter-spacing: 0.04em;\n"
-"    color: #6B7280;\n"
-"    margin-top: 20px; /* Incrementamos el margen superior para m\u00e1s espacio */\n"
-"}\n"
-"\n"
-"/* Estilo Base del Bot\u00f3n de la Paginaci\u00f3n */\n"
-"QPushButton {\n"
-"    font-family: Roboto;\n"
-"    font-style: normal;\n"
-"    font-weight: normal;\n"
-"    font-size: 15px;\n"
-"    letter-spacing: 0.02em;\n"
-"    color: white;\n"
-"    padding: 10px 20px; /* Incrementamos el padding para un mejor tama\u00f1o de bot\u00f3n */\n"
-"    background: #3f5758;\n"
-"    border: none; /* Eliminamos el borde por defecto */\n"
-"    border-radius: 8px; /* Ajustamos el border-radius */\n"
-"}\n"
-"\n"
-"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Pasar el Rat\u00f3n (Hover) */\n"
-"QPushButton:hover {\n"
-"    background: #4a6b6c; /* Color de fondo m\u00e1s claro */\n"
-"    border-r"
-                        "adius: 8px;\n"
-"}\n"
-"\n"
-"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Hacer Clic (Pressed) */\n"
-"QPushButton:pressed {\n"
-"    background: #2e4546; /* Color de fondo m\u00e1s oscuro */\n"
-"    border-radius: 8px;\n"
-"}")
-        self.frame_8.setFrameShadow(QFrame.Plain)
-        self.horizontalLayout_8 = QHBoxLayout(self.frame_8)
-        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
-        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_8.addItem(self.horizontalSpacer_21)
-
-        self.btn_pag_antes_seguimiento = QPushButton(self.frame_8)
-        self.btn_pag_antes_seguimiento.setObjectName(u"btn_pag_antes_seguimiento")
-        self.btn_pag_antes_seguimiento.setMinimumSize(QSize(59, 29))
-        self.btn_pag_antes_seguimiento.setMaximumSize(QSize(110, 20))
-        self.btn_pag_antes_seguimiento.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_pag_antes_seguimiento.setStyleSheet(u"")
-        self.btn_pag_antes_seguimiento.setIcon(icon8)
-        self.btn_pag_antes_seguimiento.setIconSize(QSize(15, 21))
-
-        self.horizontalLayout_8.addWidget(self.btn_pag_antes_seguimiento)
-
-        self.lbl_pagina_seguimiento = QLabel(self.frame_8)
-        self.lbl_pagina_seguimiento.setObjectName(u"lbl_pagina_seguimiento")
-        self.lbl_pagina_seguimiento.setMinimumSize(QSize(45, 0))
-        self.lbl_pagina_seguimiento.setStyleSheet(u"")
-        self.lbl_pagina_seguimiento.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
-
-        self.horizontalLayout_8.addWidget(self.lbl_pagina_seguimiento)
-
-        self.btn_pag_desp_seguimiento = QPushButton(self.frame_8)
-        self.btn_pag_desp_seguimiento.setObjectName(u"btn_pag_desp_seguimiento")
-        self.btn_pag_desp_seguimiento.setMinimumSize(QSize(59, 29))
-        self.btn_pag_desp_seguimiento.setMaximumSize(QSize(110, 20))
-        self.btn_pag_desp_seguimiento.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_pag_desp_seguimiento.setStyleSheet(u"")
-        self.btn_pag_desp_seguimiento.setIcon(icon9)
-        self.btn_pag_desp_seguimiento.setIconSize(QSize(15, 21))
-
-        self.horizontalLayout_8.addWidget(self.btn_pag_desp_seguimiento)
-
-
-        self.gridLayout_13.addWidget(self.frame_8, 4, 0, 1, 1)
-
         self.frame_9 = QFrame(self.frp1_2)
         self.frame_9.setObjectName(u"frame_9")
         self.frame_9.setStyleSheet(u"")
@@ -1218,7 +1148,7 @@ class Ui_principal(object):
         self.tabla_seguimiento.horizontalHeader().setVisible(True)
         self.tabla_seguimiento.horizontalHeader().setCascadingSectionResizes(False)
         self.tabla_seguimiento.horizontalHeader().setMinimumSectionSize(38)
-        self.tabla_seguimiento.horizontalHeader().setDefaultSectionSize(100)
+        self.tabla_seguimiento.horizontalHeader().setDefaultSectionSize(195)
         self.tabla_seguimiento.horizontalHeader().setHighlightSections(False)
         self.tabla_seguimiento.horizontalHeader().setProperty("showSortIndicator", False)
         self.tabla_seguimiento.horizontalHeader().setStretchLastSection(False)
@@ -1336,24 +1266,114 @@ class Ui_principal(object):
 "\n"
 "")
         self.frame_14.setFrameShadow(QFrame.Plain)
-        self.horizontalLayout_12 = QHBoxLayout(self.frame_14)
-        self.horizontalLayout_12.setSpacing(10)
-        self.horizontalLayout_12.setObjectName(u"horizontalLayout_12")
-        self.horizontalLayout_12.setContentsMargins(7, 9, 10, 12)
+        self.horizontalLayout_10 = QHBoxLayout(self.frame_14)
+        self.horizontalLayout_10.setObjectName(u"horizontalLayout_10")
+        self.cbo_filtro_periodo_seguimiento = QComboBox(self.frame_14)
+        self.cbo_filtro_periodo_seguimiento.addItem("")
+        self.cbo_filtro_periodo_seguimiento.setObjectName(u"cbo_filtro_periodo_seguimiento")
+        self.cbo_filtro_periodo_seguimiento.setMaximumSize(QSize(265, 16777215))
+
+        self.horizontalLayout_10.addWidget(self.cbo_filtro_periodo_seguimiento)
+
+        self.cbo_filtro_proyecto_seguimiento = QComboBox(self.frame_14)
+        self.cbo_filtro_proyecto_seguimiento.addItem("")
+        self.cbo_filtro_proyecto_seguimiento.setObjectName(u"cbo_filtro_proyecto_seguimiento")
+        self.cbo_filtro_proyecto_seguimiento.setMinimumSize(QSize(0, 0))
+
+        self.horizontalLayout_10.addWidget(self.cbo_filtro_proyecto_seguimiento)
+
         self.line_busqueda_seguimiento = QLineEdit(self.frame_14)
         self.line_busqueda_seguimiento.setObjectName(u"line_busqueda_seguimiento")
-        self.line_busqueda_seguimiento.setMinimumSize(QSize(0, 40))
-        self.line_busqueda_seguimiento.setMaximumSize(QSize(16777215, 40))
+        self.line_busqueda_seguimiento.setMinimumSize(QSize(244, 40))
+        self.line_busqueda_seguimiento.setMaximumSize(QSize(244, 16777215))
         self.line_busqueda_seguimiento.setStyleSheet(u"")
 
-        self.horizontalLayout_12.addWidget(self.line_busqueda_seguimiento)
-
-        self.horizontalSpacer_31 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
-
-        self.horizontalLayout_12.addItem(self.horizontalSpacer_31)
+        self.horizontalLayout_10.addWidget(self.line_busqueda_seguimiento)
 
 
         self.gridLayout_13.addWidget(self.frame_14, 1, 0, 1, 1)
+
+        self.frame_8 = QFrame(self.frp1_2)
+        self.frame_8.setObjectName(u"frame_8")
+        self.frame_8.setMinimumSize(QSize(0, 60))
+        self.frame_8.setMaximumSize(QSize(16777215, 60))
+        self.frame_8.setStyleSheet(u"/* Estilo de la Etiqueta */\n"
+"QLabel {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 14px;\n"
+"    line-height: 14px;\n"
+"    letter-spacing: 0.04em;\n"
+"    color: #6B7280;\n"
+"    margin-top: 20px; /* Incrementamos el margen superior para m\u00e1s espacio */\n"
+"}\n"
+"\n"
+"/* Estilo Base del Bot\u00f3n de la Paginaci\u00f3n */\n"
+"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 10px 20px; /* Incrementamos el padding para un mejor tama\u00f1o de bot\u00f3n */\n"
+"    background: #3f5758;\n"
+"    border: none; /* Eliminamos el borde por defecto */\n"
+"    border-radius: 8px; /* Ajustamos el border-radius */\n"
+"}\n"
+"\n"
+"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Pasar el Rat\u00f3n (Hover) */\n"
+"QPushButton:hover {\n"
+"    background: #4a6b6c; /* Color de fondo m\u00e1s claro */\n"
+"    border-r"
+                        "adius: 8px;\n"
+"}\n"
+"\n"
+"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Hacer Clic (Pressed) */\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546; /* Color de fondo m\u00e1s oscuro */\n"
+"    border-radius: 8px;\n"
+"}")
+        self.frame_8.setFrameShadow(QFrame.Plain)
+        self.horizontalLayout_8 = QHBoxLayout(self.frame_8)
+        self.horizontalLayout_8.setObjectName(u"horizontalLayout_8")
+        self.horizontalSpacer_21 = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout_8.addItem(self.horizontalSpacer_21)
+
+        self.btn_pag_antes_seguimiento = QPushButton(self.frame_8)
+        self.btn_pag_antes_seguimiento.setObjectName(u"btn_pag_antes_seguimiento")
+        self.btn_pag_antes_seguimiento.setMinimumSize(QSize(59, 29))
+        self.btn_pag_antes_seguimiento.setMaximumSize(QSize(110, 20))
+        self.btn_pag_antes_seguimiento.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_pag_antes_seguimiento.setStyleSheet(u"")
+        self.btn_pag_antes_seguimiento.setIcon(icon8)
+        self.btn_pag_antes_seguimiento.setIconSize(QSize(15, 21))
+
+        self.horizontalLayout_8.addWidget(self.btn_pag_antes_seguimiento)
+
+        self.lbl_pagina_seguimiento = QLabel(self.frame_8)
+        self.lbl_pagina_seguimiento.setObjectName(u"lbl_pagina_seguimiento")
+        self.lbl_pagina_seguimiento.setMinimumSize(QSize(45, 0))
+        self.lbl_pagina_seguimiento.setStyleSheet(u"")
+        self.lbl_pagina_seguimiento.setAlignment(Qt.AlignRight|Qt.AlignTrailing|Qt.AlignVCenter)
+
+        self.horizontalLayout_8.addWidget(self.lbl_pagina_seguimiento)
+
+        self.btn_pag_desp_seguimiento = QPushButton(self.frame_8)
+        self.btn_pag_desp_seguimiento.setObjectName(u"btn_pag_desp_seguimiento")
+        self.btn_pag_desp_seguimiento.setMinimumSize(QSize(59, 29))
+        self.btn_pag_desp_seguimiento.setMaximumSize(QSize(110, 20))
+        self.btn_pag_desp_seguimiento.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_pag_desp_seguimiento.setStyleSheet(u"")
+        self.btn_pag_desp_seguimiento.setIcon(icon9)
+        self.btn_pag_desp_seguimiento.setIconSize(QSize(15, 21))
+
+        self.horizontalLayout_8.addWidget(self.btn_pag_desp_seguimiento)
+
+
+        self.gridLayout_13.addWidget(self.frame_8, 4, 0, 1, 1)
 
         self.label_6 = QLabel(self.frp1_2)
         self.label_6.setObjectName(u"label_6")
@@ -1374,18 +1394,6 @@ class Ui_principal(object):
         self.Scrollprincipal_2.setWidget(self.scrollAreaWidgetContents_2)
 
         self.gridLayout_17.addWidget(self.Scrollprincipal_2, 1, 1, 1, 1)
-
-        self.verticalSpacer_5 = QSpacerItem(20, 19, QSizePolicy.Minimum, QSizePolicy.Fixed)
-
-        self.gridLayout_17.addItem(self.verticalSpacer_5, 0, 1, 1, 1)
-
-        self.horizontalSpacer_2 = QSpacerItem(19, 20, QSizePolicy.Fixed, QSizePolicy.Minimum)
-
-        self.gridLayout_17.addItem(self.horizontalSpacer_2, 1, 2, 1, 1)
-
-        self.verticalSpacer_6 = QSpacerItem(20, 19, QSizePolicy.Minimum, QSizePolicy.Fixed)
-
-        self.gridLayout_17.addItem(self.verticalSpacer_6, 3, 1, 1, 1)
 
         self.stackedWidget.addWidget(self.pag2)
         self.pag3 = QWidget()
@@ -5119,9 +5127,6 @@ class Ui_principal(object):
         ___qtablewidgetitem5 = self.tabla_vinculacion.horizontalHeaderItem(5)
         ___qtablewidgetitem5.setText(QCoreApplication.translate("principal", u"ACCIONES", None));
         self.label_2.setText(QCoreApplication.translate("principal", u"  Lista de Vinculaci\u00f3n", None))
-        self.btn_pag_antes_seguimiento.setText("")
-        self.lbl_pagina_seguimiento.setText(QCoreApplication.translate("principal", u"2000", None))
-        self.btn_pag_desp_seguimiento.setText("")
         ___qtablewidgetitem6 = self.tabla_seguimiento.horizontalHeaderItem(0)
         ___qtablewidgetitem6.setText(QCoreApplication.translate("principal", u"ID", None));
         ___qtablewidgetitem7 = self.tabla_seguimiento.horizontalHeaderItem(1)
@@ -5140,7 +5145,14 @@ class Ui_principal(object):
         ___qtablewidgetitem13.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
         ___qtablewidgetitem14 = self.tabla_seguimiento.verticalHeaderItem(2)
         ___qtablewidgetitem14.setText(QCoreApplication.translate("principal", u"Nueva fila", None));
+        self.cbo_filtro_periodo_seguimiento.setItemText(0, QCoreApplication.translate("principal", u"Seleccione periodo academico", None))
+
+        self.cbo_filtro_proyecto_seguimiento.setItemText(0, QCoreApplication.translate("principal", u"Seleccione proyecto", None))
+
         self.line_busqueda_seguimiento.setPlaceholderText(QCoreApplication.translate("principal", u"Buscar por cualquier campo", None))
+        self.btn_pag_antes_seguimiento.setText("")
+        self.lbl_pagina_seguimiento.setText(QCoreApplication.translate("principal", u"2000", None))
+        self.btn_pag_desp_seguimiento.setText("")
         self.label_6.setText(QCoreApplication.translate("principal", u"  Lista de alumnos asignados", None))
         self.line_busqueda_estudiantes.setPlaceholderText(QCoreApplication.translate("principal", u"buscar por nombre - apellido - cedula ", None))
         self.check_estado_estudiantes.setText(QCoreApplication.translate("principal", u"Mostrar inactivos", None))

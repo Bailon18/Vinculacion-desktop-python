@@ -1138,8 +1138,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1034</width>
-                      <height>349</height>
+                      <width>1232</width>
+                      <height>580</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2051,6 +2051,54 @@ background-color:#f1f1f1;
                    </property>
                   </spacer>
                  </item>
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>19</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="1" column="2">
+                  <spacer name="horizontalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>19</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="3" column="1">
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>19</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                  <item row="1" column="1">
                   <widget class="QScrollArea" name="Scrollprincipal_2">
                    <property name="styleSheet">
@@ -2106,168 +2154,6 @@ background-color:#f1f1f1;
                         <property name="spacing">
                          <number>6</number>
                         </property>
-                        <item row="4" column="0">
-                         <widget class="QFrame" name="frame_8">
-                          <property name="minimumSize">
-                           <size>
-                            <width>0</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="maximumSize">
-                           <size>
-                            <width>16777215</width>
-                            <height>60</height>
-                           </size>
-                          </property>
-                          <property name="styleSheet">
-                           <string notr="true">/* Estilo de la Etiqueta */
-QLabel {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    line-height: 14px;
-    letter-spacing: 0.04em;
-    color: #6B7280;
-    margin-top: 20px; /* Incrementamos el margen superior para más espacio */
-}
-
-/* Estilo Base del Botón de la Paginación */
-QPushButton {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    letter-spacing: 0.02em;
-    color: white;
-    padding: 10px 20px; /* Incrementamos el padding para un mejor tamaño de botón */
-    background: #3f5758;
-    border: none; /* Eliminamos el borde por defecto */
-    border-radius: 8px; /* Ajustamos el border-radius */
-}
-
-/* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
-QPushButton:hover {
-    background: #4a6b6c; /* Color de fondo más claro */
-    border-radius: 8px;
-}
-
-/* Estilo del Botón de la Paginación al Hacer Clic (Pressed) */
-QPushButton:pressed {
-    background: #2e4546; /* Color de fondo más oscuro */
-    border-radius: 8px;
-}</string>
-                          </property>
-                          <property name="frameShadow">
-                           <enum>QFrame::Plain</enum>
-                          </property>
-                          <layout class="QHBoxLayout" name="horizontalLayout_8">
-                           <item>
-                            <spacer name="horizontalSpacer_21">
-                             <property name="orientation">
-                              <enum>Qt::Horizontal</enum>
-                             </property>
-                             <property name="sizeHint" stdset="0">
-                              <size>
-                               <width>40</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                            </spacer>
-                           </item>
-                           <item>
-                            <widget class="QPushButton" name="btn_pag_antes_seguimiento">
-                             <property name="minimumSize">
-                              <size>
-                               <width>59</width>
-                               <height>29</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>110</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="icon">
-                              <iconset resource="../image/source.qrc">
-                               <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
-                             </property>
-                             <property name="iconSize">
-                              <size>
-                               <width>15</width>
-                               <height>21</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="lbl_pagina_seguimiento">
-                             <property name="minimumSize">
-                              <size>
-                               <width>45</width>
-                               <height>0</height>
-                              </size>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string>2000</string>
-                             </property>
-                             <property name="alignment">
-                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QPushButton" name="btn_pag_desp_seguimiento">
-                             <property name="minimumSize">
-                              <size>
-                               <width>59</width>
-                               <height>29</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>110</width>
-                               <height>20</height>
-                              </size>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string/>
-                             </property>
-                             <property name="icon">
-                              <iconset resource="../image/source.qrc">
-                               <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
-                             </property>
-                             <property name="iconSize">
-                              <size>
-                               <width>15</width>
-                               <height>21</height>
-                              </size>
-                             </property>
-                            </widget>
-                           </item>
-                          </layout>
-                         </widget>
-                        </item>
                         <item row="3" column="0">
                          <widget class="QFrame" name="frame_9">
                           <property name="styleSheet">
@@ -2579,34 +2465,49 @@ border-radius: 8px;
                           <property name="frameShadow">
                            <enum>QFrame::Plain</enum>
                           </property>
-                          <layout class="QHBoxLayout" name="horizontalLayout_12">
-                           <property name="spacing">
-                            <number>10</number>
-                           </property>
-                           <property name="leftMargin">
-                            <number>7</number>
-                           </property>
-                           <property name="topMargin">
-                            <number>9</number>
-                           </property>
-                           <property name="rightMargin">
-                            <number>10</number>
-                           </property>
-                           <property name="bottomMargin">
-                            <number>12</number>
-                           </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_10">
+                           <item>
+                            <widget class="QComboBox" name="cbo_filtro_periodo_seguimiento">
+                             <property name="maximumSize">
+                              <size>
+                               <width>265</width>
+                               <height>16777215</height>
+                              </size>
+                             </property>
+                             <item>
+                              <property name="text">
+                               <string>Seleccione periodo academico</string>
+                              </property>
+                             </item>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QComboBox" name="cbo_filtro_proyecto_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>0</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <item>
+                              <property name="text">
+                               <string>Seleccione proyecto</string>
+                              </property>
+                             </item>
+                            </widget>
+                           </item>
                            <item>
                             <widget class="QLineEdit" name="line_busqueda_seguimiento">
                              <property name="minimumSize">
                               <size>
-                               <width>0</width>
+                               <width>244</width>
                                <height>40</height>
                               </size>
                              </property>
                              <property name="maximumSize">
                               <size>
-                               <width>16777215</width>
-                               <height>40</height>
+                               <width>244</width>
+                               <height>16777215</height>
                               </size>
                              </property>
                              <property name="styleSheet">
@@ -2617,8 +2518,68 @@ border-radius: 8px;
                              </property>
                             </widget>
                            </item>
+                          </layout>
+                         </widget>
+                        </item>
+                        <item row="4" column="0">
+                         <widget class="QFrame" name="frame_8">
+                          <property name="minimumSize">
+                           <size>
+                            <width>0</width>
+                            <height>60</height>
+                           </size>
+                          </property>
+                          <property name="maximumSize">
+                           <size>
+                            <width>16777215</width>
+                            <height>60</height>
+                           </size>
+                          </property>
+                          <property name="styleSheet">
+                           <string notr="true">/* Estilo de la Etiqueta */
+QLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
+    margin-top: 20px; /* Incrementamos el margen superior para más espacio */
+}
+
+/* Estilo Base del Botón de la Paginación */
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 10px 20px; /* Incrementamos el padding para un mejor tamaño de botón */
+    background: #3f5758;
+    border: none; /* Eliminamos el borde por defecto */
+    border-radius: 8px; /* Ajustamos el border-radius */
+}
+
+/* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
+QPushButton:hover {
+    background: #4a6b6c; /* Color de fondo más claro */
+    border-radius: 8px;
+}
+
+/* Estilo del Botón de la Paginación al Hacer Clic (Pressed) */
+QPushButton:pressed {
+    background: #2e4546; /* Color de fondo más oscuro */
+    border-radius: 8px;
+}</string>
+                          </property>
+                          <property name="frameShadow">
+                           <enum>QFrame::Plain</enum>
+                          </property>
+                          <layout class="QHBoxLayout" name="horizontalLayout_8">
                            <item>
-                            <spacer name="horizontalSpacer_31">
+                            <spacer name="horizontalSpacer_21">
                              <property name="orientation">
                               <enum>Qt::Horizontal</enum>
                              </property>
@@ -2629,6 +2590,95 @@ border-radius: 8px;
                               </size>
                              </property>
                             </spacer>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_pag_antes_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>59</width>
+                               <height>29</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>110</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../image/source.qrc">
+                               <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>15</width>
+                               <height>21</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="lbl_pagina_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>45</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>2000</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_pag_desp_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>59</width>
+                               <height>29</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>110</width>
+                               <height>20</height>
+                              </size>
+                             </property>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../image/source.qrc">
+                               <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>15</width>
+                               <height>21</height>
+                              </size>
+                             </property>
+                            </widget>
                            </item>
                           </layout>
                          </widget>
@@ -2656,54 +2706,6 @@ color: #000000;</string>
                     </layout>
                    </widget>
                   </widget>
-                 </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_5">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>19</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="1" column="2">
-                  <spacer name="horizontalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>19</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="3" column="1">
-                  <spacer name="verticalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Fixed</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>19</height>
-                    </size>
-                   </property>
-                  </spacer>
                  </item>
                 </layout>
                </widget>
@@ -2776,8 +2778,8 @@ color: #000000;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>930</width>
-                      <height>296</height>
+                      <width>1232</width>
+                      <height>579</height>
                      </rect>
                     </property>
                     <property name="styleSheet">

@@ -49,15 +49,15 @@ class Seguimiento(QtWidgets.QDialog):
         self.seguimiento_tutor.btn_closeseguimiento.clicked.connect(lambda: self.cerrar_ui_seguimientoadmin())
 
 
-        self.seguimiento_tutor.btn_nuevo_seguimiento.clicked.connect(lambda: self.cambiar_pagina_seguimiento('Nuevo'))
-        self.seguimiento_tutor.btn_retornar_listado.clicked.connect(lambda: self.seguimiento_tutor.stack_principal.setCurrentIndex(1))
+        # self.seguimiento_tutor.btn_nuevo_seguimiento.clicked.connect(lambda: self.cambiar_pagina_seguimiento('Nuevo'))
+        # self.seguimiento_tutor.btn_retornar_listado.clicked.connect(lambda: self.seguimiento_tutor.stack_principal.setCurrentIndex(1))
 
-        self.seguimiento_tutor.btn_guardar.clicked.connect(lambda: self.guardarSeguimiento())
-        self.seguimiento_tutor.checkhoraactual.clicked.connect(lambda: self.evento_hora_actual())                                             
-        self.seguimiento_tutor.fecha_seguimiento.dateChanged.connect(lambda: self.evento_cambio_fecha())
+        # self.seguimiento_tutor.btn_guardar.clicked.connect(lambda: self.guardarSeguimiento())
+        # self.seguimiento_tutor.checkhoraactual.clicked.connect(lambda: self.evento_hora_actual())                                             
+        # self.seguimiento_tutor.fecha_seguimiento.dateChanged.connect(lambda: self.evento_cambio_fecha())
 
-        self.seguimiento_tutor.fecha_inicio_seguimiento.dateChanged.connect(lambda: self.evento_busqueda_rango_fechas())
-        self.seguimiento_tutor.fecha_final_seguimiento.dateChanged.connect(lambda: self.evento_busqueda_rango_fechas())
+        # self.seguimiento_tutor.fecha_inicio_seguimiento.dateChanged.connect(lambda: self.evento_busqueda_rango_fechas())
+        # self.seguimiento_tutor.fecha_final_seguimiento.dateChanged.connect(lambda: self.evento_busqueda_rango_fechas())
 
         
     def keyPressEvent(self, event):

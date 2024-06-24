@@ -7,6 +7,7 @@ from controllers.Modulo_administracion.Estudiantes_administracion import Estudia
 from controllers.Modulo_administracion.Instituciones_administracion import InstitucionesAdmin
 from controllers.Modulo_administracion.Proyectos_administracion import ProyectosAdmin
 from controllers.Modulo_administracion.Tutores_administracion import TutoresAdmin
+from controllers.Modulo_seguimiento.funcion_seguimiento import llenar_tabla_seguimiento_tutor
 from controllers.Modulo_usuarios.Modulo_usuarios import Perfil
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
 
@@ -210,6 +211,13 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.cbo_filtro_periodo.currentIndexChanged.connect(lambda: self.consultar_basedatos('periodo'))
         self.venPri.cbo_filtro_tutor.currentIndexChanged.connect(lambda: self.consultar_basedatos('tutor'))
         self.venPri.line_filtro_estudiante.textChanged.connect(lambda: self.consultar_basedatos('estudiante'))
+        
+        
+        
+        self.periodo_academico = '' 
+        
+        self.venPri.cbo_filtro_periodo_seguimiento.currentIndexChanged.connect(lambda: self.consultar_filtro_seguimiento_periodo())
+        self.venPri.cbo_filtro_proyecto_seguimiento.currentIndexChanged.connect(lambda: self.llenar_estudiantes_seguimientos_tutor())
 
 
         
@@ -292,7 +300,6 @@ class Principal(QtWidgets.QMainWindow):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         Vinculacion(parent=self, modo='nuevo').exec_()
-       
        
     def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
         datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [self.offset, self.limit])
@@ -492,7 +499,12 @@ class Principal(QtWidgets.QMainWindow):
         respuesta_proyecto = self.conec_base.getDatos('SELECT id, nombre FROM proyecto')
         respuesta_periodoacademico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM vinculacion;')
         respuesta_tutores = self.conec_base.getDatos('SELECT id, CONCAT(nombres, " ", apellidos) AS nombres FROM tutores')
-
+        
+        
+        respuesta_filtro_periodo_seguimiento = self.conec_base.getDatos_condicion(
+            "SELECT DISTINCT v.periodo_academico FROM vinculacion v WHERE v.tutores_id = %s ORDER BY v.periodo_academico;",
+            (self.tutor_id,)
+        )
 
         self.venPri.cbo_filtro_proyecto.clear()
         self.venPri.cbo_filtro_proyecto.addItem("Seleccione proyecto", None)
@@ -513,6 +525,14 @@ class Principal(QtWidgets.QMainWindow):
 
         for id, nombres in respuesta_tutores:
             self.venPri.cbo_filtro_tutor.addItem(nombres, id)
+            
+            
+        self.venPri.cbo_filtro_periodo_seguimiento.clear()
+        self.venPri.cbo_filtro_periodo_seguimiento.addItem("Seleccione periodo academico", None)
+
+        for nombre_tuple in respuesta_filtro_periodo_seguimiento:
+            nombre = nombre_tuple[0]  
+            self.venPri.cbo_filtro_periodo_seguimiento.addItem(nombre, nombre)
 
     def consultar_basedatos(self, tipo):
         if tipo == 'proyecto':
@@ -568,16 +588,56 @@ class Principal(QtWidgets.QMainWindow):
 
 
 
+    def consultar_filtro_seguimiento_periodo(self):
+        
+        self.periodo_academico = self.venPri.cbo_filtro_periodo_seguimiento.currentData()
+        
+     
+        resultados_proyectos = self.conec_base.getDatos_condicion(
+            "SELECT p.id, p.nombre AS proyecto_nombre "
+            "FROM proyecto p "
+            "JOIN vinculacion v ON p.id = v.proyecto_id "
+            "WHERE v.tutores_id = %s AND v.periodo_academico = %s "
+            "ORDER BY p.nombre;",
+            (self.tutor_id, self.periodo_academico )
+        )
+        
+        print('resultao ', resultados_proyectos)
+
+        self.venPri.cbo_filtro_proyecto_seguimiento.clear()
+        self.venPri.cbo_filtro_proyecto_seguimiento.addItem("Seleccione proyecto", None)
+
+        for id, nombre in resultados_proyectos:
+            self.venPri.cbo_filtro_proyecto_seguimiento.addItem(nombre, id)
 
 
 
+    def llenar_estudiantes_seguimientos_tutor(self):
+      
+        proyecto_id = self.venPri.cbo_filtro_proyecto_seguimiento.currentData()
 
-
-
-
-
-
-
+        resultados_vinculaciones_estudiantes = self.conec_base.getDatos_condicion(
+            "SELECT ev.id AS id_vinculacion_estudiante, "
+            "CONCAT(e.nombres, ' ', e.apellidos) AS estudiante, "
+            "v.fecha_inicio AS fecha_inicio_vinculacion, "
+            "ev.nro_horas AS horas_vinculacion, "
+            "ev.estado_vinculacion AS estado_vinculacion "
+            "FROM vinculacion v "
+            "JOIN estudiantes_vinculacion ev ON v.id = ev.vinculacion_id "
+            "JOIN estudiantes e ON ev.estudiantes_id = e.id "
+            "JOIN proyecto p ON v.proyecto_id = p.id "
+            "WHERE v.tutores_id = %s "
+            "AND v.periodo_academico = %s "
+            "AND v.proyecto_id = %s "
+            "ORDER BY v.id, e.apellidos, e.nombres;",
+            (self.tutor_id, self.periodo_academico, proyecto_id)
+        )
+        
+        print('resultante ', resultados_vinculaciones_estudiantes)
+        
+        if (resultados_vinculaciones_estudiantes):
+            
+            llenar_tabla_seguimiento_tutor(self, self.venPri.tabla_seguimiento, resultados_vinculaciones_estudiantes)
 
 
 

@@ -21,16 +21,22 @@ class PDF(FPDF):
     
     def __init__(self):
         super().__init__()
-        # Definir la ruta absoluta del directorio de fuentes
+
         self.font_dir = os.path.abspath('source/fonts/')
-        
-        # Registrar todas las fuentes Roboto
         self.register_roboto_fonts()
 
     def register_roboto_fonts(self):
-        self.add_font('Roboto-Light', '', os.path.join(self.font_dir, 'Roboto-Light.ttf'), uni=True)
-        self.add_font('Roboto-Regular', '', os.path.join(self.font_dir, 'Roboto-Regular.ttf'), uni=True)
-        self.add_font('Roboto-Bold', '', os.path.join(self.font_dir, 'Roboto-Bold.ttf'), uni=True)
+        font_files = {
+            'Roboto-Light': 'Roboto-Light.ttf',
+            'Roboto-Regular': 'Roboto-Regular.ttf',
+            'Roboto-Bold': 'Roboto-Bold.ttf'
+        }
+        
+        for font_name, font_file in font_files.items():
+            font_path = os.path.join(self.font_dir, font_file)
+            if not os.path.isfile(font_path):
+                continue  
+            self.add_font(font_name, '', font_path, uni=True)
 
     def header(self):
         self.set_font('Roboto-Bold', '', 20)  

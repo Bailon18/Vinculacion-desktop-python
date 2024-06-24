@@ -4,19 +4,7 @@ from PySide2 import QtCore, QtWidgets , QtGui
 
 def evento_tabla(parent):
 
-    parent.seguimiento_tutor.tabla_listado_seguimiento.horizontalHeader().setVisible(True)
-
-    index = [0, 3] 
-    tamano = [70, 140]  
-
-    for ind, tam in zip(index, tamano):
-        parent.seguimiento_tutor.tabla_listado_seguimiento.setColumnWidth(ind, tam)
-
-    parent.seguimiento_tutor.tabla_listado_seguimiento.horizontalHeader().setSectionResizeMode(QtWidgets.QHeaderView.Stretch)
-
-    for ind in index:
-        parent.seguimiento_tutor.tabla_listado_seguimiento.horizontalHeader().setSectionResizeMode(ind, QtWidgets.QHeaderView.Fixed)
-
+    pass
 
 def crearbotoneslista(stilo,icono,tooltip):
     
@@ -36,7 +24,7 @@ def llenar_tabla_seguimiento_tutor(parent, tabla, dato):
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
-        tabla.setColumnCount(4)
+        tabla.setColumnCount(6)
    
         for fila in range(len(dato)):
 
@@ -54,7 +42,6 @@ def llenar_tabla_seguimiento_tutor(parent, tabla, dato):
                 tooltip = 'Eliminar seguimiento')
 
 
-
             layout = QtWidgets.QHBoxLayout()
             layout.setContentsMargins(1,1,1,1)
             layout.setSpacing(3)
@@ -67,17 +54,41 @@ def llenar_tabla_seguimiento_tutor(parent, tabla, dato):
             btn_editar_seguimiento(bton_editar_seguimiento, fila, tabla, parent)
             btn_eliminar_seguimiento(bton_eliminar_seguimiento, fila, tabla, parent)
           
-            tabla.setCellWidget(fila ,3,widget)
+            tabla.setCellWidget(fila ,5,widget)
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
                 item.setTextAlignment(QtCore.Qt.AlignCenter | QtCore.Qt.AlignVCenter)
 
 
-                if columna == 2:
-                        if isinstance(dato[fila][columna], int) or dato[fila][columna].isdigit():
-                            item.setText(f"{dato[fila][columna]} horas")
+                if columna == 4:
+                    estado_columna = str(dato[fila][columna])
+                    
+                    if estado_columna == 'Pendiente':
+                        color_texto = QtGui.QColor('#FFD700')  
+                        texto = 'Pendiente'
+                    elif estado_columna == 'En Proceso':
+                        color_texto = QtGui.QColor('#008000') 
+                        texto = 'En Proceso'
+                    elif estado_columna == 'Culminado':
+                        color_texto = QtGui.QColor('#FF0000') 
+                        texto = 'Culminado'
+                    else:
+                        color_texto = QtGui.QColor('#000000') 
+                        texto = estado_columna  
 
+                    item.setForeground(QtGui.QBrush(color_texto))
+
+                    font = QtGui.QFont()
+                    font.setBold(True)
+                    item.setFont(font)
+                    
+                    item.setText(texto)
+
+                if columna == 3:
+                    if isinstance(dato[fila][columna], int):
+                        horas = dato[fila][columna]
+                        item.setText(f"{horas} {'hora' if horas == 1 else 'horas'}")
 
                 tabla.setItem(fila, columna, item)
     else:
@@ -106,10 +117,14 @@ def editar_seguimiento_acccion(fila, parent):
         return
     
     seguimiento_id = parent.seguimiento_tutor.tabla_listado_seguimiento.item(fila, 0).text()
-    resultado = parent.conec_base.getDatosProcess_condicion("ObtenerSeguimientoPorId", (seguimiento_id,))
-    parent.cambiar_pagina_seguimiento('Edit', resultado )
-    parent.seguimiento_seleccionado = seguimiento_id
-    parent.modo_ventana = 'Edit'
+    
+    
+    
+    
+    # resultado = parent.conec_base.getDatosProcess_condicion("ObtenerSeguimientoPorId", (seguimiento_id,))
+    # parent.cambiar_pagina_seguimiento('Edit', resultado )
+    # parent.seguimiento_seleccionado = seguimiento_id
+    # parent.modo_ventana = 'Edit'
 
 
 def eliminar_seguimiento_acccion(fila, parent):

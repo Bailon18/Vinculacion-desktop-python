@@ -775,4 +775,83 @@ BEGIN
 END //
 DELIMITER ;
 
-call ObtenerDetalleVinculacion(1)
+
+
+-- Trigger for AFTER INSERT
+DROP TRIGGER IF EXISTS trg_seguimiento_insert;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_insert
+AFTER INSERT ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas + NEW.horas_actividad > 96 THEN 96
+                        ELSE nro_horas + NEW.horas_actividad
+                    END
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    END IF;
+END//
+DELIMITER ;
+
+DROP TRIGGER IF EXISTS trg_seguimiento_update;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_update
+BEFORE UPDATE ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas - OLD.horas_actividad + NEW.horas_actividad > 96 THEN 96
+                        ELSE nro_horas - OLD.horas_actividad + NEW.horas_actividad
+                    END
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = NEW.estudiantes_vinculacion_id;
+    END IF;
+END//
+DELIMITER ;
