@@ -1,6 +1,8 @@
 <RCC>
   <qresource prefix="menu">
+    <file>subir-imagen.png</file>
     <file>send.png</file>
+    <file>archivo.png</file>
     <file>descargar.png</file>
     <file>hacia-adelante.png</file>
     <file>hacia-atras.png</file>

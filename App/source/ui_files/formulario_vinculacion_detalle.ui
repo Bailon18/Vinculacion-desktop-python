@@ -1,0 +1,1034 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>FormularioVinculacionDetalle</class>
+ <widget class="QDialog" name="FormularioVinculacionDetalle">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>820</width>
+    <height>557</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>486</width>
+    <height>557</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>840</width>
+    <height>557</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>Formulario Vinculacion</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>0</number>
+   </property>
+   <property name="topMargin">
+    <number>0</number>
+   </property>
+   <property name="rightMargin">
+    <number>0</number>
+   </property>
+   <property name="bottomMargin">
+    <number>0</number>
+   </property>
+   <property name="spacing">
+    <number>0</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QFrame" name="frame">
+     <property name="styleSheet">
+      <string notr="true">#frame{background-color: #f1f1f1;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+</string>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Raised</enum>
+     </property>
+     <widget class="QFrame" name="frame_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>821</width>
+        <height>50</height>
+       </rect>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_2{background: #3A4F50 ;border-top-left-radius: 10px;
+border-top-right-radius: 10px;}</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::NoFrame</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QToolButton" name="btn_close">
+       <property name="geometry">
+        <rect>
+         <x>790</x>
+         <y>10</y>
+         <width>25</width>
+         <height>25</height>
+        </rect>
+       </property>
+       <property name="focusPolicy">
+        <enum>Qt::NoFocus</enum>
+       </property>
+       <property name="toolTip">
+        <string>Cerrar</string>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#btn_close{
+font-family: Roboto;
+font-weight: normal;
+font-size: 14px;
+background-color: #d5d5d8;
+color: #6B7280;
+border-radius:11px
+}
+
+
+#btn_close:hover{background:#ce4d3a ;
+border-radius:11px; }
+
+</string>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/x.png</normaloff>:/menu/x.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>13</width>
+         <height>13</height>
+        </size>
+       </property>
+       <property name="autoRaise">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLabel" name="lbl_titulo_ventana">
+       <property name="geometry">
+        <rect>
+         <x>19</x>
+         <y>15</y>
+         <width>401</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QLabel{font-family: &quot;Roboto&quot;;
+font-style: normal;
+font-weight: normal;
+font-size: 18px;
+line-height: 23px;
+letter-spacing: 0.02em;
+color: #FFFFFF;}</string>
+       </property>
+       <property name="text">
+        <string>Detalle vinculacion</string>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QScrollArea" name="scrollArea">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>50</y>
+        <width>821</width>
+        <height>451</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/* Estilo para el título de sección (Detalle vinculacion) */
+QLabel#datospersonales {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 18px;
+    color: #344647;
+}
+
+/* Estilo para el subtítulo del detalle (Nombre) */
+QLabel#titulo_fecha,#titulo_codigo_ies, #titulo_campo_especifico,
+ #titulo_periodo_academico, #titulo_institucion,
+ #titulo_nombres_tutor, #titulo_cedula_tutor, #titulo_telefono_tutor, #titulo_correo_tutor, #titulo_nombre_proyecto {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    color: #6B7280;
+}
+
+/* Estilo para el detalle (Bailon paucar montes) */
+QLabel#date_fecha_inicio, #line_codigo_ies, #line_campo_especifico, #line_periodo_academico, #cbo_institucion,
+#line_nombres_tutor, #line_cedula_tutor, #line_telefono_tutor, #line_correo_tutor, #line_nombre_proyecto {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 13px;
+    color: #9CA3AF;
+}
+</string>
+      </property>
+      <property name="widgetResizable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="scroll_registro_estudiante">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>-173</y>
+         <width>802</width>
+         <height>900</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>0</width>
+         <height>900</height>
+        </size>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">#scroll_registro_estudiante{
+	background-color: rgb(255, 255, 255);
+}</string>
+       </property>
+       <widget class="QLabel" name="datospersonales">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>10</y>
+          <width>311</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datospersonales {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Detalles de vinculación</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_codigo_ies">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>48</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Codigo Ies</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_campo_especifico">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>48</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Campo especifico</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_institucion">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>120</y>
+          <width>221</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Institución practica</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_fecha">
+        <property name="geometry">
+         <rect>
+          <x>18</x>
+          <y>48</y>
+          <width>161</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Fecha Inicio</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="datoscontacto">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>390</y>
+          <width>241</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datoscontacto {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Detalle Proyecto Asignado</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="datosacademicos">
+        <property name="geometry">
+         <rect>
+          <x>16</x>
+          <y>500</y>
+          <width>281</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datosacademicos {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Lista de estudiantes asignados</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_periodo_academico">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>48</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Periodo academico</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="tabla_estudiante_seleccionado">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>550</y>
+          <width>761</width>
+          <height>301</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QTableWidget {
+outline: 0px;
+border:5px solid #f3f4f6;
+border-radius:15px;
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 15px;
+line-height: 19px;
+letter-spacing: 0.02em;
+color: #6B7280;
+}
+
+
+/* cabezera*/
+QHeaderView::section {
+background-color:#f1f2f3;
+border-style: none;
+height:40px;
+font-family: &quot;Roboto&quot;;
+font-style: normal;
+font-weight: 700;
+font-size: 13px;
+line-height: 14px;
+letter-spacing: 0.04em;
+color: #6B7280;
+
+
+}
+
+
+QHeaderView::section:horizontal{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+line-height: 14px;
+letter-spacing: 0.04em;
+text-transform: uppercase;
+color: #212529;
+
+}
+
+
+QTableWidget::disabled{
+    background-color:#acacac;
+    border: 1px solid #32414B;
+    color: #656565;
+    gridline-color: #656565;}
+
+/*bordes internos*/
+QTableWidget::item {
+	border-bottom: 3px solid #f3f4f6;
+
+}
+
+QTableWidget:item:selected{
+	background:white;/*color-seleccion*/
+color: #2c3d3e;
+}
+
+
+
+
+</string>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="selectionBehavior">
+         <enum>QAbstractItemView::SelectRows</enum>
+        </property>
+        <property name="showGrid">
+         <bool>false</bool>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <property name="wordWrap">
+         <bool>true</bool>
+        </property>
+        <property name="cornerButtonEnabled">
+         <bool>true</bool>
+        </property>
+        <attribute name="horizontalHeaderVisible">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="horizontalHeaderDefaultSectionSize">
+         <number>133</number>
+        </attribute>
+        <attribute name="horizontalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <attribute name="verticalHeaderVisible">
+         <bool>false</bool>
+        </attribute>
+        <attribute name="verticalHeaderDefaultSectionSize">
+         <number>40</number>
+        </attribute>
+        <attribute name="verticalHeaderHighlightSections">
+         <bool>true</bool>
+        </attribute>
+        <column>
+         <property name="text">
+          <string>Id</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Cedula</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Estudiante</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Estado Vin.</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Nro horas</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QLabel" name="datosTutor">
+        <property name="geometry">
+         <rect>
+          <x>14</x>
+          <y>190</y>
+          <width>241</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">#datosTutor
+ {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Detalle tutor asignado</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="date_fecha_inicio">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>76</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_codigo_ies">
+        <property name="geometry">
+         <rect>
+          <x>190</x>
+          <y>76</y>
+          <width>151</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_campo_especifico">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>76</y>
+          <width>211</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_periodo_academico">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>76</y>
+          <width>191</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="cbo_institucion">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>149</y>
+          <width>701</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_telefono_tutor">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>258</y>
+          <width>201</width>
+          <height>20</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_nombres_tutor">
+        <property name="geometry">
+         <rect>
+          <x>18</x>
+          <y>230</y>
+          <width>161</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nombre y apellidos</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_cedula_tutor">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>258</y>
+          <width>201</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_nombres_tutor">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>258</y>
+          <width>161</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_cedula_tutor">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>230</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Cedula</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_telefono_tutor">
+        <property name="geometry">
+         <rect>
+          <x>590</x>
+          <y>230</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Teléfono</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_correo_tutor">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>330</y>
+          <width>281</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_correo_tutor">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>300</y>
+          <width>171</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="text">
+         <string>Correo</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_descargar">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>310</y>
+          <width>151</width>
+          <height>40</height>
+         </rect>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>74</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>242</width>
+          <height>40</height>
+         </size>
+        </property>
+        <property name="cursor">
+         <cursorShape>PointingHandCursor</cursorShape>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">/* Botón Exportar a PDF */
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #e06666; /* Rojo oscuro para exportar */
+    border: none; 
+    border-radius: 8px; 
+}
+
+QPushButton:hover {
+    background: #b95454; /* Rojo más oscuro en hover */
+    border: none;
+    border-radius: 8px;
+}
+
+QPushButton:pressed {
+    background: #803232; /* Rojo aún más oscuro en estado presionado */
+    border: none;
+    border-radius: 8px;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Descargar cv</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../image/source.qrc">
+          <normaloff>:/menu/exportar.png</normaloff>:/menu/exportar.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>15</width>
+          <height>21</height>
+         </size>
+        </property>
+       </widget>
+       <widget class="QLabel" name="titulo_nombre_proyecto">
+        <property name="geometry">
+         <rect>
+          <x>18</x>
+          <y>432</y>
+          <width>161</width>
+          <height>21</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Nombre proyecto</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="line_nombre_proyecto">
+        <property name="geometry">
+         <rect>
+          <x>20</x>
+          <y>460</y>
+          <width>761</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>TextLabel</string>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+     <widget class="QFrame" name="frame_pie_pagina">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>501</y>
+        <width>821</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">#frame_pie_pagina{background-color: #f1f1f1; 
+border-bottom-right-radius: 10px;
+border-bottom-left-radius: 10px;}
+
+/*  BOTON */
+
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+
+</string>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <widget class="QLabel" name="label_98">
+       <property name="geometry">
+        <rect>
+         <x>30</x>
+         <y>-50</y>
+         <width>161</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Fecha Nacimiento</string>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="btn_exportar_detalle">
+       <property name="geometry">
+        <rect>
+         <x>540</x>
+         <y>10</y>
+         <width>241</width>
+         <height>40</height>
+        </rect>
+       </property>
+       <property name="minimumSize">
+        <size>
+         <width>74</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>242</width>
+         <height>40</height>
+        </size>
+       </property>
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #e06666;
+    border: none; 
+    border-radius: 8px; 
+
+}
+
+QPushButton:hover {
+    background: #b95454; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#cancelButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+
+}
+
+QPushButton#cancelButton:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#cancelButton:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}
+</string>
+       </property>
+       <property name="text">
+        <string>Exportar detalle vinculación</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../image/source.qrc">
+         <normaloff>:/menu/exportar.png</normaloff>:/menu/exportar.png</iconset>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>15</width>
+         <height>21</height>
+        </size>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources>
+  <include location="../image/source.qrc"/>
+ </resources>
+ <connections/>
+</ui>

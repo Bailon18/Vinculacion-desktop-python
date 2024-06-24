@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Seguimiento</class>
- <widget class="QDialog" name="Seguimiento">
+ <class>FormularioSeguimiento</class>
+ <widget class="QDialog" name="FormularioSeguimiento">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>620</width>
-    <height>582</height>
+    <height>620</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
     <width>620</width>
-    <height>582</height>
+    <height>620</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
     <width>620</width>
-    <height>582</height>
+    <height>620</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -91,47 +91,118 @@ QLabel{
 font-family: Roboto;
 font-style: normal;
 font-weight: 450;
-font-size: 15px;
+font-size: 14px;
 letter-spacing: 0.02em;
 color: #6B7280;}
 
-
-QDateEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px; }
+QDateEdit {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+    background: #F3F4F6;
+    color: #9CA3AF;
+    padding: 8px;
+    border-radius: 8px;
+}
 
 QDateEdit::up-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
+    min-width: 25px;
+    min-height: 12px;
+    background-color: #F3F4F6; 
+    border-radius: 6px;
+}
 
 QDateEdit::down-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QDateEdit::up-arrow{
-	image: url(:/menu/contraerarriba.png);
-     width: 11px;
-     height: 11px;
+    min-width: 25px;
+    min-height: 12px;
+    background-color: #F3F4F6; 
+    border-radius: 6px;
 }
 
-QDateEdit::down-arrow{
-	image: url(:/menu/contraerabajo.png);
-     width: 11px;
-     height: 11px;}
-
-QDateEdit::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
+QDateEdit::up-arrow {
+    image: url(:/menu/contraerarriba.png);
+    width: 11px;
+    height: 11px;
 }
 
+QDateEdit::down-arrow {
+    image: url(:/menu/contraerabajo.png);
+    width: 11px;
+    height: 11px;
+}
+
+QDateEdit:focus {
+    background: #FFFFFF;
+    border: 2px solid #344647;
+    border-radius: 8px;
+}
+
+/* Estilo para el QCalendarWidget */
+QCalendarWidget {
+    font-family: Roboto;
+    background: #F3F4F6;
+    color: #344647;
+    border: 2px solid #344647;
+    border-radius: 8px;
+}
+
+QCalendarWidget QToolButton {
+    background-color: #F3F4F6;
+    color: #344647;
+    font-size: 14px;
+    border: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+QCalendarWidget QToolButton:hover {
+    background-color: #E2E3E4;
+}
+
+QCalendarWidget QMenu {
+    background-color: #F3F4F6;
+    color: #344647;
+}
+
+QCalendarWidget QSpinBox {
+    background: #F3F4F6;
+    color: #344647;
+    font-size: 14px;
+    border: 1px solid #E2E3E4;
+    border-radius: 4px;
+    margin: 2px;
+}
+
+QCalendarWidget QSpinBox::up-button, QCalendarWidget QSpinBox::down-button {
+    subcontrol-origin: border;
+    background: #E2E3E4;
+    border: none;
+}
+
+QCalendarWidget QSpinBox::up-arrow, QCalendarWidget QSpinBox::down-arrow {
+    width: 10px;
+    height: 10px;
+}
+
+QCalendarWidget QAbstractItemView:enabled {
+    font-size: 14px;
+    color: #344647;
+    background-color: #FFFFFF;
+    selection-background-color: #689091;
+    selection-color: #FFFFFF;
+    outline: none;
+}
+
+QCalendarWidget QAbstractItemView:disabled {
+    color: #9CA3AF;
+}
+
+QCalendarWidget QWidget#qt_calendar_navigationbar {
+    background-color: #F3F4F6;
+    border-bottom: 1px solid #E2E3E4;
+}
 
 </string>
         </property>
@@ -141,1083 +212,6 @@ border-radius: 8px;
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="page_4">
-         <property name="minimumSize">
-          <size>
-           <width>0</width>
-           <height>522</height>
-          </size>
-         </property>
-         <layout class="QGridLayout" name="gridLayout_9">
-          <property name="leftMargin">
-           <number>0</number>
-          </property>
-          <property name="topMargin">
-           <number>0</number>
-          </property>
-          <property name="rightMargin">
-           <number>0</number>
-          </property>
-          <property name="bottomMargin">
-           <number>0</number>
-          </property>
-          <property name="spacing">
-           <number>0</number>
-          </property>
-          <item row="0" column="0">
-           <widget class="QScrollArea" name="scrollArea_4">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>599</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">background-color: rgb(255, 255, 255);</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="verticalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOn</enum>
-            </property>
-            <property name="horizontalScrollBarPolicy">
-             <enum>Qt::ScrollBarAlwaysOff</enum>
-            </property>
-            <property name="widgetResizable">
-             <bool>true</bool>
-            </property>
-            <widget class="QWidget" name="scrollAreaWidgetContents_4">
-             <property name="geometry">
-              <rect>
-               <x>0</x>
-               <y>0</y>
-               <width>603</width>
-               <height>448</height>
-              </rect>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>16777215</width>
-               <height>448</height>
-              </size>
-             </property>
-             <layout class="QGridLayout" name="gridLayout_10">
-              <property name="leftMargin">
-               <number>0</number>
-              </property>
-              <property name="topMargin">
-               <number>0</number>
-              </property>
-              <property name="rightMargin">
-               <number>0</number>
-              </property>
-              <property name="bottomMargin">
-               <number>0</number>
-              </property>
-              <property name="spacing">
-               <number>0</number>
-              </property>
-              <item row="0" column="0">
-               <widget class="QFrame" name="frame_10">
-                <property name="minimumSize">
-                 <size>
-                  <width>0</width>
-                  <height>665</height>
-                 </size>
-                </property>
-                <property name="styleSheet">
-                 <string notr="true">#frame_10{background-color:#ffffff}
-
-QLabel{
-font-family: Roboto;
-font-style: normal;
-font-weight: 450;
-font-size: 15px;
-letter-spacing: 0.02em;
-color: #6B7280;}
-
-
-QLineEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-border: 2px solid #F3F4F6;
-border-radius: 8px;
-color:#9CA3AF;
-padding:10px}
-
-QLineEdit::focus{
-background: #FFFFFF;
-border: 2px solid #54BFC9;
-border-radius: 8px;
-}
-
-
-/* DATE */
-QDateEdit
-{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px;
-}
-
-QDateEdit::drop-down
-{
-	image: url(:/prefijoNuevo/025-calendar-13.png);
-    width:15px;
-    height:15px;
-padding:13px 20px 10px 10px;
-}
-
-QDateEdit::focus{
-background: #FFFFFF;
-border: 2px solid #54BFC9;
-border-radius: 8px;
-}
-
-
-QComboBox{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-border-radius:8px;
-}
-
-QComboBox::drop-down
-{
-    width: 20px;
-    border-left-width: 1px;
-	padding: 10px 10px 10px 20px;
- }
-
-
-
-QComboBox QAbstractItemView {
-	color:#9CA3AF;
-	font-size:14px;
-	background-color: #F3F4F6;
-	selection-background-color:#54BFC9;
-	selection-color:#FFFFFF;
-	outline: 0px;
-   border: 1px solid #D1D5DB;
- border-radius:8px;
-}
-
-
-QComboBox::down-arrow
-{
-	image: url(:/prefijoNuevo/flecha_oscuro.png);
-     width: 11px;
-     height: 11px;
-}
-
-
-
-QComboBox::focus{
-background: #FFFFFF;
-border: 2px solid #54BFC9;
-border-radius: 8px;
-}
-
-
-
-/* LISTA */
-
-
-QListWidget{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px;
-}
-
-
-QListView::item:selected
-{
-    background-color: #F3F4F6; color: #9CA3AF;
-	outline: 0px;
-}
-
-QListView::item:focus
-{
-background: #54BFC9;
-border-radius:8px;
-color:white}
-
-
-QListWidget::focus{
-background: #FFFFFF;
-border: 2px solid #54BFC9;
-border-radius: 8px;
-
-}</string>
-                </property>
-                <property name="frameShape">
-                 <enum>QFrame::NoFrame</enum>
-                </property>
-                <property name="frameShadow">
-                 <enum>QFrame::Plain</enum>
-                </property>
-                <layout class="QVBoxLayout" name="verticalLayout">
-                 <property name="spacing">
-                  <number>0</number>
-                 </property>
-                 <property name="leftMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="topMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="rightMargin">
-                  <number>0</number>
-                 </property>
-                 <property name="bottomMargin">
-                  <number>0</number>
-                 </property>
-                 <item>
-                  <widget class="QFrame" name="frame_11">
-                   <property name="minimumSize">
-                    <size>
-                     <width>0</width>
-                     <height>700</height>
-                    </size>
-                   </property>
-                   <property name="frameShape">
-                    <enum>QFrame::NoFrame</enum>
-                   </property>
-                   <property name="frameShadow">
-                    <enum>QFrame::Sunken</enum>
-                   </property>
-                   <widget class="QFrame" name="frame_13">
-                    <property name="geometry">
-                     <rect>
-                      <x>10</x>
-                      <y>10</y>
-                      <width>911</width>
-                      <height>700</height>
-                     </rect>
-                    </property>
-                    <property name="minimumSize">
-                     <size>
-                      <width>0</width>
-                      <height>700</height>
-                     </size>
-                    </property>
-                    <property name="frameShape">
-                     <enum>QFrame::NoFrame</enum>
-                    </property>
-                    <property name="frameShadow">
-                     <enum>QFrame::Sunken</enum>
-                    </property>
-                    <widget class="QStackedWidget" name="stack_formulario">
-                     <property name="geometry">
-                      <rect>
-                       <x>0</x>
-                       <y>10</y>
-                       <width>911</width>
-                       <height>709</height>
-                      </rect>
-                     </property>
-                     <property name="minimumSize">
-                      <size>
-                       <width>0</width>
-                       <height>709</height>
-                      </size>
-                     </property>
-                     <property name="maximumSize">
-                      <size>
-                       <width>16777215</width>
-                       <height>624</height>
-                      </size>
-                     </property>
-                     <property name="styleSheet">
-                      <string notr="true">QLabel{
-font-family: Roboto;
-font-style: bold;
-font-weight: 450;
-font-size: 15px;
-letter-spacing: 0.02em;
-color: #6B7280;}
-
-
-
-
-/* PLANTEXT*/
-QPlainTextEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-border: 2px solid #F3F4F6;
-border-radius: 8px;
-color:#9CA3AF;
-padding:10px}
-
-QPlainTextEdit::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-QCheckBox{font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-color:#9CA3AF}
-
-
-/*SPINBOX*/
-QSpinBox{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px; }
-
-QSpinBox::up-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QSpinBox::down-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QSpinBox::up-arrow{
-	image: url(:/menu/contraerarriba.png);
-     width: 11px;
-     height: 11px;
-}
-
-QSpinBox::down-arrow{
-	image: url(:/menu/contraerabajo.png);
-     width:11px;
-     height: 11px;}
-
-QSpinBox::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-QDateEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px; }
-
-QDateEdit::up-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QDateEdit::down-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QDateEdit::up-arrow{
-	image: url(:/menu/contraerarriba.png);
-     width: 11px;
-     height: 11px;
-}
-
-QDateEdit::down-arrow{
-	image: url(:/menu/contraerabajo.png);
-     width: 11px;
-     height: 11px;}
-
-QDateEdit::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-
-
-
-
-
-</string>
-                     </property>
-                     <property name="currentIndex">
-                      <number>0</number>
-                     </property>
-                     <widget class="QWidget" name="pag_agregarSesion">
-                      <property name="minimumSize">
-                       <size>
-                        <width>0</width>
-                        <height>691</height>
-                       </size>
-                      </property>
-                      <property name="maximumSize">
-                       <size>
-                        <width>16777215</width>
-                        <height>16777215</height>
-                       </size>
-                      </property>
-                      <property name="styleSheet">
-                       <string notr="true">#pag_agregarSesion{
-	background-color: rgb(255, 255, 255);
-}
-
-QLabel{
-font-family: Roboto;
-font-style: bold;
-font-weight: 450;
-font-size: 15px;
-letter-spacing: 0.02em;
-color: #6B7280;}
-
-
-
-
-/* PLANTEXT*/
-QPlainTextEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-border: 2px solid #F3F4F6;
-border-radius: 8px;
-color:#9CA3AF;
-padding:10px}
-
-QPlainTextEdit::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-QCheckBox{font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-color:#9CA3AF}
-
-
-/*SPINBOX*/
-QSpinBox{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px; }
-
-QSpinBox::up-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QSpinBox::down-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QSpinBox::up-arrow{
-	image: url(:/menu/contraerarriba.png);
-     width: 11px;
-     height: 11px;
-}
-
-QSpinBox::down-arrow{
-	image: url(:/menu/contraerabajo.png);
-     width:11px;
-     height: 11px;}
-
-QSpinBox::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-QDateEdit{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-padding:8px;
-border-radius:8px; }
-
-QDateEdit::up-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QDateEdit::down-button {
-min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
-border-radius: 6px;}
-
-QDateEdit::up-arrow{
-	image: url(:/menu/contraerarriba.png);
-     width: 11px;
-     height: 11px;
-}
-
-QDateEdit::down-arrow{
-	image: url(:/menu/contraerabajo.png);
-     width: 11px;
-     height: 11px;}
-
-QDateEdit::focus{
-background: #FFFFFF;
-border: 2px solid #344647;
-border-radius: 8px;
-}
-
-
-
-
-
-
-
-</string>
-                      </property>
-                      <widget class="QDateEdit" name="datefecha_atencion">
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>69</y>
-                         <width>280</width>
-                         <height>47</height>
-                        </rect>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <property name="displayFormat">
-                        <string>d-MM-yyyy</string>
-                       </property>
-                       <property name="calendarPopup">
-                        <bool>false</bool>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_79">
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>140</y>
-                         <width>133</width>
-                         <height>21</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Duracion sesión*</string>
-                       </property>
-                      </widget>
-                      <widget class="QLineEdit" name="line_duracion">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>164</y>
-                         <width>280</width>
-                         <height>47</height>
-                        </rect>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="text">
-                        <string>1</string>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_89">
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>39</y>
-                         <width>151</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Fecha de atención*</string>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_91">
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>250</y>
-                         <width>181</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Costo Pagar*</string>
-                       </property>
-                      </widget>
-                      <widget class="QDoubleSpinBox" name="spin_monto">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>280</y>
-                         <width>280</width>
-                         <height>47</height>
-                        </rect>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <property name="prefix">
-                        <string>S/.</string>
-                       </property>
-                       <property name="suffix">
-                        <string/>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_97">
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>340</y>
-                         <width>151</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Medio de pago*</string>
-                       </property>
-                      </widget>
-                      <widget class="QComboBox" name="cbox_mediopago">
-                       <property name="enabled">
-                        <bool>false</bool>
-                       </property>
-                       <property name="geometry">
-                        <rect>
-                         <x>620</x>
-                         <y>370</y>
-                         <width>281</width>
-                         <height>47</height>
-                        </rect>
-                       </property>
-                       <property name="minimumSize">
-                        <size>
-                         <width>0</width>
-                         <height>40</height>
-                        </size>
-                       </property>
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <item>
-                        <property name="text">
-                         <string>Seleccionar</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>BBVA Padma</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>BCP Carmen</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>YAPE Carmen</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>PLIN Carmen</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>Efectivo</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>Convenio H&amp;I</string>
-                        </property>
-                       </item>
-                       <item>
-                        <property name="text">
-                         <string>Convenio Tejiendo sonrisas</string>
-                        </property>
-                       </item>
-                      </widget>
-                      <widget class="QDateEdit" name="fecha_seguimiento">
-                       <property name="geometry">
-                        <rect>
-                         <x>10</x>
-                         <y>88</y>
-                         <width>230</width>
-                         <height>40</height>
-                        </rect>
-                       </property>
-                       <property name="cursor">
-                        <cursorShape>PointingHandCursor</cursorShape>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <property name="displayFormat">
-                        <string>d-MM-yyyy</string>
-                       </property>
-                       <property name="calendarPopup">
-                        <bool>false</bool>
-                       </property>
-                      </widget>
-                      <widget class="QSpinBox" name="spb_numerohoras">
-                       <property name="enabled">
-                        <bool>true</bool>
-                       </property>
-                       <property name="geometry">
-                        <rect>
-                         <x>320</x>
-                         <y>88</y>
-                         <width>71</width>
-                         <height>41</height>
-                        </rect>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_96">
-                       <property name="geometry">
-                        <rect>
-                         <x>10</x>
-                         <y>48</y>
-                         <width>201</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Fecha seguimiento*</string>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_98">
-                       <property name="geometry">
-                        <rect>
-                         <x>10</x>
-                         <y>158</y>
-                         <width>161</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="text">
-                        <string>Observaciones*</string>
-                       </property>
-                      </widget>
-                      <widget class="QPlainTextEdit" name="plain_observacion">
-                       <property name="geometry">
-                        <rect>
-                         <x>10</x>
-                         <y>200</y>
-                         <width>561</width>
-                         <height>221</height>
-                        </rect>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="lbl5">
-                       <property name="geometry">
-                        <rect>
-                         <x>320</x>
-                         <y>48</y>
-                         <width>101</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true"/>
-                       </property>
-                       <property name="text">
-                        <string>N° horas</string>
-                       </property>
-                      </widget>
-                      <widget class="QCheckBox" name="checkhoraactual">
-                       <property name="geometry">
-                        <rect>
-                         <x>250</x>
-                         <y>100</y>
-                         <width>70</width>
-                         <height>17</height>
-                        </rect>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">QCheckBox {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    color: #9CA3AF;
-}
-
-
-</string>
-                       </property>
-                       <property name="text">
-                        <string>Hoy</string>
-                       </property>
-                      </widget>
-                      <widget class="QLabel" name="label_40">
-                       <property name="geometry">
-                        <rect>
-                         <x>10</x>
-                         <y>0</y>
-                         <width>291</width>
-                         <height>31</height>
-                        </rect>
-                       </property>
-                       <property name="styleSheet">
-                        <string notr="true">QLabel{
-font-family: Roboto ;
-font-style: bold;
-font-weight: 480;
-font-size: 21px;
-line-height: 28px;
-letter-spacing: 0.02em;
-color: #374151}</string>
-                       </property>
-                       <property name="text">
-                        <string>Nuevo  Seguimiento</string>
-                       </property>
-                      </widget>
-                     </widget>
-                    </widget>
-                   </widget>
-                  </widget>
-                 </item>
-                </layout>
-               </widget>
-              </item>
-             </layout>
-            </widget>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QFrame" name="frame_9">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>61</height>
-             </size>
-            </property>
-            <property name="styleSheet">
-             <string notr="true">#frame_9{background-color: #f1f1f1; 
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;}
-
-
-
-/*  BOTON */
-
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #54BFC9;
-border-radius: 8px;}
-
-QPushButton:hover{background: #439CA8;
-border-radius: 8px; }
-
-</string>
-            </property>
-            <property name="frameShape">
-             <enum>QFrame::NoFrame</enum>
-            </property>
-            <property name="frameShadow">
-             <enum>QFrame::Plain</enum>
-            </property>
-            <widget class="QPushButton" name="btn_guardar">
-             <property name="geometry">
-              <rect>
-               <x>470</x>
-               <y>10</y>
-               <width>110</width>
-               <height>40</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>100</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>110</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">/*  BOTON */
-
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #3A4F50;
-border-radius: 4px;}
-
-QPushButton:hover{background: #344647;
-border-radius: 4px; }
-</string>
-             </property>
-             <property name="text">
-              <string>Guardar</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../image/source.qrc">
-               <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>15</width>
-               <height>21</height>
-              </size>
-             </property>
-            </widget>
-            <widget class="QPushButton" name="btn_retornar_listado">
-             <property name="geometry">
-              <rect>
-               <x>275</x>
-               <y>10</y>
-               <width>191</width>
-               <height>40</height>
-              </rect>
-             </property>
-             <property name="minimumSize">
-              <size>
-               <width>186</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="maximumSize">
-              <size>
-               <width>200</width>
-               <height>40</height>
-              </size>
-             </property>
-             <property name="cursor">
-              <cursorShape>PointingHandCursor</cursorShape>
-             </property>
-             <property name="focusPolicy">
-              <enum>Qt::NoFocus</enum>
-             </property>
-             <property name="styleSheet">
-              <string notr="true">QPushButton {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 15px;
-    color: #FFFFF;
-    padding: 8px 16px;
-    background-color: #b3b3b3;
-    border: 1px solid #CCCCCC;
-    border-radius: 4px;
-}
-
-QPushButton:hover {
-    background-color: #919191;
-    border-color: #BBBBBB;
-}
-</string>
-             </property>
-             <property name="text">
-              <string> Listado seguimiento</string>
-             </property>
-             <property name="icon">
-              <iconset resource="../image/source.qrc">
-               <normaloff>:/menu/retornar.png</normaloff>:/menu/retornar.png</iconset>
-             </property>
-             <property name="iconSize">
-              <size>
-               <width>15</width>
-               <height>21</height>
-              </size>
-             </property>
-            </widget>
-           </widget>
-          </item>
-         </layout>
-        </widget>
         <widget class="QWidget" name="page_2">
          <property name="styleSheet">
           <string notr="true">#page_2{background-color: #ffffff;
@@ -1230,32 +224,35 @@ border-bottom-left-radius: 10;}
           <property name="geometry">
            <rect>
             <x>20</x>
-            <y>140</y>
-            <width>241</width>
+            <y>160</y>
+            <width>311</width>
             <height>31</height>
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QLabel{
-font-family: Roboto ;
-font-style: bold;
-font-weight: 480;
-font-size: 21px;
-line-height: 28px;
-letter-spacing: 0.02em;
-color: #374151}</string>
+           <string notr="true">QLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
           </property>
           <property name="text">
-           <string>Lista de seguimientos</string>
+           <string>Lista de actividades realizadas</string>
           </property>
          </widget>
          <widget class="QFrame" name="frame_17">
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>170</y>
-            <width>591</width>
-            <height>331</height>
+            <y>200</y>
+            <width>601</width>
+            <height>301</height>
            </rect>
           </property>
           <property name="styleSheet">
@@ -1287,113 +284,68 @@ border-radius:18px
             <number>0</number>
            </property>
            <item row="0" column="0">
-            <widget class="QTableWidget" name="tabla_listado_seguimiento">
+            <widget class="QTableWidget" name="tabla_listado_actividades">
              <property name="styleSheet">
-              <string notr="true">QTableWidget {
-outline: 0px;
-border:2px solid #f3f4f6;
-border-radius:18px;
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-line-height: 19px;
-letter-spacing: 0.02em;
-color: #6B7280;
-background-color: rgb(255, 255, 255);
+              <string notr="true">/* Estilo Base del QTableWidget */
+QTableWidget {
+    outline: 0px;
+    border: 5px solid #f3f4f6;
+    border-radius: 15px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    color: #6B7280;
+    gridline-color: #e0e0e0; /* Color de las líneas de la cuadrícula */
 }
 
-/* cabezera*/
-QHeaderView::section {
-border-style: none;
-height:50px;
-font-family: &quot;Roboto&quot;;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 14px;
-letter-spacing: 0.04em;
-color: #6B7280;
+/* Estilo de las Celdas */
+QTableWidget::item {
+    border-bottom: 3px solid #f3f4f6;
+    padding: 5px;
 }
 
-
-QHeaderView::section:horizontal{
-font-family: Roboto;
-font-style:normal ;
-font-weight: normal;
-font-size: 13px;
-letter-spacing: 0.04em;
-color:#212529;
-background-color:#F1F1F1 ;
+/* Estilo de las Celdas Seleccionadas */
+QTableWidget::item:selected {
+    background: #465e5f; /* Fondo más claro para la celda seleccionada */
+    color: #ffffff; /* Color de texto claro para las celdas seleccionadas */
 }
 
-
-QTableWidget::disabled{
-    background-color:#acacac;
+/* Estilo de las Celdas Deshabilitadas */
+QTableWidget::disabled {
+    background-color: #acacac;
     border: 1px solid #32414B;
     color: #656565;
-    gridline-color: #656565;}
-
-/*bordes internos*/
-QTableWidget::item {
-	border-bottom: 4px solid #f3f4f6;
-border-style:ridge
-
+    gridline-color: #656565;
 }
 
-QTableWidget:item:selected{
-	background:white;/*color-seleccion*/
-color: #54bfc9;
+/* Estilo de las Secciones de la Cabecera */
+QHeaderView::section {
+    background-color: #f1f2f3;
+    border-style: none;
+    height: 40px;
+    font-family: &quot;Roboto&quot;;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px; /* Tamaño de la letra de la cabecera */
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
 }
 
-
-
-
-
-
-/*SCROLL VERTICAL*/
-
-QScrollBar:vertical{
-	background: #f3f4f6;
-	width: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:vertical{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 0px 0px 3px 2px;
-}
-
-QScrollBar::add-line:vertical {
-	height: 0px;
-}
-
-QScrollBar::sub-line:vertical {
-	height: 0 px;
-}
-
-
-/*SCROLL HORIZONTAL*/
-
-QScrollBar:horizontal{
-	background: #f3f4f6;
-	height: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:horizontal{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 3px 2px 0px 0px;
-}
-
-QScrollBar::add-line:horizontal{
-	height: 0px;
-}
-
-QScrollBar::sub-line:horizontal{
-	height: 0 px;
+/* Estilo de las Secciones Horizontales de la Cabecera */
+QHeaderView::section:horizontal {
+    font-size: 14px; /* Tamaño de la letra de la cabecera */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+   text-transform: uppercase; /* Convertir texto a mayúsculas */;
+    color: #212529;
+    border-bottom: 2px solid #e0e0e0; /* Separador inferior */
 }
 
 </string>
@@ -1437,6 +389,21 @@ QScrollBar::sub-line:horizontal{
              <attribute name="verticalHeaderDefaultSectionSize">
               <number>41</number>
              </attribute>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
+             <row>
+              <property name="text">
+               <string>Nueva fila</string>
+              </property>
+             </row>
              <column>
               <property name="text">
                <string>ID</string>
@@ -1459,12 +426,12 @@ QScrollBar::sub-line:horizontal{
              </column>
              <column>
               <property name="text">
-               <string>FECHA SEGUIMIENTO</string>
+               <string>FECHA ACTIVIDAD</string>
               </property>
              </column>
              <column>
               <property name="text">
-               <string>HORA ASIGNADA</string>
+               <string>HORA ACTIVIDAD</string>
               </property>
              </column>
              <column>
@@ -1479,9 +446,9 @@ QScrollBar::sub-line:horizontal{
          <widget class="QPushButton" name="btn_nuevo_seguimiento">
           <property name="geometry">
            <rect>
-            <x>440</x>
-            <y>30</y>
-            <width>161</width>
+            <x>420</x>
+            <y>90</y>
+            <width>181</width>
             <height>40</height>
            </rect>
           </property>
@@ -1508,19 +475,33 @@ QScrollBar::sub-line:horizontal{
           </property>
           <property name="styleSheet">
            <string notr="true">
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #3A4F50;
-border-radius: 4px;}
+/*  BOTON */
 
-QPushButton:hover{background: #344647;
-border-radius: 4px; }
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
 </string>
           </property>
           <property name="text">
@@ -1578,7 +559,7 @@ border-radius: 4px; }
            <string>yyyy-MM-d</string>
           </property>
           <property name="calendarPopup">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
          </widget>
          <widget class="QDateEdit" name="fecha_final_seguimiento">
@@ -1594,7 +575,7 @@ border-radius: 4px; }
            <string>yyyy-MM-d</string>
           </property>
           <property name="calendarPopup">
-           <bool>false</bool>
+           <bool>true</bool>
           </property>
           <property name="currentSectionIndex">
            <number>0</number>
@@ -1630,24 +611,189 @@ border-radius: 4px; }
           <property name="geometry">
            <rect>
             <x>20</x>
-            <y>30</y>
+            <y>20</y>
             <width>241</width>
             <height>31</height>
            </rect>
           </property>
           <property name="styleSheet">
            <string notr="true">QLabel{
-font-family: Roboto ;
-font-style: bold;
-font-weight: 480;
-font-size: 21px;
-line-height: 28px;
-letter-spacing: 0.02em;
-color: #374151}</string>
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 17px;
+    letter-spacing: 0.02em;
+    color: #000000; 
+    padding: 2px; 
+    text-decoration: underline; /* Agrega subrayado */
+}
+</string>
           </property>
           <property name="text">
-           <string>Filtrar</string>
+           <string>Filtrar Actividades</string>
           </property>
+         </widget>
+         <widget class="QFrame" name="frame_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>510</y>
+            <width>591</width>
+            <height>61</height>
+           </rect>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">/* Estilo de la Etiqueta */
+QLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
+    margin-top: 20px; /* Incrementamos el margen superior para más espacio */
+}
+
+/* Estilo Base del Botón de la Paginación */
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 10px 20px; /* Incrementamos el padding para un mejor tamaño de botón */
+    background: #3f5758;
+    border: none; /* Eliminamos el borde por defecto */
+    border-radius: 8px; /* Ajustamos el border-radius */
+}
+
+/* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
+QPushButton:hover {
+    background: #4a6b6c; /* Color de fondo más claro */
+    border-radius: 8px;
+}
+
+/* Estilo del Botón de la Paginación al Hacer Clic (Pressed) */
+QPushButton:pressed {
+    background: #2e4546; /* Color de fondo más oscuro */
+    border-radius: 8px;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <widget class="QPushButton" name="btn_pag_desp_seguimiento">
+           <property name="geometry">
+            <rect>
+             <x>521</x>
+             <y>11</y>
+             <width>59</width>
+             <height>29</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>59</width>
+             <height>29</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../image/source.qrc">
+             <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>15</width>
+             <height>21</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QPushButton" name="btn_pag_antes_seguimiento">
+           <property name="geometry">
+            <rect>
+             <x>405</x>
+             <y>11</y>
+             <width>59</width>
+             <height>29</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>59</width>
+             <height>29</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>110</width>
+             <height>20</height>
+            </size>
+           </property>
+           <property name="cursor">
+            <cursorShape>PointingHandCursor</cursorShape>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string/>
+           </property>
+           <property name="icon">
+            <iconset resource="../image/source.qrc">
+             <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>15</width>
+             <height>21</height>
+            </size>
+           </property>
+          </widget>
+          <widget class="QLabel" name="lbl_pagina_seguimiento">
+           <property name="geometry">
+            <rect>
+             <x>470</x>
+             <y>0</y>
+             <width>45</width>
+             <height>42</height>
+            </rect>
+           </property>
+           <property name="minimumSize">
+            <size>
+             <width>45</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="styleSheet">
+            <string notr="true"/>
+           </property>
+           <property name="text">
+            <string>2000</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+           </property>
+          </widget>
          </widget>
         </widget>
        </widget>
@@ -1701,7 +847,7 @@ color: #FFFFFF;}</string>
           <string>Seguimiento</string>
          </property>
         </widget>
-        <widget class="QToolButton" name="btn_closeseguimiento">
+        <widget class="QToolButton" name="btn_close">
          <property name="geometry">
           <rect>
            <x>590</x>
@@ -1717,7 +863,7 @@ color: #FFFFFF;}</string>
           <string>Cerrar</string>
          </property>
          <property name="styleSheet">
-          <string notr="true">#btn_closeseguimiento{
+          <string notr="true">#btn_close{
 font-family: Roboto;
 font-weight: normal;
 font-size: 14px;
@@ -1728,7 +874,7 @@ border-radius:11px
 
 
 
-#btn_closeseguimiento:hover{background:#ce4d3a ;
+#btn_close:hover{background:#ce4d3a ;
 border-radius:11px; }
 
 
@@ -1781,12 +927,7 @@ color: #FFFFFF;}</string>
   </layout>
  </widget>
  <tabstops>
-  <tabstop>datefecha_atencion</tabstop>
-  <tabstop>line_duracion</tabstop>
-  <tabstop>spin_monto</tabstop>
-  <tabstop>cbox_mediopago</tabstop>
-  <tabstop>scrollArea_4</tabstop>
-  <tabstop>tabla_listado_seguimiento</tabstop>
+  <tabstop>tabla_listado_actividades</tabstop>
  </tabstops>
  <resources>
   <include location="../image/source.qrc"/>

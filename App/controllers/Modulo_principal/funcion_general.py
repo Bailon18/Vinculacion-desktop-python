@@ -147,6 +147,7 @@ def evento_tabla(parent):
         parent.venPri.tabla_carrera: {0: 50, 2: 140, 3: 140},
         parent.venPri.tabla_institucion: {0: 50, 1: 450},
         parent.venPri.tabla_vinculacion: {0: 50, 2:140, 3:150, 4:140, 5: 140},
+        parent.venPri.tabla_seguimiento: {0: 50, 2:150, 3:170, 4:170, 5:150},
         parent.venPri.tabla_reporte_tutores: {0: 50},
         parent.venPri.tabla_reporte_estudiantes: {0: 50},
         parent.venPri.tabla_reporte_memorandum_tutor: {0: 50},
@@ -276,39 +277,37 @@ def btn_editar_acciones_vinculacion(fila,parent):
     Vinculacion(vinculacion_id, "editar", parent).exec_()
 
 def btn_eliminar_acciones_vinculacion(fila, parent):
-    pass
-    
-    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
 
-    # mensaje = f"¿Está seguro(a) de eliminar la vinculación de {nombre_estudiante.upper()}? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
+    vinculacion_id = parent.venPri.tabla_vinculacion.item(fila, 0).text()
 
-    # respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
-    #     QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+    mensaje = f"¿Está seguro(a) de eliminar la vinculación ? Esto eliminará los datos del estudiante y sus seguimientos realizados por el tutor asociados."
 
-    # if respuesta == QtWidgets.QMessageBox.Yes:
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+    if respuesta == QtWidgets.QMessageBox.Yes:
         
-    #     if not parent.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
-    #         return
+        if not parent.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+            return
         
-    #     parent.conec_base.getDatosProcess_condicion("EliminarVinculacion", (vinculacion_id,))
-    #     parent.listar_vinculacion()
-
-    #     QtWidgets.QMessageBox.information(parent, "Mensaje", f"La vinculación de {nombre_estudiante.upper()} se ha eliminado exitosamente.")
+        consulta_delete = "DELETE FROM vinculacion WHERE id = %s"
+        parent.conec_base.deleteDatos(consulta_delete, (vinculacion_id,))
+ 
+        parent.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', parent.venPri.tabla_vinculacion)
+        parent.actualizarInfoPaginacion('vinculacion', parent.venPri.lbl_pagina_vinculacion)
+        QtWidgets.QMessageBox.information(parent, "Mensaje", "La vinculación se ha eliminado exitosamente.")
 
 def btn_detalle_acciones_vinculacion(fila, parent):
-    pass
+    
 
-    # from controllers.Modulo_principal.seguimiento_admin import Seguimiento_admin
+    from controllers.Modulo_Vinculacion.Modulo_vinculacion_detalle import VinculacionDetalle
 
-    # vinculacion_id = parent.venPri.tabla_principal.item(fila, 0).text()
-    # nombre_estudiante = parent.venPri.tabla_principal.item(fila, 6).text()
-    # nombre_tutor = parent.venPri.tabla_principal.item(fila, 15).text()
+    vinculacion_id = parent.venPri.tabla_vinculacion.item(fila, 0).text()
 
-    # parent.raizOpacidad.resize(parent.width(), parent.height())
-    # parent.raizOpacidad.show()
-    # Seguimiento_admin([nombre_estudiante, nombre_tutor, vinculacion_id],parent = parent).exec_()
+    parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.raizOpacidad.show()
+    VinculacionDetalle(vinculacion_id,parent = parent).exec_()
 
 # -------------------------------------------------------------------------------------------------------
 def cargar_tabla(tabla,dato):

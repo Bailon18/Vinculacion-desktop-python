@@ -48,17 +48,17 @@ class Principal(QtWidgets.QMainWindow):
 
         
 
-        if(self.rol != 'Administrador'):
-            self.venPri.btn_afiliacion.setHidden(True)
-            self.venPri.btn_usuario.setHidden(True)
-            self.venPri.btn_reporte.setHidden(True)
-            self.venPri.btn_home.setHidden(True)
-            self.venPri.btn_seguimientoo.setHidden(False)
-            evento_pagina(self,1, self.venPri.btn_seguimientoo)
-        else:
-            self.venPri.btn_seguimientoo.setHidden(True)
-            self.venPri.btn_home.setHidden(False)
-            evento_pagina(self,0, self.venPri.btn_afiliacion)
+        # if(self.rol != 'Administrador'):
+        #     self.venPri.btn_afiliacion.setHidden(True)
+        #     self.venPri.btn_usuario.setHidden(True)
+        #     self.venPri.btn_reporte.setHidden(True)
+        #     self.venPri.btn_home.setHidden(True)
+        #     self.venPri.btn_seguimientoo.setHidden(False)
+        #     evento_pagina(self,1, self.venPri.btn_seguimientoo)
+        # else:
+        #     self.venPri.btn_seguimientoo.setHidden(True)
+        #     self.venPri.btn_home.setHidden(False)
+        #     evento_pagina(self,0, self.venPri.btn_afiliacion)
 
         # self.listar_vinculacion()
         # self.listar_usuarios()

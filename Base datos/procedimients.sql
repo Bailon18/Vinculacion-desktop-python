@@ -747,10 +747,32 @@ BEGIN
 END //
 DELIMITER ;
 
-SELECT LAST_INSERT_ID()
 
 
+DROP PROCEDURE IF EXISTS ObtenerDetalleVinculacion;
+DELIMITER //
+CREATE PROCEDURE ObtenerDetalleVinculacion (IN vinculacion_id INT)
+BEGIN
+    SELECT 
+		DATE_FORMAT(v.fecha_inicio, '%Y-%m-%d') AS fecha_inicio,
+        v.codigo_ies,
+        v.campo_especifico,
+        v.periodo_academico,
+        i.nombre AS institucion_nombre,
+        CONCAT(t.nombres, ' ', t.apellidos) AS tutor_nombre,
+        t.nro_identificacion AS tutor_identificacion,
+        t.telefono AS tutor_telefono,
+        t.correo AS tutor_correo,
+        t.archivo_cv AS tutor_archivo_cv,
+        p.nombre AS proyecto_nombre
+    FROM
+        vinculacion v
+        JOIN institucion i ON v.institucion_id = i.id
+        JOIN tutores t ON v.tutores_id = t.id
+        JOIN proyecto p ON v.proyecto_id = p.id
+    WHERE
+        v.id = vinculacion_id;
+END //
+DELIMITER ;
 
-
-
-
+call ObtenerDetalleVinculacion(1)

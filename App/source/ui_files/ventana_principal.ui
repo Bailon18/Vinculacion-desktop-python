@@ -1113,7 +1113,7 @@ QComboBox::down-arrow
                 <string notr="true"/>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="pag1">
                 <property name="styleSheet">
@@ -1138,8 +1138,8 @@ background-color:#f1f1f1;
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1232</width>
-                      <height>580</height>
+                      <width>1034</width>
+                      <height>349</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -2121,195 +2121,77 @@ background-color:#f1f1f1;
                            </size>
                           </property>
                           <property name="styleSheet">
-                           <string notr="true">QLabel{font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #6B7280;}
+                           <string notr="true">/* Estilo de la Etiqueta */
+QLabel {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
+    margin-top: 20px; /* Incrementamos el margen superior para más espacio */
+}
 
-QPushButton{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:4px;
-background: #3f5758;
-border-radius: 4px;}
+/* Estilo Base del Botón de la Paginación */
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 10px 20px; /* Incrementamos el padding para un mejor tamaño de botón */
+    background: #3f5758;
+    border: none; /* Eliminamos el borde por defecto */
+    border-radius: 8px; /* Ajustamos el border-radius */
+}
 
-QPushButton:hover{background: #3f5758;
-border-radius: 4px; }
-</string>
+/* Estilo del Botón de la Paginación al Pasar el Ratón (Hover) */
+QPushButton:hover {
+    background: #4a6b6c; /* Color de fondo más claro */
+    border-radius: 8px;
+}
+
+/* Estilo del Botón de la Paginación al Hacer Clic (Pressed) */
+QPushButton:pressed {
+    background: #2e4546; /* Color de fondo más oscuro */
+    border-radius: 8px;
+}</string>
                           </property>
                           <property name="frameShadow">
                            <enum>QFrame::Plain</enum>
                           </property>
                           <layout class="QHBoxLayout" name="horizontalLayout_8">
-                           <property name="spacing">
-                            <number>13</number>
-                           </property>
-                           <property name="leftMargin">
-                            <number>9</number>
-                           </property>
-                           <property name="topMargin">
-                            <number>0</number>
-                           </property>
-                           <property name="rightMargin">
-                            <number>9</number>
-                           </property>
-                           <property name="bottomMargin">
-                            <number>18</number>
-                           </property>
                            <item>
-                            <widget class="QLabel" name="label_7">
-                             <property name="minimumSize">
+                            <spacer name="horizontalSpacer_21">
+                             <property name="orientation">
+                              <enum>Qt::Horizontal</enum>
+                             </property>
+                             <property name="sizeHint" stdset="0">
                               <size>
-                               <width>80</width>
-                               <height>0</height>
+                               <width>40</width>
+                               <height>20</height>
                               </size>
                              </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>58</width>
-                               <height>16777215</height>
-                              </size>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string>MOSTRAR</string>
-                             </property>
-                            </widget>
+                            </spacer>
                            </item>
                            <item>
-                            <widget class="QComboBox" name="cbox_rango_tutor">
+                            <widget class="QPushButton" name="btn_pag_antes_seguimiento">
                              <property name="minimumSize">
                               <size>
-                               <width>92</width>
-                               <height>38</height>
+                               <width>59</width>
+                               <height>29</height>
                               </size>
                              </property>
                              <property name="maximumSize">
                               <size>
-                               <width>92</width>
-                               <height>38</height>
+                               <width>110</width>
+                               <height>20</height>
                               </size>
                              </property>
                              <property name="cursor">
                               <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="styleSheet">
-                              <string notr="true">
-QComboBox{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-letter-spacing: 0.02em;
-background: #F3F4F6;
-color:#9CA3AF;
-border-radius:8px;
-padding:10px;
-combobox-popup: 0;
-border: 2px solid #F3F4F6;
-
-}
-
-
-QComboBox::drop-down
-{
-    width: 20px;
-    border-left-width: 1px;
-	padding: 10px 10px 10px 20px;
- }
-
-
-QComboBox QAbstractItemView {
-	color:#9CA3AF;
-	font-size:14px;
-	background-color: #F3F4F6;
-	selection-background-color:#3f5758;
-	selection-color:#ffffff;
-	outline: 0px;
-   border: 1px solid #3f5758;
- border-radius:8px;
-padding:10px
-}
-
-
-
-QComboBox::down-arrow
-{
-	image: url(:/menu/contraerabajo.png);
-     width: 11px;
-     height: 11px;
-}
-
-QComboBox::focus{
-background: #FFFFFF;
-border: 2px solid #3f5758;
-border-radius: 8px;
-}
-
-
-
-
-</string>
-                             </property>
-                             <item>
-                              <property name="text">
-                               <string>5</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>10</string>
-                              </property>
-                             </item>
-                             <item>
-                              <property name="text">
-                               <string>50</string>
-                              </property>
-                             </item>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QLabel" name="label_8">
-                             <property name="styleSheet">
-                              <string notr="true"/>
-                             </property>
-                             <property name="text">
-                              <string>REGISTRO</string>
-                             </property>
-                            </widget>
-                           </item>
-                           <item>
-                            <widget class="QPushButton" name="btn_recargar_tutor">
-                             <property name="minimumSize">
-                              <size>
-                               <width>59</width>
-                               <height>36</height>
-                              </size>
-                             </property>
-                             <property name="maximumSize">
-                              <size>
-                               <width>59</width>
-                               <height>36</height>
-                              </size>
-                             </property>
-                             <property name="cursor">
-                              <cursorShape>PointingHandCursor</cursorShape>
-                             </property>
-                             <property name="focusPolicy">
-                              <enum>Qt::NoFocus</enum>
-                             </property>
-                             <property name="toolTip">
-                              <string>Actualizar registro</string>
                              </property>
                              <property name="styleSheet">
                               <string notr="true"/>
@@ -2319,16 +2201,67 @@ border-radius: 8px;
                              </property>
                              <property name="icon">
                               <iconset resource="../image/source.qrc">
-                               <normaloff>:/menu/menuactualizar.png</normaloff>:/menu/menuactualizar.png</iconset>
+                               <normaloff>:/menu/hacia-atras.png</normaloff>:/menu/hacia-atras.png</iconset>
                              </property>
                              <property name="iconSize">
                               <size>
-                               <width>20</width>
+                               <width>15</width>
+                               <height>21</height>
+                              </size>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QLabel" name="lbl_pagina_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>45</width>
+                               <height>0</height>
+                              </size>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string>2000</string>
+                             </property>
+                             <property name="alignment">
+                              <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+                             </property>
+                            </widget>
+                           </item>
+                           <item>
+                            <widget class="QPushButton" name="btn_pag_desp_seguimiento">
+                             <property name="minimumSize">
+                              <size>
+                               <width>59</width>
+                               <height>29</height>
+                              </size>
+                             </property>
+                             <property name="maximumSize">
+                              <size>
+                               <width>110</width>
                                <height>20</height>
                               </size>
                              </property>
-                             <property name="flat">
-                              <bool>false</bool>
+                             <property name="cursor">
+                              <cursorShape>PointingHandCursor</cursorShape>
+                             </property>
+                             <property name="styleSheet">
+                              <string notr="true"/>
+                             </property>
+                             <property name="text">
+                              <string/>
+                             </property>
+                             <property name="icon">
+                              <iconset resource="../image/source.qrc">
+                               <normaloff>:/menu/hacia-adelante.png</normaloff>:/menu/hacia-adelante.png</iconset>
+                             </property>
+                             <property name="iconSize">
+                              <size>
+                               <width>15</width>
+                               <height>21</height>
+                              </size>
                              </property>
                             </widget>
                            </item>
@@ -2345,117 +2278,68 @@ border-radius: 8px;
                           </property>
                           <layout class="QGridLayout" name="gridLayout_16">
                            <item row="0" column="0">
-                            <widget class="QTableWidget" name="tabla_principal_tutor">
+                            <widget class="QTableWidget" name="tabla_seguimiento">
                              <property name="styleSheet">
-                              <string notr="true">QTableWidget {
-outline: 0px;
-border:5px solid #f3f4f6;
-border-radius:15px;
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-line-height: 19px;
-letter-spacing: 0.02em;
-color: #6B7280;
+                              <string notr="true">/* Estilo Base del QTableWidget */
+QTableWidget {
+    outline: 0px;
+    border: 5px solid #f3f4f6;
+    border-radius: 15px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    line-height: 19px;
+    letter-spacing: 0.02em;
+    color: #6B7280;
+    gridline-color: #e0e0e0; /* Color de las líneas de la cuadrícula */
 }
 
-
-/* cabezera*/
-QHeaderView::section {
-background-color:#f1f2f3;
-border-style: none;
-height:40px;
-font-family: &quot;Roboto&quot;;
-font-style: normal;
-font-weight: normal;
-font-size: 13px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #6B7280;
-
-
+/* Estilo de las Celdas */
+QTableWidget::item {
+    border-bottom: 3px solid #f3f4f6;
+    padding: 5px;
 }
 
-
-QHeaderView::section:horizontal{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 14px;
-line-height: 14px;
-letter-spacing: 0.04em;
-text-transform: uppercase;
-color: #212529;
-
+/* Estilo de las Celdas Seleccionadas */
+QTableWidget::item:selected {
+    background: #465e5f; /* Fondo más claro para la celda seleccionada */
+    color: #ffffff; /* Color de texto claro para las celdas seleccionadas */
 }
 
-
-QTableWidget::disabled{
-    background-color:#acacac;
+/* Estilo de las Celdas Deshabilitadas */
+QTableWidget::disabled {
+    background-color: #acacac;
     border: 1px solid #32414B;
     color: #656565;
-    gridline-color: #656565;}
-
-/*bordes internos*/
-QTableWidget::item {
-	border-bottom: 3px solid #f3f4f6;
-
+    gridline-color: #656565;
 }
 
-QTableWidget:item:selected{
-	background:white;/*color-seleccion*/
-color: #2c3d3e;
+/* Estilo de las Secciones de la Cabecera */
+QHeaderView::section {
+    background-color: #f1f2f3;
+    border-style: none;
+    height: 40px;
+    font-family: &quot;Roboto&quot;;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px; /* Tamaño de la letra de la cabecera */
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    color: #6B7280;
 }
 
-
-
-
-
-/*SCROLL VERTICAL*/
-
-QScrollBar:vertical{
-	background: #f3f4f6;
-	width: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:vertical{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 0px 0px 3px 2px;
-}
-
-QScrollBar::add-line:vertical {
-	height: 0px;
-}
-
-QScrollBar::sub-line:vertical {
-	height: 0 px;
-}
-
-
-/*SCROLL HORIZONTAL*/
-
-QScrollBar:horizontal{
-	background: #f3f4f6;
-	height: 11px; 
-	margin: 0px 0px 0px 0px;
-}
-
-QScrollBar::handle:horizontal{
-	background: #cdcecf;
-    border-radius:3px;
-	margin: 3px 2px 0px 0px;
-}
-
-QScrollBar::add-line:horizontal{
-	height: 0px;
-}
-
-QScrollBar::sub-line:horizontal{
-	height: 0 px;
+/* Estilo de las Secciones Horizontales de la Cabecera */
+QHeaderView::section:horizontal {
+    font-size: 14px; /* Tamaño de la letra de la cabecera */
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+   text-transform: uppercase; /* Convertir texto a mayúsculas */;
+    color: #212529;
+    border-bottom: 2px solid #e0e0e0; /* Separador inferior */
 }
 
 </string>
@@ -2494,7 +2378,7 @@ QScrollBar::sub-line:horizontal{
                               <bool>true</bool>
                              </property>
                              <attribute name="horizontalHeaderVisible">
-                              <bool>false</bool>
+                              <bool>true</bool>
                              </attribute>
                              <attribute name="horizontalHeaderCascadingSectionResizes">
                               <bool>false</bool>
@@ -2503,7 +2387,7 @@ QScrollBar::sub-line:horizontal{
                               <number>38</number>
                              </attribute>
                              <attribute name="horizontalHeaderDefaultSectionSize">
-                              <number>100</number>
+                              <number>195</number>
                              </attribute>
                              <attribute name="horizontalHeaderHighlightSections">
                               <bool>false</bool>
@@ -2712,17 +2596,17 @@ border-radius: 8px;
                             <number>12</number>
                            </property>
                            <item>
-                            <widget class="QLineEdit" name="line_busqueda_tutor">
+                            <widget class="QLineEdit" name="line_busqueda_seguimiento">
                              <property name="minimumSize">
                               <size>
                                <width>0</width>
-                               <height>45</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="maximumSize">
                               <size>
                                <width>16777215</width>
-                               <height>45</height>
+                               <height>40</height>
                               </size>
                              </property>
                              <property name="styleSheet">
@@ -2892,8 +2776,8 @@ color: #000000;</string>
                      <rect>
                       <x>0</x>
                       <y>0</y>
-                      <width>1232</width>
-                      <height>579</height>
+                      <width>930</width>
+                      <height>296</height>
                      </rect>
                     </property>
                     <property name="styleSheet">
@@ -9248,7 +9132,6 @@ border-radius: 8px;
  </widget>
  <resources>
   <include location="../image/source.qrc"/>
-  <include location="../../../../../../.designer/image/source.qrc"/>
  </resources>
  <connections/>
 </ui>

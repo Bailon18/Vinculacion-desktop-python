@@ -14,12 +14,95 @@ from PySide2.QtWidgets import QFileDialog
 from fpdf import FPDF
 
 # ventana carga reporte
+
 from views.ui_ui_VenCargaReportes import Ui_VenCargaReportes
+
+class PDF(FPDF):
+    
+    def __init__(self):
+        super().__init__()
+        # Definir la ruta absoluta del directorio de fuentes
+        self.font_dir = os.path.abspath('source/fonts/')
+        
+        # Registrar todas las fuentes Roboto
+        self.register_roboto_fonts()
+
+    def register_roboto_fonts(self):
+        self.add_font('Roboto-Light', '', os.path.join(self.font_dir, 'Roboto-Light.ttf'), uni=True)
+        self.add_font('Roboto-Regular', '', os.path.join(self.font_dir, 'Roboto-Regular.ttf'), uni=True)
+        self.add_font('Roboto-Bold', '', os.path.join(self.font_dir, 'Roboto-Bold.ttf'), uni=True)
+
+    def header(self):
+        self.set_font('Roboto-Bold', '', 20)  
+        self.set_text_color(58, 79, 80)  
+        self.cell(0, 10, 'Detalle de Vinculación', 0, 1, 'C')
+        self.ln(10)
+
+    def footer(self):
+        self.set_y(-15)
+        self.set_font('Roboto-Regular', '', 8) 
+        self.set_text_color(128) 
+        self.cell(0, 10, f'Página {self.page_no()}', 0, 0, 'C')
+
+    def chapter_title(self, title):
+        self.set_font('Roboto-Bold', '', 16)  
+        self.set_text_color(58, 79, 80)  
+        self.cell(0, 10, title, 0, 1, 'L')
+        self.ln(2)
+
+    def add_card(self, title, body_dict):
+        self.set_fill_color(220, 220, 220)  
+        self.set_text_color(58, 79, 80)  
+        self.set_font('Roboto-Bold', '', 14) 
+        self.cell(0, 10, title, 0, 1, 'L', fill=True)
+        self.ln(6)
+        
+        self.set_font('Roboto-Regular', '', 12)  
+        key_color = (80, 80, 80)  
+        value_color = (58, 79, 80)  
+        
+        key_width = 45
+        value_width = 140
+        
+        for key, value in body_dict.items():
+            self.set_text_color(*key_color)
+            self.cell(key_width, 2, f'{key}:', 0, 0, 'L')
+            
+            self.set_text_color(*value_color)
+            self.multi_cell(value_width, 2, value, 0, 'L')
+            
+            self.ln(8)
+            
+    def add_student_table(self, header, data):
+        self.set_fill_color(58, 79, 80)  
+        self.set_text_color(255, 255, 255)  
+        self.set_font('Roboto-Bold', '', 12)  
+        
+        # Header
+        cell_width = 45
+        for col in header:
+            self.cell(cell_width, 10, col, 1, 0, 'C', True)
+        self.ln()
+        
+        self.set_font('Roboto-Regular', '', 12) 
+        self.set_text_color(58, 79, 80)  
+        self.set_fill_color(245, 245, 245) 
+        
+        # Data
+        fill = False
+        for row in data:
+            for item in row:
+                self.cell(cell_width, 10, str(item), 1, 0, 'C', fill)
+            self.ln()
+            fill = not fill
+            
+    def add_logo(self, logo_path):
+            self.image(logo_path, x=8, y=2, w=25)
 
 # VENTANA MUESTRA USUARIO
 class FormRepoImforme(QDialog):
 
-    def __init__(self, repdatos, tipo, periodo):
+    def __init__(self, vinculacion_datos, estudiantes_datos):
         super(FormRepoImforme, self).__init__()
 
         # clase principal
@@ -29,9 +112,8 @@ class FormRepoImforme(QDialog):
         self.setWindowFlags(self.windowFlags() ^ Qt.WindowContextHelpButtonHint)
         self.contador=0
 
-        self.repdatos = repdatos
-        self.tipo = tipo
-        self.periodo = periodo
+        self.vinculacion_datos = vinculacion_datos
+        self.estudiantes_datos = estudiantes_datos
 
         # controlador cierre
         self.sw_cierre = False
@@ -53,7 +135,7 @@ class FormRepoImforme(QDialog):
             self.close()
 
             # GENERAR REPORTES---- 
-            self.raiz_inicia_rep.gen_mandar_datos(self,self.repdatos, self.tipo, self.periodo)
+            self.raiz_inicia_rep.gen_mandar_datos(self,self.vinculacion_datos, self.estudiantes_datos)
 
         self.contador += 1
 
@@ -84,7 +166,7 @@ class ClaseGeneradorReportes():
         ruta= QFileDialog.getSaveFileName(None, 'Seleccionar archivo',nombre_guardado,'Texto (*.pdf)')
         return ruta[0]
        
-    def gen_mandar_datos(self, parent, datos, tipo, periodo):
+    def gen_mandar_datos(self, parent, vinculacion_datos, estudiantes_datos):
 
 
         # fecha de generacion del informe
@@ -92,20 +174,23 @@ class ClaseGeneradorReportes():
 
    
         # nombre del archivo
-        nombre_archivo = f'Reporte_{tipo}_{fecha_data_act}'
+        nombre_archivo = f'DetalleVinculacion_{fecha_data_act}'
 
         self.ruta_save = self.guardarArchivo(nombre_archivo)
         if(self.ruta_save==''):return
         
         
-        if(tipo == "estudiantes"):
-            self.gene_reporte_estudiantes(datos)  
-        elif( tipo == "informe"):
-            self.gene_reporte_informe(datos, periodo)
-        elif( tipo == "ficha"):
-            self.gene_reporte_ficha(datos, periodo)
-        else:
-            self.gene_reporte_memorandum(datos, periodo)
+        # if(tipo == "estudiantes"):
+        #     self.gene_reporte_estudiantes(datos)  
+        # elif( tipo == "informe"):
+        #     self.gene_reporte_informe(datos, periodo)
+        # elif( tipo == "ficha"):
+        #     self.gene_reporte_ficha(datos, periodo)
+        # else:
+        #     self.gene_reporte_memorandum(datos, periodo)
+        
+        
+        self.generar_detalle_vinculacion(vinculacion_datos, estudiantes_datos)
             
             
         webbrowser.open(self.ruta_save, new=2)
@@ -301,4 +386,51 @@ class ClaseGeneradorReportes():
                 pdf.cell(45, 10, str(item), 1, 0, 'C') 
             pdf.ln()
 
+        pdf.output(self.ruta_save)
+        
+    def generar_detalle_vinculacion(self, vinculacion_datos, estudiantes_datos):
+        
+        
+        pdf = PDF()
+        pdf.add_page()
+        
+        image_path = os.path.abspath('source/image/logito2.png')
+        pdf.add_logo(image_path)
+        
+        # Información de Vinculación
+        vinculacion = vinculacion_datos[0]
+        vinculacion_text = {
+            'Fecha de Inicio': vinculacion['fecha_inicio'],
+            'Código IES': vinculacion['codigo_ies'],
+            'Campo Específico': vinculacion['campo_especifico'],
+            'Periodo Académico': vinculacion['periodo_academico'],
+            'Institución': vinculacion['institucion_nombre']
+        }
+        
+        pdf.add_card('Detalle de Vinculación', vinculacion_text)
+        
+        # Información del Tutor
+        tutor_text = {
+            'Nombre del Tutor': vinculacion['tutor_nombre'],
+            'Cédula del Tutor': vinculacion['tutor_identificacion'],
+            'Teléfono del Tutor': vinculacion['tutor_telefono'],
+            'Correo del Tutor': vinculacion['tutor_correo']
+        }
+        
+        pdf.add_card('Detalle del Tutor', tutor_text)
+        
+        # Información del Proyecto
+        proyecto_text = {
+            'Nombre del Proyecto': vinculacion['proyecto_nombre']
+        }
+        
+        pdf.add_card('Detalle del Proyecto', proyecto_text)
+        
+        # Información de Estudiantes
+        header = ['Cédula', 'Nombre', 'Estado', 'Horas']
+        data = estudiantes_datos
+        
+        pdf.chapter_title('Estudiantes Vinculados')
+        pdf.add_student_table(header, data)
+        
         pdf.output(self.ruta_save)
