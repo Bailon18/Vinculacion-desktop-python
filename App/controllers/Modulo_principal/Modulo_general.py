@@ -7,6 +7,7 @@ from controllers.Modulo_administracion.Estudiantes_administracion import Estudia
 from controllers.Modulo_administracion.Instituciones_administracion import InstitucionesAdmin
 from controllers.Modulo_administracion.Proyectos_administracion import ProyectosAdmin
 from controllers.Modulo_administracion.Tutores_administracion import TutoresAdmin
+from controllers.Modulo_seguimiento.Modulo_actividad import FormularioSeguimientoEstudiante
 from controllers.Modulo_seguimiento.funcion_seguimiento import llenar_tabla_seguimiento_tutor
 from controllers.Modulo_usuarios.Modulo_usuarios import Perfil
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
@@ -294,6 +295,11 @@ class Principal(QtWidgets.QMainWindow):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         TutoresAdmin(self, 'nuevo', 0).exec_()
+        
+    def abrir_ventana_nueva_actividad(self):
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        FormularioSeguimientoEstudiante(self, 0, '').exec_()
         
     def abrir_ventana_proyectos(self):
         self.raizOpacidad.resize(self.width(), self.height())

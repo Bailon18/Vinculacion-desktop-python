@@ -1,4 +1,5 @@
 from PySide2 import QtWidgets , QtCore , QtGui
+from controllers.Modulo_seguimiento.Modulo_actividad import FormularioSeguimientoEstudiante
 from controllers.Modulo_seguimiento.funcion_seguimiento import *
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
 from PySide2.QtWidgets import QMessageBox
@@ -76,6 +77,9 @@ class Seguimiento(QtWidgets.QDialog):
         # Inicializar la tabla con la primera página
         self.llenarTabla('ObtenerListaSeguimientoXEstudiante', 'seguimiento', self.seguimiento_tutor.tabla_listado_actividades)
         self.actualizarInfoPaginacion('seguimiento', self.seguimiento_tutor.lbl_pagina_seguimiento)
+        
+        
+        self.seguimiento_tutor.btn_nuevo_seguimiento.clicked.connect(lambda: self.abrirNuevaActividad())
 
         
     def keyPressEvent(self, event):
@@ -85,8 +89,8 @@ class Seguimiento(QtWidgets.QDialog):
     def cerrar_ui_seguimientoadmin(self):
         self.parent.raizOpacidad.close()
         self.close()
-
         
+
     def keyPressEvent(self, qKeyEvent):
  
         if qKeyEvent.modifiers() & QtCore.Qt.AltModifier:
@@ -96,7 +100,12 @@ class Seguimiento(QtWidgets.QDialog):
             self.window().setAttribute(QtCore.Qt.WA_KeyboardFocusChange)
         else:
             super().keyPressEvent(qKeyEvent)
-
+            
+    def abrirNuevaActividad(self):
+        self.cerrar_ui_seguimientoadmin()
+        self.parent.abrir_ventana_nueva_actividad()
+       
+    
     def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
         datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [self.id_seguimiento, self.offset, self.limit])
         llenar_tabla_actividades(self, tabla_diseno, datoresultante[0])

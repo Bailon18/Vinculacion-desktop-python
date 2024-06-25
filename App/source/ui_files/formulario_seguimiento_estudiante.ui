@@ -294,15 +294,15 @@ border-radius: 8px;
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>0</y>
+         <y>-309</y>
          <width>494</width>
-         <height>720</height>
+         <height>770</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>720</height>
+         <height>770</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -318,7 +318,7 @@ border-bottom-left-radius: 10px;
          <rect>
           <x>7</x>
           <y>20</y>
-          <width>161</width>
+          <width>261</width>
           <height>21</height>
          </rect>
         </property>
@@ -336,7 +336,7 @@ border-bottom-left-radius: 10px;
 </string>
         </property>
         <property name="text">
-         <string>Datos Actividad</string>
+         <string>Datos de  Actividad</string>
         </property>
        </widget>
        <widget class="QLabel" name="label_97">
@@ -378,8 +378,8 @@ border-bottom-left-radius: 10px;
         <property name="geometry">
          <rect>
           <x>4</x>
-          <y>460</y>
-          <width>261</width>
+          <y>500</y>
+          <width>351</width>
           <height>21</height>
          </rect>
         </property>
@@ -430,7 +430,7 @@ border-bottom-left-radius: 10px;
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>180</y>
+          <y>190</y>
           <width>471</width>
           <height>261</height>
          </rect>
@@ -440,7 +440,7 @@ border-bottom-left-radius: 10px;
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>500</y>
+          <y>540</y>
           <width>221</width>
           <height>35</height>
          </rect>
@@ -491,7 +491,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>270</x>
-          <y>500</y>
+          <y>540</y>
           <width>211</width>
           <height>35</height>
          </rect>
@@ -542,7 +542,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>598</y>
+          <y>650</y>
           <width>471</width>
           <height>101</height>
          </rect>
@@ -552,7 +552,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>571</y>
+          <y>620</y>
           <width>271</width>
           <height>21</height>
          </rect>
@@ -578,7 +578,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>540</y>
+          <y>580</y>
           <width>171</width>
           <height>16</height>
          </rect>
@@ -595,7 +595,7 @@ font: italic 10pt &quot;Roboto&quot;;</string>
         <property name="geometry">
          <rect>
           <x>270</x>
-          <y>540</y>
+          <y>580</y>
           <width>171</width>
           <height>16</height>
          </rect>
@@ -612,13 +612,39 @@ font: italic 10pt &quot;Roboto&quot;;</string>
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>150</y>
+          <y>157</y>
           <width>221</width>
           <height>31</height>
          </rect>
         </property>
         <property name="text">
          <string>Lista de actividades realizados</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorNombres">
+        <property name="geometry">
+         <rect>
+          <x>272</x>
+          <y>131</y>
+          <width>211</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>dwd</string>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorNombres_2">
+        <property name="geometry">
+         <rect>
+          <x>12</x>
+          <y>454</y>
+          <width>211</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>dwd</string>
         </property>
        </widget>
       </widget>
