@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_seguimiento_estudianteJHBSbN.ui'
+## Form generated from reading UI file 'formulario_seguimiento_estudianteVpvdBs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -262,7 +262,7 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, -259, 494, 720))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 494, 720))
         self.scroll_registro_estudiante.setMinimumSize(QSize(0, 720))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"

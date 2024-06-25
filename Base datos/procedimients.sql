@@ -855,3 +855,56 @@ BEGIN
     END IF;
 END//
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS ObtenerListaSeguimientoXEstudiante;
+DELIMITER //
+CREATE PROCEDURE ObtenerListaSeguimientoXEstudiante(IN p_estudiantes_vinculacion_id INT, IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT 
+        id, fecha_actividad, horas_actividad 
+    FROM seguimiento WHERE estudiantes_vinculacion_id = p_estudiantes_vinculacion_id 
+    ORDER BY id DESC
+    LIMIT p_limit 
+    OFFSET p_offset;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS contar_instituciones_SeguimientoXEstudiante;
+DELIMITER //
+CREATE PROCEDURE contar_instituciones_SeguimientoXEstudiante(
+    IN p_estudiantes_vinculacion_id INT,
+    IN p_fecha_inicio DATE,
+    IN p_fecha_final DATE
+)
+BEGIN
+    SELECT COUNT(DISTINCT id) AS total_instituciones
+    FROM seguimiento
+    WHERE estudiantes_vinculacion_id = p_estudiantes_vinculacion_id
+    AND fecha_actividad BETWEEN p_fecha_inicio AND p_fecha_final;
+END//
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS buscar_seguimiento_fechas;
+DELIMITER //
+CREATE PROCEDURE buscar_seguimiento_fechas(
+    IN p_estudiantes_vinculacion_id INT,
+    IN p_fecha_inicio DATE,
+    IN p_fecha_final DATE,
+    IN p_offset INT,
+    IN p_limit INT
+)
+BEGIN
+    SELECT 
+        id, fecha_actividad, horas_actividad 
+    FROM seguimiento 
+    WHERE estudiantes_vinculacion_id = p_estudiantes_vinculacion_id
+    AND fecha_actividad BETWEEN p_fecha_inicio AND p_fecha_final
+    ORDER BY id DESC
+    LIMIT p_limit 
+    OFFSET p_offset;
+END //
+DELIMITER ;
+
+
+call buscar_seguimiento_fechas(16, '2023-01-02', '2024-09-30', 0, 7)

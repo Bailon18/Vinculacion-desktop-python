@@ -387,7 +387,7 @@ QHeaderView::section:horizontal {
               <number>23</number>
              </attribute>
              <attribute name="verticalHeaderDefaultSectionSize">
-              <number>41</number>
+              <number>50</number>
              </attribute>
              <row>
               <property name="text">
@@ -682,7 +682,7 @@ QPushButton:pressed {
 }</string>
           </property>
           <property name="frameShape">
-           <enum>QFrame::StyledPanel</enum>
+           <enum>QFrame::NoFrame</enum>
           </property>
           <property name="frameShadow">
            <enum>QFrame::Raised</enum>
@@ -902,7 +902,7 @@ border-radius:11px; }
           <rect>
            <x>20</x>
            <y>29</y>
-           <width>411</width>
+           <width>491</width>
            <height>20</height>
           </rect>
          </property>

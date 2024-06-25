@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'seguimientoUiwwGx.ui'
+## Form generated from reading UI file 'seguimientoWfdIkV.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -307,7 +307,7 @@ class Ui_FormularioSeguimiento(object):
         self.tabla_listado_actividades.horizontalHeader().setHighlightSections(False)
         self.tabla_listado_actividades.verticalHeader().setVisible(False)
         self.tabla_listado_actividades.verticalHeader().setMinimumSectionSize(23)
-        self.tabla_listado_actividades.verticalHeader().setDefaultSectionSize(41)
+        self.tabla_listado_actividades.verticalHeader().setDefaultSectionSize(50)
 
         self.gridLayout_30.addWidget(self.tabla_listado_actividades, 0, 0, 1, 1)
 
@@ -432,7 +432,7 @@ class Ui_FormularioSeguimiento(object):
 "    background: #2e4546; /* Color de fondo m\u00e1s oscuro */\n"
 "    border-radius: 8px;\n"
 "}")
-        self.frame_2.setFrameShape(QFrame.StyledPanel)
+        self.frame_2.setFrameShape(QFrame.NoFrame)
         self.frame_2.setFrameShadow(QFrame.Raised)
         self.btn_pag_desp_seguimiento = QPushButton(self.frame_2)
         self.btn_pag_desp_seguimiento.setObjectName(u"btn_pag_desp_seguimiento")
@@ -514,7 +514,7 @@ class Ui_FormularioSeguimiento(object):
         self.btn_close.setAutoRaise(True)
         self.lbl_nombreestudiante = QLabel(self.frame_19)
         self.lbl_nombreestudiante.setObjectName(u"lbl_nombreestudiante")
-        self.lbl_nombreestudiante.setGeometry(QRect(20, 29, 411, 20))
+        self.lbl_nombreestudiante.setGeometry(QRect(20, 29, 491, 20))
         self.lbl_nombreestudiante.setStyleSheet(u"QLabel{font-family: Roboto;\n"
 "font-style: normal;\n"
 "font-weight: normal;\n"

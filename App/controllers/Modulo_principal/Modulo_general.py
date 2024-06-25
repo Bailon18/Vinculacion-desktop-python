@@ -86,6 +86,8 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.line_busqueda_proyecto.textChanged.connect(lambda: self.filtro_proyectos())
         self.venPri.line_busqueda_carrera.textChanged.connect(lambda: self.filtro_carreras())
         self.venPri.line_busqueda_inst.textChanged.connect(lambda: self.filtro_institucion())
+        
+        
         # self.venPri.line_busqueda_tutor.textChanged.connect(lambda: self.busqueda_vinculacion_tutor())
         # self.venPri.line_busqueda_reporte_estudiantes.textChanged.connect(lambda: self.busqueda_datos_estudiante())
         # self.venPri.line_busqueda_usuario.textChanged.connect(lambda: self.busqueda_usuarios_filtro())
@@ -215,10 +217,22 @@ class Principal(QtWidgets.QMainWindow):
         
         
         self.periodo_academico = '' 
+
+
+
         
         self.venPri.cbo_filtro_periodo_seguimiento.currentIndexChanged.connect(lambda: self.consultar_filtro_seguimiento_periodo())
         self.venPri.cbo_filtro_proyecto_seguimiento.currentIndexChanged.connect(lambda: self.llenar_estudiantes_seguimientos_tutor())
-
+        
+        self.consultar_filtro_seguimiento_periodo()
+        
+        # Verificar si el combo box de periodos tiene elementos
+        if self.venPri.cbo_filtro_periodo_seguimiento.count() > 0:
+            self.venPri.cbo_filtro_periodo_seguimiento.setCurrentIndex(1)
+            self.venPri.cbo_filtro_proyecto_seguimiento.setCurrentIndex(1)
+        else:
+            self.venPri.cbo_filtro_periodo_seguimiento.setCurrentIndex(0)
+            self.venPri.cbo_filtro_proyecto_seguimiento.setCurrentIndex(0)
 
         
 
@@ -585,9 +599,6 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.cbo_filtro_periodo.blockSignals(False)
             self.venPri.cbo_filtro_tutor.blockSignals(False)
 
-
-
-
     def consultar_filtro_seguimiento_periodo(self):
         
         self.periodo_academico = self.venPri.cbo_filtro_periodo_seguimiento.currentData()
@@ -602,42 +613,40 @@ class Principal(QtWidgets.QMainWindow):
             (self.tutor_id, self.periodo_academico )
         )
         
-        print('resultao ', resultados_proyectos)
-
         self.venPri.cbo_filtro_proyecto_seguimiento.clear()
         self.venPri.cbo_filtro_proyecto_seguimiento.addItem("Seleccione proyecto", None)
 
         for id, nombre in resultados_proyectos:
             self.venPri.cbo_filtro_proyecto_seguimiento.addItem(nombre, id)
 
-
-
     def llenar_estudiantes_seguimientos_tutor(self):
       
         proyecto_id = self.venPri.cbo_filtro_proyecto_seguimiento.currentData()
+        
+        if(proyecto_id is not None):
 
-        resultados_vinculaciones_estudiantes = self.conec_base.getDatos_condicion(
-            "SELECT ev.id AS id_vinculacion_estudiante, "
-            "CONCAT(e.nombres, ' ', e.apellidos) AS estudiante, "
-            "v.fecha_inicio AS fecha_inicio_vinculacion, "
-            "ev.nro_horas AS horas_vinculacion, "
-            "ev.estado_vinculacion AS estado_vinculacion "
-            "FROM vinculacion v "
-            "JOIN estudiantes_vinculacion ev ON v.id = ev.vinculacion_id "
-            "JOIN estudiantes e ON ev.estudiantes_id = e.id "
-            "JOIN proyecto p ON v.proyecto_id = p.id "
-            "WHERE v.tutores_id = %s "
-            "AND v.periodo_academico = %s "
-            "AND v.proyecto_id = %s "
-            "ORDER BY v.id, e.apellidos, e.nombres;",
-            (self.tutor_id, self.periodo_academico, proyecto_id)
-        )
-        
-        print('resultante ', resultados_vinculaciones_estudiantes)
-        
-        if (resultados_vinculaciones_estudiantes):
+            resultados_vinculaciones_estudiantes = self.conec_base.getDatos_condicion(
+                "SELECT ev.id AS id_vinculacion_estudiante, "
+                "CONCAT(e.nombres, ' ', e.apellidos) AS estudiante, "
+                "v.fecha_inicio AS fecha_inicio_vinculacion, "
+                "ev.nro_horas AS horas_vinculacion, "
+                "ev.estado_vinculacion AS estado_vinculacion "
+                "FROM vinculacion v "
+                "JOIN estudiantes_vinculacion ev ON v.id = ev.vinculacion_id "
+                "JOIN estudiantes e ON ev.estudiantes_id = e.id "
+                "JOIN proyecto p ON v.proyecto_id = p.id "
+                "WHERE v.tutores_id = %s "
+                "AND v.periodo_academico = %s "
+                "AND v.proyecto_id = %s "
+                "ORDER BY v.id, e.apellidos, e.nombres;",
+                (self.tutor_id, self.periodo_academico, proyecto_id)
+            )
             
-            llenar_tabla_seguimiento_tutor(self, self.venPri.tabla_seguimiento, resultados_vinculaciones_estudiantes)
+            #print('resultante ', resultados_vinculaciones_estudiantes)
+            
+            if (resultados_vinculaciones_estudiantes):
+                
+                llenar_tabla_seguimiento_tutor(self, self.venPri.tabla_seguimiento, resultados_vinculaciones_estudiantes)
 
 
 

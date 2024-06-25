@@ -116,6 +116,21 @@ DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
 
+CREATE TABLE IF NOT EXISTS seguimiento (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    estudiantes_vinculacion_id INT NOT NULL,
+    fecha_actividad DATE NOT NULL,
+    horas_actividad INT NOT NULL,
+    actividades TEXT,
+    archivo_foto LONGBLOB,
+    archivo_actividad LONGBLOB,
+    tipo_archivo_actividad VARCHAR(50),
+    observacion TEXT,
+    fecha_seguimiento DATE NOT NULL,
+    FOREIGN KEY (estudiantes_vinculacion_id) REFERENCES estudiantes_vinculacion(id)
+    ON DELETE CASCADE
+    ON UPDATE NO ACTION
+);
 
 
 
