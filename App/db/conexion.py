@@ -8,6 +8,16 @@ import sys
 class Conexion:
 
 
+    # __MINISIZE = 1
+    # __MAXISIZE = 5
+    # __DATABASE = 'railway'
+    # __USERNAME = 'root'
+    # __PASSWORD = 'UQIDvCECdFsNqKYrYvslvbDDhjxXLIkx'
+    # __DB_PORT = 54633
+    # __HOST = 'roundhouse.proxy.rlwy.net'
+    # __pool = None
+    
+    
     __MINISIZE = 1
     __MAXISIZE = 5
     __DATABASE = 'vinculacion'
@@ -16,6 +26,7 @@ class Conexion:
     __DB_PORT = 3306
     __HOST = 'localhost'
     __pool = None
+    
     
     @classmethod
     def obtenerPool(cls):

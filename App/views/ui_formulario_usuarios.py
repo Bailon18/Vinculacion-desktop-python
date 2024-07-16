@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'perfilYqLhDQ.ui'
+## Form generated from reading UI file 'formulario_usuariosCEPfOL.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -14,22 +14,22 @@ from PySide2.QtWidgets import *
 
 from source.image import source
 
-class Ui_Perfil(object):
-    def setupUi(self, Perfil):
-        if not Perfil.objectName():
-            Perfil.setObjectName(u"Perfil")
-        Perfil.resize(476, 490)
-        Perfil.setMinimumSize(QSize(476, 400))
-        Perfil.setMaximumSize(QSize(476, 490))
+class Ui_FormularioUsuario(object):
+    def setupUi(self, FormularioUsuario):
+        if not FormularioUsuario.objectName():
+            FormularioUsuario.setObjectName(u"FormularioUsuario")
+        FormularioUsuario.resize(476, 520)
+        FormularioUsuario.setMinimumSize(QSize(476, 520))
+        FormularioUsuario.setMaximumSize(QSize(476, 520))
         icon = QIcon()
         icon.addFile(u":/prefijoNuevo/logo.png", QSize(), QIcon.Normal, QIcon.Off)
-        Perfil.setWindowIcon(icon)
-        Perfil.setStyleSheet(u"")
-        self.gridLayout = QGridLayout(Perfil)
+        FormularioUsuario.setWindowIcon(icon)
+        FormularioUsuario.setStyleSheet(u"")
+        self.gridLayout = QGridLayout(FormularioUsuario)
         self.gridLayout.setSpacing(0)
         self.gridLayout.setObjectName(u"gridLayout")
         self.gridLayout.setContentsMargins(0, 0, 0, 0)
-        self.frame = QFrame(Perfil)
+        self.frame = QFrame(FormularioUsuario)
         self.frame.setObjectName(u"frame")
         self.frame.setFrameShape(QFrame.NoFrame)
         self.frame.setFrameShadow(QFrame.Plain)
@@ -173,38 +173,55 @@ class Ui_Perfil(object):
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.btn_guardar = QPushButton(self.frame_3)
         self.btn_guardar.setObjectName(u"btn_guardar")
-        self.btn_guardar.setGeometry(QRect(330, 380, 120, 40))
-        self.btn_guardar.setMinimumSize(QSize(120, 40))
+        self.btn_guardar.setGeometry(QRect(320, 426, 136, 40))
+        self.btn_guardar.setMinimumSize(QSize(136, 40))
         self.btn_guardar.setMaximumSize(QSize(120, 40))
         self.btn_guardar.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_guardar.setFocusPolicy(Qt.NoFocus)
-        self.btn_guardar.setStyleSheet(u"/*  BOTON */\n"
+        self.btn_guardar.setStyleSheet(u"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 8px 16px;\n"
+"    background: #3f5758;\n"
+"    border: none; \n"
+"    border-radius: 8px; \n"
+"}\n"
 "\n"
-"QPushButton{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 15px;\n"
-"letter-spacing: 0.02em;\n"
-"color:white;\n"
-"padding:8px;\n"
-"background: #3A4F50;\n"
-"border-radius: 8px;}\n"
+"QPushButton:hover {\n"
+"    background: #4a6b6c; \n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
 "\n"
-"QPushButton:hover{background: #344748;\n"
-"border-radius: 8px; }\n"
-"")
+"\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}")
         self.btn_guardar.setIconSize(QSize(15, 21))
         self.frame_4 = QFrame(self.frame_3)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setGeometry(QRect(10, 10, 461, 351))
+        self.frame_4.setGeometry(QRect(10, 10, 461, 411))
         self.frame_4.setMinimumSize(QSize(0, 0))
-        self.frame_4.setStyleSheet(u"")
+        self.frame_4.setStyleSheet(u"/* QLabel para Mostrar Error */\n"
+"QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimiento, #errorCorreo, #errorTelefono, #errorDireccion, #errorContrasena{\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: bold;\n"
+"    font-size: 14px;\n"
+"    color: #D32F2F; \n"
+"}\n"
+"")
         self.frame_4.setFrameShape(QFrame.NoFrame)
         self.frame_4.setFrameShadow(QFrame.Raised)
         self.lbl5 = QLabel(self.frame_4)
         self.lbl5.setObjectName(u"lbl5")
-        self.lbl5.setGeometry(QRect(10, 93, 151, 21))
+        self.lbl5.setGeometry(QRect(10, 113, 151, 21))
         self.lbl5.setStyleSheet(u"")
         self.lbl5.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.line_dni = QLineEdit(self.frame_4)
@@ -237,61 +254,77 @@ class Ui_Perfil(object):
         self.line_apeP = QLineEdit(self.frame_4)
         self.line_apeP.setObjectName(u"line_apeP")
         self.line_apeP.setEnabled(True)
-        self.line_apeP.setGeometry(QRect(10, 118, 205, 40))
+        self.line_apeP.setGeometry(QRect(10, 138, 205, 40))
         self.line_apeP.setStyleSheet(u"")
         self.line_apeP.setMaxLength(100)
         self.line_apeP.setFrame(True)
         self.line_apeP.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lbl10 = QLabel(self.frame_4)
         self.lbl10.setObjectName(u"lbl10")
-        self.lbl10.setGeometry(QRect(320, 180, 82, 21))
+        self.lbl10.setGeometry(QRect(320, 212, 82, 21))
         self.lbl10.setStyleSheet(u"")
         self.lbl10.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.lbl3 = QLabel(self.frame_4)
         self.lbl3.setObjectName(u"lbl3")
-        self.lbl3.setGeometry(QRect(10, 180, 151, 21))
+        self.lbl3.setGeometry(QRect(10, 212, 151, 21))
         self.lbl3.setStyleSheet(u"")
         self.lbl3.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.line_correo = QLineEdit(self.frame_4)
         self.line_correo.setObjectName(u"line_correo")
         self.line_correo.setEnabled(True)
-        self.line_correo.setGeometry(QRect(10, 204, 291, 40))
+        self.line_correo.setGeometry(QRect(10, 236, 291, 40))
         self.line_correo.setStyleSheet(u"")
         self.line_correo.setMaxLength(100)
         self.line_correo.setFrame(True)
         self.line_correo.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
         self.lbl6_2 = QLabel(self.frame_4)
         self.lbl6_2.setObjectName(u"lbl6_2")
-        self.lbl6_2.setGeometry(QRect(10, 262, 151, 21))
+        self.lbl6_2.setGeometry(QRect(10, 310, 151, 21))
         self.lbl6_2.setStyleSheet(u"")
         self.lbl6_2.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.lbl6_3 = QLabel(self.frame_4)
         self.lbl6_3.setObjectName(u"lbl6_3")
-        self.lbl6_3.setGeometry(QRect(242, 95, 81, 21))
+        self.lbl6_3.setGeometry(QRect(242, 110, 81, 21))
         self.lbl6_3.setStyleSheet(u"")
         self.lbl6_3.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.cbox_estado = QComboBox(self.frame_4)
         self.cbox_estado.addItem("")
         self.cbox_estado.addItem("")
         self.cbox_estado.setObjectName(u"cbox_estado")
-        self.cbox_estado.setGeometry(QRect(240, 120, 205, 40))
+        self.cbox_estado.setGeometry(QRect(240, 140, 205, 40))
         self.cbox_estado.setCursor(QCursor(Qt.PointingHandCursor))
         self.cbox_estado.setStyleSheet(u"")
         self.admi = QRadioButton(self.frame_4)
         self.admi.setObjectName(u"admi")
         self.admi.setEnabled(True)
-        self.admi.setGeometry(QRect(320, 206, 131, 17))
+        self.admi.setGeometry(QRect(320, 238, 131, 17))
+        self.admi.setChecked(True)
         self.tutor = QRadioButton(self.frame_4)
         self.tutor.setObjectName(u"tutor")
-        self.tutor.setGeometry(QRect(320, 228, 111, 17))
+        self.tutor.setGeometry(QRect(320, 260, 111, 17))
         self.line_contrasena = QLineEdit(self.frame_4)
         self.line_contrasena.setObjectName(u"line_contrasena")
         self.line_contrasena.setEnabled(True)
-        self.line_contrasena.setGeometry(QRect(10, 290, 291, 38))
+        self.line_contrasena.setGeometry(QRect(10, 340, 291, 38))
         self.line_contrasena.setMinimumSize(QSize(0, 0))
         self.line_contrasena.setMaximumSize(QSize(16777215, 16777215))
         self.line_contrasena.setStyleSheet(u"")
         self.line_contrasena.setEchoMode(QLineEdit.Password)
+        self.errorNombres = QLabel(self.frame_4)
+        self.errorNombres.setObjectName(u"errorNombres")
+        self.errorNombres.setGeometry(QRect(242, 77, 201, 16))
+        self.errorApellidos = QLabel(self.frame_4)
+        self.errorApellidos.setObjectName(u"errorApellidos")
+        self.errorApellidos.setGeometry(QRect(10, 179, 201, 16))
+        self.errorIdentificacion = QLabel(self.frame_4)
+        self.errorIdentificacion.setObjectName(u"errorIdentificacion")
+        self.errorIdentificacion.setGeometry(QRect(12, 76, 201, 16))
+        self.errorCorreo = QLabel(self.frame_4)
+        self.errorCorreo.setObjectName(u"errorCorreo")
+        self.errorCorreo.setGeometry(QRect(10, 277, 291, 16))
+        self.errorContrasena = QLabel(self.frame_4)
+        self.errorContrasena.setObjectName(u"errorContrasena")
+        self.errorContrasena.setGeometry(QRect(10, 380, 291, 16))
 
         self.gridLayout_2.addWidget(self.frame_3, 1, 0, 1, 1)
 
@@ -360,39 +393,44 @@ class Ui_Perfil(object):
         QWidget.setTabOrder(self.line_correo, self.admi)
         QWidget.setTabOrder(self.admi, self.tutor)
 
-        self.retranslateUi(Perfil)
+        self.retranslateUi(FormularioUsuario)
 
         self.cbox_estado.setCurrentIndex(1)
 
 
-        QMetaObject.connectSlotsByName(Perfil)
+        QMetaObject.connectSlotsByName(FormularioUsuario)
     # setupUi
 
-    def retranslateUi(self, Perfil):
-        Perfil.setWindowTitle(QCoreApplication.translate("Perfil", u"Dialog", None))
-        self.btn_guardar.setText(QCoreApplication.translate("Perfil", u"Guardar", None))
-        self.lbl5.setText(QCoreApplication.translate("Perfil", u"Apellidos*", None))
-        self.line_dni.setPlaceholderText(QCoreApplication.translate("Perfil", u"Ejm:  992928983-3", None))
-        self.lbl11.setText(QCoreApplication.translate("Perfil", u"Documento Identidad*", None))
-        self.lbl9.setText(QCoreApplication.translate("Perfil", u"Nombre*", None))
-        self.line_nombre.setPlaceholderText(QCoreApplication.translate("Perfil", u"Ingrese nombre", None))
-        self.line_apeP.setPlaceholderText(QCoreApplication.translate("Perfil", u"Ingrese apellido paterno", None))
-        self.lbl10.setText(QCoreApplication.translate("Perfil", u"Cargo*", None))
-        self.lbl3.setText(QCoreApplication.translate("Perfil", u"Correo electronico*", None))
-        self.line_correo.setPlaceholderText(QCoreApplication.translate("Perfil", u"Ingrese correo", None))
-        self.lbl6_2.setText(QCoreApplication.translate("Perfil", u"Contrase\u00f1a*", None))
-        self.lbl6_3.setText(QCoreApplication.translate("Perfil", u"Estado*", None))
-        self.cbox_estado.setItemText(0, QCoreApplication.translate("Perfil", u"Inactivo", None))
-        self.cbox_estado.setItemText(1, QCoreApplication.translate("Perfil", u"Activo", None))
+    def retranslateUi(self, FormularioUsuario):
+        FormularioUsuario.setWindowTitle(QCoreApplication.translate("FormularioUsuario", u"Dialog", None))
+        self.btn_guardar.setText(QCoreApplication.translate("FormularioUsuario", u"Guardar", None))
+        self.lbl5.setText(QCoreApplication.translate("FormularioUsuario", u"Apellidos*", None))
+        self.line_dni.setPlaceholderText(QCoreApplication.translate("FormularioUsuario", u"Ejm:  9929289833", None))
+        self.lbl11.setText(QCoreApplication.translate("FormularioUsuario", u"C\u00e9dula*", None))
+        self.lbl9.setText(QCoreApplication.translate("FormularioUsuario", u"Nombre*", None))
+        self.line_nombre.setPlaceholderText(QCoreApplication.translate("FormularioUsuario", u"Ingrese nombre", None))
+        self.line_apeP.setPlaceholderText(QCoreApplication.translate("FormularioUsuario", u"Ingrese apellidos", None))
+        self.lbl10.setText(QCoreApplication.translate("FormularioUsuario", u"Cargo*", None))
+        self.lbl3.setText(QCoreApplication.translate("FormularioUsuario", u"Correo electronico*", None))
+        self.line_correo.setPlaceholderText(QCoreApplication.translate("FormularioUsuario", u"Ingrese correo", None))
+        self.lbl6_2.setText(QCoreApplication.translate("FormularioUsuario", u"Contrase\u00f1a*", None))
+        self.lbl6_3.setText(QCoreApplication.translate("FormularioUsuario", u"Estado*", None))
+        self.cbox_estado.setItemText(0, QCoreApplication.translate("FormularioUsuario", u"Inactivo", None))
+        self.cbox_estado.setItemText(1, QCoreApplication.translate("FormularioUsuario", u"Activo", None))
 
-        self.admi.setText(QCoreApplication.translate("Perfil", u"Administrador", None))
-        self.tutor.setText(QCoreApplication.translate("Perfil", u"Tutor", None))
-        self.line_contrasena.setPlaceholderText(QCoreApplication.translate("Perfil", u"Ingrese contrase\u00f1a", None))
+        self.admi.setText(QCoreApplication.translate("FormularioUsuario", u"Administrador", None))
+        self.tutor.setText(QCoreApplication.translate("FormularioUsuario", u"Otros", None))
+        self.line_contrasena.setPlaceholderText(QCoreApplication.translate("FormularioUsuario", u"Ingrese contrase\u00f1a", None))
+        self.errorNombres.setText("")
+        self.errorApellidos.setText("")
+        self.errorIdentificacion.setText("")
+        self.errorCorreo.setText("")
+        self.errorContrasena.setText("")
 #if QT_CONFIG(tooltip)
-        self.btn_closeedit.setToolTip(QCoreApplication.translate("Perfil", u"Cerrar", None))
+        self.btn_closeedit.setToolTip(QCoreApplication.translate("FormularioUsuario", u"Cerrar", None))
 #endif // QT_CONFIG(tooltip)
         self.btn_closeedit.setText("")
-        self.lbl_titulo_ventana.setText(QCoreApplication.translate("Perfil", u"Nuevo Usuario", None))
+        self.lbl_titulo_ventana.setText(QCoreApplication.translate("FormularioUsuario", u"Nuevo Usuario", None))
         self.lbl_usuariologeado.setText("")
     # retranslateUi
 

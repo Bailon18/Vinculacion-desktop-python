@@ -85,7 +85,7 @@ class EstudiantesAdmin(QtWidgets.QDialog):
         self.close()
 
     def data_configuracion(self):
-        consulta = 'SELECT id, nombre FROM carrera'
+        consulta = 'SELECT id, nombre FROM carrera where estado = true'
         respuesta = self.control_base.getDatos(consulta)
         self.venEstudiante.cbo_carrera.clear()
         for id_carrera, nombre in respuesta:
@@ -299,8 +299,10 @@ class EstudiantesAdmin(QtWidgets.QDialog):
 
                 self.parent.raizOpacidad.close()
                 self.close()
+                self.parent.offset = 0
                 self.parent.llenarTabla('listar_estudiantes', 'estudiantes', self.parent.venPri.tabla_estudiantes)
-                self.parent.actualizarInfoPaginacion('estudiantes', self.parent.venPri.lbl_pagina_estudiantes)
+                self.parent.venPri.check_estado_estudiantes.setChecked(False)
+                self.parent.actualizarInfoPaginacion('estudiantes', self.parent.venPri.lbl_pagina_estudiantes, True)
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar los datos en la base de datos: {str(e)}")
 

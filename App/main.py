@@ -31,7 +31,7 @@ if __name__ == "__main__":
         print(f"Error al cargar fuentes: {e}")
 
     
-    ventana_ses = Principal()
+    ventana_ses = Login()
     ventana_ses.show()
     sys.exit(app.exec_())
    

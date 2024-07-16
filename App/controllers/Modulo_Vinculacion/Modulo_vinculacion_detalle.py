@@ -179,8 +179,7 @@ class VinculacionDetalle(QtWidgets.QDialog):
         }]
 
         estudiantes_datos = [estudiante[1:] for estudiante in self.lista_id_estudiantes]
-        FormRepoImforme(vinculacion_datos, estudiantes_datos).exec_()
-            
+        FormRepoImforme(vinculacion_datos=vinculacion_datos, datos=estudiantes_datos, modo='vinculacion').exec_()
  
             
         

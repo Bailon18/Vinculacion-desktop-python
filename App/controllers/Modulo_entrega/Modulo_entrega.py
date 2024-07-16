@@ -47,7 +47,6 @@ class Entrega(QtWidgets.QDialog):
         self.venEntrega.btn_registrar_memorandum.clicked.connect(lambda: self.guardarMemorandum())
         
         if(self.modo == "informe"):
-            
             self.venEntrega.titulo_accion.setText('Entrega Informe')
             self.venEntrega.nombre_tutor.setText(self.dato[1])
 
@@ -60,7 +59,6 @@ class Entrega(QtWidgets.QDialog):
     def ventana_configuracion(self):
         fecha_actual = QtCore.QDate.currentDate()
         self.venEntrega.fecha_informe.setDate(fecha_actual)
-
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
@@ -93,13 +91,12 @@ class Entrega(QtWidgets.QDialog):
             self.venEntrega.titulo_accion.setText('Entrega Memorandum')
             
 
-
     def guardarInforme(self):
 
         fecha_informe = self.venEntrega.fecha_informe.date().toString("yyyy-MM-dd")
         tutor_id = self.dato[0]
 
-        consulta_periodo = 'SELECT periodo_academico FROM vinculaciones ORDER BY fecha_registro DESC LIMIT 1'
+        consulta_periodo = 'SELECT periodo_academico FROM vinculacion ORDER BY periodo_academico DESC LIMIT 1'
         periodo_academico = self.conec_base.getDatos(consulta_periodo)
 
         if not periodo_academico:
@@ -123,20 +120,24 @@ class Entrega(QtWidgets.QDialog):
             return
 
         # Insertar el informe en la base de datos
-        consulta_insertar = "INSERT INTO informes (fecha, tutor_id, periodo_academico) VALUES (%s, %s, %s)"
-        self.conec_base.setDatos(consulta_insertar, [fecha_informe, tutor_id, periodo_academico])
+        consulta_insertar = "INSERT INTO informes (fecha, tutor_id, mes,  periodo_academico) VALUES (%s, %s, %s, %s)"
+        self.conec_base.setDatos(consulta_insertar, [fecha_informe, tutor_id,self.mes , periodo_academico])
+
+        self.parent.llenarTabla('listar_tutores', 'tutores', self.parent.venPri.tabla_reporte_tutores)
+        self.parent.actualizarInfoPaginacion('tutores', self.parent.venPri.lbl_pagina_reporte02, True )
         self.parent.configuracion_ventana()
 
         QMessageBox.information(self, "Mensaje", "Informe guardado exitosamente")
         self.parent.raizOpacidad.close()
         self.close()
+        
 
     def guardarFicha(self):
         
         tutor_id = self.dato[0]
 
         # Obtener el periodo académico actual
-        periodo_academico = self.conec_base.getDatos('SELECT periodo_academico FROM vinculaciones ORDER BY fecha_registro DESC LIMIT 1')
+        periodo_academico = self.conec_base.getDatos('SELECT periodo_academico FROM vinculacion ORDER BY periodo_academico DESC LIMIT 1')
         if not periodo_academico:
             QMessageBox.warning(self, "Error al guardar", "Aún no se ha iniciado ningún periodo académico")
             return
@@ -169,6 +170,8 @@ class Entrega(QtWidgets.QDialog):
                 self.conec_base.setDatos(consulta_insertar, [tutor_id, periodo_academico, estado_ficha])
                 mensaje = "Ficha guardada exitosamente"
 
+            self.parent.llenarTabla('listar_tutores', 'tutores', self.parent.venPri.tabla_reporte_tutores)
+            self.parent.actualizarInfoPaginacion('tutores', self.parent.venPri.lbl_pagina_reporte02, True )
             self.parent.configuracion_ventana()
             QMessageBox.information(self, "Mensaje", mensaje)
             self.parent.raizOpacidad.close()
@@ -192,7 +195,7 @@ class Entrega(QtWidgets.QDialog):
         tutor_id = self.dato[0]
 
         # Obtener el periodo académico actual
-        periodo_academico = self.conec_base.getDatos('SELECT periodo_academico FROM vinculaciones ORDER BY fecha_registro DESC LIMIT 1')
+        periodo_academico = self.conec_base.getDatos('SELECT periodo_academico FROM vinculacion ORDER BY periodo_academico DESC LIMIT 1')
         if not periodo_academico:
             QMessageBox.warning(self, "Error al guardar", "Aún no se ha iniciado ningún periodo académico")
             return
@@ -223,6 +226,9 @@ class Entrega(QtWidgets.QDialog):
                 self.conec_base.setDatos(consulta_insertar, [tutor_id, periodo_academico, estado_memorandum])
                 mensaje = "Memorandum guardada exitosamente"
 
+
+            self.parent.llenarTabla('listar_tutores', 'tutores', self.parent.venPri.tabla_reporte_tutores)
+            self.parent.actualizarInfoPaginacion('tutores', self.parent.venPri.lbl_pagina_reporte02, True )
             self.parent.configuracion_ventana()
             QMessageBox.information(self, "Mensaje", mensaje)
             self.parent.raizOpacidad.close()

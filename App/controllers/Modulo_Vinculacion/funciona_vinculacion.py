@@ -96,7 +96,8 @@ def btn_eliminar_acciones_estudiante_seleccionado(fila, parent):
 
     estudiante_id = int(parent.vinculacion.tabla_estudiante_seleccionado.item(fila, 0).text())
     
-    # print(f"Estudiante a eliminar: {estudiante_id}")
+    print(f"Estudiante a eliminar: {estudiante_id}")
+    print(f' lista {parent.lista_id_estudiantes}')
     
     for estudiante in parent.lista_id_estudiantes:
         if estudiante[0] == estudiante_id:

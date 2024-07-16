@@ -9,6 +9,7 @@ class CursorDelPool:
     def __enter__(self):
 
         self.__conn = Conexion.obtenerConexion()
+        self.__conn.ping(True)
         self.__cursor = self.__conn.cursor()
         return self.__cursor
 
@@ -21,7 +22,7 @@ class CursorDelPool:
             self.__conn.commit() 
 
         self.__cursor.close()    
-        Conexion.liberarConexion(self.__conn) # regresa
+        Conexion.liberarConexion(self.__conn)
         
 
                     

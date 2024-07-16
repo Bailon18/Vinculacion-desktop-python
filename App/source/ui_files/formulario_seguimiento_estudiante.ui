@@ -215,7 +215,7 @@ QCalendarWidget QWidget#qt_calendar_navigationbar {
 
 
 /* QLabel para Mostrar Error */
-QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimiento, #errorCorreo, #errorTelefono, #errorDireccion{
+QLabel#errorHora, #errorListActividades, #errorEvidencias{
     font-family: Roboto;
     font-style: normal;
     font-weight: bold;
@@ -223,44 +223,43 @@ QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimient
     color: #D32F2F; 
 }
 
-QSpinBox {
-    font-family: Roboto;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 14px;
-    letter-spacing: 0.02em;
-    background: #F3F4F6;
-    color: #344647;
-    border: 1px solid #E2E3E4;
-    border-radius: 4px;
-    padding: 8px;
-    margin: 2px;
+/*SPINBOX*/
+QSpinBox{
+font-family: Roboto;
+font-style: normal;
+font-weight: normal;
+font-size: 14px;
+letter-spacing: 0.02em;
+background: #F3F4F6;
+color:#9CA3AF;
+padding:8px;
+border-radius:8px; }
+
+QSpinBox::up-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::down-button {
+min-width: 25px; min-height: 12px; background-color: #F3F4F6; 
+border-radius: 6px;}
+
+QSpinBox::up-arrow{
+	image: url(:/menu/contraerarriba.png);
+     width: 9px;
+     height: 9px;
 }
 
-QSpinBox::up-button, QSpinBox::down-button {
-    subcontrol-origin: border;
-    background: #E2E3E4;
-    border: none;
-    width: 20px;
-    height: 20px;
+QSpinBox::down-arrow{
+ image: url(:/menu/contraerabajo.png);
+     width: 9px;
+     height: 9px;}
+
+QSpinBox::focus{
+background: #FFFFFF;
+border: 2px solid #3a4f50;
+border-radius: 8px;
 }
 
-QSpinBox::up-arrow, QSpinBox::down-arrow {
-    width: 10px;
-    height: 10px;
-}
-
-QSpinBox::up-arrow {
-    image: url(:/menu/contraerarriba.png);
-}
-
-QSpinBox::down-arrow {
-    image: url(:/menu/contraerabajo.png);
-}
-
-QSpinBox::up-button:hover, QSpinBox::down-button:hover {
-    background-color: #CCCCCC;
-}
 
 
 QPlainTextEdit{
@@ -294,15 +293,15 @@ border-radius: 8px;
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-309</y>
+         <y>-294</y>
          <width>494</width>
-         <height>770</height>
+         <height>800</height>
         </rect>
        </property>
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>770</height>
+         <height>800</height>
         </size>
        </property>
        <property name="styleSheet">
@@ -353,6 +352,9 @@ border-bottom-left-radius: 10px;
         </property>
        </widget>
        <widget class="QDateEdit" name="fecha_actividad">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -401,6 +403,9 @@ border-bottom-left-radius: 10px;
         </property>
        </widget>
        <widget class="QSpinBox" name="horas_spinx">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>270</x>
@@ -427,6 +432,9 @@ border-bottom-left-radius: 10px;
         </property>
        </widget>
        <widget class="QPlainTextEdit" name="actividades_plain">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -437,6 +445,9 @@ border-bottom-left-radius: 10px;
         </property>
        </widget>
        <widget class="QPushButton" name="btn_subir_fotos">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
         <property name="geometry">
          <rect>
           <x>10</x>
@@ -542,7 +553,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>650</y>
+          <y>660</y>
           <width>471</width>
           <height>101</height>
          </rect>
@@ -552,7 +563,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>620</y>
+          <y>630</y>
           <width>271</width>
           <height>21</height>
          </rect>
@@ -578,7 +589,7 @@ QPushButton:pressed {
         <property name="geometry">
          <rect>
           <x>10</x>
-          <y>580</y>
+          <y>583</y>
           <width>171</width>
           <height>16</height>
          </rect>
@@ -621,7 +632,7 @@ font: italic 10pt &quot;Roboto&quot;;</string>
          <string>Lista de actividades realizados</string>
         </property>
        </widget>
-       <widget class="QLabel" name="errorNombres">
+       <widget class="QLabel" name="errorHora">
         <property name="geometry">
          <rect>
           <x>272</x>
@@ -631,20 +642,115 @@ font: italic 10pt &quot;Roboto&quot;;</string>
          </rect>
         </property>
         <property name="text">
-         <string>dwd</string>
+         <string/>
         </property>
        </widget>
-       <widget class="QLabel" name="errorNombres_2">
+       <widget class="QLabel" name="errorListActividades">
         <property name="geometry">
          <rect>
           <x>12</x>
           <y>454</y>
-          <width>211</width>
+          <width>461</width>
           <height>16</height>
          </rect>
         </property>
         <property name="text">
-         <string>dwd</string>
+         <string/>
+        </property>
+       </widget>
+       <widget class="QLabel" name="errorEvidencias">
+        <property name="geometry">
+         <rect>
+          <x>10</x>
+          <y>603</y>
+          <width>461</width>
+          <height>16</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_descargar_foto">
+        <property name="geometry">
+         <rect>
+          <x>198</x>
+          <y>577</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Descargar archivo</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../image/source.qrc">
+          <normaloff>:/menu/descargar.png</normaloff>:/menu/descargar.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="btn_descargar_archivo">
+        <property name="geometry">
+         <rect>
+          <x>450</x>
+          <y>577</y>
+          <width>31</width>
+          <height>31</height>
+         </rect>
+        </property>
+        <property name="toolTip">
+         <string>Descargar archivo</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../image/source.qrc">
+          <normaloff>:/menu/descargar.png</normaloff>:/menu/descargar.png</iconset>
+        </property>
+        <property name="iconSize">
+         <size>
+          <width>20</width>
+          <height>20</height>
+         </size>
+        </property>
+        <property name="checkable">
+         <bool>false</bool>
+        </property>
+        <property name="autoRepeat">
+         <bool>false</bool>
+        </property>
+        <property name="autoDefault">
+         <bool>true</bool>
+        </property>
+        <property name="default">
+         <bool>false</bool>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
         </property>
        </widget>
       </widget>
@@ -653,8 +759,8 @@ font: italic 10pt &quot;Roboto&quot;;</string>
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>500</y>
-        <width>511</width>
+        <y>507</y>
+        <width>501</width>
         <height>51</height>
        </rect>
       </property>
@@ -726,91 +832,109 @@ QPushButton#cancelButton:pressed {
       <property name="frameShadow">
        <enum>QFrame::Raised</enum>
       </property>
-      <widget class="QPushButton" name="btn_agregar_actividad">
-       <property name="geometry">
-        <rect>
-         <x>300</x>
-         <y>10</y>
-         <width>180</width>
-         <height>40</height>
-        </rect>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>11</number>
        </property>
-       <property name="minimumSize">
-        <size>
-         <width>180</width>
-         <height>40</height>
-        </size>
+       <property name="leftMargin">
+        <number>0</number>
        </property>
-       <property name="maximumSize">
-        <size>
-         <width>110</width>
-         <height>40</height>
-        </size>
+       <property name="topMargin">
+        <number>0</number>
        </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
+       <property name="rightMargin">
+        <number>0</number>
        </property>
-       <property name="styleSheet">
-        <string notr="true"/>
+       <property name="bottomMargin">
+        <number>0</number>
        </property>
-       <property name="text">
-        <string>Guardar actividad</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../image/source.qrc">
-         <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>15</width>
-         <height>21</height>
-        </size>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="cancelButton">
-       <property name="geometry">
-        <rect>
-         <x>160</x>
-         <y>10</y>
-         <width>120</width>
-         <height>40</height>
-        </rect>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>120</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>120</width>
-         <height>40</height>
-        </size>
-       </property>
-       <property name="cursor">
-        <cursorShape>PointingHandCursor</cursorShape>
-       </property>
-       <property name="focusPolicy">
-        <enum>Qt::NoFocus</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true"/>
-       </property>
-       <property name="text">
-        <string>Cancelar</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../image/source.qrc">
-         <normaloff>:/menu/no.png</normaloff>:/menu/no.png</iconset>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>15</width>
-         <height>21</height>
-        </size>
-       </property>
-      </widget>
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QPushButton" name="cancelButton">
+         <property name="minimumSize">
+          <size>
+           <width>120</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>120</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::NoFocus</enum>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Cancelar</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../image/source.qrc">
+           <normaloff>:/menu/no.png</normaloff>:/menu/no.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>15</width>
+           <height>21</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="btn_agregar_actividad">
+         <property name="minimumSize">
+          <size>
+           <width>180</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>110</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="cursor">
+          <cursorShape>PointingHandCursor</cursorShape>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="text">
+          <string>Guardar actividad</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../image/source.qrc">
+           <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>15</width>
+           <height>21</height>
+          </size>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </widget>
      <widget class="QFrame" name="frame_2">
       <property name="geometry">

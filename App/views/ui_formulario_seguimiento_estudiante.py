@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_seguimiento_estudianteVpvdBs.ui'
+## Form generated from reading UI file 'formulario_seguimiento_estudiantemcekuS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -189,7 +189,7 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "\n"
 "\n"
 "/* QLabel para Mostrar Error */\n"
-"QLabel#errorNombres, #errorApellidos, #errorIdentificacion, #errorFechaNacimiento, #errorCorreo, #errorTelefono, #errorDireccion{\n"
+"QLabel#errorHora, #errorListActividades, #errorEvidencias{\n"
 "    font-family: Roboto;\n"
 "    font-style: normal;\n"
 "    font-weight: bold;\n"
@@ -197,45 +197,44 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "    color: #D32F2F; \n"
 "}\n"
 "\n"
-"QSpinBox {\n"
-"    font-family: Roboto;\n"
-"    font-style: normal;\n"
-"    font-weight: normal;\n"
-"    font-size: 14px;\n"
-"    letter-spacing: 0.02em;\n"
-"    background: #F3F4F6;\n"
-"    color: #344647;\n"
-"    border: 1px solid #E2E3E4;\n"
-"    border-radius: 4px;\n"
-"    padding: 8px;\n"
-"    margin: 2px;\n"
+"/*SPINBOX*/\n"
+"QSpinBox{\n"
+"font-family: Roboto;\n"
+"font-style: normal;\n"
+"font-weight: normal;\n"
+"font-size: 14px;\n"
+"letter-spacing: 0.02em;\n"
+"background: #F3F4F6;\n"
+"color:#9CA3AF;\n"
+"padding:8px;\n"
+"border-radius:8px; }\n"
+"\n"
+"QSpinBox::up-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QSpinBox::down-button {\n"
+"min-width: 25px; min-height: 12px; background-color: #F3F4F6; \n"
+"border-radius: 6px;}\n"
+"\n"
+"QSpinBox::up-arrow{\n"
+"	image: url(:/menu/contraerarriba.png);\n"
+"     width: 9px;\n"
+"     height: 9px;\n"
 "}\n"
 "\n"
-"QSpinBox::up-button, QSpinBox::down-button {\n"
-"    subcontrol-origin: border;\n"
-"    background: #E2E3E4;\n"
-"    border: none;\n"
-"    width: 20px;\n"
-"    height: 20px;\n"
+"QSpinBox"
+                        "::down-arrow{\n"
+" image: url(:/menu/contraerabajo.png);\n"
+"     width: 9px;\n"
+"     height: 9px;}\n"
+"\n"
+"QSpinBox::focus{\n"
+"background: #FFFFFF;\n"
+"border: 2px solid #3a4f50;\n"
+"border-radius: 8px;\n"
 "}\n"
 "\n"
-"QSpinBox::up-arrow, QSpinBox::down"
-                        "-arrow {\n"
-"    width: 10px;\n"
-"    height: 10px;\n"
-"}\n"
-"\n"
-"QSpinBox::up-arrow {\n"
-"    image: url(:/menu/contraerarriba.png);\n"
-"}\n"
-"\n"
-"QSpinBox::down-arrow {\n"
-"    image: url(:/menu/contraerabajo.png);\n"
-"}\n"
-"\n"
-"QSpinBox::up-button:hover, QSpinBox::down-button:hover {\n"
-"    background-color: #CCCCCC;\n"
-"}\n"
 "\n"
 "\n"
 "QPlainTextEdit{\n"
@@ -262,8 +261,8 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 494, 720))
-        self.scroll_registro_estudiante.setMinimumSize(QSize(0, 720))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, 0, 494, 800))
+        self.scroll_registro_estudiante.setMinimumSize(QSize(0, 800))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"
 "border-bottom-right-radius: 10px;\n"
@@ -272,7 +271,7 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "")
         self.datospersonales = QLabel(self.scroll_registro_estudiante)
         self.datospersonales.setObjectName(u"datospersonales")
-        self.datospersonales.setGeometry(QRect(7, 20, 161, 21))
+        self.datospersonales.setGeometry(QRect(7, 20, 261, 21))
         self.datospersonales.setStyleSheet(u"#datospersonales {\n"
 "    font-family: Roboto;\n"
 "    font-style: normal;\n"
@@ -295,7 +294,7 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.fecha_actividad.setCalendarPopup(True)
         self.datosacademicos = QLabel(self.scroll_registro_estudiante)
         self.datosacademicos.setObjectName(u"datosacademicos")
-        self.datosacademicos.setGeometry(QRect(4, 460, 261, 21))
+        self.datosacademicos.setGeometry(QRect(4, 500, 351, 21))
         self.datosacademicos.setStyleSheet(u"#datosacademicos {\n"
 "    font-family: Roboto;\n"
 "    font-style: normal;\n"
@@ -316,10 +315,10 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.label_98.setGeometry(QRect(280, 60, 181, 31))
         self.actividades_plain = QPlainTextEdit(self.scroll_registro_estudiante)
         self.actividades_plain.setObjectName(u"actividades_plain")
-        self.actividades_plain.setGeometry(QRect(10, 180, 471, 261))
+        self.actividades_plain.setGeometry(QRect(10, 190, 471, 261))
         self.btn_subir_fotos = QPushButton(self.scroll_registro_estudiante)
         self.btn_subir_fotos.setObjectName(u"btn_subir_fotos")
-        self.btn_subir_fotos.setGeometry(QRect(10, 500, 221, 35))
+        self.btn_subir_fotos.setGeometry(QRect(10, 540, 221, 35))
         self.btn_subir_fotos.setStyleSheet(u"\n"
 "QPushButton {\n"
 "    font-family: Roboto;\n"
@@ -352,7 +351,7 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.btn_subir_fotos.setIconSize(QSize(19, 19))
         self.btn_subir_archivo = QPushButton(self.scroll_registro_estudiante)
         self.btn_subir_archivo.setObjectName(u"btn_subir_archivo")
-        self.btn_subir_archivo.setGeometry(QRect(270, 500, 211, 35))
+        self.btn_subir_archivo.setGeometry(QRect(270, 540, 211, 35))
         self.btn_subir_archivo.setStyleSheet(u"\n"
 "QPushButton {\n"
 "    font-family: Roboto;\n"
@@ -385,10 +384,10 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.btn_subir_archivo.setIconSize(QSize(19, 19))
         self.observacion_plain = QPlainTextEdit(self.scroll_registro_estudiante)
         self.observacion_plain.setObjectName(u"observacion_plain")
-        self.observacion_plain.setGeometry(QRect(10, 598, 471, 101))
+        self.observacion_plain.setGeometry(QRect(10, 660, 471, 101))
         self.datosacademicos_2 = QLabel(self.scroll_registro_estudiante)
         self.datosacademicos_2.setObjectName(u"datosacademicos_2")
-        self.datosacademicos_2.setGeometry(QRect(10, 571, 271, 21))
+        self.datosacademicos_2.setGeometry(QRect(10, 630, 271, 21))
         self.datosacademicos_2.setStyleSheet(u"#datosacademicos {\n"
 "    font-family: Roboto;\n"
 "    font-style: normal;\n"
@@ -402,21 +401,50 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "")
         self.lbl_nombre_archivo_seleccionado = QLabel(self.scroll_registro_estudiante)
         self.lbl_nombre_archivo_seleccionado.setObjectName(u"lbl_nombre_archivo_seleccionado")
-        self.lbl_nombre_archivo_seleccionado.setGeometry(QRect(10, 540, 171, 16))
+        self.lbl_nombre_archivo_seleccionado.setGeometry(QRect(10, 583, 171, 16))
         self.lbl_nombre_archivo_seleccionado.setStyleSheet(u"color:rgb(48, 165, 255);\n"
 "font: italic 10pt \"Roboto\";")
         self.lbl_nombre_archivo_seleccionado_2 = QLabel(self.scroll_registro_estudiante)
         self.lbl_nombre_archivo_seleccionado_2.setObjectName(u"lbl_nombre_archivo_seleccionado_2")
-        self.lbl_nombre_archivo_seleccionado_2.setGeometry(QRect(270, 540, 171, 16))
+        self.lbl_nombre_archivo_seleccionado_2.setGeometry(QRect(270, 580, 171, 16))
         self.lbl_nombre_archivo_seleccionado_2.setStyleSheet(u"color:rgb(48, 165, 255);\n"
 "font: italic 10pt \"Roboto\";")
         self.label_99 = QLabel(self.scroll_registro_estudiante)
         self.label_99.setObjectName(u"label_99")
-        self.label_99.setGeometry(QRect(10, 150, 221, 31))
+        self.label_99.setGeometry(QRect(10, 157, 221, 31))
+        self.errorHora = QLabel(self.scroll_registro_estudiante)
+        self.errorHora.setObjectName(u"errorHora")
+        self.errorHora.setGeometry(QRect(272, 131, 211, 16))
+        self.errorListActividades = QLabel(self.scroll_registro_estudiante)
+        self.errorListActividades.setObjectName(u"errorListActividades")
+        self.errorListActividades.setGeometry(QRect(12, 454, 461, 16))
+        self.errorEvidencias = QLabel(self.scroll_registro_estudiante)
+        self.errorEvidencias.setObjectName(u"errorEvidencias")
+        self.errorEvidencias.setGeometry(QRect(10, 603, 461, 16))
+        self.btn_descargar_foto = QPushButton(self.scroll_registro_estudiante)
+        self.btn_descargar_foto.setObjectName(u"btn_descargar_foto")
+        self.btn_descargar_foto.setGeometry(QRect(198, 577, 31, 31))
+        icon2 = QIcon()
+        icon2.addFile(u":/menu/descargar.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_descargar_foto.setIcon(icon2)
+        self.btn_descargar_foto.setIconSize(QSize(20, 20))
+        self.btn_descargar_foto.setCheckable(False)
+        self.btn_descargar_foto.setAutoRepeat(False)
+        self.btn_descargar_foto.setAutoDefault(True)
+        self.btn_descargar_foto.setFlat(False)
+        self.btn_descargar_archivo = QPushButton(self.scroll_registro_estudiante)
+        self.btn_descargar_archivo.setObjectName(u"btn_descargar_archivo")
+        self.btn_descargar_archivo.setGeometry(QRect(450, 577, 31, 31))
+        self.btn_descargar_archivo.setIcon(icon2)
+        self.btn_descargar_archivo.setIconSize(QSize(20, 20))
+        self.btn_descargar_archivo.setCheckable(False)
+        self.btn_descargar_archivo.setAutoRepeat(False)
+        self.btn_descargar_archivo.setAutoDefault(True)
+        self.btn_descargar_archivo.setFlat(False)
         self.scrollArea.setWidget(self.scroll_registro_estudiante)
         self.frame_pie_pagina = QFrame(self.frame)
         self.frame_pie_pagina.setObjectName(u"frame_pie_pagina")
-        self.frame_pie_pagina.setGeometry(QRect(0, 500, 511, 51))
+        self.frame_pie_pagina.setGeometry(QRect(0, 507, 501, 51))
         self.frame_pie_pagina.setStyleSheet(u"#frame_pie_pagina{background-color: #f1f1f1; \n"
 "border-bottom-right-radius: 10px;\n"
 "border-bottom-left-radius: 10px;}\n"
@@ -480,20 +508,16 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "")
         self.frame_pie_pagina.setFrameShape(QFrame.NoFrame)
         self.frame_pie_pagina.setFrameShadow(QFrame.Raised)
-        self.btn_agregar_actividad = QPushButton(self.frame_pie_pagina)
-        self.btn_agregar_actividad.setObjectName(u"btn_agregar_actividad")
-        self.btn_agregar_actividad.setGeometry(QRect(300, 10, 180, 40))
-        self.btn_agregar_actividad.setMinimumSize(QSize(180, 40))
-        self.btn_agregar_actividad.setMaximumSize(QSize(110, 40))
-        self.btn_agregar_actividad.setCursor(QCursor(Qt.PointingHandCursor))
-        self.btn_agregar_actividad.setStyleSheet(u"")
-        icon2 = QIcon()
-        icon2.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_agregar_actividad.setIcon(icon2)
-        self.btn_agregar_actividad.setIconSize(QSize(15, 21))
+        self.horizontalLayout = QHBoxLayout(self.frame_pie_pagina)
+        self.horizontalLayout.setSpacing(11)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
+        self.horizontalSpacer = QSpacerItem(40, 20, QSizePolicy.Expanding, QSizePolicy.Minimum)
+
+        self.horizontalLayout.addItem(self.horizontalSpacer)
+
         self.cancelButton = QPushButton(self.frame_pie_pagina)
         self.cancelButton.setObjectName(u"cancelButton")
-        self.cancelButton.setGeometry(QRect(160, 10, 120, 40))
         self.cancelButton.setMinimumSize(QSize(120, 40))
         self.cancelButton.setMaximumSize(QSize(120, 40))
         self.cancelButton.setCursor(QCursor(Qt.PointingHandCursor))
@@ -503,6 +527,22 @@ class Ui_FormularioSeguimientoEstudiante(object):
         icon3.addFile(u":/menu/no.png", QSize(), QIcon.Normal, QIcon.Off)
         self.cancelButton.setIcon(icon3)
         self.cancelButton.setIconSize(QSize(15, 21))
+
+        self.horizontalLayout.addWidget(self.cancelButton)
+
+        self.btn_agregar_actividad = QPushButton(self.frame_pie_pagina)
+        self.btn_agregar_actividad.setObjectName(u"btn_agregar_actividad")
+        self.btn_agregar_actividad.setMinimumSize(QSize(180, 40))
+        self.btn_agregar_actividad.setMaximumSize(QSize(110, 40))
+        self.btn_agregar_actividad.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_agregar_actividad.setStyleSheet(u"")
+        icon4 = QIcon()
+        icon4.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_agregar_actividad.setIcon(icon4)
+        self.btn_agregar_actividad.setIconSize(QSize(15, 21))
+
+        self.horizontalLayout.addWidget(self.btn_agregar_actividad)
+
         self.frame_2 = QFrame(self.frame)
         self.frame_2.setObjectName(u"frame_2")
         self.frame_2.setGeometry(QRect(0, 0, 511, 51))
@@ -531,9 +571,9 @@ class Ui_FormularioSeguimientoEstudiante(object):
 "border-radius:11px; }\n"
 "\n"
 "")
-        icon4 = QIcon()
-        icon4.addFile(u":/menu/x.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_closeedit.setIcon(icon4)
+        icon5 = QIcon()
+        icon5.addFile(u":/menu/x.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_closeedit.setIcon(icon5)
         self.btn_closeedit.setIconSize(QSize(13, 13))
         self.btn_closeedit.setAutoRaise(True)
         self.lbl_titulo_ventana = QLabel(self.frame_2)
@@ -552,12 +592,16 @@ class Ui_FormularioSeguimientoEstudiante(object):
 
         self.retranslateUi(FormularioSeguimientoEstudiante)
 
+        self.btn_descargar_foto.setDefault(False)
+        self.btn_descargar_archivo.setDefault(False)
+
+
         QMetaObject.connectSlotsByName(FormularioSeguimientoEstudiante)
     # setupUi
 
     def retranslateUi(self, FormularioSeguimientoEstudiante):
         FormularioSeguimientoEstudiante.setWindowTitle(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Formulario Estudiante", None))
-        self.datospersonales.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Datos Actividad", None))
+        self.datospersonales.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Datos de  Actividad", None))
         self.label_97.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Fecha actividad", None))
         self.fecha_actividad.setDisplayFormat(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"yyyy-MM-d", None))
         self.datosacademicos.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Evidencia de actividad realizada", None))
@@ -568,8 +612,19 @@ class Ui_FormularioSeguimientoEstudiante(object):
         self.lbl_nombre_archivo_seleccionado.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"ningun archivo seleccionado", None))
         self.lbl_nombre_archivo_seleccionado_2.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"ningun archivo seleccionado", None))
         self.label_99.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Lista de actividades realizados", None))
-        self.btn_agregar_actividad.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Guardar actividad", None))
+        self.errorHora.setText("")
+        self.errorListActividades.setText("")
+        self.errorEvidencias.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_descargar_foto.setToolTip(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Descargar archivo", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_descargar_foto.setText("")
+#if QT_CONFIG(tooltip)
+        self.btn_descargar_archivo.setToolTip(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Descargar archivo", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_descargar_archivo.setText("")
         self.cancelButton.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Cancelar", None))
+        self.btn_agregar_actividad.setText(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Guardar actividad", None))
 #if QT_CONFIG(tooltip)
         self.btn_closeedit.setToolTip(QCoreApplication.translate("FormularioSeguimientoEstudiante", u"Cerrar", None))
 #endif // QT_CONFIG(tooltip)

@@ -3,6 +3,8 @@ from sys import version
 import os
 from PySide2 import QtWidgets , QtCore , QtGui
 from PySide2.QtCore import QFileInfo
+from PySide2.QtCore import QUrl
+from PySide2.QtGui import QDesktopServices
 from PySide2.QtWidgets import QMessageBox, QFileDialog
 
 from datetime import datetime, timedelta
@@ -34,7 +36,7 @@ class TutoresAdmin(QtWidgets.QDialog):
         self.archivo_cv = None
         self.nombretutor = ''
         
-    
+
         if(self.modo != 'nuevo'):
             self.tutor_id = tutor_id
             self.venTutores.btn_agregar_tutor.setText('Actualizar')
@@ -43,6 +45,7 @@ class TutoresAdmin(QtWidgets.QDialog):
             self.llenado_datos_tutor(int(self.tutor_id))
         else:
             self.venTutores.btn_descargar_archivo.hide()
+            self.venTutores.line_contrasena.setText('admin123')
 
 
         self.STYLE_ERROR = "color: #D32F2F; font-family: Roboto; font-style: normal; font-weight: bold; font-size: 12px; visibility: visible;"
@@ -282,7 +285,7 @@ class TutoresAdmin(QtWidgets.QDialog):
         if not self.control_base.verificarConexionInternet():
             QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
             return
-        
+     
 
         nombres = self.venTutores.line_nombres.text().strip()
         apellidos = self.venTutores.line_apellidos.text().strip()
@@ -329,8 +332,12 @@ class TutoresAdmin(QtWidgets.QDialog):
 
                 self.parent.raizOpacidad.close()
                 self.close()
-                self.parent.llenarTabla('listar_estudiantes', 'estudiantes', self.parent.venPri.tabla_estudiantes)
-                self.parent.actualizarInfoPaginacion('estudiantes', self.parent.venPri.lbl_pagina_estudiantes)
+                self.parent.offset = 0
+                self.parent.llenarTabla('listar_tutores', 'tutores', self.parent.venPri.tabla_tutores)
+                self.parent.venPri.check_estado_tutores.setChecked(False)
+                self.parent.actualizarInfoPaginacion('tutores', self.parent.venPri.lbl_pagina_tutores, True )
+                self.parent.datos_inicializacion()
+                self.parent.cargaDatosEventoReporte()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar los datos en la base de datos: {str(e)}")
 
@@ -428,9 +435,8 @@ class TutoresAdmin(QtWidgets.QDialog):
                     file.write(self.archivo_cv)
                     
                 if archivo.lower().endswith('.pdf'):
-                    # Si es un archivo PDF, abrir automáticamente
-                    import os
-                    os.startfile(archivo)
+                    QDesktopServices.openUrl(QUrl.fromLocalFile(archivo))
+                
                     
                 QMessageBox.information(self, "Éxito", "El archivo se ha descargado correctamente.")
         else:

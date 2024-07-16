@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_vinculacionODpFrs.ui'
+## Form generated from reading UI file 'formulario_vinculacionYBqrSI.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -291,7 +291,7 @@ class Ui_FormularioVinculacion(object):
         self.scrollArea.setWidgetResizable(True)
         self.scroll_registro_estudiante = QWidget()
         self.scroll_registro_estudiante.setObjectName(u"scroll_registro_estudiante")
-        self.scroll_registro_estudiante.setGeometry(QRect(0, -375, 802, 950))
+        self.scroll_registro_estudiante.setGeometry(QRect(0, -261, 802, 950))
         self.scroll_registro_estudiante.setMinimumSize(QSize(0, 950))
         self.scroll_registro_estudiante.setStyleSheet(u"#scroll_registro_estudiante{\n"
 "	background-color: rgb(255, 255, 255);\n"
@@ -381,11 +381,6 @@ class Ui_FormularioVinculacion(object):
 "    text-decoration: underline; /* Agrega subrayado */\n"
 "}\n"
 "")
-        self.lbl9_5 = QLabel(self.scroll_registro_estudiante)
-        self.lbl9_5.setObjectName(u"lbl9_5")
-        self.lbl9_5.setGeometry(QRect(22, 560, 201, 21))
-        self.lbl9_5.setStyleSheet(u"")
-        self.lbl9_5.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.line_periodo_academico = QLineEdit(self.scroll_registro_estudiante)
         self.line_periodo_academico.setObjectName(u"line_periodo_academico")
         self.line_periodo_academico.setEnabled(True)
@@ -441,39 +436,9 @@ class Ui_FormularioVinculacion(object):
         self.lbl11_9.setGeometry(QRect(620, 465, 171, 21))
         self.lbl11_9.setStyleSheet(u"")
         self.lbl11_9.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
-        self.date_fecha_final = QDateEdit(self.scroll_registro_estudiante)
-        self.date_fecha_final.setObjectName(u"date_fecha_final")
-        self.date_fecha_final.setGeometry(QRect(22, 590, 241, 40))
-        self.date_fecha_final.setCursor(QCursor(Qt.PointingHandCursor))
-        self.date_fecha_final.setStyleSheet(u"")
-        self.date_fecha_final.setCalendarPopup(True)
-        self.cbo_estado_vinculacion = QComboBox(self.scroll_registro_estudiante)
-        self.cbo_estado_vinculacion.addItem("")
-        self.cbo_estado_vinculacion.addItem("")
-        self.cbo_estado_vinculacion.addItem("")
-        self.cbo_estado_vinculacion.setObjectName(u"cbo_estado_vinculacion")
-        self.cbo_estado_vinculacion.setGeometry(QRect(280, 590, 161, 40))
-        self.lbl9_3 = QLabel(self.scroll_registro_estudiante)
-        self.lbl9_3.setObjectName(u"lbl9_3")
-        self.lbl9_3.setGeometry(QRect(280, 564, 221, 21))
-        self.lbl9_3.setStyleSheet(u"")
-        self.lbl9_3.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
-        self.line_horas = QLineEdit(self.scroll_registro_estudiante)
-        self.line_horas.setObjectName(u"line_horas")
-        self.line_horas.setEnabled(True)
-        self.line_horas.setGeometry(QRect(460, 590, 141, 40))
-        self.line_horas.setStyleSheet(u"")
-        self.line_horas.setMaxLength(30)
-        self.line_horas.setFrame(True)
-        self.line_horas.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignVCenter)
-        self.lbl11_10 = QLabel(self.scroll_registro_estudiante)
-        self.lbl11_10.setObjectName(u"lbl11_10")
-        self.lbl11_10.setGeometry(QRect(460, 564, 171, 21))
-        self.lbl11_10.setStyleSheet(u"")
-        self.lbl11_10.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.btn_agregar_estu_seleccionado = QPushButton(self.scroll_registro_estudiante)
         self.btn_agregar_estu_seleccionado.setObjectName(u"btn_agregar_estu_seleccionado")
-        self.btn_agregar_estu_seleccionado.setGeometry(QRect(620, 590, 120, 40))
+        self.btn_agregar_estu_seleccionado.setGeometry(QRect(20, 550, 120, 40))
         self.btn_agregar_estu_seleccionado.setMinimumSize(QSize(120, 40))
         self.btn_agregar_estu_seleccionado.setMaximumSize(QSize(120, 40))
         self.btn_agregar_estu_seleccionado.setCursor(QCursor(Qt.PointingHandCursor))
@@ -522,7 +487,7 @@ class Ui_FormularioVinculacion(object):
         __qtablewidgetitem4 = QTableWidgetItem()
         self.tabla_estudiante_seleccionado.setHorizontalHeaderItem(4, __qtablewidgetitem4)
         self.tabla_estudiante_seleccionado.setObjectName(u"tabla_estudiante_seleccionado")
-        self.tabla_estudiante_seleccionado.setGeometry(QRect(19, 680, 761, 251))
+        self.tabla_estudiante_seleccionado.setGeometry(QRect(19, 640, 761, 291))
         self.tabla_estudiante_seleccionado.setStyleSheet(u"QTableWidget {\n"
 "outline: 0px;\n"
 "border:5px solid #f3f4f6;\n"
@@ -603,7 +568,7 @@ class Ui_FormularioVinculacion(object):
         self.tabla_estudiante_seleccionado.verticalHeader().setHighlightSections(True)
         self.lbl9_6 = QLabel(self.scroll_registro_estudiante)
         self.lbl9_6.setObjectName(u"lbl9_6")
-        self.lbl9_6.setGeometry(QRect(20, 650, 241, 21))
+        self.lbl9_6.setGeometry(QRect(20, 610, 241, 21))
         self.lbl9_6.setStyleSheet(u"font: 11pt \"Roboto\";")
         self.lbl9_6.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.datosTutor = QLabel(self.scroll_registro_estudiante)
@@ -762,7 +727,7 @@ class Ui_FormularioVinculacion(object):
         self.btn_close.setText("")
         self.lbl_titulo_ventana.setText(QCoreApplication.translate("FormularioVinculacion", u"Registrar Nueva Vinculaci\u00f3n", None))
         self.datospersonales.setText(QCoreApplication.translate("FormularioVinculacion", u"Detalles de vinculaci\u00f3n", None))
-        self.line_codigo_ies.setPlaceholderText(QCoreApplication.translate("FormularioVinculacion", u"Ingrese  codigo ies", None))
+        self.line_codigo_ies.setPlaceholderText(QCoreApplication.translate("FormularioVinculacion", u"Ingrese  codigo ies Ejem 1234", None))
         self.lbl11.setText(QCoreApplication.translate("FormularioVinculacion", u"Codigo ies*", None))
         self.lbl11_2.setText(QCoreApplication.translate("FormularioVinculacion", u"Campo especifico", None))
         self.line_campo_especifico.setPlaceholderText(QCoreApplication.translate("FormularioVinculacion", u"Ingrese campo especi.. Ejem: 1-2A", None))
@@ -771,7 +736,6 @@ class Ui_FormularioVinculacion(object):
         self.date_fecha_inicio.setDisplayFormat(QCoreApplication.translate("FormularioVinculacion", u"yyyy-MM-d", None))
         self.datoscontacto.setText(QCoreApplication.translate("FormularioVinculacion", u"Proyecto Asignado", None))
         self.datosacademicos.setText(QCoreApplication.translate("FormularioVinculacion", u"Estudiantes Asignados", None))
-        self.lbl9_5.setText(QCoreApplication.translate("FormularioVinculacion", u"Fecha final vinculaci\u00f3n", None))
         self.line_periodo_academico.setText("")
         self.line_periodo_academico.setPlaceholderText(QCoreApplication.translate("FormularioVinculacion", u"Ingrese periodo academico Ejem: P1-2023, P2-2023", None))
         self.lbl11_8.setText(QCoreApplication.translate("FormularioVinculacion", u"Periodo academico", None))
@@ -781,15 +745,6 @@ class Ui_FormularioVinculacion(object):
         self.lbl11_4.setText(QCoreApplication.translate("FormularioVinculacion", u"Estudiante seleccionado", None))
         self.line_cedula_seleccionado.setPlaceholderText("")
         self.lbl11_9.setText(QCoreApplication.translate("FormularioVinculacion", u"Cedula estudiante", None))
-        self.date_fecha_final.setDisplayFormat(QCoreApplication.translate("FormularioVinculacion", u"yyyy-MM-d", None))
-        self.cbo_estado_vinculacion.setItemText(0, QCoreApplication.translate("FormularioVinculacion", u"Pendiente", None))
-        self.cbo_estado_vinculacion.setItemText(1, QCoreApplication.translate("FormularioVinculacion", u"En Proceso", None))
-        self.cbo_estado_vinculacion.setItemText(2, QCoreApplication.translate("FormularioVinculacion", u"Culminado", None))
-
-        self.lbl9_3.setText(QCoreApplication.translate("FormularioVinculacion", u"Estado de vinculaci\u00f3n", None))
-        self.line_horas.setText(QCoreApplication.translate("FormularioVinculacion", u"0", None))
-        self.line_horas.setPlaceholderText("")
-        self.lbl11_10.setText(QCoreApplication.translate("FormularioVinculacion", u"N\u00b0 Horas", None))
         self.btn_agregar_estu_seleccionado.setText(QCoreApplication.translate("FormularioVinculacion", u"Agregar", None))
         ___qtablewidgetitem = self.tabla_estudiante_seleccionado.horizontalHeaderItem(0)
         ___qtablewidgetitem.setText(QCoreApplication.translate("FormularioVinculacion", u"Id", None));

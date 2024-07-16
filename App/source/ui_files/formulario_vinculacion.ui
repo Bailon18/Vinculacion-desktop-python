@@ -381,7 +381,7 @@ QLabel#errorCodigoies, #errorCampoEspecifico, #errorEstudianteNoEncontrado,#erro
        <property name="geometry">
         <rect>
          <x>0</x>
-         <y>-375</y>
+         <y>-261</y>
          <width>802</width>
          <height>950</height>
         </rect>
@@ -448,7 +448,7 @@ QLabel#errorCodigoies, #errorCampoEspecifico, #errorEstudianteNoEncontrado,#erro
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
         </property>
         <property name="placeholderText">
-         <string>Ingrese  codigo ies</string>
+         <string>Ingrese  codigo ies Ejem 1234</string>
         </property>
        </widget>
        <widget class="QLabel" name="lbl11">
@@ -631,25 +631,6 @@ QLabel#errorCodigoies, #errorCampoEspecifico, #errorEstudianteNoEncontrado,#erro
         </property>
         <property name="text">
          <string>Estudiantes Asignados</string>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lbl9_5">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>560</y>
-          <width>201</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Fecha final vinculación</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
         </property>
        </widget>
        <widget class="QLineEdit" name="line_periodo_academico">
@@ -853,127 +834,11 @@ QLabel#errorCodigoies, #errorCampoEspecifico, #errorEstudianteNoEncontrado,#erro
          <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
         </property>
        </widget>
-       <widget class="QDateEdit" name="date_fecha_final">
-        <property name="geometry">
-         <rect>
-          <x>22</x>
-          <y>590</y>
-          <width>241</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="cursor">
-         <cursorShape>PointingHandCursor</cursorShape>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="displayFormat">
-         <string>yyyy-MM-d</string>
-        </property>
-        <property name="calendarPopup">
-         <bool>true</bool>
-        </property>
-       </widget>
-       <widget class="QComboBox" name="cbo_estado_vinculacion">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>590</y>
-          <width>161</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <item>
-         <property name="text">
-          <string>Pendiente</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>En Proceso</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Culminado</string>
-         </property>
-        </item>
-       </widget>
-       <widget class="QLabel" name="lbl9_3">
-        <property name="geometry">
-         <rect>
-          <x>280</x>
-          <y>564</y>
-          <width>221</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>Estado de vinculación</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-        </property>
-       </widget>
-       <widget class="QLineEdit" name="line_horas">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="geometry">
-         <rect>
-          <x>460</x>
-          <y>590</y>
-          <width>141</width>
-          <height>40</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>0</string>
-        </property>
-        <property name="maxLength">
-         <number>30</number>
-        </property>
-        <property name="frame">
-         <bool>true</bool>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-       </widget>
-       <widget class="QLabel" name="lbl11_10">
-        <property name="geometry">
-         <rect>
-          <x>460</x>
-          <y>564</y>
-          <width>171</width>
-          <height>21</height>
-         </rect>
-        </property>
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="text">
-         <string>N° Horas</string>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-        </property>
-       </widget>
        <widget class="QPushButton" name="btn_agregar_estu_seleccionado">
         <property name="geometry">
          <rect>
-          <x>620</x>
-          <y>590</y>
+          <x>20</x>
+          <y>550</y>
           <width>120</width>
           <height>40</height>
          </rect>
@@ -1042,9 +907,9 @@ QPushButton#btn_agregar_estu_seleccionado:pressed {
         <property name="geometry">
          <rect>
           <x>19</x>
-          <y>680</y>
+          <y>640</y>
           <width>761</width>
-          <height>251</height>
+          <height>291</height>
          </rect>
         </property>
         <property name="styleSheet">
@@ -1180,7 +1045,7 @@ color: #2c3d3e;
         <property name="geometry">
          <rect>
           <x>20</x>
-          <y>650</y>
+          <y>610</y>
           <width>241</width>
           <height>21</height>
          </rect>

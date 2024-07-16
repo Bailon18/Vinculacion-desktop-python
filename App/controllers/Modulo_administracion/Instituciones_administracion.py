@@ -3,10 +3,16 @@ from sys import version
 from PySide2 import QtWidgets , QtCore , QtGui
 from PySide2.QtCore import Qt
 from PySide2.QtWidgets import QMessageBox
+from PySide2.QtWidgets import QMessageBox, QFileDialog
+import imghdr
+import os
+from PySide2.QtCore import QUrl
+from PySide2.QtGui import QDesktopServices
 
 
 from controllers.Modulo_utils.Funcion_validaciones import *
 from controllers.Modulo_utils.funcion_efecto import Clase_Opacidad
+from PySide2.QtCore import QFileInfo
 
 from views.ui_formulario_instituciones import Ui_FormularioInstitucion
 
@@ -28,6 +34,9 @@ class InstitucionesAdmin(QtWidgets.QDialog):
         self.telefono_actual = ''
         self.nombre_actual = ''
         
+        self.archivo_convenio = None
+        self.tipo_archivo = ''
+        self.venInstituciones.btn_descargar_archivo.hide()
     
         if(self.modo != 'nuevo'):
             self.institucion_id = institucion_id
@@ -52,6 +61,8 @@ class InstitucionesAdmin(QtWidgets.QDialog):
         self.venInstituciones.btn_close.clicked.connect(lambda: self.cerrar_ventana())
         self.venInstituciones.btn_guardar_institiucion.clicked.connect(lambda: self.accion_boton_guardar())
         self.venInstituciones.cancelButton.clicked.connect(lambda: self.cerrar_ventana())
+        self.venInstituciones.btn_subir_cv.clicked.connect(lambda: self.subir_convenio())
+        self.venInstituciones.btn_descargar_archivo.clicked.connect(lambda: self.descargar_archivo())
         
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
@@ -69,8 +80,6 @@ class InstitucionesAdmin(QtWidgets.QDialog):
     def cerrar_ventana(self):
         self.parent.raizOpacidad.close()
         self.close()
-
-
 
     def es_texto_valido(self, texto):
         if not texto.strip():
@@ -142,12 +151,9 @@ class InstitucionesAdmin(QtWidgets.QDialog):
                 self.venInstituciones.errorTelefono.setStyleSheet("")
                 self.venInstituciones.errorTelefono.setText("")
 
-
     def campos_validados(self):
         return (self.venInstituciones.line_nombre_institucion.styleSheet() == self.STYLE_VALID and
                 self.venInstituciones.line_telefono.styleSheet() == self.STYLE_VALID)
-
-
 
     def accion_boton_guardar(self):
         if not self.control_base.verificarConexionInternet():
@@ -167,18 +173,20 @@ class InstitucionesAdmin(QtWidgets.QDialog):
             try:
                 if self.modo != 'nuevo':
 
-                    self.control_base.setDatosProcess('actualizar_institucion', (self.institucion_id, nombre_proyecto, tipo_institucion, estado, direccion, telefono))
+                    self.control_base.setDatosProcess('actualizar_institucion', (self.institucion_id, nombre_proyecto, tipo_institucion, estado, direccion, telefono, self.archivo_convenio, self.tipo_archivo ))
 
                     QMessageBox.information(self, "Mensaje", "Los datos se han actualizado correctamente en la base de datos.")
                 else:
-                    self.control_base.setDatosProcess('agregar_institucion', ( nombre_proyecto, tipo_institucion, estado, direccion, telefono))
+                    self.control_base.setDatosProcess('agregar_institucion', ( nombre_proyecto, tipo_institucion, estado, direccion, telefono, self.archivo_convenio, self.tipo_archivo))
                     
                     QMessageBox.information(self, "Mensaje", "Los datos se han validado correctamente y se han enviado a la base de datos.")
 
                 self.parent.raizOpacidad.close()
                 self.close()
+                self.parent.offset = 0
                 self.parent.llenarTabla('listar_institucion', 'institucion', self.parent.venPri.tabla_institucion)
-                self.parent.actualizarInfoPaginacion('institucion', self.parent.venPri.lbl_pagina_instituto)
+                self.parent.venPri.check_estado_insti.setChecked(False)
+                self.parent.actualizarInfoPaginacion('institucion', self.parent.venPri.lbl_pagina_instituto, True)
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar los datos en la base de datos: {str(e)}")
 
@@ -200,7 +208,93 @@ class InstitucionesAdmin(QtWidgets.QDialog):
             self.venInstituciones.line_telefono.setText(respuesta[4])
             self.nombre_actual = respuesta[0]
             self.telefono_actual = respuesta[4]
+            
+            self.archivo_convenio = respuesta[5]
+            self.tipo_archivo = respuesta[6] 
+            if(self.archivo_convenio!= None):
+                self.venInstituciones.lbl_nombre_archivo_seleccionado.setText(f'Descargar archivo {self.tipo_archivo} ->')
+                self.venInstituciones.btn_descargar_archivo.show()
   
 
+    def subir_convenio(self):
+        opciones = QFileDialog.Options()
+        archivo, _ = QFileDialog.getOpenFileName(
+            self,
+            "Seleccionar archivo",
+            "",
+            "Archivos PDF (*.pdf);;Archivos Word (*.doc *.docx);;Archivos Excel (*.xls *.xlsx);;Archivos PowerPoint (*.ppt *.pptx)",
+            options=opciones
+        )
+        
+        if archivo:
+            with open(archivo, 'rb') as file:
+                self.archivo_convenio = file.read()
+  
+                extension = QFileInfo(archivo).suffix().lower()
 
+                if extension in ['pdf']:
+                    self.tipo_archivo = 'pdf'
+                elif extension in ['doc', 'docx']:
+                    self.tipo_archivo = 'word'
+                elif extension in ['xls', 'xlsx']:
+                    self.tipo_archivo = 'excel'
+                elif extension in ['ppt', 'pptx']:
+                    self.tipo_archivo = 'ppt'
+                else:
+                    self.tipo_archivo = 'desconocido'
+               
+                QDesktopServices.openUrl(QUrl.fromLocalFile(archivo))
+            self.venInstituciones.lbl_nombre_archivo_seleccionado.setText(QFileInfo(archivo).fileName())
+            
+            
+            QMessageBox.information(self, "Éxito", "El archivo se ha cargado correctamente.")
+        else:
+            QMessageBox.information(self, "Cancelado", "No se ha seleccionado ningún archivo.")
     
+    def descargar_archivo(self):
+        if self.archivo_convenio:
+            opciones = QFileDialog.Options()
+            extension = self.tipo_archivo.lower()
+            
+            if extension == 'pdf':
+                filtro_archivos = "Archivos PDF (*.pdf)"
+                default_filename = "archivo_convenio.pdf"
+            elif extension in ['word', 'doc', 'docx']:
+                filtro_archivos = "Archivos Word (*.doc *.docx)"
+                default_filename = "archivo_convenio.docx"
+            elif extension in ['excel', 'xls', 'xlsx']:
+                filtro_archivos = "Archivos Excel (*.xls *.xlsx)"
+                default_filename = "archivo_convenio.xlsx"
+            elif extension in ['ppt', 'pptx']:
+                filtro_archivos = "Archivos PowerPoint (*.ppt *.pptx)"
+                default_filename = "archivo_convenio.pptx"
+            else:
+                filtro_archivos = "Todos los archivos (*)"
+                default_filename = "archivo_convenio"
+            
+            archivo, _ = QFileDialog.getSaveFileName(
+                self,
+                "Guardar archivo",
+                default_filename,
+                filtro_archivos,
+                options=opciones
+            )
+            
+            if archivo:
+                try:
+                    with open(archivo, 'wb') as file:
+                        file.write(self.archivo_convenio)
+                    
+                    # Abrir vista previa del archivo
+                    if os.path.isfile(archivo):
+                        QDesktopServices.openUrl(QUrl.fromLocalFile(archivo))
+                    else:
+                        QMessageBox.warning(self, "Advertencia", "No se pudo abrir el archivo guardado.")
+                    
+                    QMessageBox.information(self, "Éxito", "El archivo se ha descargado correctamente.")
+                except Exception as e:
+                    QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar el archivo: {str(e)}")
+            else:
+                QMessageBox.warning(self, "Advertencia", "No se ha especificado una ruta para guardar el archivo.")
+        else:
+            QMessageBox.warning(self, "Advertencia", "No hay ningún archivo para descargar.")

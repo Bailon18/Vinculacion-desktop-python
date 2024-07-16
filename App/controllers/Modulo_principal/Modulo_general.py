@@ -1,5 +1,6 @@
 
 from PySide2 import QtWidgets , QtCore , QtGui
+from PySide2.QtCore import QTimer
 from PySide2.QtCore import Qt
 from controllers.Modulo_Vinculacion.Modulo_Vinculacion import Vinculacion
 from controllers.Modulo_administracion.Carreras_administracion import CarrerasAdmin
@@ -31,39 +32,36 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.setupUi(self)
         
         self.conec_base = BaseDatos()
+        
+        self.configuracion_ventana()
+        self.rol = args[0][2]
+        self.tutor_id = args[0][0]
+        self.venPri.lbl_usuario.setText(str(args[0][1])) 
+        self.venPri.lbl_rol.setText(args[0][2])
+        
+        self.args = args
+        
 
-        
-        #self.configuracion_ventana()
-        self.rol = 'Administrador' # args[0][2]
-        self.tutor_id = 1 # args[0][0]
-        self.venPri.lbl_usuario.setText("Bailon Paucar") # str(args[0][1])
-        self.venPri.lbl_rol.setText("Administrador") # str(args[0][2])
-        
-        # self.lista_estudiante_filtro = []
-        # self.lista_informes_filtro =[]
-        # self.lista_ficha_filtro = []
-        # self.lista_memorandun_filtro = []
-        
-        # self.cambioPagina()
+        self.cambioPagina()
         self.datos_inicializacion()
-        
 
-        
 
-        # if(self.rol != 'Administrador'):
-        #     self.venPri.btn_afiliacion.setHidden(True)
-        #     self.venPri.btn_usuario.setHidden(True)
-        #     self.venPri.btn_reporte.setHidden(True)
-        #     self.venPri.btn_home.setHidden(True)
-        #     self.venPri.btn_seguimientoo.setHidden(False)
-        #     evento_pagina(self,1, self.venPri.btn_seguimientoo)
-        # else:
-        #     self.venPri.btn_seguimientoo.setHidden(True)
-        #     self.venPri.btn_home.setHidden(False)
-        #     evento_pagina(self,0, self.venPri.btn_afiliacion)
-
-        # self.listar_vinculacion()
-        # self.listar_usuarios()
+        if(self.rol != 'Administrador'):
+            
+            self.showEvent = self.customShowEvent
+            self.venPri.btn_afiliacion.setHidden(True)
+            self.venPri.btn_usuario.setHidden(True)
+            self.venPri.btn_reporte.setHidden(True)
+            self.venPri.btn_home.setHidden(True)
+            #self.venPri.btn_seguimientoo.setHidden(True)
+            self.venPri.cbo_filtro_tutor_seguimiento.setHidden(True)
+            evento_pagina(self,1, self.venPri.btn_seguimientoo)
+            
+        else:
+            
+            #self.venPri.btn_seguimientoo.setHidden(True)
+            self.venPri.btn_home.setHidden(False)
+            evento_pagina(self,0, self.venPri.btn_afiliacion)
         
         self.controlSalida = True
          # clase opacidad-----------------------
@@ -79,6 +77,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_agregar_carrera.clicked.connect(lambda: self.abrir_ventana_carreras())
         self.venPri.btn_agregar_insti.clicked.connect(lambda: self.abrir_ventana_instituciones())
         self.venPri.btn_nueva_vinculacion.clicked.connect(lambda: self.abrir_ventana_vinculacion())
+        self.venPri.btn_agregar_usuario.clicked.connect(lambda: self.abrir_ventana_usuarios())
         
         
         # filtro evento busquedas
@@ -87,15 +86,12 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.line_busqueda_proyecto.textChanged.connect(lambda: self.filtro_proyectos())
         self.venPri.line_busqueda_carrera.textChanged.connect(lambda: self.filtro_carreras())
         self.venPri.line_busqueda_inst.textChanged.connect(lambda: self.filtro_institucion())
+        self.venPri.line_busqueda_usuario.textChanged.connect(lambda: self.filtro_usuarios())
         
         
-        # self.venPri.line_busqueda_tutor.textChanged.connect(lambda: self.busqueda_vinculacion_tutor())
-        # self.venPri.line_busqueda_reporte_estudiantes.textChanged.connect(lambda: self.busqueda_datos_estudiante())
-        # self.venPri.line_busqueda_usuario.textChanged.connect(lambda: self.busqueda_usuarios_filtro())
-        # self.venPri.cbox_perfil.activated.connect(lambda: self.evento_perfil())
+        self.venPri.cbox_perfil.activated.connect(lambda: self.evento_perfil())
      
 
- 
         #evento_menu(self, self.venPri, tr=0)
         evento_menu(self, self.venPri, tr=200, imagen=self.venPri.lbl_logo2)
         evento_hora(self)
@@ -110,18 +106,7 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_menu_instituciones.clicked.connect(lambda: evento_pagina_mantenimiento(self, 4, self.venPri.btn_menu_instituciones))
         
         
-        
-
-        # self.venPri.btn_agregar_instituto.clicked.connect(lambda: self.mostrar_formulario_instituciones())
-        # self.venPri.btn_agregar_proyectos.clicked.connect(lambda: self.mostrar_formulario_proyectos())
-
-        # self.llenado_instituciones('Activo')
-        # self.llenado_proyectos('Activo')
-
-        # self.venPri.check_estado_institucion.stateChanged.connect(lambda: self.mostrar_instituciones_estado())
-        # self.venPri.check_estado_proyectos.stateChanged.connect(lambda: self.mostrar_proyectos_estado())
     
-
         self.venPri.btn_afiliacion.clicked.connect(lambda: evento_pagina(self, 0, self.venPri.btn_afiliacion))
         self.venPri.btn_seguimientoo.clicked.connect(lambda: evento_pagina(self, 1, self.venPri.btn_seguimientoo))
         self.venPri.btn_home.clicked.connect(lambda: evento_pagina(self, 2, self.venPri.btn_home))
@@ -129,45 +114,41 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_reporte.clicked.connect(lambda: evento_pagina(self, 4, self.venPri.btn_reporte))
         
         
-        # self.venPri.btn_nuevoafiliacion.clicked.connect(lambda: self.abrir_ventana_afiliacion())
-        # self.venPri.btn_recargar.clicked.connect(lambda: self.listar_vinculacion())
-        # self.venPri.btn_agregar_usuario.clicked.connect(lambda: self.abrir_ventana_perfil())
         
-        # self.venPri.cbox_rango.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango(self.venPri.cbox_rango.currentText()))
-        # self.venPri.cbox_rango_tutor.currentIndexChanged.connect(lambda : self.mostrar_vinculacion_rango_tutor(self.venPri.cbox_rango_tutor.currentText()))
-        
-        # evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2)
-        # self.venPri.radioEstudiante.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2))
-        # self.venPri.radioTutor.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioTutor, 0))
-        # self.venPri.radioreporteentrega.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioreporteentrega, 1))
-        
+        self.venPri.check_estado_estudiantes.clicked.connect(lambda: self.mostrar_culminado_estudiantes('estado_estudiantes'))
+        self.venPri.check_estado_tutores.clicked.connect(lambda: self.mostrar_inactivo_tutores('estado_tutores'))
+        self.venPri.check_estado_proyecto.clicked.connect(lambda: self.mostrar_inactivo_proyectos('estado_proyectos'))
+        self.venPri.check_estado_carrera.clicked.connect(lambda: self.mostrar_inactivo_carreras('estado_carreras'))
+        self.venPri.check_estado_insti.clicked.connect(lambda: self.mostrar_inactivo_instituciones('estado_instituciones'))
 
-        # self.listar_seguimiento_tutor()
-        
-        # # evento reporte
-        # self.venPri.cbox_rango_reporte_tutor.activated.connect(lambda: self.evento_obtener_tutores_limite())
-        # self.venPri.line_busqueda_reporte_tutor.textChanged.connect(lambda: self.busqueda_tutor_reporte())
 
         
-        # self.llenado_reporte('En Progreso',  self.venPri.tabla_reporte_estudiantes, 'obtenerInformacionVinculacionesConEstado', 5)
-        # self.venPri.check_todos_estudiantes.clicked.connect(lambda: self.evento_obtener_reporte_general())
-        # self.venPri.cbox_rango_estudiantes.activated.connect(lambda: self.evento_obtener_reporte_general())
-        # self.venPri.radioProcesoE.clicked.connect(lambda: self.filtro_reporte('En Progreso','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
-        # self.venPri.radioPendienteE.clicked.connect(lambda: self.filtro_reporte('Pendiente','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
-        # self.venPri.radioCulminadoE.clicked.connect(lambda: self.filtro_reporte('Culminado','Estudiante', 'obtenerInformacionVinculacionesConEstado'))
+        evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2)
+        self.venPri.radioEstudiante.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioEstudiante, 2))
+        self.venPri.radioTutor.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioTutor, 0))
+        self.venPri.radioreporteentrega.clicked.connect(lambda: evento_seleccion_reporte(self, self.venPri.radioreporteentrega, 1))
         
-        # self.venPri.cbo_tipo_entrega.activated.connect(lambda: self.cambioPagina())
-        # self.venPri.cbo_periodo_academico.activated.connect(lambda: self.eventoSeleccionPeriodo())
+
+
+        self.venPri.cbo_tipo_entrega.activated.connect(lambda: self.cambioPagina())
+        self.venPri.cbo_periodo_academico.activated.connect(lambda: self.eventoSeleccionPeriodo())
         
-        # self.venPri.btn_export.clicked.connect(lambda: self.reporte_estudiantes())
-        # self.venPri.btn_export_2.clicked.connect(lambda: self.generarReporte_informe())
-        # self.venPri.btn_export_3.clicked.connect(lambda: self.generarReporte_ficha())
-        # self.venPri.btn_export_4.clicked.connect(lambda: self.generarReporte_memorandum())
+        self.venPri.btn_export.clicked.connect(lambda: self.reporte_estudiantes())
+        self.venPri.btn_export_2.clicked.connect(lambda: self.generarReporte_informe())
+        self.venPri.btn_export_3.clicked.connect(lambda: self.generarReporte_ficha())
+        self.venPri.btn_export_4.clicked.connect(lambda: self.generarReporte_memorandum())
         
         
         self.offset = 0
         self.limit = 5
+        
+
         self.textobusqueda = ""
+        self.estudiantes_vinculacion_id = None
+        self.estudiantes_vinculacion_nombre = None
+        self.modo_formulario_seguimiento_estudiante = 'nuevo'
+        self.id_actividad = 0
+
         
         self.venPri.btn_pag_antes_estu.clicked.connect(lambda: self.prev_page('listar_estudiantes', 'estudiantes', self.venPri.lbl_pagina_estudiantes, self.venPri.tabla_estudiantes))
         self.venPri.btn_pag_desp_estu.clicked.connect(lambda: self.next_page('listar_estudiantes', 'estudiantes', self.venPri.lbl_pagina_estudiantes, self.venPri.tabla_estudiantes))
@@ -187,63 +168,101 @@ class Principal(QtWidgets.QMainWindow):
         self.venPri.btn_pag_antes_vinculacion.clicked.connect(lambda: self.prev_page('ObtenerListaVinculaciones', 'vinculacion', self.venPri.lbl_pagina_vinculacion, self.venPri.tabla_vinculacion))
         self.venPri.btn_pag_desp_vinculacion.clicked.connect(lambda: self.next_page('ObtenerListaVinculaciones', 'vinculacion', self.venPri.lbl_pagina_vinculacion, self.venPri.tabla_vinculacion))
         
+        self.venPri.btn_pag_antes_user.clicked.connect(lambda: self.prev_page('listar_usuarios', 'usuarios', self.venPri.lbl_pagina_user, self.venPri.tabla_usuario))
+        self.venPri.btn_pag_desp_user.clicked.connect(lambda: self.next_page('listar_usuarios', 'usuarios', self.venPri.lbl_pagina_user, self.venPri.tabla_usuario))
         
     
         # Inicializar la tabla con la primera página
         self.llenarTabla('listar_estudiantes', 'estudiantes', self.venPri.tabla_estudiantes)
-        self.actualizarInfoPaginacion('estudiantes', self.venPri.lbl_pagina_estudiantes)
+        self.actualizarInfoPaginacion('estudiantes', self.venPri.lbl_pagina_estudiantes, True )
         
         self.llenarTabla('listar_tutores', 'tutores', self.venPri.tabla_tutores)
-        self.actualizarInfoPaginacion('tutores', self.venPri.lbl_pagina_tutores)
+        self.actualizarInfoPaginacion('tutores', self.venPri.lbl_pagina_tutores, True )
         
         self.llenarTabla('listar_proyectos', 'proyecto', self.venPri.tabla_proyecto)
-        self.actualizarInfoPaginacion('proyecto', self.venPri.lbl_pagina_proyectos)
+        self.actualizarInfoPaginacion('proyecto', self.venPri.lbl_pagina_proyectos, True )
         
         self.llenarTabla('listar_carreras', 'carrera', self.venPri.tabla_carrera)
-        self.actualizarInfoPaginacion('carrera', self.venPri.lbl_pagina_carrera)
+        self.actualizarInfoPaginacion('carrera', self.venPri.lbl_pagina_carrera, True )
         
         self.llenarTabla('listar_institucion', 'institucion', self.venPri.tabla_institucion)
-        self.actualizarInfoPaginacion('institucion', self.venPri.lbl_pagina_instituto)
+        self.actualizarInfoPaginacion('institucion', self.venPri.lbl_pagina_instituto, True )
         
         self.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.venPri.tabla_vinculacion)
-        self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion)
+        self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion, True )
         
+        self.llenarTabla('listar_usuarios', 'usuarios', self.venPri.tabla_usuario)
+        self.actualizarInfoPaginacion('usuarios', self.venPri.lbl_pagina_user, True )
+        
+        
+        self.llenarTablaReporte01('listar_estudiantes_vinculacion_por_estado', self.venPri.tabla_reporte_estudiantes, 'En proceso')
+        self.actualizarInfoPaginacion_reporte(self.venPri.lbl_pagina_reporte01, 'contar_estudiantes_vinculacion_por_estado', 'En proceso')
+        
+        self.llenarTabla('listar_tutores', 'tutores', self.venPri.tabla_reporte_tutores)
+        self.actualizarInfoPaginacion('tutores', self.venPri.lbl_pagina_reporte02, True )
+       
+        
+        self.venPri.btn_pag_antes_reporte01.clicked.connect(lambda: self.prev_page(
+                'listar_estudiantes_vinculacion_por_estado',self.venPri.lbl_pagina_reporte01, self.venPri.tabla_reporte_estudiantes, 'contar_estudiantes_vinculacion_por_estado' ))
+        self.venPri.btn_pag_desp_reporte01.clicked.connect(lambda: self.next_page(
+                'listar_estudiantes_vinculacion_por_estado',self.venPri.lbl_pagina_reporte01, self.venPri.tabla_reporte_estudiantes,  'contar_estudiantes_vinculacion_por_estado'))
+        
+        
+        self.venPri.btn_pag_antes_reporte02.clicked.connect(lambda: self.prev_page('listar_tutores', 'tutores', self.venPri.lbl_pagina_reporte02, self.venPri.tabla_reporte_tutores))
+        self.venPri.btn_pag_desp_reporte02.clicked.connect(lambda: self.next_page('listar_tutores', 'tutores', self.venPri.lbl_pagina_reporte02, self.venPri.tabla_reporte_tutores))
+        
+        self.venPri.radioProcesoE.clicked.connect(lambda: self.filtro_reporte_estudiante('En proceso'))
+        self.venPri.radioPendienteE.clicked.connect(lambda: self.filtro_reporte_estudiante('Pendiente'))
+        self.venPri.radioCulminadoE.clicked.connect(lambda: self.filtro_reporte_estudiante('Culminado'))
+        
+        
+        self.venPri.line_busqueda_reporte_estudiantes.textChanged.connect(lambda: self.busqueda_datos_estudiante())
         
         # Eventos de combobox filtro en vinculacion
-        self.venPri.cbo_filtro_proyecto.currentIndexChanged.connect(lambda: self.consultar_basedatos('proyecto'))
-        self.venPri.cbo_filtro_periodo.currentIndexChanged.connect(lambda: self.consultar_basedatos('periodo'))
-        self.venPri.cbo_filtro_tutor.currentIndexChanged.connect(lambda: self.consultar_basedatos('tutor'))
+        self.venPri.cbo_filtro_proyecto.activated.connect(lambda: self.consultar_basedatos('proyecto'))
+        self.venPri.cbo_filtro_periodo.activated.connect(lambda: self.consultar_basedatos('periodo'))
+        self.venPri.cbo_filtro_tutor.activated.connect(lambda: self.consultar_basedatos('tutor'))
         self.venPri.line_filtro_estudiante.textChanged.connect(lambda: self.consultar_basedatos('estudiante'))
         
-        
-        
+                
         self.periodo_academico = '' 
 
-
-
-        
-        self.venPri.cbo_filtro_periodo_seguimiento.currentIndexChanged.connect(lambda: self.consultar_filtro_seguimiento_periodo())
-        self.venPri.cbo_filtro_proyecto_seguimiento.currentIndexChanged.connect(lambda: self.llenar_estudiantes_seguimientos_tutor())
+        self.venPri.cbo_filtro_tutor_seguimiento.activated.connect(lambda: self.consultar_filtro_seguimiento_tutor())
+        self.venPri.cbo_filtro_periodo_seguimiento.activated.connect(lambda: self.consultar_filtro_seguimiento_periodo())
+        self.venPri.cbo_filtro_proyecto_seguimiento.activated.connect(lambda: self.llenar_estudiantes_seguimientos_tutor())
         
         self.consultar_filtro_seguimiento_periodo()
+
         
-        # Verificar si el combo box de periodos tiene elementos
-        if self.venPri.cbo_filtro_periodo_seguimiento.count() > 0:
-            self.venPri.cbo_filtro_periodo_seguimiento.setCurrentIndex(1)
-            self.venPri.cbo_filtro_proyecto_seguimiento.setCurrentIndex(1)
-        else:
+    def customShowEvent(self, event):
+        super().showEvent(event)
+        QTimer.singleShot(0, self.validar_sesiones)
+        
+
+    
+    def validar_sesiones(self):
+        
+        print('cantidasd ', self.venPri.cbo_filtro_periodo_seguimiento.count())
+        if self.venPri.cbo_filtro_periodo_seguimiento.count() <= 1:
+            QtWidgets.QMessageBox.warning(self, "Sin Asignación", "Usted aún no está asignado a ninguna vinculación.")
             self.venPri.cbo_filtro_periodo_seguimiento.setCurrentIndex(0)
             self.venPri.cbo_filtro_proyecto_seguimiento.setCurrentIndex(0)
-
         
-
     def evento_perfil(self):
         
+        from controllers.Modulo_administracion.Tutores_administracion import TutoresAdmin
+        
         if self.venPri.cbox_perfil.currentIndex() == 0:
-
             self.raizOpacidad.resize(self.width(), self.height())
             self.raizOpacidad.show()
-            Perfil(self, 'Editar', [self.tutor_id, 'Jose Luna']).exec_()
+            
+            if(self.args[0][2] != 'Administrador'):
+                TutoresAdmin(self, 'editar', self.tutor_id).exec_()    
+            else:
+                Perfil(self, 'Editar', [self.tutor_id, self.args[0][1]]).exec_()
+            
+            
+           
         else:
             self.cerrar_sesion()
 
@@ -297,10 +316,27 @@ class Principal(QtWidgets.QMainWindow):
         TutoresAdmin(self, 'nuevo', 0).exec_()
         
     def abrir_ventana_nueva_actividad(self):
-        self.raizOpacidad.resize(self.width(), self.height())
-        self.raizOpacidad.show()
-        FormularioSeguimientoEstudiante(self, 0, '').exec_()
         
+        print('Abrir ventana nueva actividad')
+
+        if(self.estudiantes_vinculacion_id != None):
+            self.raizOpacidad.resize(self.width(), self.height())
+            self.raizOpacidad.show()
+            FormularioSeguimientoEstudiante(self, self.id_actividad, '', self.estudiantes_vinculacion_id, self.modo_formulario_seguimiento_estudiante).exec_()
+        else:
+            QtWidgets.QMessageBox.information(self, 'Error', 'Debe seleccionar un estudiante para visualizar o agregar su actividad.')
+            
+    def abrir_ventana_seguimiento_tutor(self):
+        
+        from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
+
+        if(self.estudiantes_vinculacion_id != None and self.estudiantes_vinculacion_nombre!= None):
+            self.raizOpacidad.resize(self.width(), self.height())
+            self.raizOpacidad.show()
+            Seguimiento(self, self.estudiantes_vinculacion_id, self.estudiantes_vinculacion_nombre).exec_()
+        else:
+            QtWidgets.QMessageBox.information(self, 'Error', 'Debe seleccionar un estudiante para visualizar su actividad.')
+            
     def abrir_ventana_proyectos(self):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
@@ -320,23 +356,12 @@ class Principal(QtWidgets.QMainWindow):
         self.raizOpacidad.resize(self.width(), self.height())
         self.raizOpacidad.show()
         Vinculacion(parent=self, modo='nuevo').exec_()
-       
-    def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
-        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [self.offset, self.limit])
 
-        if(tabla == 'estudiantes' and datoresultante):
-            llenar_tabla_estudiantes(self, tabla_diseno, datoresultante[0])
-        elif(tabla == 'tutores' and datoresultante):
-            lenar_tabla_tutores(self, tabla_diseno, datoresultante[0])
-        elif(tabla == 'proyecto' and datoresultante):
-            llenar_tabla_proyectos(self, tabla_diseno, datoresultante[0])
-        elif(tabla == 'carrera' and datoresultante):
-            llenar_tabla_carreras(self, tabla_diseno, datoresultante[0])
-        elif(tabla == 'institucion' and datoresultante):
-            llenar_tabla_institucion(self, tabla_diseno, datoresultante[0])
-        elif(tabla == 'vinculacion' and datoresultante):
-            llenar_tabla_vinculacion(self, tabla_diseno, datoresultante[0])
-            
+    def abrir_ventana_usuarios(self):
+        self.raizOpacidad.resize(self.width(), self.height())
+        self.raizOpacidad.show()
+        Perfil(parent=self, modo='nuevo',dato=[]).exec_()
+       
     def llenarTablaFiltro(self, procedimiento, tabla_diseno, param, tipo):
         datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [tipo, param,  self.offset, self.limit])
         
@@ -345,29 +370,266 @@ class Principal(QtWidgets.QMainWindow):
         else:
             QtWidgets.QMessageBox.warning(self, 'Información', f'No se encontró ninguna vinculación con el nombre del {tipo} seleccionado.')
             self.llenarTabla('ObtenerListaVinculaciones', 'vinculacion', self.venPri.tabla_vinculacion)
-            self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion)
-  
+            self.actualizarInfoPaginacion('vinculacion', self.venPri.lbl_pagina_vinculacion, True)    
+       
+       
+    def mostrar_culminado_estudiantes(self, estado_estudiantes):
+        
+        estado = True
+        
+        self.offset = 0
+        
+        if self.venPri.check_estado_estudiantes.isChecked():
+            self.llenarTabla('listar_estudiantes_inactivos', 'estudiantes', self.venPri.tabla_estudiantes)
+            estado = False
+
+        else:
+            self.llenarTabla('listar_estudiantes', 'estudiantes', self.venPri.tabla_estudiantes)
+            estado = True
+
+        self.actualizarInfoPaginacion('estudiantes', self.venPri.lbl_pagina_estudiantes, estado, estado_estudiantes)
+        
+    def mostrar_inactivo_tutores(self, estado_tutores):
+   
+        
+        estado = True
+        self.offset = 0
+        
+        if self.venPri.check_estado_tutores.isChecked():
+            self.llenarTabla('listar_tutores_inactivos', 'tutores', self.venPri.tabla_tutores)
+            estado = False
+        else:
+            self.llenarTabla('listar_tutores', 'tutores', self.venPri.tabla_tutores)
+            estado = True
+            
+        self.actualizarInfoPaginacion('tutores', self.venPri.lbl_pagina_tutores, estado, estado_tutores)
+        
+    def mostrar_inactivo_proyectos(self, estado_proyectos):
+        
+        estado = True
+        self.offset = 0
+        
+        if self.venPri.check_estado_proyecto.isChecked():
+            self.llenarTabla('listar_proyectos_inactivos', 'proyecto', self.venPri.tabla_proyecto)
+            estado = False
+        else:
+            self.llenarTabla('listar_proyectos', 'proyecto', self.venPri.tabla_proyecto)
+            estado = True
+            
+        self.actualizarInfoPaginacion('proyecto', self.venPri.lbl_pagina_proyectos, estado, estado_proyectos)
+        
+    def mostrar_inactivo_carreras(self, estado_carreras):
+        
+        estado = True
+        self.offset = 0
+        
+        if self.venPri.check_estado_carrera.isChecked():
+            self.llenarTabla('listar_carreras_inactivas', 'carrera', self.venPri.tabla_carrera)
+            estado = False
+        else:
+            self.llenarTabla('listar_carreras', 'carrera', self.venPri.tabla_carrera)
+            estado = True
+            
+        self.actualizarInfoPaginacion('carrera', self.venPri.lbl_pagina_carrera, estado, estado_carreras)
+        
+    def mostrar_inactivo_instituciones(self, estado_institucion):
+        
+        estado = True
+        self.offset = 0
+        
+        if self.venPri.check_estado_insti.isChecked():
+            self.llenarTabla('listar_instituciones_inactivas', 'institucion', self.venPri.tabla_institucion)
+            estado = False
+        else:
+            self.llenarTabla('listar_institucion', 'institucion', self.venPri.tabla_institucion)
+            estado = True
+            
+        self.actualizarInfoPaginacion('institucion', self.venPri.lbl_pagina_instituto, estado, estado_institucion)
+       
+       
+    def llenarTabla(self, procedimiento, tabla,  tabla_diseno):
+        
+        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [self.offset, self.limit])
+
+        if(tabla == 'estudiantes' and datoresultante):
+            llenar_tabla_estudiantes(self, tabla_diseno, datoresultante[0])
+ 
+        elif tabla == 'tutores' and tabla_diseno.objectName() == 'tabla_tutores' and datoresultante:
+            llenar_tabla_tutores(self, tabla_diseno, datoresultante[0])
+        elif tabla == 'tutores' and tabla_diseno.objectName() == 'tabla_reporte_tutores' and datoresultante:
+            llenar_tabla_tutores_reportes(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'proyecto' and datoresultante):
+            llenar_tabla_proyectos(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'carrera' and datoresultante):
+            llenar_tabla_carreras(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'institucion' and datoresultante):
+            llenar_tabla_institucion(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'vinculacion' and datoresultante):
+            llenar_tabla_vinculacion(self, tabla_diseno, datoresultante[0])
+        elif(tabla == 'usuarios' and datoresultante):
+            llenar_tabla_usuario(self, tabla_diseno, datoresultante[0])
+        # elif(tabla == 'reporte02' and datoresultante):
+        #     llenar_tabla_usuario(self, tabla_diseno, datoresultante[0])
+            
     def next_page(self, procedimiento, tabla, labels, tabla_diseno):
         self.offset += self.limit
+        estado = True
+        
+        
+        
+        if tabla == 'estudiantes' and self.venPri.check_estado_estudiantes.isChecked():
+            procedimiento = 'listar_estudiantes_inactivos'
+            estado = False
+            
+        elif tabla == 'tutores' and self.venPri.check_estado_tutores.isChecked() and tabla_diseno.objectName() == 'tabla_tutores':
+            procedimiento = 'listar_tutores_inactivos'
+            estado = False
+        
+        elif tabla == 'tutores' and tabla_diseno.objectName() == 'tabla_reporte_tutores':
+            procedimiento = procedimiento
+            estado = True
+            
+        elif tabla == 'proyecto' and self.venPri.check_estado_proyecto.isChecked():
+            procedimiento = 'listar_proyectos_inactivos'
+            estado = False
+            
+        elif tabla == 'carrera' and self.venPri.check_estado_carrera.isChecked():
+            procedimiento = 'listar_carreras_inactivas'
+            estado = False
+            
+        elif tabla == 'institucion' and self.venPri.check_estado_insti.isChecked():
+            procedimiento = 'listar_instituciones_inactivas'
+            estado = False
+        
         datoretorno = self.conec_base.getDatosProcess_condicion(procedimiento, [self.offset, self.limit])
-  
+    
         if len(datoretorno[0]) > 0:
             self.llenarTabla(procedimiento, tabla, tabla_diseno)
         else:
-            self.offset -= self.limit
-        self.actualizarInfoPaginacion(tabla, labels)
+            self.offset -= self.limit 
+        
+        self.actualizarInfoPaginacion(tabla, labels, estado)
 
     def prev_page(self, procedimiento, tabla, labels, tabla_diseno):
-        self.offset = max(0, self.offset - self.limit)
-        self.llenarTabla(procedimiento, tabla, tabla_diseno)
-        self.actualizarInfoPaginacion(tabla, labels)
         
-    def actualizarInfoPaginacion(self, nomnbreTabla, labels):
-        total_registros = self.conec_base.getDatos('SELECT COUNT(*) FROM '+ nomnbreTabla)
+        estado = True
+        self.offset = max(0, self.offset - self.limit)
+        
+        if tabla == 'estudiantes' and self.venPri.check_estado_estudiantes.isChecked():
+            procedimiento = 'listar_estudiantes_inactivos'
+            estado = False
+            
+
+        elif tabla == 'tutores' and self.venPri.check_estado_tutores.isChecked() and tabla_diseno.objectName() == 'tabla_tutores':
+            procedimiento = 'listar_tutores_inactivos'
+            estado = False
+        
+        elif tabla == 'tutores' and tabla_diseno.objectName() == 'tabla_reporte_tutores':
+            procedimiento = procedimiento
+            estado = True
+            
+        elif tabla == 'proyecto' and self.venPri.check_estado_proyecto.isChecked():
+            procedimiento = 'listar_proyectos_inactivos'
+            estado = False
+            
+        elif tabla == 'carrera' and self.venPri.check_estado_carrera.isChecked():
+            procedimiento = 'listar_carreras_inactivas'
+            estado = False
+            
+        elif tabla == 'institucion' and self.venPri.check_estado_insti.isChecked():
+            procedimiento = 'listar_instituciones_inactivas'
+            estado = False
+        
+        self.llenarTabla(procedimiento, tabla, tabla_diseno)
+        self.actualizarInfoPaginacion(tabla, labels, estado)
+        
+    def actualizarInfoPaginacion(self, nombreTabla, labels, estado, estado2 = None):
+        
+   
+        query = f"SELECT COUNT(*) FROM {nombreTabla} WHERE estado = {estado}"
+        total_registros = self.conec_base.getDatos(query)
+        
+  
+        estadomensaje = 'Activo' if estado == True else 'Inactivo'
+        
+        if total_registros[0][0] == 0 and estado2 != None:
+            QtWidgets.QMessageBox.warning(self, "Sin datos", f"No se encontraron datos de {nombreTabla} con el estado {estadomensaje}.")
+            self.venPri.check_estado_estudiantes.setChecked(False)
+            self.venPri.check_estado_tutores.setChecked(False)
+            self.venPri.check_estado_proyecto.setChecked(False)
+            self.venPri.check_estado_carrera.setChecked(False)
+            self.venPri.check_estado_insti.setChecked(False)
+            return
+            
+        
         total_registros = total_registros[0][0] if total_registros else 0
-        total_paginas = (total_registros + self.limit - 1) // self.limit 
-        pagina_actual = (self.offset // self.limit) + 1 
-        labels.setText(f"Página {pagina_actual} de {total_paginas}") 
+        
+        total_paginas = (total_registros + self.limit - 1) // self.limit
+        
+        pagina_actual = (self.offset // self.limit) + 1
+        
+        if pagina_actual > total_paginas:
+            pagina_actual = total_paginas
+        
+        if pagina_actual < 1:
+            pagina_actual = 1
+        
+        labels.setText(f"Página {pagina_actual} de {total_paginas}")
+
+    def llenarTablaReporte01(self, procedimiento,  tabla_diseno, condicion):
+
+        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, [condicion, self.offset, self.limit])
+        if(datoresultante):
+            cargar_tabla_reporte_estudiante(tabla_diseno, datoresultante[0])
+
+    def next_page_reporte(self, procedimiento, labels, tabla_diseno, procedimiento_count):
+        
+        condicion = 'Pendiente' if self.venPri.radioPendienteE.isChecked() else ('En Proceso' if self.venPri.radioProcesoE.isChecked() else 'Culminado')
+        
+        self.offset += self.limit
+
+        datoretorno = self.conec_base.getDatosProcess_condicion(procedimiento, [condicion, self.offset, self.limit])
+        if len(datoretorno[0]) > 0:
+            self.llenarTablaReporte01(procedimiento, tabla_diseno, condicion)
+        else:
+            self.offset -= self.limit 
+        self.actualizarInfoPaginacion_reporte(labels, procedimiento_count, condicion)
+
+    def prev_page_reporte(self, procedimiento, labels, tabla_diseno, procedimiento_count):
+        
+        condicion = 'Pendiente' if self.venPri.radioPendienteE.isChecked() else ('En Proceso' if self.venPri.radioProcesoE.isChecked() else 'Culminado')
+        
+        print(f'condicion: {condicion}')
+        
+        self.offset = max(0, self.offset - self.limit)
+        self.llenarTablaReporte01(procedimiento, tabla_diseno, condicion)
+        self.actualizarInfoPaginacion_reporte(labels, procedimiento_count, condicion)
+        
+    def actualizarInfoPaginacion_reporte(self,labels, procedimiento_count  , condicion ):
+
+        total_registros = self.conec_base.getDatosProcess_condicion(procedimiento_count, [condicion,])
+     
+        total_registros = total_registros[0][0] if total_registros else 0
+        
+        total_paginas = (total_registros[0] + self.limit - 1) // self.limit
+        
+        pagina_actual = (self.offset // self.limit) + 1
+        
+        if pagina_actual > total_paginas:
+            pagina_actual = total_paginas
+        
+        if pagina_actual < 1:
+            pagina_actual = 1
+        
+        labels.setText(f"Página {pagina_actual} de {total_paginas}")
+        
+    def filtro_reporte_estudiante(self, estado):
+        
+        self.venPri.line_busqueda_reporte_estudiantes.setText('')
+        self.offset = 0
+        
+        self.llenarTablaReporte01('listar_estudiantes_vinculacion_por_estado', self.venPri.tabla_reporte_estudiantes, estado)
+        self.actualizarInfoPaginacion_reporte(self.venPri.lbl_pagina_reporte01, 'contar_estudiantes_vinculacion_por_estado', estado)
 
     def filtro_estudiante(self):
         if not self.conec_base.verificarConexionInternet():
@@ -395,7 +657,7 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_estudiantes(self, self.venPri.tabla_estudiantes, datoresultante[0])
         else:
             self.offset = max(0, self.offset - self.limit)
-        self.actualizarInfoPaginacion("estudiantes", self.venPri.lbl_pagina_estudiantes)
+        self.actualizarInfoPaginacion("estudiantes", self.venPri.lbl_pagina_estudiantes, True)
         
     def filtro_tutores(self):
         if not self.conec_base.verificarConexionInternet():
@@ -420,10 +682,10 @@ class Principal(QtWidgets.QMainWindow):
         datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, parametros)
 
         if len(datoresultante[0]) > 0:
-            lenar_tabla_tutores(self, self.venPri.tabla_tutores, datoresultante[0])
+            llenar_tabla_tutores(self, self.venPri.tabla_tutores, datoresultante[0])
         else:
             self.offset = max(0, self.offset - self.limit)
-        self.actualizarInfoPaginacion("tutores", self.venPri.lbl_pagina_tutores)
+        self.actualizarInfoPaginacion("tutores", self.venPri.lbl_pagina_tutores, True)
         
     def filtro_proyectos(self):
         if not self.conec_base.verificarConexionInternet():
@@ -451,7 +713,7 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_proyectos(self, self.venPri.tabla_proyecto, datoresultante[0])
         else:
             self.offset = max(0, self.offset - self.limit)
-        self.actualizarInfoPaginacion("tutores", self.venPri.lbl_pagina_proyectos)
+        self.actualizarInfoPaginacion("tutores", self.venPri.lbl_pagina_proyectos, True)
         
     def filtro_carreras(self):
         if not self.conec_base.verificarConexionInternet():
@@ -479,7 +741,7 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_carreras(self, self.venPri.tabla_carrera, datoresultante[0])
         else:
             self.offset = max(0, self.offset - self.limit)
-        self.actualizarInfoPaginacion("carrera", self.venPri.lbl_pagina_carrera)
+        self.actualizarInfoPaginacion("carrera", self.venPri.lbl_pagina_carrera, True)
 
     def filtro_institucion(self):
         if not self.conec_base.verificarConexionInternet():
@@ -491,7 +753,7 @@ class Principal(QtWidgets.QMainWindow):
             procedimiento = "listar_institucion"
             parametros = (self.offset, self.limit)
         else:
-            total_registros = self.conec_base.getDatosProcess_condicion("contar_instituciones", (textobusqueda,))
+            total_registros = self.conec_base.getDatosProcess_condicion("contar_instituciones", (textobusqueda,)) # id, nombre, telefono, estado 
             total_registros = total_registros[0][0][0] if total_registros else 0
 
             total_paginas = (total_registros + self.limit - 1) // self.limit
@@ -507,7 +769,35 @@ class Principal(QtWidgets.QMainWindow):
             llenar_tabla_institucion(self, self.venPri.tabla_institucion, datoresultante[0])
         else:
             self.offset = max(0, self.offset - self.limit)
-        self.actualizarInfoPaginacion("institucion", self.venPri.lbl_pagina_instituto)
+        self.actualizarInfoPaginacion("institucion", self.venPri.lbl_pagina_instituto, True)
+        
+    def filtro_usuarios(self):
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        textobusqueda = self.venPri.line_busqueda_usuario.text()
+
+        if textobusqueda.strip() == "":
+            procedimiento = "listar_usuarios"
+            parametros = (self.offset, self.limit)
+        else:
+            total_registros = self.conec_base.getDatosProcess_condicion("contar_usuarios", (textobusqueda,))
+            total_registros = total_registros[0][0][0] if total_registros else 0
+
+            total_paginas = (total_registros + self.limit - 1) // self.limit
+            pagina_actual = min((self.offset // self.limit) + 1, total_paginas)
+            self.offset = max(0, (pagina_actual - 1) * self.limit)
+
+            procedimiento = "buscar_usuarios"
+            parametros = (textobusqueda, self.offset, self.limit)
+
+        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, parametros)
+
+        if len(datoresultante[0]) > 0:
+            llenar_tabla_usuario(self, self.venPri.tabla_usuario, datoresultante[0])
+        else:
+            self.offset = max(0, self.offset - self.limit)
+        self.actualizarInfoPaginacion("usuarios", self.venPri.lbl_pagina_user, True)
 
     def datos_inicializacion(self):
         
@@ -515,16 +805,27 @@ class Principal(QtWidgets.QMainWindow):
             QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
             return
         
+        consulta = "SELECT t.id AS idtutor, CONCAT(t.nombres, ' ', t.apellidos) AS nombre_completo FROM tutores t JOIN vinculacion v ON t.id = v.tutores_id WHERE t.estado = TRUE;"
+        respuesta_tutor = self.conec_base.getDatos(consulta)
    
-        respuesta_proyecto = self.conec_base.getDatos('SELECT id, nombre FROM proyecto')
+        respuesta_proyecto = self.conec_base.getDatos('SELECT id, nombre FROM proyecto where estado = true')
+        
         respuesta_periodoacademico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM vinculacion;')
-        respuesta_tutores = self.conec_base.getDatos('SELECT id, CONCAT(nombres, " ", apellidos) AS nombres FROM tutores')
+        
+        respuesta_tutores = self.conec_base.getDatos('SELECT id, CONCAT(nombres, " ", apellidos) AS nombres FROM tutores where estado = true')
         
         
         respuesta_filtro_periodo_seguimiento = self.conec_base.getDatos_condicion(
             "SELECT DISTINCT v.periodo_academico FROM vinculacion v WHERE v.tutores_id = %s ORDER BY v.periodo_academico;",
             (self.tutor_id,)
         )
+        
+        self.venPri.cbo_filtro_tutor_seguimiento.clear()
+        self.venPri.cbo_filtro_tutor_seguimiento.addItem("Seleccione tutor academico", None)
+
+        for id, nombre in respuesta_tutor:
+            self.venPri.cbo_filtro_tutor_seguimiento.addItem(nombre, id)
+            
 
         self.venPri.cbo_filtro_proyecto.clear()
         self.venPri.cbo_filtro_proyecto.addItem("Seleccione proyecto", None)
@@ -557,43 +858,47 @@ class Principal(QtWidgets.QMainWindow):
     def consultar_basedatos(self, tipo):
         if tipo == 'proyecto':
             proyecto_id = self.venPri.cbo_filtro_proyecto.currentData()
-            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, proyecto_id, 'proyecto')
-            self.venPri.cbo_filtro_periodo.blockSignals(True)
-            self.venPri.cbo_filtro_tutor.blockSignals(True)
-            self.venPri.line_filtro_estudiante.blockSignals(True)
-            self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
-            self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
-            self.venPri.line_filtro_estudiante.setText('')
-            self.venPri.cbo_filtro_periodo.blockSignals(False)
-            self.venPri.cbo_filtro_tutor.blockSignals(False)
-            self.venPri.line_filtro_estudiante.blockSignals(False)
+            if(proyecto_id):
+                self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, proyecto_id, 'proyecto')
+                self.venPri.cbo_filtro_periodo.blockSignals(True)
+                self.venPri.cbo_filtro_tutor.blockSignals(True)
+                self.venPri.line_filtro_estudiante.blockSignals(True)
+                self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
+                self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
+                self.venPri.line_filtro_estudiante.setText('')
+                self.venPri.cbo_filtro_periodo.blockSignals(False)
+                self.venPri.cbo_filtro_tutor.blockSignals(False)
+                self.venPri.line_filtro_estudiante.blockSignals(False)
         elif tipo == 'periodo':
             periodo = self.venPri.cbo_filtro_periodo.currentData()
-            # print('periodo ', periodo)
-            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, periodo, 'periodo')
-            self.venPri.cbo_filtro_proyecto.blockSignals(True)
-            self.venPri.cbo_filtro_tutor.blockSignals(True)
-            self.venPri.line_filtro_estudiante.blockSignals(True)
-            self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
-            self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
-            self.venPri.line_filtro_estudiante.setText('')
-            self.venPri.cbo_filtro_proyecto.blockSignals(False)
-            self.venPri.cbo_filtro_tutor.blockSignals(False)
-            self.venPri.line_filtro_estudiante.blockSignals(False)
+            print('periodo: ' , periodo)
+            if(periodo != None):
+                self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, periodo, 'periodo')
+                self.venPri.cbo_filtro_proyecto.blockSignals(True)
+                self.venPri.cbo_filtro_tutor.blockSignals(True)
+                self.venPri.line_filtro_estudiante.blockSignals(True)
+                self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
+                self.venPri.cbo_filtro_tutor.setCurrentIndex(0)
+                self.venPri.line_filtro_estudiante.setText('')
+                self.venPri.cbo_filtro_proyecto.blockSignals(False)
+                self.venPri.cbo_filtro_tutor.blockSignals(False)
+                self.venPri.line_filtro_estudiante.blockSignals(False)
         elif tipo == 'tutor':
             tutor_id = self.venPri.cbo_filtro_tutor.currentData()
-            self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, tutor_id, 'tutor')
-            self.venPri.cbo_filtro_proyecto.blockSignals(True)
-            self.venPri.cbo_filtro_periodo.blockSignals(True)
-            self.venPri.line_filtro_estudiante.blockSignals(True)
-            self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
-            self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
-            self.venPri.line_filtro_estudiante.setText('')
-            self.venPri.cbo_filtro_proyecto.blockSignals(False)
-            self.venPri.cbo_filtro_periodo.blockSignals(False)
-            self.venPri.line_filtro_estudiante.blockSignals(False)
+            if(tutor_id):
+                self.llenarTablaFiltro('ObtenerListaVinculacionesPorFiltro', self.venPri.tabla_vinculacion, tutor_id, 'tutor')
+                self.venPri.cbo_filtro_proyecto.blockSignals(True)
+                self.venPri.cbo_filtro_periodo.blockSignals(True)
+                self.venPri.line_filtro_estudiante.blockSignals(True)
+                self.venPri.cbo_filtro_proyecto.setCurrentIndex(0)
+                self.venPri.cbo_filtro_periodo.setCurrentIndex(0)
+                self.venPri.line_filtro_estudiante.setText('')
+                self.venPri.cbo_filtro_proyecto.blockSignals(False)
+                self.venPri.cbo_filtro_periodo.blockSignals(False)
+                self.venPri.line_filtro_estudiante.blockSignals(False)
         elif tipo == 'estudiante':
             text_param = self.venPri.line_filtro_estudiante.text().strip()
+
             self.llenarTablaFiltro('ObtenerListaVinculacionesPorEstudiante', self.venPri.tabla_vinculacion, text_param, 'estudiante')
             self.venPri.cbo_filtro_proyecto.blockSignals(True)
             self.venPri.cbo_filtro_periodo.blockSignals(True)
@@ -604,6 +909,27 @@ class Principal(QtWidgets.QMainWindow):
             self.venPri.cbo_filtro_proyecto.blockSignals(False)
             self.venPri.cbo_filtro_periodo.blockSignals(False)
             self.venPri.cbo_filtro_tutor.blockSignals(False)
+
+
+
+    def consultar_filtro_seguimiento_tutor(self):
+        
+        tutor_id = self.venPri.cbo_filtro_tutor_seguimiento.currentData()
+        print('tutor_id ', tutor_id)
+        self.tutor_id = tutor_id
+   
+        respuesta_filtro_periodo_seguimiento = self.conec_base.getDatos_condicion(
+            "SELECT DISTINCT v.periodo_academico FROM vinculacion v WHERE v.tutores_id = %s ORDER BY v.periodo_academico;",
+            (self.tutor_id,)
+        )
+        
+        self.venPri.cbo_filtro_periodo_seguimiento.clear()
+        self.venPri.cbo_filtro_periodo_seguimiento.addItem("Seleccione periodo academico", None)
+
+        for nombre_tuple in respuesta_filtro_periodo_seguimiento:
+            nombre = nombre_tuple[0]  
+            self.venPri.cbo_filtro_periodo_seguimiento.addItem(nombre, nombre)
+    
 
     def consultar_filtro_seguimiento_periodo(self):
         
@@ -624,6 +950,7 @@ class Principal(QtWidgets.QMainWindow):
 
         for id, nombre in resultados_proyectos:
             self.venPri.cbo_filtro_proyecto_seguimiento.addItem(nombre, id)
+            
 
     def llenar_estudiantes_seguimientos_tutor(self):
       
@@ -654,423 +981,170 @@ class Principal(QtWidgets.QMainWindow):
                 
                 llenar_tabla_seguimiento_tutor(self, self.venPri.tabla_seguimiento, resultados_vinculaciones_estudiantes)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    # def configuracion_ventana(self):
+    def busqueda_datos_estudiante(self):
         
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
         
-    #     limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+        textobusqueda = self.venPri.line_busqueda_reporte_estudiantes.text()
+        estado = 'Pendiente' if self.venPri.radioPendienteE.isChecked() else ('En Proceso' if self.venPri.radioProcesoE.isChecked() else 'Culminado')
+
+        if textobusqueda.strip() == "":
+            procedimiento = "listar_estudiantes_vinculacion_por_estado"
+            parametros = (estado, self.offset, self.limit)
+        else:
+            procedimiento = "filtro_estudiantes_vinculacion_por_estado"
+            parametros = (estado, self.offset, self.limit, textobusqueda)
+
+        datoresultante = self.conec_base.getDatosProcess_condicion(procedimiento, parametros)
         
-    #     lista_tutores = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite, ))
         
-    #     if(len(lista_tutores)> 0):
-    #         llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutores[0])
+
+        if len(datoresultante[0]) > 0:
+            cargar_tabla_reporte_estudiante(self.venPri.tabla_reporte_estudiantes, datoresultante[0])
+        else:
+            self.offset = max(0, self.offset - self.limit)
+            
+        total_registros = self.conec_base.getDatosProcess_condicion('filtro_estudiantes_vinculacion_por_estado_contar', [estado, textobusqueda ])
+     
+        total_registros = total_registros[0][0] if total_registros else 0
         
-    #     periodo_academico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM ( SELECT periodo_academico FROM vinculaciones ORDER BY fecha_registro DESC ) AS subconsulta;')
+        total_paginas = (total_registros[0] + self.limit - 1) // self.limit
         
-    #     if(len(periodo_academico)):
-    #         self.venPri.cbo_periodo_academico.clear()
-    #         for periodo in periodo_academico:
-    #             self.venPri.cbo_periodo_academico.addItem(periodo[0])
+        pagina_actual = (self.offset // self.limit) + 1
+        
+        if pagina_actual > total_paginas:
+            pagina_actual = total_paginas
+        
+        if pagina_actual < 1:
+            pagina_actual = 1
+        
+        
+        self.venPri.lbl_pagina_instituto.setText(f"Página {pagina_actual} de {total_paginas}")
+        
+        
+    def reporte_estudiantes(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        
+        procedimiento = "listar_estudiantes_vinculacion_completo"
+        datoresultante = self.conec_base.getDatosProcess(procedimiento)
+        
+        if(len( datoresultante[0]) > 0):
+            
+            FormRepoImforme(datos=datoresultante, modo='estudiantes').exec_()
+        else:
+            
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+
+ 
+ 
+
+    def configuracion_ventana(self):
+        
+        if not self.conec_base.verificarConexionInternet():
+            QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
+            return
+        
+
+        periodo_academico = self.conec_base.getDatos('SELECT DISTINCT periodo_academico FROM vinculacion ORDER BY periodo_academico DESC;')
+        
+        if(len(periodo_academico)):
+            self.venPri.cbo_periodo_academico.clear()
+            for periodo in periodo_academico:
+                self.venPri.cbo_periodo_academico.addItem(periodo[0])
                 
         
-    #     self.cargaDatosEventoReporte()
+        self.cargaDatosEventoReporte()
         
-    # def abrir_ventana_afiliacion(self):
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Vinculacion(parent = self).exec_()
-
-    # def abrir_ventana_perfil(self):
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Perfil(parent = self, modo ='Nuevo').exec_()
-
-    # def listar_vinculacion(self, datos=None):
+    def cambioPagina(self):
         
+        tipo_accion = self.venPri.cbo_tipo_entrega.currentText()
         
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
+        if(tipo_accion == 'Informe'):
+            self.venPri.stackedWidget_2.setCurrentIndex(0)
+        else:
+            self.venPri.stackedWidget_2.setCurrentIndex(1)
         
-    #     limite = int(self.venPri.cbox_rango.currentText())
+        self.cargaDatosEventoReporte()
+
+    def cargaDatosEventoReporte(self):
         
-    #     if datos is None:
-    #         datos = self.conec_base.getDatosProcess_condicion("ListarVinculaciones",(limite, ))
-
-    #     if isinstance(datos, list) and datos:
-    #         datos_a_insertar = datos[0]
-    #         llenar_tabla_vinculacion(self, self.venPri.tabla_principal, datos_a_insertar)
-    #     else:
-    #         pass
-    #         #print("Los datos obtenidos no son válidos o están vacíos. No se pudo llenar la tabla.")
-
-    # def busqueda_vinculacion(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-    #     textobusqueda =  self.venPri.line_busqueda.text()
-    #     limite = int(self.venPri.cbox_rango.currentText())
-        
-    #     lista_vinculaciones = self.conec_base.getDatosProcess_condicion("BuscarVinculaciones", (textobusqueda, limite))
-    #     self.listar_vinculacion(lista_vinculaciones)
-
-    # def mostrar_vinculacion_rango(self, text):
-    #     self.listar_vinculacion()
-
-    # def listar_seguimiento_tutor(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-    #     limite = int(self.venPri.cbox_rango_tutor.currentText())
-
-    #     lista_seguimiento = self.conec_base.getDatosProcess_condicion('ObtenerSeguimientosConEstudiantes', (self.tutor_id, limite))
-    #     llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, lista_seguimiento[0])
-
-    # def listar_vinculacion_tutor(self, datos=None):
-        
-    #     if datos is None:
-    #         self.listar_seguimiento_tutor()
-
-    #     if isinstance(datos, list) and datos:
-    #         datos_a_insertar = datos[0]
-    #         llenar_tabla_seguimiento(self, self.venPri.tabla_principal_tutor, datos_a_insertar)
-    #     else:
-    #         pass
-
-
-    # def busqueda_vinculacion_tutor(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-
-    #     textobusqueda =  self.venPri.line_busqueda_tutor.text()
-    #     limite = int(self.venPri.cbox_rango_tutor.currentText())
-
-    #     lista_vinculaciones_tutor = self.conec_base.getDatosProcess_condicion("filtrarSeguimientosConEstudiantes", (self.tutor_id, limite, textobusqueda,))
-    #     self.listar_vinculacion_tutor(lista_vinculaciones_tutor)
-
-
-    # def mostrar_vinculacion_rango_tutor(self, text):
-    #     self.listar_vinculacion_tutor()
-        
-    # def listar_usuarios(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-
-    #     resultado  = self.conec_base.getDatosProcess('ListarUsuarios')
-    #     if(len(resultado) > 0):
-    #         resultado = resultado[0]
-    #         llenar_tabla_usuario(self, self.venPri.tabla_usuario, resultado)
-
-
-    # def busqueda_usuarios_filtro(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-
-    #     texto_busqueda = self.venPri.line_busqueda_usuario.text().strip()
-
-    #     resultado = self.conec_base.getDatosProcess_condicion('filtrarUsuarios', (texto_busqueda,))
-    #     if(len(resultado) > 0):
-    #         resultado = resultado[0]
-    #         llenar_tabla_usuario(self, self.venPri.tabla_usuario, resultado)
-    #     else:
-    #         self.listar_usuarios()
-
-
-    # def mostrar_formulario_instituciones(self):
-        
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Instituciones(parent = self, modo='Nuevo').exec_()
-
-
-    # def mostrar_formulario_proyectos(self):
-    #     self.raizOpacidad.resize(self.width(), self.height())
-    #     self.raizOpacidad.show()
-    #     Proyectos(parent = self, modo='Nuevo').exec_()
-
-
-    # def llenado_instituciones(self, estado):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-    #     respuesta = self.conec_base.getDatosProcess_condicion('ListarInstitucionesPorEstado' , (estado, ))
-    #     if(respuesta):
-    #         respuesta = respuesta[0]
-    #         llenar_tabla_institucion(self, self.venPri.tabla_intituciones, respuesta)
-
-
-    # def mostrar_instituciones_estado(self):
-
-    #     estado = 'Inactivo' if self.venPri.check_estado_institucion.isChecked() else 'Activo'
-    #     self.llenado_instituciones(estado)
-
-    # def llenado_proyectos(self, estado):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-
-    #     respuesta = self.conec_base.getDatosProcess_condicion('ListarProyectosPorEstado' , (estado, ))
-    #     if(respuesta):
-    #         respuesta = respuesta[0]
-    #         llenar_tabla_proyectos(self, self.venPri.tabla_proyectos, respuesta)
-
-    # def mostrar_proyectos_estado(self):
-
-    #     estado = 'Inactivo' if self.venPri.check_estado_proyectos.isChecked() else 'Activo'
-    #     self.llenado_proyectos(estado)
-
-    # def llenado_reporte(self, estado, tabla, procedimiento, limite, condicion=0):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-    #     if(condicion != 0):
-    #         respuesta = self.conec_base.getDatosProcess_condicion( procedimiento , (estado,limite,condicion, ))
-    #     else:                                                                 
-    #         respuesta = self.conec_base.getDatosProcess_condicion( procedimiento , (estado,limite ))
-            
-  
-    #     if(respuesta):
-    #         respuesta = respuesta[0]
-    #         self.lista_estudiante_filtro = respuesta
-            
-    #         cargar_tabla(tabla, respuesta)
-            
-    # def filtro_reporte(self, estado , tipo, consulta):
-        
-    #     if(tipo == 'Estudiante'):
-    #         limite = int(self.venPri.cbox_rango_estudiantes.currentText())
-    #         self.llenado_reporte(estado , self.venPri.tabla_reporte_estudiantes, consulta, limite)
-
-    # def evento_obtener_reporte_general(self):
-    #     if self.venPri.check_todos_estudiantes.isChecked():
-    #         self.venPri.radioCulminadoE.setEnabled(True)
-    #         self.venPri.radioProcesoE.setEnabled(True)
-    #         self.venPri.radioPendienteE.setEnabled(True)
-    #         self.venPri.line_busqueda_reporte_estudiantes.setEnabled(False)
-    #         estado = ''
-    #         self.venPri.line_busqueda_reporte_estudiantes.setText('')
-            
-    #         if self.venPri.radioPendienteE.isChecked():
-    #             estado = 'Pendiente'
-    #         elif self.venPri.radioProcesoE.isChecked():
-    #             estado = 'En Progreso'
-    #         else:
-    #             estado = 'Culminado'
+        periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
                 
-    #         self.filtro_reporte(estado, 'Estudiante', 'obtenerInformacionVinculacionesConEstado')
-    #     else:
-    #         self.venPri.line_busqueda_reporte_estudiantes.setEnabled(True)
-    #         self.venPri.radioCulminadoE.setEnabled(False)
-    #         self.venPri.radioProcesoE.setEnabled(False)
-    #         self.venPri.radioPendienteE.setEnabled(False)
-    
-    # def busqueda_datos_estudiante(self):
+        datos_informes = self.conec_base.getDatosProcess_condicion('listar_informes_por_periodo_academico', (periodo_actual_seleccionado, ))
         
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-    #     self.venPri.check_todos_estudiantes.setChecked(False)
-    #     self.evento_obtener_reporte_general()
-    #     parametro_busqueda = self.venPri.line_busqueda_reporte_estudiantes.text().strip()
-    #     respuesta = self.conec_base.getDatosProcess_condicion( 'obtenerInformacionVinculacionesConEstadoYBusqueda' , (parametro_busqueda, ))
-        
-  
-        
-    #     if(respuesta):
-        
-    #         respuesta = respuesta[0]
+        if(len(datos_informes)> 0):
             
-    #         self.lista_estudiante_filtro = respuesta
+            datos_informes = datos_informes[0]
             
-    #         cargar_tabla(self.venPri.tabla_reporte_estudiantes, respuesta)
+            self.lista_informes_filtro = datos_informes
             
-    # def llenar_combobox(self, combobox, lista, longitud_maxima):
-    #     for elemento in lista:
-    #         id_elemento, nombre_elemento = elemento
-    #         texto_truncado = nombre_elemento[:longitud_maxima]
-    #         combobox.addItem(texto_truncado, userData=id_elemento)
-    #         combobox.setItemData(combobox.count() - 1, nombre_elemento, Qt.ToolTipRole)
+            cargar_tabla_reporte_informes(self.venPri.tabla_reporte_informe_tutor, datos_informes, periodo_actual_seleccionado, self)
             
-    # def evento_obtener_tutores_limite(self):
-        
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
-        
-        
-    #     limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
-        
-    #     lista_tutores = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite, ))
-        
-    #     if(len(lista_tutores)> 0):
             
-    #         llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutores[0])
+        
+        datos_fichas = self.conec_base.getDatosProcess_condicion('consulta_fichas', (periodo_actual_seleccionado, ))
+        
+        if(len(datos_fichas)> 0):
             
+            datos_fichas = datos_fichas[0]
+            
+            self.lista_ficha_filtro = datos_fichas
+            
+            cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_ficha_tutor, datos_fichas, periodo_actual_seleccionado, self, 'fichas')
+            
+            
+        datos_memorandum = self.conec_base.getDatosProcess_condicion('consulta_memorandum', (periodo_actual_seleccionado, ))
+        
+        if(len(datos_memorandum)> 0):
+            
+            datos_memorandum = datos_memorandum[0]
 
-    # def busqueda_tutor_reporte(self):
+            self.lista_memorandun_filtro = datos_memorandum
+            
+            cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_memorandum_tutor, datos_memorandum, periodo_actual_seleccionado, self, 'memorandum')
         
-    #     if not self.conec_base.verificarConexionInternet():
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
-    #         return
+   
+    def eventoSeleccionPeriodo(self):
+        
+        self.cargaDatosEventoReporte()
+        
 
-    #     textobusqueda = self.venPri.line_busqueda_reporte_tutor.text()
-    #     limite = int(self.venPri.cbox_rango_reporte_tutor.currentText())
+    def generarReporte_informe(self):
+        
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+        if len(self.lista_informes_filtro) > 0:
+   
+            lista_sin_id = [fila[1:] for fila in self.lista_informes_filtro]
 
-    #     if textobusqueda:
-    #         lista_tutor = self.conec_base.getDatosProcess_condicion("buscar_tutor_criterio", (textobusqueda,))
-    #     else:
-    #         lista_tutor = self.conec_base.getDatosProcess_condicion("listar_usuarios_tutor", (limite,))
-            
-    #     if not lista_tutor:
-    #         QtWidgets.QMessageBox.information(self, "Información", "No se encontraron resultados.")
-    #         return
-        
-    #     llenar_tabla_tutores(self, self.venPri.tabla_reporte_tutores, lista_tutor[0])
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
+            FormRepoImforme(datos=lista_sin_id, modo='informe', periodo=periodo_actual_seleccionado).exec_()
+        else:
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
 
-        
-    # def cambioPagina(self):
-        
-    #     tipo_accion = self.venPri.cbo_tipo_entrega.currentText()
-        
-    #     if(tipo_accion == 'Informe'):
-    #         self.venPri.stackedWidget_2.setCurrentIndex(0)
-    #     else:
-    #         self.venPri.stackedWidget_2.setCurrentIndex(1)
-        
-    #     self.cargaDatosEventoReporte()
+                  
+    def generarReporte_ficha(self):
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
 
+        if len(self.lista_ficha_filtro) > 0:
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
             
-    # def cargaDatosEventoReporte(self):
-        
-    #     periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
-                
-    #     datos_informes = self.conec_base.getDatosProcess_condicion('listar_informes_por_periodo_academico', (periodo_actual_seleccionado, ))
-        
-    #     if(len(datos_informes)> 0):
-            
-    #         datos_informes = datos_informes[0]
-            
-    #         self.lista_informes_filtro = datos_informes
-            
-    #         cargar_tabla_reporte_informes(self.venPri.tabla_reporte_informe_tutor, datos_informes)
-            
-            
-        
-    #     datos_fichas = self.conec_base.getDatosProcess_condicion('consulta_fichas', (periodo_actual_seleccionado, ))
-        
-    #     if(len(datos_fichas)> 0):
-            
-    #         datos_fichas = datos_fichas[0]
-            
-    #         self.lista_ficha_filtro = datos_fichas
-            
-    #         cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_ficha_tutor, datos_fichas)
-            
-            
-    #     datos_memorandum = self.conec_base.getDatosProcess_condicion('consulta_memorandum', (periodo_actual_seleccionado, ))
-        
-    #     if(len(datos_memorandum)> 0):
-            
-    #         datos_memorandum = datos_memorandum[0]
+            datos_sin_id = [[elemento for elemento in sublista[1:]] for sublista in self.lista_ficha_filtro]
 
-    #         self.lista_memorandun_filtro = datos_memorandum
+            FormRepoImforme(datos=datos_sin_id, modo='ficha', periodo=periodo_actual_seleccionado).exec_()
+        else:
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+
+    def generarReporte_memorandum(self):
+        from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
+
+        if len(self.lista_memorandun_filtro) > 0:
+            periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
             
-    #         cargar_tabla_reporte_ficha_memorandum(self.venPri.tabla_reporte_memorandum_tutor, datos_memorandum)
-            
-    # def eventoSeleccionPeriodo(self):
-        
-    #     self.cargaDatosEventoReporte()
-        
-    # def reporte_estudiantes(self):
-        
-    #     from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
-        
-        
-    #     if(len(self.lista_estudiante_filtro)> 0):
-            
-    #         print(self.lista_estudiante_filtro)
-        
-    #         FormRepoImforme(self.lista_estudiante_filtro, 'estudiantes', '').exec_()
-            
-    #     else:
-            
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
-            
-    
-    # def generarReporte_informe(self):
-        
-    #     from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
-        
-        
-    #     if(len(self.lista_informes_filtro)> 0):
-            
-    #         periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
-    #         FormRepoImforme(self.lista_informes_filtro, 'informe', periodo_actual_seleccionado).exec_()
-            
-    #     else:
-            
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
-            
-            
-    # def generarReporte_ficha(self):
-        
-    #     from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
-        
-        
-    #     if(len(self.lista_ficha_filtro)> 0):
-            
-    #         periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
-            
-    #         FormRepoImforme(self.lista_ficha_filtro, 'ficha', periodo_actual_seleccionado).exec_()
-            
-    #     else:
-            
-    #         QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
-            
-    # def generarReporte_memorandum(self):
-        
-        # from controllers.Modulo_reporte.generarRepoInforme import FormRepoImforme
-        
-        
-        # if(len(self.lista_memorandun_filtro)> 0):
-            
-        #     periodo_actual_seleccionado = self.venPri.cbo_periodo_academico.currentText()
-            
-        #     FormRepoImforme(self.lista_memorandun_filtro, 'memorandum', periodo_actual_seleccionado).exec_()
-            
-        # else:
-            
-        #     QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")
+            datos_sin_id = [[elemento for elemento in sublista[1:]] for sublista in self.lista_memorandun_filtro]
+
+            FormRepoImforme(datos=datos_sin_id, modo='memorandum', periodo=periodo_actual_seleccionado).exec_()
+        else:
+            QtWidgets.QMessageBox.critical(self, "Error", "No ha realizado ningún filtro.")

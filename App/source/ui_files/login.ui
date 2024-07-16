@@ -208,10 +208,65 @@ border-radius: 8px;
 border:1px solid white;
 background-color: #ffffff;
 border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px}</string>
+border-bottom-left-radius: 10px}
+
+
+
+QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+}
+
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
+
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}
+
+
+/* Botón Cancelar */
+QPushButton#btn_cancelarr {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: #3f5758;
+    padding: 8px 16px;
+    background: transparent;
+    border: 2px solid #3f5758; 
+    border-radius: 8px; 
+}
+
+QPushButton#btn_cancelarr:hover {
+    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */
+    color: #2e4546; 
+    border: 2px solid #2e4546;
+}
+
+QPushButton#btn_cancelarr:pressed {
+    background: rgba(63, 87, 88, 0.2); /* Fondo más oscuro en estado presionado */
+    color: #1c2d2e; 
+    border: 2px solid #1c2d2e;
+}</string>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="pag_inicio">
             <property name="styleSheet">
@@ -225,7 +280,7 @@ border-bottom-left-radius: 10px}
              <property name="geometry">
               <rect>
                <x>30</x>
-               <y>190</y>
+               <y>240</y>
                <width>296</width>
                <height>40</height>
               </rect>
@@ -250,7 +305,7 @@ border-bottom-left-radius: 10px}
              <property name="geometry">
               <rect>
                <x>30</x>
-               <y>160</y>
+               <y>210</y>
                <width>121</width>
                <height>25</height>
               </rect>
@@ -266,7 +321,7 @@ border-bottom-left-radius: 10px}
              <property name="geometry">
               <rect>
                <x>28</x>
-               <y>280</y>
+               <y>330</y>
                <width>296</width>
                <height>40</height>
               </rect>
@@ -435,7 +490,7 @@ border-radius:8px}</string>
              <property name="geometry">
               <rect>
                <x>30</x>
-               <y>250</y>
+               <y>300</y>
                <width>111</width>
                <height>25</height>
               </rect>
@@ -447,11 +502,11 @@ border-radius:8px}</string>
               <string>Contraseña*</string>
              </property>
             </widget>
-            <widget class="QToolButton" name="btn_aceptar">
+            <widget class="QPushButton" name="btn_aceptar">
              <property name="geometry">
               <rect>
                <x>30</x>
-               <y>340</y>
+               <y>390</y>
                <width>296</width>
                <height>40</height>
               </rect>
@@ -463,21 +518,31 @@ border-radius:8px}</string>
               <enum>Qt::NoFocus</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">#btn_aceptar{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:white;
-padding:8px;
-background: #3A4F50;
-border-radius: 4px;}
+              <string notr="true">QPushButton {
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 15px;
+    letter-spacing: 0.02em;
+    color: white;
+    padding: 8px 16px;
+    background: #3f5758;
+    border: none; 
+    border-radius: 8px; 
+}
 
-#btn_aceptar:hover{background: #314344;
-border-radius: 4px; }
+QPushButton:hover {
+    background: #4a6b6c; 
+    border: none;
+    border-radius: 8px;
+}
 
-</string>
+
+QPushButton:pressed {
+    background: #2e4546;
+    border: none;
+    border-radius: 8px;
+}</string>
              </property>
              <property name="text">
               <string> Ingresar</string>
@@ -488,15 +553,12 @@ border-radius: 4px; }
                <height>20</height>
               </size>
              </property>
-             <property name="autoRaise">
-              <bool>true</bool>
-             </property>
             </widget>
             <widget class="QToolButton" name="btn_recuperar">
              <property name="geometry">
               <rect>
                <x>159</x>
-               <y>390</y>
+               <y>440</y>
                <width>171</width>
                <height>21</height>
               </rect>
@@ -520,22 +582,23 @@ font-size:14px;
               <bool>true</bool>
              </property>
             </widget>
-            <widget class="QLabel" name="label_titulo">
+            <widget class="QLabel" name="label">
              <property name="geometry">
               <rect>
-               <x>110</x>
-               <y>60</y>
-               <width>161</width>
-               <height>25</height>
+               <x>90</x>
+               <y>10</y>
+               <width>181</width>
+               <height>181</height>
               </rect>
              </property>
-             <property name="styleSheet">
-              <string notr="true">#label_titulo{font-size:22px;
-font-family:Roboto
-}</string>
-             </property>
              <property name="text">
-              <string>Bienvenido</string>
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../image/source.qrc">:/menu/logito2.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
              </property>
             </widget>
            </widget>
@@ -548,13 +611,13 @@ border-bottom-right-radius: 10px;
 border-bottom-left-radius: 10px;}
 </string>
             </property>
-            <widget class="QToolButton" name="btn_cancelarr">
+            <widget class="QPushButton" name="btn_cancelarr">
              <property name="geometry">
               <rect>
                <x>32</x>
-               <y>400</y>
+               <y>410</y>
                <width>296</width>
-               <height>47</height>
+               <height>40</height>
               </rect>
              </property>
              <property name="cursor">
@@ -564,41 +627,29 @@ border-bottom-left-radius: 10px;}
               <enum>Qt::NoFocus</enum>
              </property>
              <property name="styleSheet">
-              <string notr="true">#btn_cancelarr{
-font-family: Roboto;
-font-style: normal;
-font-weight: normal;
-font-size: 15px;
-letter-spacing: 0.02em;
-color:#374151;
-padding:8px;
-background: #F9FAFB;
-border-radius: 8px;
-border: 1px solid #E5E7EB;
-}
-
-#btn_cancelarr:hover{background: #F3F4F6;
-border: 1px solid #E5E7EB }
-
-</string>
+              <string notr="true"/>
              </property>
              <property name="text">
-              <string>Cancelar</string>
+              <string> Cancelar</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../image/source.qrc">
+               <normaloff>:/menu/no.png</normaloff>:/menu/no.png</iconset>
              </property>
              <property name="iconSize">
               <size>
-               <width>20</width>
-               <height>20</height>
+               <width>16</width>
+               <height>16</height>
               </size>
              </property>
             </widget>
-            <widget class="QToolButton" name="btn_enviar">
+            <widget class="QPushButton" name="btn_enviar">
              <property name="geometry">
               <rect>
                <x>33</x>
-               <y>340</y>
+               <y>360</y>
                <width>296</width>
-               <height>47</height>
+               <height>40</height>
               </rect>
              </property>
              <property name="cursor">
@@ -625,7 +676,11 @@ border-radius: 8px; }
 </string>
              </property>
              <property name="text">
-              <string> Enviar</string>
+              <string>  Enviar</string>
+             </property>
+             <property name="icon">
+              <iconset resource="../image/source.qrc">
+               <normaloff>:/menu/correo.png</normaloff>:/menu/correo.png</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -637,8 +692,8 @@ border-radius: 8px; }
             <widget class="QLabel" name="label_contrasea_2">
              <property name="geometry">
               <rect>
-               <x>34</x>
-               <y>170</y>
+               <x>31</x>
+               <y>223</y>
                <width>171</width>
                <height>25</height>
               </rect>
@@ -653,9 +708,9 @@ border-radius: 8px; }
             <widget class="QLabel" name="line_mensaje">
              <property name="geometry">
               <rect>
-               <x>30</x>
-               <y>260</y>
-               <width>241</width>
+               <x>32</x>
+               <y>300</y>
+               <width>301</width>
                <height>41</height>
               </rect>
              </property>
@@ -674,10 +729,10 @@ font-size:14px;</string>
             <widget class="QLineEdit" name="line_email2">
              <property name="geometry">
               <rect>
-               <x>32</x>
-               <y>200</y>
+               <x>31</x>
+               <y>256</y>
                <width>296</width>
-               <height>50</height>
+               <height>40</height>
               </rect>
              </property>
              <property name="styleSheet">
@@ -717,19 +772,38 @@ border-radius: 8px;
             <widget class="QLabel" name="label_recuperar">
              <property name="geometry">
               <rect>
-               <x>50</x>
-               <y>70</y>
-               <width>291</width>
+               <x>72</x>
+               <y>2</y>
+               <width>241</width>
                <height>25</height>
               </rect>
              </property>
              <property name="styleSheet">
-              <string notr="true">#label_recuperar{font-size:22px;
+              <string notr="true">#label_recuperar{font-size:20px;
 font-family:Roboto
 }</string>
              </property>
              <property name="text">
               <string>Recuperar Contraseña</string>
+             </property>
+            </widget>
+            <widget class="QLabel" name="label_2">
+             <property name="geometry">
+              <rect>
+               <x>103</x>
+               <y>51</y>
+               <width>151</width>
+               <height>141</height>
+              </rect>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="pixmap">
+              <pixmap resource="../image/source.qrc">:/menu/candado.png</pixmap>
+             </property>
+             <property name="scaledContents">
+              <bool>true</bool>
              </property>
             </widget>
            </widget>

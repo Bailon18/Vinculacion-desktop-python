@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'formulario_institucionesxWMFvO.ui'
+## Form generated from reading UI file 'formulario_institucionesZvXVCM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,9 +18,9 @@ class Ui_FormularioInstitucion(object):
     def setupUi(self, FormularioInstitucion):
         if not FormularioInstitucion.objectName():
             FormularioInstitucion.setObjectName(u"FormularioInstitucion")
-        FormularioInstitucion.resize(476, 520)
-        FormularioInstitucion.setMinimumSize(QSize(476, 520))
-        FormularioInstitucion.setMaximumSize(QSize(476, 520))
+        FormularioInstitucion.resize(476, 580)
+        FormularioInstitucion.setMinimumSize(QSize(476, 580))
+        FormularioInstitucion.setMaximumSize(QSize(476, 580))
         icon = QIcon()
         icon.addFile(u":/prefijoNuevo/logo.png", QSize(), QIcon.Normal, QIcon.Off)
         FormularioInstitucion.setWindowIcon(icon)
@@ -242,7 +242,7 @@ class Ui_FormularioInstitucion(object):
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.frame_4 = QFrame(self.frame_3)
         self.frame_4.setObjectName(u"frame_4")
-        self.frame_4.setGeometry(QRect(10, 10, 461, 391))
+        self.frame_4.setGeometry(QRect(10, 10, 461, 461))
         self.frame_4.setMinimumSize(QSize(0, 0))
         self.frame_4.setStyleSheet(u"/* QLabel para Mostrar Error */\n"
 "QLabel#errorNombre, #errorTelefono, #errorDireccion{\n"
@@ -252,6 +252,8 @@ class Ui_FormularioInstitucion(object):
 "    font-size: 14px;\n"
 "    color: #D32F2F; \n"
 "}\n"
+"\n"
+"\n"
 "")
         self.frame_4.setFrameShape(QFrame.NoFrame)
         self.frame_4.setFrameShadow(QFrame.Raised)
@@ -326,9 +328,97 @@ class Ui_FormularioInstitucion(object):
         self.errorTelefono = QLabel(self.frame_4)
         self.errorTelefono.setObjectName(u"errorTelefono")
         self.errorTelefono.setGeometry(QRect(10, 360, 221, 16))
+        self.lbl9_6 = QLabel(self.frame_4)
+        self.lbl9_6.setObjectName(u"lbl9_6")
+        self.lbl9_6.setGeometry(QRect(240, 396, 201, 21))
+        self.lbl9_6.setStyleSheet(u"")
+        self.lbl9_6.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
+        self.btn_descargar_archivo = QPushButton(self.frame_4)
+        self.btn_descargar_archivo.setObjectName(u"btn_descargar_archivo")
+        self.btn_descargar_archivo.setGeometry(QRect(420, 409, 31, 31))
+        self.btn_descargar_archivo.setStyleSheet(u"")
+        icon1 = QIcon()
+        icon1.addFile(u":/menu/descargar.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_descargar_archivo.setIcon(icon1)
+        self.btn_descargar_archivo.setIconSize(QSize(20, 20))
+        self.btn_descargar_archivo.setCheckable(False)
+        self.btn_descargar_archivo.setAutoRepeat(False)
+        self.btn_descargar_archivo.setAutoDefault(True)
+        self.btn_descargar_archivo.setFlat(False)
+        self.btn_subir_cv = QPushButton(self.frame_4)
+        self.btn_subir_cv.setObjectName(u"btn_subir_cv")
+        self.btn_subir_cv.setGeometry(QRect(10, 396, 221, 40))
+        self.btn_subir_cv.setMinimumSize(QSize(74, 40))
+        self.btn_subir_cv.setMaximumSize(QSize(242, 40))
+        self.btn_subir_cv.setCursor(QCursor(Qt.PointingHandCursor))
+        self.btn_subir_cv.setStyleSheet(u"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 8px 16px;\n"
+"    background: #e06666;\n"
+"    border: none; \n"
+"    border-radius: 8px; \n"
+"\n"
+"}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background: #b95454; \n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"\n"
+"/* Bot\u00f3n Cancelar */\n"
+"QPushButton#cancelButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: #3f5758;\n"
+"    padding: 8px 16px;\n"
+"    background: transparent;\n"
+"    border: 2px solid #3f5758; \n"
+"    border-radius: 8px; \n"
+"\n"
+"}\n"
+"\n"
+"QPushButton#cancelButton:hover {\n"
+"    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en h"
+                        "over */\n"
+"    color: #2e4546; \n"
+"    border: 2px solid #2e4546;\n"
+"}\n"
+"\n"
+"QPushButton#cancelButton:pressed {\n"
+"    background: rgba(63, 87, 88, 0.2); /* Fondo m\u00e1s oscuro en estado presionado */\n"
+"    color: #1c2d2e; \n"
+"    border: 2px solid #1c2d2e;\n"
+"}\n"
+"")
+        icon2 = QIcon()
+        icon2.addFile(u":/menu/exportar.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_subir_cv.setIcon(icon2)
+        self.btn_subir_cv.setIconSize(QSize(15, 21))
+        self.lbl_nombre_archivo_seleccionado = QLabel(self.frame_4)
+        self.lbl_nombre_archivo_seleccionado.setObjectName(u"lbl_nombre_archivo_seleccionado")
+        self.lbl_nombre_archivo_seleccionado.setGeometry(QRect(240, 420, 171, 16))
+        self.lbl_nombre_archivo_seleccionado.setStyleSheet(u"color:rgb(48, 165, 255);\n"
+"font: italic 10pt \"Roboto\";")
         self.frame_5 = QFrame(self.frame_3)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setGeometry(QRect(0, 409, 481, 61))
+        self.frame_5.setGeometry(QRect(0, 470, 481, 61))
         self.frame_5.setStyleSheet(u"#frame_5{background-color: #f1f1f1; \n"
 "border-bottom-right-radius: 10px;\n"
 "border-bottom-left-radius: 10px;}\n"
@@ -399,9 +489,9 @@ class Ui_FormularioInstitucion(object):
         self.btn_guardar_institiucion.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_guardar_institiucion.setFocusPolicy(Qt.NoFocus)
         self.btn_guardar_institiucion.setStyleSheet(u"")
-        icon1 = QIcon()
-        icon1.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_guardar_institiucion.setIcon(icon1)
+        icon3 = QIcon()
+        icon3.addFile(u":/menu/botonadd.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_guardar_institiucion.setIcon(icon3)
         self.btn_guardar_institiucion.setIconSize(QSize(15, 21))
         self.cancelButton = QPushButton(self.frame_5)
         self.cancelButton.setObjectName(u"cancelButton")
@@ -411,9 +501,9 @@ class Ui_FormularioInstitucion(object):
         self.cancelButton.setCursor(QCursor(Qt.PointingHandCursor))
         self.cancelButton.setFocusPolicy(Qt.NoFocus)
         self.cancelButton.setStyleSheet(u"")
-        icon2 = QIcon()
-        icon2.addFile(u":/menu/no.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.cancelButton.setIcon(icon2)
+        icon4 = QIcon()
+        icon4.addFile(u":/menu/no.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.cancelButton.setIcon(icon4)
         self.cancelButton.setIconSize(QSize(15, 21))
 
         self.gridLayout_2.addWidget(self.frame_3, 1, 0, 1, 1)
@@ -445,9 +535,9 @@ class Ui_FormularioInstitucion(object):
 "border-radius:11px; }\n"
 "\n"
 "")
-        icon3 = QIcon()
-        icon3.addFile(u":/menu/x.png", QSize(), QIcon.Normal, QIcon.Off)
-        self.btn_close.setIcon(icon3)
+        icon5 = QIcon()
+        icon5.addFile(u":/menu/x.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_close.setIcon(icon5)
         self.btn_close.setIconSize(QSize(13, 13))
         self.btn_close.setAutoRaise(True)
         self.lbl_titulo_ventana = QLabel(self.frame_2)
@@ -482,6 +572,7 @@ class Ui_FormularioInstitucion(object):
         self.retranslateUi(FormularioInstitucion)
 
         self.cbox_estado_intitucion.setCurrentIndex(1)
+        self.btn_descargar_archivo.setDefault(False)
 
 
         QMetaObject.connectSlotsByName(FormularioInstitucion)
@@ -507,6 +598,13 @@ class Ui_FormularioInstitucion(object):
         self.line_telefono.setPlaceholderText(QCoreApplication.translate("FormularioInstitucion", u"Ingrese telefono", None))
         self.errorDireccion.setText("")
         self.errorTelefono.setText("")
+        self.lbl9_6.setText(QCoreApplication.translate("FormularioInstitucion", u"Archivo seleccionado", None))
+#if QT_CONFIG(tooltip)
+        self.btn_descargar_archivo.setToolTip(QCoreApplication.translate("FormularioInstitucion", u"Descargar archivo", None))
+#endif // QT_CONFIG(tooltip)
+        self.btn_descargar_archivo.setText("")
+        self.btn_subir_cv.setText(QCoreApplication.translate("FormularioInstitucion", u"Subir archivo convenio", None))
+        self.lbl_nombre_archivo_seleccionado.setText(QCoreApplication.translate("FormularioInstitucion", u"ningun archivo seleccionado", None))
         self.btn_guardar_institiucion.setText(QCoreApplication.translate("FormularioInstitucion", u"Guardar institucion", None))
         self.cancelButton.setText(QCoreApplication.translate("FormularioInstitucion", u"Cancelar", None))
 #if QT_CONFIG(tooltip)

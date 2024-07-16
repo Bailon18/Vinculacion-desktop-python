@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'entregaoFAuOX.ui'
+## Form generated from reading UI file 'entregaWYaOxs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -172,23 +172,20 @@ class Ui_EntregaUi(object):
         self.frame_3.setStyleSheet(u"#frame_3{background: #3A4F50 ;border-top-left-radius: 10px;\n"
 "border-top-right-radius: 10px;}\n"
 "\n"
-"QLabel{\n"
-"\n"
-"font-family: Roboto;\n"
+"QLabel{font-family: Roboto;\n"
 "font-style: normal;\n"
-"font-weight: 500;\n"
-"font-size: 17px;\n"
-"line-height: 40px;\n"
+"font-weight: normal;\n"
+"font-size: 16px;\n"
+"line-height: 23px;\n"
 "letter-spacing: 0.02em;\n"
-"color:#ffffff;\n"
-"\n"
-"}")
+"color: #FFFFFF;}")
         self.frame_3.setFrameShape(QFrame.StyledPanel)
         self.frame_3.setFrameShadow(QFrame.Raised)
         self.titulo_accion = QLabel(self.frame_3)
         self.titulo_accion.setObjectName(u"titulo_accion")
-        self.titulo_accion.setGeometry(QRect(20, 5, 241, 22))
-        self.titulo_accion.setStyleSheet(u"font-size:19px")
+        self.titulo_accion.setGeometry(QRect(20, 5, 241, 31))
+        self.titulo_accion.setStyleSheet(u"\n"
+"font: 87 14pt \"Roboto Black\";")
         self.titulo_accion.setAlignment(Qt.AlignLeading|Qt.AlignLeft|Qt.AlignTop)
         self.nombre_tutor = QLabel(self.frame_3)
         self.nombre_tutor.setObjectName(u"nombre_tutor")
@@ -223,18 +220,59 @@ class Ui_EntregaUi(object):
         self.frame = QFrame(EntregaUi)
         self.frame.setObjectName(u"frame")
         self.frame.setGeometry(QRect(0, 54, 331, 281))
-        self.frame.setStyleSheet(u"#frame{background-color:white}\n"
+        self.frame.setStyleSheet(u"#frame{background-color:white;\n"
+"border-bottom-right-radius: 10px;\n"
+"border-bottom-left-radius: 10px;\n"
+"}\n"
+"\n"
+"\n"
 "")
         self.frame.setFrameShape(QFrame.StyledPanel)
         self.frame.setFrameShadow(QFrame.Raised)
         self.stackedWidget = QStackedWidget(self.frame)
         self.stackedWidget.setObjectName(u"stackedWidget")
         self.stackedWidget.setGeometry(QRect(0, 90, 331, 291))
-        self.stackedWidget.setStyleSheet(u"")
+        self.stackedWidget.setStyleSheet(u"/* Estilo Base del Bot\u00f3n de la Paginaci\u00f3n */\n"
+"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 10px 20px; /* Incrementamos el padding para un mejor tama\u00f1o de bot\u00f3n */\n"
+"    background: #3f5758;\n"
+"    border: none; /* Eliminamos el borde por defecto */\n"
+"    border-radius: 8px; /* Ajustamos el border-radius */\n"
+"}\n"
+"\n"
+"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Pasar el Rat\u00f3n (Hover) */\n"
+"QPushButton:hover {\n"
+"    background: #4a6b6c; /* Color de fondo m\u00e1s claro */\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"/* Estilo del Bot\u00f3n de la Paginaci\u00f3n al Hacer Clic (Pressed) */\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546; /* Color de fondo m\u00e1s oscuro */\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"#stackedWidget{background-color:white;\n"
+"border-bottom-right-radius: 10px;\n"
+"border-bottom-left-r"
+                        "adius: 10px;\n"
+"}\n"
+"\n"
+"\n"
+"")
         self.page = QWidget()
         self.page.setObjectName(u"page")
         self.page.setStyleSheet(u"#page{\n"
-"	background-color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-bottom-right-radius: 10px;\n"
+"border-bottom-left-radius: 10px;\n"
+"\n"
 "}")
         self.fecha_informe = QDateEdit(self.page)
         self.fecha_informe.setObjectName(u"fecha_informe")
@@ -247,7 +285,7 @@ class Ui_EntregaUi(object):
         self.lbl9_4.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.btn_registrar_informe = QPushButton(self.page)
         self.btn_registrar_informe.setObjectName(u"btn_registrar_informe")
-        self.btn_registrar_informe.setGeometry(QRect(160, 140, 161, 35))
+        self.btn_registrar_informe.setGeometry(QRect(140, 140, 181, 35))
         self.btn_registrar_informe.setMinimumSize(QSize(100, 35))
         self.btn_registrar_informe.setMaximumSize(QSize(200, 567))
         self.btn_registrar_informe.setCursor(QCursor(Qt.PointingHandCursor))
@@ -278,11 +316,15 @@ class Ui_EntregaUi(object):
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
         self.page_2.setStyleSheet(u"#page_2{\n"
-"	background-color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-bottom-right-radius: 10px;\n"
+"border-bottom-left-radius: 10px;\n"
+"\n"
 "}")
         self.rbt_si_ficha = QRadioButton(self.page_2)
         self.rbt_si_ficha.setObjectName(u"rbt_si_ficha")
         self.rbt_si_ficha.setGeometry(QRect(20, 70, 61, 17))
+        self.rbt_si_ficha.setChecked(True)
         self.rbt_no_ficha = QRadioButton(self.page_2)
         self.rbt_no_ficha.setObjectName(u"rbt_no_ficha")
         self.rbt_no_ficha.setGeometry(QRect(80, 70, 82, 17))
@@ -293,7 +335,7 @@ class Ui_EntregaUi(object):
         self.pregunta_ficha.setAlignment(Qt.AlignBottom|Qt.AlignLeading|Qt.AlignLeft)
         self.btn_registrar_ficha = QPushButton(self.page_2)
         self.btn_registrar_ficha.setObjectName(u"btn_registrar_ficha")
-        self.btn_registrar_ficha.setGeometry(QRect(160, 140, 161, 35))
+        self.btn_registrar_ficha.setGeometry(QRect(140, 140, 181, 35))
         self.btn_registrar_ficha.setMinimumSize(QSize(100, 35))
         self.btn_registrar_ficha.setMaximumSize(QSize(200, 567))
         self.btn_registrar_ficha.setCursor(QCursor(Qt.PointingHandCursor))
@@ -305,7 +347,10 @@ class Ui_EntregaUi(object):
         self.page_3 = QWidget()
         self.page_3.setObjectName(u"page_3")
         self.page_3.setStyleSheet(u"#page_3{\n"
-"	background-color: rgb(255, 255, 255);\n"
+"background-color: rgb(255, 255, 255);\n"
+"border-bottom-right-radius: 10px;\n"
+"border-bottom-left-radius: 10px;\n"
+"\n"
 "}")
         self.rbt_no_memorandum = QRadioButton(self.page_3)
         self.rbt_no_memorandum.setObjectName(u"rbt_no_memorandum")
@@ -318,9 +363,10 @@ class Ui_EntregaUi(object):
         self.rbt_si_memorandum = QRadioButton(self.page_3)
         self.rbt_si_memorandum.setObjectName(u"rbt_si_memorandum")
         self.rbt_si_memorandum.setGeometry(QRect(20, 70, 41, 17))
+        self.rbt_si_memorandum.setChecked(True)
         self.btn_registrar_memorandum = QPushButton(self.page_3)
         self.btn_registrar_memorandum.setObjectName(u"btn_registrar_memorandum")
-        self.btn_registrar_memorandum.setGeometry(QRect(159, 130, 161, 35))
+        self.btn_registrar_memorandum.setGeometry(QRect(129, 130, 191, 35))
         self.btn_registrar_memorandum.setMinimumSize(QSize(100, 35))
         self.btn_registrar_memorandum.setMaximumSize(QSize(200, 567))
         self.btn_registrar_memorandum.setCursor(QCursor(Qt.PointingHandCursor))

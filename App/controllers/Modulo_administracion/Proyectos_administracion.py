@@ -32,7 +32,7 @@ class ProyectosAdmin(QtWidgets.QDialog):
         if(self.modo != 'nuevo'):
             self.proyecto_id = proyecto_id
             self.venProyecto.btn_agregar_proyecto.setText('Actualizar')
-            self.venProyecto.lbl_titulo_ventana.setText('Editar Tutor')
+            self.venProyecto.lbl_titulo_ventana.setText('Editar Proyecto')
             self.llenado_datos_proyecto(int(self.proyecto_id))
 
     
@@ -132,8 +132,11 @@ class ProyectosAdmin(QtWidgets.QDialog):
 
                 self.parent.raizOpacidad.close()
                 self.close()
+                self.parent.offset = 0
                 self.parent.llenarTabla('listar_proyectos', 'proyecto', self.parent.venPri.tabla_proyecto)
-                self.parent.actualizarInfoPaginacion('proyecto', self.parent.venPri.lbl_pagina_proyectos)
+                self.parent.venPri.check_estado_proyecto.setChecked(False)
+                self.parent.actualizarInfoPaginacion('proyecto', self.parent.venPri.lbl_pagina_proyectos, True)
+                self.parent.datos_inicializacion()
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar los datos en la base de datos: {str(e)}")
 

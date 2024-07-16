@@ -23,18 +23,26 @@ CREATE TABLE IF NOT EXISTS estudiantes (
     telefono VARCHAR(50),
     direccion TEXT,
     carrera_id INT,
+    estado BOOLEAN NOT NULL DEFAULT true,
     FOREIGN KEY (carrera_id) REFERENCES carrera(id)
 );
+ALTER TABLE estudiantes
+ADD COLUMN estado BOOLEAN NOT NULL DEFAULT true;
 
 -- Crear tabla institucion
 CREATE TABLE IF NOT EXISTS institucion (
     id INT AUTO_INCREMENT PRIMARY KEY,
     nombre VARCHAR(255) NOT NULL,
     tipo_institucion VARCHAR(255) NOT NULL,
-    estado BOOLEAN NOT NULL DEFAULT true,
     direccion TEXT,
-    telefono VARCHAR(50)
+    telefono VARCHAR(50),
+    estado BOOLEAN NOT NULL DEFAULT true,
+    archivo_convenio LONGBLOB,
+    tipo_archivo VARCHAR(50)
 );
+
+ALTER TABLE institucion
+ADD COLUMN archivo_convenio LONGBLOB;
 
 -- Crear tabla proyecto
 CREATE TABLE IF NOT EXISTS proyecto (
@@ -58,8 +66,13 @@ CREATE TABLE IF NOT EXISTS tutores (
     telefono VARCHAR(50),
     direccion TEXT,
     profesion VARCHAR(255),
-    archivo_cv LONGBLOB
+    archivo_cv LONGBLOB,
+    estado BOOLEAN NOT NULL DEFAULT true
 );
+
+ALTER TABLE tutores
+ADD COLUMN estado BOOLEAN NOT NULL DEFAULT true;
+
 
 CREATE TABLE IF NOT EXISTS vinculacion (
   id INT NOT NULL AUTO_INCREMENT,
@@ -132,6 +145,50 @@ CREATE TABLE IF NOT EXISTS seguimiento (
     ON UPDATE NO ACTION
 );
 
+CREATE TABLE roles (
+    role_id INT AUTO_INCREMENT PRIMARY KEY, -- Identificador único del rol
+    role_name VARCHAR(50) NOT NULL -- Nombre del rol (ej. Administrador, Tutor)
+);
+
+CREATE TABLE usuarios (
+    user_id INT AUTO_INCREMENT PRIMARY KEY, 
+    contrasena VARCHAR(100) NOT NULL, 
+    identificacion VARCHAR(50), 
+    role_id INT, 
+    nombre VARCHAR(100), 
+    apellido VARCHAR(100), 
+    correo_electronico VARCHAR(100), 
+    fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP, 
+    estado VARCHAR(50) DEFAULT 'Activo', 
+    FOREIGN KEY (role_id) REFERENCES roles(role_id)
+);
+
+CREATE TABLE informes (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha DATE,
+    mes VARCHAR(255),
+    periodo_academico VARCHAR(50),
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES tutores(id)
+);
+
+CREATE TABLE fichas (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    periodo_academico VARCHAR(50),
+    is_ficha BOOLEAN,
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES tutores(id)
+);
+
+CREATE TABLE memorandum (
+	id INT AUTO_INCREMENT PRIMARY KEY, 
+	fecha TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    periodo_academico VARCHAR(50),
+    is_memorandum BOOLEAN,
+    tutor_id INT,
+    FOREIGN KEY (tutor_id) REFERENCES tutores(id)
+);
 
 
 

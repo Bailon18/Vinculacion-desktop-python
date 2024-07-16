@@ -35,11 +35,10 @@ def add_font_app(ruta, extension):
 
 def limpiar_login(parent,index):
 
-    """
-    Funcion que recibe por parametro la clase(ventana),el index pagina, boton seleccionado
-    funcionalidad : evento de colores segun la seleccion
-    """
     parent.venLogin.stackedWidget.setCurrentIndex(index)
+    parent.venLogin.line_correo.setText('')
+    parent.venLogin.line_contrasena.setText('')
+    parent.venLogin.line_email2.setText('')
 
 def estilos_login(parent):
     

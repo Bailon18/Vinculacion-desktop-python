@@ -133,10 +133,13 @@ class CarrerasAdmin(QtWidgets.QDialog):
                     
                     QMessageBox.information(self, "Mensaje", "Los datos se han validado correctamente y se han enviado a la base de datos.")
 
+                
                 self.parent.raizOpacidad.close()
                 self.close()
+                self.parent.offset = 0
                 self.parent.llenarTabla('listar_carreras', 'carrera', self.parent.venPri.tabla_carrera)
-                self.parent.actualizarInfoPaginacion('carrera', self.parent.venPri.lbl_pagina_carrera)
+                self.parent.venPri.check_estado_carrera.setChecked(False)
+                self.parent.actualizarInfoPaginacion('carrera', self.parent.venPri.lbl_pagina_carrera, True)
             except Exception as e:
                 QMessageBox.critical(self, "Error", f"Ha ocurrido un error al guardar los datos en la base de datos: {str(e)}")
 

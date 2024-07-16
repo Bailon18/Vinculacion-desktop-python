@@ -44,6 +44,7 @@ class Ui_VenCarga(QDialog):
 
         self.raizCarga = Ui_VentanaCarga()
         self.raizCarga.setupUi(self)
+        print('llego a carga')
 
         # MODIFICAR PRIORIDAD DE VENTANA
         self.setWindowFlags(Qt.WindowStaysOnTopHint)
@@ -61,6 +62,7 @@ class Ui_VenCarga(QDialog):
 
 
         # CAMBIAR TEXTO EN PLENA CARGA
+        print(f'Cargando: {self.lista_data}')
         self.raizCarga.labTitu.setText(f'{self.lista_data[1]}')
         # EJECUTANDO LA BARRA DE PROGRESO
         self.timeLoad = QTimer()
@@ -82,7 +84,7 @@ class Ui_VenCarga(QDialog):
 
             self.close()
 
-    
+            
             self.main = Principal(self.lista_data)
             self.main.showMaximized()
             #self.main.show()

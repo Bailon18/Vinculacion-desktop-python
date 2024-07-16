@@ -112,13 +112,11 @@ def btn_editar_seguimiento(boton,fila,tabla,parent):
     boton.clicked.connect(lambda: tabla.selectRow(fila))
     boton.clicked.connect(lambda: editar_seguimiento_acccion(fila,parent))
 
-
 def btn_eliminar_seguimiento(boton,fila,tabla,parent):
 
     """eventos  del boton agregar seguimiento """
     boton.clicked.connect(lambda: tabla.selectRow(fila))
     #boton.clicked.connect(lambda: eliminar_seguimiento_acccion(fila,parent))
-
 
 def editar_seguimiento_acccion(fila, parent):
 
@@ -132,9 +130,14 @@ def editar_seguimiento_acccion(fila, parent):
 
     seguimiento_id = parent.venPri.tabla_seguimiento.item(fila, 0).text()
     estudiante_nombre = parent.venPri.tabla_seguimiento.item(fila, 1).text()
+    
+    parent.estudiantes_vinculacion_id = seguimiento_id
+    parent.estudiantes_vinculacion_nombre = estudiante_nombre
+
 
     parent.raizOpacidad.resize(parent.width(), parent.height())
     parent.raizOpacidad.show()
+    
     Seguimiento(parent, seguimiento_id, estudiante_nombre).exec_()
 
 
@@ -173,41 +176,40 @@ def editar_seguimiento_acccion(fila, parent):
 # -------------------------------------------------------------------------------------------------------------------
 
 def llenar_tabla_actividades(parent, tabla, dato):
-
     if dato:
         tabla.setRowCount(0)
         tabla.setRowCount(len(dato))
         tabla.setColumnCount(4)
 
         for fila in range(len(dato)):
-
             bton_editar_actividad = crearbotoneslista(
-                stilo = u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
+                stilo=u"""QToolButton{background-color: #DEF5F8; border-radius:8px}
                 QToolButton:hover{background-color:#82b5b9}""",
-                icono = u':/menu/acccion_editar.png',
-                tooltip = 'Editar actividad')
-
-
-            bton_eliminar_actividad = crearbotoneslista(
-                stilo = u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
-                        QToolButton:hover{background-color:#ebdada}""",
-                icono = u':/menu/accion_eliminar.png',
-                tooltip = 'Eliminar seguimiento')
-
+                icono=u':/menu/acccion_editar.png',
+                tooltip='Editar actividad'
+            )
 
             layout = QtWidgets.QHBoxLayout()
-            layout.setContentsMargins(1,1,1,1)
+            layout.setContentsMargins(1, 1, 1, 1)
             layout.setSpacing(3)
             layout.addWidget(bton_editar_actividad)
-            layout.addWidget(bton_eliminar_actividad)
 
+            if parent.parent.rol == 'Tutor':
+                bton_eliminar_actividad = crearbotoneslista(
+                    stilo=u"""QToolButton{background-color: #FBE9E9; border-radius:8px}
+                            QToolButton:hover{background-color:#ebdada}""",
+                    icono=u':/menu/accion_eliminar.png',
+                    tooltip='Eliminar seguimiento'
+                )
+                layout.addWidget(bton_eliminar_actividad)
+                btn_eliminar_actividad(bton_eliminar_actividad, fila, tabla, parent)
+            
             widget = QtWidgets.QWidget()
             widget.setLayout(layout)
 
             btn_editar_actividad(bton_editar_actividad, fila, tabla, parent)
-            btn_eliminar_actividad(bton_eliminar_actividad, fila, tabla, parent)
 
-            tabla.setCellWidget(fila ,3,widget)
+            tabla.setCellWidget(fila, 3, widget)
 
             for columna in range(len(dato[fila])):
                 item = QtWidgets.QTableWidgetItem(str(dato[fila][columna]))
@@ -221,6 +223,7 @@ def llenar_tabla_actividades(parent, tabla, dato):
                 tabla.setItem(fila, columna, item)
     else:
         tabla.setRowCount(0)
+
 
 def btn_editar_actividad(boton,fila,tabla,parent):
 
@@ -237,46 +240,61 @@ def btn_eliminar_actividad(boton,fila,tabla,parent):
 
 
 def editar_actividad_acccion(fila, parent):
-    pass
 
-
-    # from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
-
-
-    # if not parent.conec_base.verificarConexionInternet():
-    #     QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
-    #     return
-
-    # seguimiento_id = parent.venPri.tabla_seguimiento.item(fila, 0).text()
-    # estudiante_nombre = parent.venPri.tabla_seguimiento.item(fila, 0).text()
-
-    # parent.raizOpacidad.resize(parent.width(), parent.height())
-    # parent.raizOpacidad.show()
-    # Seguimiento(parent, seguimiento_id, estudiante_nombre).exec_()
-
-
-
-
-
-def eliminar_seguimiento_acccion(fila, parent):
 
     if not parent.conec_base.verificarConexionInternet():
         QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
         return
 
-    # seguimiento_id = parent.seguimiento_tutor.tabla_listado_seguimiento.item(fila, 0).text()
-    # fecha = parent.seguimiento_tutor.tabla_listado_seguimiento.item(fila, 1).text()
+    id_actividad = parent.seguimiento_tutor.tabla_listado_actividades.item(fila, 0).text()
+    
+    parent.parent.id_actividad = id_actividad
+    parent.parent.modo_formulario_seguimiento_estudiante = 'editar'
+    
+    parent.parent.raizOpacidad.resize(parent.width(), parent.height())
+    parent.parent.raizOpacidad.show()
+    parent.close()
+    
+    parent.parent.abrir_ventana_nueva_actividad()
+    
 
-    # mensaje = f"¿Está seguro(a) de eliminar el seguimiento de {parent.datos_compartidos[1].upper()}\n Registrada en la fecha {fecha}?."
+    
 
-    # respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
-    #     QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+def eliminar_seguimiento_acccion(fila, parent):
 
-    # if respuesta == QtWidgets.QMessageBox.Yes:
-    #     consulta = 'DELETE FROM Seguimientos WHERE seguimiento_id = %s'
-    #     parent.conec_base.deleteDatos(consulta, ( seguimiento_id))
-    #     parent.parent.listar_vinculacion()
-    #     parent.listado_seguimiento()
-    #     parent.parent.listar_vinculacion_tutor()
+    from controllers.Modulo_seguimiento.Modulo_seguimiento import Seguimiento
 
-    #     QtWidgets.QMessageBox.information(parent, "Mensaje", f"Seguimiento se ha eliminado exitosamente.")
+
+    if not parent.conec_base.verificarConexionInternet():
+        QtWidgets.QMessageBox.critical(None, "Error", "No hay conexión a Internet.")
+        return
+
+    id_actividad = parent.seguimiento_tutor.tabla_listado_actividades.item(fila, 0).text()
+    fecha = parent.seguimiento_tutor.tabla_listado_actividades.item(fila, 1).text()
+    estudiante_nombre = parent.seguimiento_tutor.lbl_nombreestudiante.text()
+
+
+    mensaje = f"¿Está seguro(a) de que desea eliminar la actividad registrada en la fecha {fecha}?"
+
+
+    respuesta = QtWidgets.QMessageBox.question(parent, "Mensaje", mensaje,
+        QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No)
+
+    if respuesta == QtWidgets.QMessageBox.Yes:
+        consulta = 'DELETE FROM seguimiento WHERE id = %s'
+        parent.conec_base.deleteDatos(consulta, ( id_actividad, ))
+        
+        
+        QtWidgets.QMessageBox.information(parent, "Mensaje", f"Actividad se ha eliminado exitosamente.")
+        
+        parent.parent.estudiantes_vinculacion_id = parent.id_seguimiento
+        parent.parent.estudiantes_vinculacion_nombre = estudiante_nombre
+    
+        parent.parent.raizOpacidad.resize(parent.width(), parent.height())
+        parent.parent.raizOpacidad.show()
+        parent.close()
+        
+        
+        parent.parent.abrir_ventana_seguimiento_tutor()
+        parent.parent.llenar_estudiantes_seguimientos_tutor()
+        

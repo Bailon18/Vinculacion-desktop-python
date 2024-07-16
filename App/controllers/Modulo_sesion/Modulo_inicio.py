@@ -29,8 +29,8 @@ class Login(QtWidgets.QDialog):
         
         self.conec_base = BaseDatos()
         
-        self.venLogin.line_contrasena.setText('admin')
-        self.venLogin.line_correo.setText('admin@gmail.com')
+        self.venLogin.line_contrasena.setText('admin123')
+        self.venLogin.line_correo.setText('usuario@gmail.com')
             
         # Quitar sombra - titulo de barra
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
@@ -60,114 +60,152 @@ class Login(QtWidgets.QDialog):
         self.venLogin.btn_enviar.clicked.connect(lambda : self.enviar_correo())
         
     def validarIngreso(self):
-        
         if not self.conec_base.verificarConexionInternet():
             QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
             return
-        
-        
+
         correoIngreso = self.venLogin.line_correo.text()
         contrasenaIngreso = self.venLogin.line_contrasena.text()
+        
+        print('correoIngreso', correoIngreso)
+        print('contrasenaIngreso', contrasenaIngreso)
 
+        # Buscar en la tabla de usuarios
+        resultado_usuario = self.conec_base.getDatos_condicion(
+            '''
+            SELECT u.user_id, u.nombre, r.role_name AS role_nombre, u.estado
+            FROM usuarios u
+            JOIN roles r ON u.role_id = r.role_id
+            WHERE u.correo_electronico = %s AND u.contrasena = %s
+            ''',
+            (correoIngreso, contrasenaIngreso)
+        )
 
-   
-
-        resultado = self.conec_base.getDatosProcess_condicion('ValidarInicioSesion', (correoIngreso, contrasenaIngreso))
-
-        if resultado:
-            if resultado[0]:
+        if resultado_usuario:
+            datos_usuario = resultado_usuario[0]
+            estado_usuario = datos_usuario[3]
             
-                datos_usuario = resultado[0][0]
-
-                # print('RESULADTA ', datos_usuario)
-
-                estado_usuario = datos_usuario[6]
-                if estado_usuario == 'Activo':
-                    
-                    from controllers.Modulo_utils.Modulo_venCarga import Ui_VenCarga
-
-                    self.hide()
-
-
-                    Ui_VenCarga(
-                        [datos_usuario[0], 
-                        datos_usuario[1].split()[0] +' '+ datos_usuario[2].split()[0],
-                        datos_usuario[5]] 
-                        ).exec_()
-                else:
-            
-                    QMessageBox.warning(self, "Usuario Inactivo", "El usuario está inactivo.")
+            if estado_usuario == 'Activo':
+                from controllers.Modulo_utils.Modulo_venCarga import Ui_VenCarga
+                self.hide()
+                Ui_VenCarga(
+                    [datos_usuario[0],
+                    f"{datos_usuario[1]}", 
+                    datos_usuario[2]] 
+                ).exec_()
             else:
+                QMessageBox.warning(self, "Usuario Inactivo", f"Sr {datos_usuario[1]}, su cuenta está inactiva. Comuníquese con el administrador.")
+            return
+
+        # Buscar en la tabla de tutores
+        resultado_tutor = self.conec_base.getDatos_condicion(
+            '''
+            SELECT id, nombres, 'Tutor' AS role_nombre, estado
+            FROM tutores
+            WHERE correo = %s AND contrasena = %s
+            ''',
+            (correoIngreso, contrasenaIngreso)
+        )
+
+
+        if resultado_tutor:
+          
+            datos_tutor = resultado_tutor[0]
+            estado_usuario = datos_tutor[3]
+
+            if estado_usuario != 0 :
+                from controllers.Modulo_utils.Modulo_venCarga import Ui_VenCarga
             
-                QMessageBox.critical(self, "Error de Inicio de Sesión", "El correo electrónico o la contraseña son incorrectos.")
+                self.hide()
+                Ui_VenCarga(
+                    [datos_tutor[0], 
+                    f"{datos_tutor[1]}",  
+                    datos_tutor[2]]  
+                ).exec_()
+            else:
+                QMessageBox.warning(self, "Tutor Inactivo", f"Sr {datos_tutor[1]}, su cuenta está inactiva. Comuníquese con el administrador.")
+       
+    
         else:
-            
-            QMessageBox.critical(self, "Error", "Hubo un problema al validar el inicio de sesión.")
+            QMessageBox.critical(self, "Error de Inicio de Sesión", "El correo electrónico o la contraseña son incorrectos.")
+
 
     def keyPressEvent(self, event):
         if event.key() == QtCore.Qt.Key_Escape:
             pass
     
     def enviar_correo(self):
-
         if not self.conec_base.verificarConexionInternet():
             QtWidgets.QMessageBox.critical(self, "Error", "No hay conexión a Internet.")
             return
-      
+    
         correo = self.venLogin.line_email2.text()
 
         if correo:
+            # Buscar en la tabla de usuarios
+            get_datos_usuario = self.conec_base.getDatos_condicion(
+                """SELECT nombre, correo_electronico, contrasena, estado 
+                FROM usuarios 
+                WHERE correo_electronico = %s""",
+                (correo,)
+            )
+            
+            # Buscar en la tabla de tutores
+            get_datos_tutor = self.conec_base.getDatos_condicion(
+                """SELECT nombres AS nombre, correo, contrasena, estado 
+                FROM tutores 
+                WHERE correo = %s""",
+                (correo,)
+            )
 
-            get_datos = self.conec_base.getDatos_condicion("""SELECT nombre, correo_electronico, contrasena FROM usuarios
-                                                                where correo_electronico= %s""",(correo))
+            # Unir resultados
+            get_datos = get_datos_usuario if get_datos_usuario else get_datos_tutor
             dato_validar = [x for x in get_datos]
-            if(dato_validar):
 
-                # obtenemos primera posicion 
+            if dato_validar:
                 dato = [x for x in dato_validar[0]]
 
-                # datos de fecha --- inicio
-                fechactual = datetime.now()
-                horaEntrada = datetime.strptime(f"{fechactual.hour}:{fechactual.minute}:{fechactual.second}", "%H:%M:%S")
-                horaSalida = datetime.strftime(horaEntrada, "%I:%M:%S %p")
-           
+                if (get_datos_usuario and dato[3] == 'Activo') or (get_datos_tutor and dato[3] == 1):  # Verificar estado
+                    fechactual = datetime.now()
+                    horaEntrada = datetime.strptime(f"{fechactual.hour}:{fechactual.minute}:{fechactual.second}", "%H:%M:%S")
+                    horaSalida = datetime.strftime(horaEntrada, "%I:%M:%S %p")
 
-                emisor = 'paucarmontesbailon@gmail.com'
-                contra = 'evpijsuxnscmqpbe'
+                    emisor = 'pedro29pablo062000@gmail.com'
+                    contra = 'dnhummctzntwjujz'
+                    receptor = correo
+                    
+                    try:
+                        # Configuracion del mail
+                        mensaje = MIMEMultipart("alternative")  # standar
+                        mensaje['Subject'] = "Solicitud de recuperación de contraseña"
+                        mensaje['From'] = emisor
+                        mensaje['To'] = receptor
 
-                receptor = correo
-                
-                try:
-                    # Configuracion del mail
-                    mensaje = MIMEMultipart("alternative") # standar
-                    mensaje['Subject'] = "Solicitud de recuperación de contraseña"
-                    mensaje['From'] = emisor
-                    mensaje['To'] = receptor
+                        div_fechahora = f'{fechactual.strftime("%d/%m/%Y")} {horaSalida}'
+                        div_usuarionom = dato[0]
+                        div_contrasena = dato[2]
+                        div_ahoactual = str(fechactual.year)
 
+                        html = self.codigo_html_envio(div_fechahora, div_usuarionom, div_contrasena, div_ahoactual, emisor, dato[1])
+                        parte_html = MIMEText(html, 'html')
+                        mensaje.attach(parte_html)
 
-                    div_fechahora = f'{fechactual.strftime("%d/%m/%Y")} {horaSalida}'
-                    div_usuarionom = dato[0]
-                    div_contrasena = dato[2]
-                    div_ahoactual= str(fechactual.year)
+                        context = ssl.create_default_context()
 
-                    html = self.codigo_html_envio(div_fechahora,div_usuarionom,div_contrasena,div_ahoactual,emisor,dato[1])
-                    parte_html = MIMEText(html, 'html')
-                    mensaje.attach(parte_html)
+                        with smtplib.SMTP_SSL('smtp.gmail.com', 465, context=context) as server:
+                            server.login(emisor, contra)
+                            server.sendmail(emisor, receptor, mensaje.as_string())
 
-                    context = ssl.create_default_context()
-
-                    with smtplib.SMTP_SSL('smtp.gmail.com', 465 , context=context) as server:
-                        server.login(emisor, contra)
-                        server.sendmail(emisor, receptor, mensaje.as_string())
-
-                    self.venLogin.line_mensaje.setText(dato[0]+' recibió su contraseña con éxito.')
-                except Exception as e:
-                    QtWidgets.QMessageBox.critical(self, 'Error', f'Recuperación de contraseña fallido, por favor\nconsultar con el soporte')
-            
+                        self.venLogin.line_mensaje.setText(dato[0] + ' recibió su contraseña con éxito.')
+                    except Exception as e:
+                        QtWidgets.QMessageBox.critical(self, 'Error', 'Recuperación de contraseña fallida, por favor\nconsultar con el soporte')
+                else:
+                    self.venLogin.line_mensaje.setText(f'Sr {dato[0]}, su cuenta está inactiva. Comuníquese con el administrador.')
             else:
                 self.venLogin.line_mensaje.setText('Error, correo no registrado en la base de datos.')
         else:
             self.venLogin.line_mensaje.setText('Error, Campo correo vacío.')
+
                 
 
     def codigo_html_envio(self,fechahora,usuarionom,contrasena,ahoactual,emisor,receptor):

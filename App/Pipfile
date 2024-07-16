@@ -11,6 +11,7 @@ pymysql-pooling = "*"
 cryptography = "*"
 fpdf = "*"
 requests = "*"
+openpyxl = "*"
 
 [dev-packages]
 

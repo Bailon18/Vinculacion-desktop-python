@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'loginZhtbID.ui'
+## Form generated from reading UI file 'loginmjVTlO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -123,7 +123,63 @@ class Ui_ventana_sesion(object):
 "border:1px solid white;\n"
 "background-color: #ffffff;\n"
 "border-bottom-right-radius: 10px;\n"
-"border-bottom-left-radius: 10px}")
+"border-bottom-left-radius: 10px}\n"
+"\n"
+"\n"
+"\n"
+"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 8px 16px;\n"
+"    background: #3f5758;\n"
+"    border: none; \n"
+"    border-radius: 8px; \n"
+""
+                        "}\n"
+"\n"
+"QPushButton:hover {\n"
+"    background: #4a6b6c; \n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
+"\n"
+"\n"
+"/* Bot\u00f3n Cancelar */\n"
+"QPushButton#btn_cancelarr {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: #3f5758;\n"
+"    padding: 8px 16px;\n"
+"    background: transparent;\n"
+"    border: 2px solid #3f5758; \n"
+"    border-radius: 8px; \n"
+"}\n"
+"\n"
+"QPushButton#btn_cancelarr:hover {\n"
+"    background: rgba(63, 87, 88, 0.1); /* Fondo ligeramente oscuro en hover */\n"
+"    color: #2e4546; \n"
+"    border: 2px solid #2e4546;\n"
+"}\n"
+"\n"
+"QPushButton#btn_cancelarr:pressed {\n"
+"    background: rgba(63, 87, 88, 0.2); /* Fondo m\u00e1s oscuro en estado presionado */\n"
+"    color: #1c2d2e; \n"
+"    border: 2px solid #1c2d2e;\n"
+"}")
         self.pag_inicio = QWidget()
         self.pag_inicio.setObjectName(u"pag_inicio")
         self.pag_inicio.setStyleSheet(u"#pag_inicio{background-color: #ffffff;\n"
@@ -133,16 +189,16 @@ class Ui_ventana_sesion(object):
 "")
         self.line_correo = QLineEdit(self.pag_inicio)
         self.line_correo.setObjectName(u"line_correo")
-        self.line_correo.setGeometry(QRect(30, 190, 296, 40))
+        self.line_correo.setGeometry(QRect(30, 240, 296, 40))
         self.line_correo.setStyleSheet(u"")
         self.line_correo.setMaxLength(100)
         self.label_Psicologa = QLabel(self.pag_inicio)
         self.label_Psicologa.setObjectName(u"label_Psicologa")
-        self.label_Psicologa.setGeometry(QRect(30, 160, 121, 25))
+        self.label_Psicologa.setGeometry(QRect(30, 210, 121, 25))
         self.label_Psicologa.setStyleSheet(u"")
         self.frame_5 = QFrame(self.pag_inicio)
         self.frame_5.setObjectName(u"frame_5")
-        self.frame_5.setGeometry(QRect(28, 280, 296, 40))
+        self.frame_5.setGeometry(QRect(28, 330, 296, 40))
         self.frame_5.setStyleSheet(u"#frame_5{background-color:#f3f4f6;\n"
 "border-radius:8px}")
         self.frame_5.setFrameShape(QFrame.NoFrame)
@@ -200,33 +256,42 @@ class Ui_ventana_sesion(object):
 
         self.label_contrasea = QLabel(self.pag_inicio)
         self.label_contrasea.setObjectName(u"label_contrasea")
-        self.label_contrasea.setGeometry(QRect(30, 250, 111, 25))
+        self.label_contrasea.setGeometry(QRect(30, 300, 111, 25))
         self.label_contrasea.setStyleSheet(u"")
-        self.btn_aceptar = QToolButton(self.pag_inicio)
+        self.btn_aceptar = QPushButton(self.pag_inicio)
         self.btn_aceptar.setObjectName(u"btn_aceptar")
-        self.btn_aceptar.setGeometry(QRect(30, 340, 296, 40))
+        self.btn_aceptar.setGeometry(QRect(30, 390, 296, 40))
         self.btn_aceptar.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_aceptar.setFocusPolicy(Qt.NoFocus)
-        self.btn_aceptar.setStyleSheet(u"#btn_aceptar{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 15px;\n"
-"letter-spacing: 0.02em;\n"
-"color:white;\n"
-"padding:8px;\n"
-"background: #3A4F50;\n"
-"border-radius: 4px;}\n"
+        self.btn_aceptar.setStyleSheet(u"QPushButton {\n"
+"    font-family: Roboto;\n"
+"    font-style: normal;\n"
+"    font-weight: normal;\n"
+"    font-size: 15px;\n"
+"    letter-spacing: 0.02em;\n"
+"    color: white;\n"
+"    padding: 8px 16px;\n"
+"    background: #3f5758;\n"
+"    border: none; \n"
+"    border-radius: 8px; \n"
+"}\n"
 "\n"
-"#btn_aceptar:hover{background: #314344;\n"
-"border-radius: 4px; }\n"
+"QPushButton:hover {\n"
+"    background: #4a6b6c; \n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}\n"
 "\n"
-"")
+"\n"
+"QPushButton:pressed {\n"
+"    background: #2e4546;\n"
+"    border: none;\n"
+"    border-radius: 8px;\n"
+"}")
         self.btn_aceptar.setIconSize(QSize(20, 20))
-        self.btn_aceptar.setAutoRaise(True)
         self.btn_recuperar = QToolButton(self.pag_inicio)
         self.btn_recuperar.setObjectName(u"btn_recuperar")
-        self.btn_recuperar.setGeometry(QRect(159, 390, 171, 21))
+        self.btn_recuperar.setGeometry(QRect(159, 440, 171, 21))
         self.btn_recuperar.setFocusPolicy(Qt.NoFocus)
         self.btn_recuperar.setStyleSheet(u"background-color: transparent;\n"
 "color:#0d73b1;\n"
@@ -234,12 +299,11 @@ class Ui_ventana_sesion(object):
 "")
         self.btn_recuperar.setCheckable(False)
         self.btn_recuperar.setAutoRaise(True)
-        self.label_titulo = QLabel(self.pag_inicio)
-        self.label_titulo.setObjectName(u"label_titulo")
-        self.label_titulo.setGeometry(QRect(110, 60, 131, 25))
-        self.label_titulo.setStyleSheet(u"#label_titulo{font-size:25px;\n"
-"font-family:Roboto\n"
-"}")
+        self.label = QLabel(self.pag_inicio)
+        self.label.setObjectName(u"label")
+        self.label.setGeometry(QRect(90, 10, 181, 181))
+        self.label.setPixmap(QPixmap(u":/menu/logito2.png"))
+        self.label.setScaledContents(True)
         self.stackedWidget.addWidget(self.pag_inicio)
         self.pag_recuperar = QWidget()
         self.pag_recuperar.setObjectName(u"pag_recuperar")
@@ -249,32 +313,19 @@ class Ui_ventana_sesion(object):
 "border-bottom-right-radius: 10px;\n"
 "border-bottom-left-radius: 10px;}\n"
 "")
-        self.btn_cancelarr = QToolButton(self.pag_recuperar)
+        self.btn_cancelarr = QPushButton(self.pag_recuperar)
         self.btn_cancelarr.setObjectName(u"btn_cancelarr")
-        self.btn_cancelarr.setGeometry(QRect(32, 400, 296, 47))
+        self.btn_cancelarr.setGeometry(QRect(32, 410, 296, 40))
         self.btn_cancelarr.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_cancelarr.setFocusPolicy(Qt.NoFocus)
-        self.btn_cancelarr.setStyleSheet(u"#btn_cancelarr{\n"
-"font-family: Roboto;\n"
-"font-style: normal;\n"
-"font-weight: normal;\n"
-"font-size: 15px;\n"
-"letter-spacing: 0.02em;\n"
-"color:#374151;\n"
-"padding:8px;\n"
-"background: #F9FAFB;\n"
-"border-radius: 8px;\n"
-"border: 1px solid #E5E7EB;\n"
-"}\n"
-"\n"
-"#btn_cancelarr:hover{background: #F3F4F6;\n"
-"border: 1px solid #E5E7EB }\n"
-"\n"
-"")
-        self.btn_cancelarr.setIconSize(QSize(20, 20))
-        self.btn_enviar = QToolButton(self.pag_recuperar)
+        self.btn_cancelarr.setStyleSheet(u"")
+        icon3 = QIcon()
+        icon3.addFile(u":/menu/no.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_cancelarr.setIcon(icon3)
+        self.btn_cancelarr.setIconSize(QSize(16, 16))
+        self.btn_enviar = QPushButton(self.pag_recuperar)
         self.btn_enviar.setObjectName(u"btn_enviar")
-        self.btn_enviar.setGeometry(QRect(33, 340, 296, 47))
+        self.btn_enviar.setGeometry(QRect(33, 360, 296, 40))
         self.btn_enviar.setCursor(QCursor(Qt.PointingHandCursor))
         self.btn_enviar.setFocusPolicy(Qt.NoFocus)
         self.btn_enviar.setStyleSheet(u"#btn_enviar{\n"
@@ -292,21 +343,24 @@ class Ui_ventana_sesion(object):
 "border-radius: 8px; }\n"
 "\n"
 "")
+        icon4 = QIcon()
+        icon4.addFile(u":/menu/correo.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.btn_enviar.setIcon(icon4)
         self.btn_enviar.setIconSize(QSize(20, 20))
         self.label_contrasea_2 = QLabel(self.pag_recuperar)
         self.label_contrasea_2.setObjectName(u"label_contrasea_2")
-        self.label_contrasea_2.setGeometry(QRect(34, 170, 171, 25))
+        self.label_contrasea_2.setGeometry(QRect(31, 223, 171, 25))
         self.label_contrasea_2.setStyleSheet(u"")
         self.line_mensaje = QLabel(self.pag_recuperar)
         self.line_mensaje.setObjectName(u"line_mensaje")
-        self.line_mensaje.setGeometry(QRect(30, 260, 241, 41))
+        self.line_mensaje.setGeometry(QRect(32, 300, 301, 41))
         self.line_mensaje.setStyleSheet(u"background-color: transparent;\n"
 "color:#0d73b1;\n"
 "font-size:14px;")
         self.line_mensaje.setWordWrap(True)
         self.line_email2 = QLineEdit(self.pag_recuperar)
         self.line_email2.setObjectName(u"line_email2")
-        self.line_email2.setGeometry(QRect(32, 200, 296, 50))
+        self.line_email2.setGeometry(QRect(31, 256, 296, 40))
         self.line_email2.setStyleSheet(u"\n"
 "QLineEdit{\n"
 "font-family: Roboto;\n"
@@ -329,10 +383,15 @@ class Ui_ventana_sesion(object):
         self.line_email2.setMaxLength(100)
         self.label_recuperar = QLabel(self.pag_recuperar)
         self.label_recuperar.setObjectName(u"label_recuperar")
-        self.label_recuperar.setGeometry(QRect(50, 70, 261, 25))
-        self.label_recuperar.setStyleSheet(u"#label_recuperar{font-size:25px;\n"
+        self.label_recuperar.setGeometry(QRect(72, 2, 241, 25))
+        self.label_recuperar.setStyleSheet(u"#label_recuperar{font-size:20px;\n"
 "font-family:Roboto\n"
 "}")
+        self.label_2 = QLabel(self.pag_recuperar)
+        self.label_2.setObjectName(u"label_2")
+        self.label_2.setGeometry(QRect(103, 51, 151, 141))
+        self.label_2.setPixmap(QPixmap(u":/menu/candado.png"))
+        self.label_2.setScaledContents(True)
         self.stackedWidget.addWidget(self.pag_recuperar)
 
         self.gridLayout_2.addWidget(self.stackedWidget, 0, 0, 1, 1)
@@ -373,14 +432,15 @@ class Ui_ventana_sesion(object):
         self.label_contrasea.setText(QCoreApplication.translate("ventana_sesion", u"Contrase\u00f1a*", None))
         self.btn_aceptar.setText(QCoreApplication.translate("ventana_sesion", u" Ingresar", None))
         self.btn_recuperar.setText(QCoreApplication.translate("ventana_sesion", u"\u00bfOlvidaste tu contrase\u00f1a?", None))
-        self.label_titulo.setText(QCoreApplication.translate("ventana_sesion", u"Bienvenido", None))
-        self.btn_cancelarr.setText(QCoreApplication.translate("ventana_sesion", u"Cancelar", None))
-        self.btn_enviar.setText(QCoreApplication.translate("ventana_sesion", u" Enviar", None))
+        self.label.setText("")
+        self.btn_cancelarr.setText(QCoreApplication.translate("ventana_sesion", u" Cancelar", None))
+        self.btn_enviar.setText(QCoreApplication.translate("ventana_sesion", u"  Enviar", None))
         self.label_contrasea_2.setText(QCoreApplication.translate("ventana_sesion", u"Ingrese su correo*", None))
         self.line_mensaje.setText(QCoreApplication.translate("ventana_sesion", u"Despu\u00e9s del proceso revise su bandeja de entrada.", None))
         self.line_email2.setInputMask("")
         self.line_email2.setText("")
         self.line_email2.setPlaceholderText(QCoreApplication.translate("ventana_sesion", u"demo@gmail.com", None))
         self.label_recuperar.setText(QCoreApplication.translate("ventana_sesion", u"Recuperar Contrase\u00f1a", None))
+        self.label_2.setText("")
     # retranslateUi
 

@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="menu">
+    <file>correo.png</file>
+    <file>candado.png</file>
     <file>subir-imagen.png</file>
     <file>send.png</file>
     <file>archivo.png</file>

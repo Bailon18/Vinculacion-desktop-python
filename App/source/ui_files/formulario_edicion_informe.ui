@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>EntregaUi</class>
- <widget class="QDialog" name="EntregaUi">
+ <class>EntregaActualizacion</class>
+ <widget class="QDialog" name="EntregaActualizacion">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>331</width>
+    <width>370</width>
     <height>335</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>331</width>
+    <width>370</width>
     <height>335</height>
    </size>
   </property>
   <property name="maximumSize">
    <size>
-    <width>331</width>
+    <width>370</width>
     <height>335</height>
    </size>
   </property>
@@ -173,7 +173,7 @@ border-radius: 8px;
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>331</width>
+     <width>371</width>
      <height>55</height>
     </rect>
    </property>
@@ -221,7 +221,7 @@ color: #FFFFFF;}</string>
 font: 87 14pt &quot;Roboto Black&quot;;</string>
     </property>
     <property name="text">
-     <string>Nueva Entrega</string>
+     <string>Edicion entrega informe</string>
     </property>
     <property name="alignment">
      <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
@@ -249,7 +249,7 @@ font: 87 14pt &quot;Roboto Black&quot;;</string>
    <widget class="QToolButton" name="btn_closeadmi_3">
     <property name="geometry">
      <rect>
-      <x>300</x>
+      <x>340</x>
       <y>7</y>
       <width>25</width>
       <height>25</height>
@@ -302,7 +302,7 @@ border-radius:11px; }
     <rect>
      <x>0</x>
      <y>54</y>
-     <width>331</width>
+     <width>371</width>
      <height>281</height>
     </rect>
    </property>
@@ -325,9 +325,9 @@ border-bottom-left-radius: 10px;
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>90</y>
-      <width>331</width>
-      <height>291</height>
+      <y>0</y>
+      <width>371</width>
+      <height>381</height>
      </rect>
     </property>
     <property name="styleSheet">
@@ -368,256 +368,6 @@ border-bottom-left-radius: 10px;
     <property name="currentIndex">
      <number>0</number>
     </property>
-    <widget class="QWidget" name="page">
-     <property name="styleSheet">
-      <string notr="true">#page{
-background-color: rgb(255, 255, 255);
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-
-}</string>
-     </property>
-     <widget class="QDateEdit" name="fecha_informe">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>70</y>
-        <width>171</width>
-        <height>40</height>
-       </rect>
-      </property>
-      <property name="displayFormat">
-       <string>yyyy-MM-dd</string>
-      </property>
-      <property name="calendarPopup">
-       <bool>false</bool>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbl9_4">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>131</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Fecha  entrega</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_registrar_informe">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>140</y>
-        <width>181</width>
-        <height>35</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>35</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>200</width>
-        <height>567</height>
-       </size>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Registrar entrega</string>
-      </property>
-      <property name="icon">
-       <iconset resource="../image/source.qrc">
-        <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>15</width>
-        <height>21</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QLabel" name="lbl9_5">
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>40</y>
-        <width>91</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Mes</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-      </property>
-     </widget>
-     <widget class="QLineEdit" name="line_mes">
-      <property name="enabled">
-       <bool>false</bool>
-      </property>
-      <property name="geometry">
-       <rect>
-        <x>200</x>
-        <y>70</y>
-        <width>121</width>
-        <height>40</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="frame">
-       <bool>true</bool>
-      </property>
-      <property name="cursorPosition">
-       <number>0</number>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-      </property>
-      <property name="dragEnabled">
-       <bool>false</bool>
-      </property>
-      <property name="readOnly">
-       <bool>false</bool>
-      </property>
-      <property name="placeholderText">
-       <string/>
-      </property>
-      <property name="cursorMoveStyle">
-       <enum>Qt::LogicalMoveStyle</enum>
-      </property>
-      <property name="clearButtonEnabled">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </widget>
-    <widget class="QWidget" name="page_2">
-     <property name="styleSheet">
-      <string notr="true">#page_2{
-background-color: rgb(255, 255, 255);
-border-bottom-right-radius: 10px;
-border-bottom-left-radius: 10px;
-
-}</string>
-     </property>
-     <widget class="QRadioButton" name="rbt_si_ficha">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>70</y>
-        <width>61</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>SI</string>
-      </property>
-      <property name="checked">
-       <bool>true</bool>
-      </property>
-     </widget>
-     <widget class="QRadioButton" name="rbt_no_ficha">
-      <property name="geometry">
-       <rect>
-        <x>80</x>
-        <y>70</y>
-        <width>82</width>
-        <height>17</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>NO</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="pregunta_ficha">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>311</width>
-        <height>21</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>¿Entrego ficha?</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_registrar_ficha">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>140</y>
-        <width>181</width>
-        <height>35</height>
-       </rect>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>100</width>
-        <height>35</height>
-       </size>
-      </property>
-      <property name="maximumSize">
-       <size>
-        <width>200</width>
-        <height>567</height>
-       </size>
-      </property>
-      <property name="cursor">
-       <cursorShape>PointingHandCursor</cursorShape>
-      </property>
-      <property name="focusPolicy">
-       <enum>Qt::NoFocus</enum>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Registrar entrega</string>
-      </property>
-      <property name="icon">
-       <iconset resource="../image/source.qrc">
-        <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>15</width>
-        <height>21</height>
-       </size>
-      </property>
-     </widget>
-    </widget>
     <widget class="QWidget" name="page_3">
      <property name="styleSheet">
       <string notr="true">#page_3{
@@ -631,7 +381,7 @@ border-bottom-left-radius: 10px;
       <property name="geometry">
        <rect>
         <x>70</x>
-        <y>70</y>
+        <y>160</y>
         <width>51</width>
         <height>17</height>
        </rect>
@@ -644,7 +394,7 @@ border-bottom-left-radius: 10px;
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>40</y>
+        <y>130</y>
         <width>311</width>
         <height>21</height>
        </rect>
@@ -653,7 +403,7 @@ border-bottom-left-radius: 10px;
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>¿Entregó Memorandum?</string>
+       <string>Estado de entrega</string>
       </property>
       <property name="alignment">
        <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
@@ -663,7 +413,7 @@ border-bottom-left-radius: 10px;
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>70</y>
+        <y>160</y>
         <width>41</width>
         <height>17</height>
        </rect>
@@ -675,11 +425,11 @@ border-bottom-left-radius: 10px;
        <bool>true</bool>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_registrar_memorandum">
+     <widget class="QPushButton" name="btn_registrar_informe">
       <property name="geometry">
        <rect>
-        <x>129</x>
-        <y>130</y>
+        <x>170</x>
+        <y>220</y>
         <width>191</width>
         <height>35</height>
        </rect>
@@ -706,11 +456,11 @@ border-bottom-left-radius: 10px;
        <string notr="true"/>
       </property>
       <property name="text">
-       <string>Registrar entrega</string>
+       <string>Actualizar entrega</string>
       </property>
       <property name="icon">
        <iconset resource="../image/source.qrc">
-        <normaloff>:/menu/botonadd.png</normaloff>:/menu/botonadd.png</iconset>
+        <normaloff>:/menu/ok.png</normaloff>:/menu/ok.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -719,60 +469,85 @@ border-bottom-left-radius: 10px;
        </size>
       </property>
      </widget>
+     <widget class="QDateEdit" name="fecha_informe">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>60</y>
+        <width>151</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="displayFormat">
+       <string>yyyy-MM-dd</string>
+      </property>
+      <property name="calendarPopup">
+       <bool>false</bool>
+      </property>
+     </widget>
+     <widget class="QLabel" name="lbl9_4">
+      <property name="geometry">
+       <rect>
+        <x>210</x>
+        <y>30</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Fecha  entrega</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cbo_meses_entrega">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>60</y>
+        <width>181</width>
+        <height>40</height>
+       </rect>
+      </property>
+      <property name="cursor">
+       <cursorShape>PointingHandCursor</cursorShape>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="maxVisibleItems">
+       <number>67</number>
+      </property>
+      <item>
+       <property name="text">
+        <string>Seleccione mes</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="lbl9_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>30</y>
+        <width>131</width>
+        <height>21</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Meses entregados</string>
+      </property>
+      <property name="alignment">
+       <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
+      </property>
+     </widget>
     </widget>
-   </widget>
-   <widget class="QLabel" name="lbl9_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="text">
-     <string>Tipo entrega</string>
-    </property>
-    <property name="alignment">
-     <set>Qt::AlignBottom|Qt::AlignLeading|Qt::AlignLeft</set>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="cbo_tipo_entrega">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>40</y>
-      <width>311</width>
-      <height>40</height>
-     </rect>
-    </property>
-    <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
-    </property>
-    <property name="styleSheet">
-     <string notr="true"/>
-    </property>
-    <property name="maxVisibleItems">
-     <number>67</number>
-    </property>
-    <item>
-     <property name="text">
-      <string>Informe</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Ficha</string>
-     </property>
-    </item>
-    <item>
-     <property name="text">
-      <string>Memorandum</string>
-     </property>
-    </item>
    </widget>
   </widget>
  </widget>

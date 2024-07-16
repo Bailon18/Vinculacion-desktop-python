@@ -7,41 +7,130 @@ DROP PROCEDURE IF EXISTS listar_carreras;
 DELIMITER //
 CREATE PROCEDURE listar_carreras(IN p_offset INT, IN p_limit INT)
 BEGIN
-    SELECT id, nombre, estado FROM carrera ORDER BY id DESC
-	LIMIT p_limit OFFSET p_offset;
+    SELECT id, nombre, estado 
+    FROM carrera
+    WHERE estado = TRUE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
 END //
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_carreras_inactivas;
+DELIMITER //
+CREATE PROCEDURE listar_carreras_inactivas(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombre, estado 
+    FROM carrera
+    WHERE estado = FALSE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
 
 -- Procedimiento para listar registros de la tabla estudiantes con paginación
 DROP PROCEDURE IF EXISTS listar_estudiantes;
 DELIMITER //
 CREATE PROCEDURE listar_estudiantes(IN p_offset INT, IN p_limit INT)
 BEGIN
-    SELECT id, nombres, apellidos, nro_identificacion, correo  FROM estudiantes
+    SELECT id, nombres, apellidos, nro_identificacion, correo  
+    FROM estudiantes
+    WHERE estado = true
     ORDER BY id DESC
     LIMIT p_limit OFFSET p_offset;
 END //
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_estudiantes_inactivos;
+DELIMITER //
+CREATE PROCEDURE listar_estudiantes_inactivos(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombres, apellidos, nro_identificacion, correo  
+    FROM estudiantes
+    WHERE estado = false
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
 
 -- Procedimiento para listar registros de la tabla institucion en orden descendente por id
 DROP PROCEDURE IF EXISTS listar_institucion;
 DELIMITER //
 CREATE PROCEDURE listar_institucion(IN p_offset INT, IN p_limit INT)
 BEGIN
-    SELECT id, nombre, telefono, estado FROM institucion ORDER BY id DESC
+    SELECT id, nombre, telefono, estado 
+    FROM institucion
+    WHERE estado = TRUE
+    ORDER BY id DESC
     LIMIT p_limit OFFSET p_offset;
 END //
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_instituciones_inactivas;
+DELIMITER //
+CREATE PROCEDURE listar_instituciones_inactivas(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombre, telefono, estado 
+    FROM institucion
+    WHERE estado = FALSE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
 
 -- Procedimiento para listar registros de la tabla proyecto en orden descendente por id
 DROP PROCEDURE IF EXISTS listar_proyectos;
 DELIMITER //
 CREATE PROCEDURE listar_proyectos(IN p_offset INT, IN p_limit INT)
 BEGIN
-    SELECT id, nombre, estado FROM proyecto ORDER BY id DESC
-	LIMIT p_limit OFFSET p_offset;
+    SELECT id, nombre, estado 
+    FROM proyecto
+    WHERE estado = TRUE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
 END //
 DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_proyectos_inactivos;
+DELIMITER //
+CREATE PROCEDURE listar_proyectos_inactivos(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombre, estado 
+    FROM proyecto
+    WHERE estado = FALSE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+
+-- Procedimiento para listar registros de la tabla tutores en orden descendente por id
+DROP PROCEDURE IF EXISTS listar_tutores;
+DELIMITER //
+CREATE PROCEDURE listar_tutores(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombres, apellidos, nro_identificacion, correo 
+    FROM tutores
+    WHERE estado = TRUE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_tutores_inactivos;
+DELIMITER //
+CREATE PROCEDURE listar_tutores_inactivos(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT id, nombres, apellidos, nro_identificacion, correo 
+    FROM tutores
+    WHERE estado = FALSE
+    ORDER BY id DESC
+    LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
 
 -- Procedimiento para listar registros de la tabla tutores en orden descendente por id
 DROP PROCEDURE IF EXISTS listar_tutores;
@@ -79,9 +168,12 @@ DROP PROCEDURE IF EXISTS buscar_institucion_por_id;
 DELIMITER //
 CREATE PROCEDURE buscar_institucion_por_id(IN p_id INT)
 BEGIN
-    SELECT nombre , tipo_institucion, estado, direccion , telefono FROM institucion WHERE id = p_id;
+    SELECT nombre, tipo_institucion, estado, direccion, telefono, archivo_convenio, tipo_archivo 
+    FROM institucion 
+    WHERE id = p_id;
 END //
 DELIMITER ;
+
 
 -- Procedimiento para buscar registros en la tabla proyecto por id
 DROP PROCEDURE IF EXISTS buscar_proyecto_por_id;
@@ -162,7 +254,9 @@ CREATE PROCEDURE actualizar_institucion(
     IN p_tipo_institucion VARCHAR(255),
     IN p_estado BOOLEAN,
     IN p_direccion TEXT,
-    IN p_telefono VARCHAR(50)
+    IN p_telefono VARCHAR(50),
+    IN p_archivo_convenio LONGBLOB,
+    IN p_tipo_archivo VARCHAR(50)
 )
 BEGIN
     UPDATE institucion
@@ -170,10 +264,13 @@ BEGIN
         tipo_institucion = p_tipo_institucion,
         estado = p_estado,
         direccion = p_direccion,
-        telefono = p_telefono
+        telefono = p_telefono,
+        archivo_convenio = p_archivo_convenio,
+        tipo_archivo = p_tipo_archivo
     WHERE id = p_id;
 END //
 DELIMITER ;
+
 
 -- Procedimiento para actualizar un registro en la tabla proyecto
 DROP PROCEDURE IF EXISTS actualizar_proyecto;
@@ -367,16 +464,15 @@ CREATE PROCEDURE agregar_institucion(
     IN p_tipo_institucion VARCHAR(255),
     IN p_estado BOOLEAN,
     IN p_direccion TEXT,
-    IN p_telefono VARCHAR(50)
+    IN p_telefono VARCHAR(50),
+    IN p_archivo_convenio LONGBLOB,
+    IN p_tipo_archivo VARCHAR(50)
 )
 BEGIN
-    INSERT INTO institucion (nombre, tipo_institucion, estado, direccion, telefono)
-    VALUES (p_nombre, p_tipo_institucion, p_estado, p_direccion, p_telefono);
+    INSERT INTO institucion (nombre, tipo_institucion, estado, direccion, telefono, archivo_convenio, tipo_archivo)
+    VALUES (p_nombre, p_tipo_institucion, p_estado, p_direccion, p_telefono, p_archivo_convenio, p_tipo_archivo);
 END//
 DELIMITER ;
-
-
-
 
 
 DROP PROCEDURE IF EXISTS buscar_estudiantes;
@@ -418,6 +514,58 @@ BEGIN
         telefono LIKE CONCAT('%', param_busqueda, '%');
 END //
 DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS buscar_usuarios;
+DELIMITER //
+CREATE PROCEDURE buscar_usuarios(
+    IN param_busqueda VARCHAR(255),
+    IN offset_val INT,
+    IN limit_val INT
+)
+BEGIN
+    SELECT 
+        u.user_id, 
+        concat(u.nombre, '' ,u.apellido) , 
+        u.identificacion, 
+        r.role_name AS role_name, 
+		u.correo_electronico, 
+        u.estado
+    FROM 
+        usuarios u
+    JOIN 
+        roles r ON u.role_id = r.role_id
+    WHERE 
+        u.nombre LIKE CONCAT('%', param_busqueda, '%') OR
+        u.apellido LIKE CONCAT('%', param_busqueda, '%') OR
+        u.correo_electronico LIKE CONCAT('%', param_busqueda, '%') OR
+        u.identificacion LIKE CONCAT('%', param_busqueda, '%') OR
+        r.role_name LIKE CONCAT('%', param_busqueda, '%')
+    LIMIT offset_val, limit_val;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS contar_usuarios;
+DELIMITER //
+CREATE PROCEDURE contar_usuarios(
+    IN param_busqueda VARCHAR(255)
+)
+BEGIN
+    SELECT COUNT(*)
+    FROM 
+        usuarios u
+    JOIN 
+        roles r ON u.role_id = r.role_id
+    WHERE 
+        u.nombre LIKE CONCAT('%', param_busqueda, '%') OR
+        u.apellido LIKE CONCAT('%', param_busqueda, '%') OR
+        u.correo_electronico LIKE CONCAT('%', param_busqueda, '%') OR
+        u.identificacion LIKE CONCAT('%', param_busqueda, '%') OR
+        r.role_name LIKE CONCAT('%', param_busqueda, '%');
+END //
+DELIMITER ;
+
+
 
 
 DROP PROCEDURE IF EXISTS buscar_tutores;
@@ -540,8 +688,7 @@ BEGIN
     FROM institucion
     WHERE 
         nombre LIKE CONCAT('%', param_busqueda, '%') OR
-        telefono LIKE CONCAT('%', param_busqueda, '%') OR
-        descripcion LIKE CONCAT('%', param_busqueda, '%') 
+        telefono LIKE CONCAT('%', param_busqueda, '%') 
     LIMIT offset_val, limit_val;
 END //
 DELIMITER ;
@@ -557,8 +704,7 @@ BEGIN
     FROM institucion
     WHERE 
         nombre LIKE CONCAT('%', param_busqueda, '%') OR
-        telefono LIKE CONCAT('%', param_busqueda, '%') OR
-        descripcion LIKE CONCAT('%', param_busqueda, '%') ;
+        telefono LIKE CONCAT('%', param_busqueda, '%') ;
 END //
 DELIMITER ;
 
@@ -778,7 +924,7 @@ DELIMITER ;
 
 
 -- Trigger for AFTER INSERT
-DROP TRIGGER IF EXISTS trg_seguimiento_insert;
+/* DROP TRIGGER IF EXISTS trg_seguimiento_insert;
 DELIMITER //
 CREATE TRIGGER trg_seguimiento_insert
 AFTER INSERT ON seguimiento
@@ -816,8 +962,179 @@ BEGIN
     END IF;
 END//
 DELIMITER ;
+*/
+
+
+DROP TRIGGER IF EXISTS trg_seguimiento_insert;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_insert
+AFTER INSERT ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+    DECLARE estudiante_id INT;
+
+    -- Fetch the estudiante_id
+    SELECT estudiantes_id INTO estudiante_id
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas + NEW.horas_actividad > 96 THEN 96
+                        ELSE nro_horas + NEW.horas_actividad
+                    END
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = false
+        WHERE id = estudiante_id;
+    END IF;
+END//
+DELIMITER ;
+
 
 DROP TRIGGER IF EXISTS trg_seguimiento_update;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_update
+BEFORE UPDATE ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+    DECLARE estudiante_id INT;
+
+    -- Fetch the estudiante_id
+    SELECT estudiantes_id INTO estudiante_id
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas - OLD.horas_actividad + NEW.horas_actividad > 96 THEN 96
+                        ELSE nro_horas - OLD.horas_actividad + NEW.horas_actividad
+                    END
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = NEW.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso'
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = NEW.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = false
+        WHERE id = estudiante_id;
+    END IF;
+END//
+DELIMITER ;
+
+
+DROP TRIGGER IF EXISTS trg_seguimiento_delete;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_delete
+AFTER DELETE ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+    DECLARE estudiante_id INT;
+
+    -- Fetch the estudiante_id
+    SELECT estudiantes_id INTO estudiante_id
+    FROM estudiantes_vinculacion
+    WHERE id = OLD.estudiantes_vinculacion_id;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas - OLD.horas_actividad < 0 THEN 0
+                        ELSE nro_horas - OLD.horas_actividad
+                    END
+    WHERE id = OLD.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = OLD.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente',
+            fecha_final = NULL
+        WHERE id = OLD.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso',
+            fecha_final = NULL
+        WHERE id = OLD.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = true
+        WHERE id = estudiante_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = OLD.estudiantes_vinculacion_id;
+        UPDATE estudiantes
+        SET estado = false
+        WHERE id = estudiante_id;
+    END IF;
+END//
+DELIMITER ;
+
+
+
+
+/*DROP TRIGGER IF EXISTS trg_seguimiento_update;
 DELIMITER //
 CREATE TRIGGER trg_seguimiento_update
 BEFORE UPDATE ON seguimiento
@@ -854,7 +1171,50 @@ BEGIN
         WHERE id = NEW.estudiantes_vinculacion_id;
     END IF;
 END//
-DELIMITER ;
+DELIMITER ;*/
+
+-- Trigger for AFTER DELETE
+/*DROP TRIGGER IF EXISTS trg_seguimiento_delete;
+DELIMITER //
+CREATE TRIGGER trg_seguimiento_delete
+AFTER DELETE ON seguimiento
+FOR EACH ROW
+BEGIN
+    DECLARE total_horas INT;
+
+    -- Update the nro_horas
+    UPDATE estudiantes_vinculacion
+    SET nro_horas = CASE 
+                        WHEN nro_horas - OLD.horas_actividad < 0 THEN 0
+                        ELSE nro_horas - OLD.horas_actividad
+                    END
+    WHERE id = OLD.estudiantes_vinculacion_id;
+
+    -- Fetch the updated nro_horas
+    SELECT nro_horas INTO total_horas
+    FROM estudiantes_vinculacion
+    WHERE id = OLD.estudiantes_vinculacion_id;
+
+    -- Update the estado_vinculacion and fecha_final based on nro_horas
+    IF total_horas = 0 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Pendiente',
+            fecha_final = NULL
+        WHERE id = OLD.estudiantes_vinculacion_id;
+    ELSEIF total_horas < 96 THEN
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'En Proceso',
+            fecha_final = NULL
+        WHERE id = OLD.estudiantes_vinculacion_id;
+    ELSE
+        UPDATE estudiantes_vinculacion
+        SET estado_vinculacion = 'Culminado',
+            fecha_final = CURDATE()
+        WHERE id = OLD.estudiantes_vinculacion_id;
+    END IF;
+END//
+DELIMITER ; */
+
 
 
 DROP PROCEDURE IF EXISTS ObtenerListaSeguimientoXEstudiante;
@@ -907,4 +1267,387 @@ END //
 DELIMITER ;
 
 
-call buscar_seguimiento_fechas(16, '2023-01-02', '2024-09-30', 0, 7)
+DROP PROCEDURE IF EXISTS InsertarSeguimiento;
+DELIMITER //
+CREATE PROCEDURE InsertarSeguimiento(
+    IN p_estudiantes_vinculacion_id INT,
+    IN p_fecha_actividad DATE,
+    IN p_horas_actividad INT,
+    IN p_actividades TEXT,
+    IN p_archivo_foto LONGBLOB,
+    IN p_archivo_actividad LONGBLOB,
+    IN p_tipo_archivo_actividad VARCHAR(50),
+    IN p_observacion TEXT,
+    IN p_fecha_seguimiento DATE
+)
+BEGIN
+    INSERT INTO seguimiento (
+        estudiantes_vinculacion_id,
+        fecha_actividad,
+        horas_actividad,
+        actividades,
+        archivo_foto,
+        archivo_actividad,
+        tipo_archivo_actividad,
+        observacion,
+        fecha_seguimiento
+    ) VALUES (
+        p_estudiantes_vinculacion_id,
+        p_fecha_actividad,
+        p_horas_actividad,
+        p_actividades,
+        p_archivo_foto,
+        p_archivo_actividad,
+        p_tipo_archivo_actividad,
+        p_observacion,
+        p_fecha_seguimiento
+    );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_usuarios;
+DELIMITER //
+CREATE PROCEDURE listar_usuarios(IN p_offset INT, IN p_limit INT)
+BEGIN
+    SELECT u.user_id, concat(u.nombre, ' ',u.apellido), u.identificacion, r.role_name, u.correo_electronico, u.estado 
+    FROM usuarios u inner join roles r
+    on u.role_id = r.role_id
+    ORDER BY u.user_id DESC
+	LIMIT p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS insertar_usuario;
+DELIMITER //
+CREATE PROCEDURE insertar_usuario(
+    IN p_contrasena VARCHAR(100),
+    IN p_identificacion VARCHAR(50),
+    IN p_role_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_apellido VARCHAR(100),
+    IN p_correo_electronico VARCHAR(100),
+    IN p_estado VARCHAR(50)
+)
+BEGIN
+    INSERT INTO usuarios (
+        contrasena, 
+        identificacion, 
+        role_id, 
+        nombre, 
+        apellido, 
+        correo_electronico, 
+        estado
+    ) VALUES (
+        p_contrasena, 
+        p_identificacion, 
+        p_role_id, 
+        p_nombre, 
+        p_apellido, 
+        p_correo_electronico, 
+        p_estado
+    );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS actualizar_usuario;
+DELIMITER //
+CREATE PROCEDURE actualizar_usuario(
+    IN p_user_id INT,
+    IN p_contrasena VARCHAR(100),
+    IN p_identificacion VARCHAR(50),
+    IN p_role_id INT,
+    IN p_nombre VARCHAR(100),
+    IN p_apellido VARCHAR(100),
+    IN p_correo_electronico VARCHAR(100),
+    IN p_estado VARCHAR(50)
+)
+BEGIN
+    UPDATE usuarios
+    SET 
+        contrasena = p_contrasena, 
+        identificacion = p_identificacion, 
+        role_id = p_role_id, 
+        nombre = p_nombre, 
+        apellido = p_apellido, 
+        correo_electronico = p_correo_electronico, 
+        estado = p_estado
+    WHERE 
+        user_id = p_user_id;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS buscar_usuario_por_id;
+DELIMITER //
+CREATE PROCEDURE buscar_usuario_por_id(
+    IN p_user_id INT
+)
+BEGIN
+    SELECT 
+        u.user_id, 
+        u.contrasena, 
+        u.identificacion, 
+        u.role_id, 
+        u.nombre, 
+        u.apellido, 
+        u.correo_electronico,  
+        u.estado
+    FROM 
+        usuarios u
+    JOIN 
+        roles r ON u.role_id = r.role_id
+    WHERE 
+        u.user_id = p_user_id;
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS listar_estudiantes_vinculacion_por_estado;
+DELIMITER //
+CREATE PROCEDURE listar_estudiantes_vinculacion_por_estado(
+    IN p_estado_vinculacion ENUM('Pendiente', 'En Proceso', 'Culminado'),
+    IN p_offset INT,
+    IN p_limit INT
+)
+BEGIN
+    SELECT 
+        CONCAT(e.nombres, ' ', e.apellidos) AS estudiante,
+        v.fecha_inicio,
+        ev.nro_horas,
+        v.periodo_academico,
+        CONCAT(t.nombres, ' ', t.apellidos) AS tutor,
+        ev.estado_vinculacion
+    FROM 
+        estudiantes_vinculacion ev
+    JOIN 
+        estudiantes e ON ev.estudiantes_id = e.id
+    JOIN 
+        vinculacion v ON ev.vinculacion_id = v.id
+    JOIN 
+        tutores t ON v.tutores_id = t.id
+    WHERE 
+        ev.estado_vinculacion = p_estado_vinculacion
+    ORDER BY 
+        v.fecha_inicio DESC
+    LIMIT 
+        p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS contar_estudiantes_vinculacion_por_estado;
+DELIMITER //
+CREATE PROCEDURE contar_estudiantes_vinculacion_por_estado(
+    IN p_estado_vinculacion ENUM('Pendiente', 'En Proceso', 'Culminado')
+)
+BEGIN
+    SELECT 
+        COUNT(*) AS cantidad
+    FROM 
+        estudiantes_vinculacion ev
+    JOIN 
+        estudiantes e ON ev.estudiantes_id = e.id
+    JOIN 
+        vinculacion v ON ev.vinculacion_id = v.id
+    JOIN 
+        tutores t ON v.tutores_id = t.id
+    WHERE 
+        ev.estado_vinculacion = p_estado_vinculacion;
+END //
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS filtro_estudiantes_vinculacion_por_estado;
+DELIMITER //
+CREATE PROCEDURE filtro_estudiantes_vinculacion_por_estado(
+    IN p_estado_vinculacion ENUM('Pendiente', 'En Proceso', 'Culminado'),
+    IN p_offset INT,
+    IN p_limit INT,
+    IN p_queryparam VARCHAR(255)
+)
+BEGIN
+    SELECT 
+        CONCAT(e.nombres, ' ', e.apellidos) AS estudiante,
+        v.fecha_inicio,
+        ev.nro_horas,
+        v.periodo_academico,
+        CONCAT(t.nombres, ' ', t.apellidos) AS tutor,
+        ev.estado_vinculacion
+    FROM 
+        estudiantes_vinculacion ev
+    JOIN 
+        estudiantes e ON ev.estudiantes_id = e.id
+    JOIN 
+        vinculacion v ON ev.vinculacion_id = v.id
+    JOIN 
+        tutores t ON v.tutores_id = t.id
+    WHERE 
+        ev.estado_vinculacion = p_estado_vinculacion
+        AND (
+            e.nombres LIKE CONCAT('%', p_queryparam, '%')
+            OR e.apellidos LIKE CONCAT('%', p_queryparam, '%')
+            OR e.nro_identificacion LIKE CONCAT('%', p_queryparam, '%')
+            OR e.correo LIKE CONCAT('%', p_queryparam, '%')
+            OR e.telefono LIKE CONCAT('%', p_queryparam, '%')
+        )
+    ORDER BY 
+        v.fecha_inicio DESC
+    LIMIT 
+        p_limit OFFSET p_offset;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS filtro_estudiantes_vinculacion_por_estado_contar;
+DELIMITER //
+CREATE PROCEDURE filtro_estudiantes_vinculacion_por_estado_contar(
+    IN p_estado_vinculacion VARCHAR(20),
+    IN p_queryparam VARCHAR(255)
+)
+BEGIN
+    SELECT 
+        COUNT(*) AS cantidad
+    FROM 
+        estudiantes_vinculacion ev
+    JOIN 
+        estudiantes e ON ev.estudiantes_id = e.id
+    JOIN 
+        vinculacion v ON ev.vinculacion_id = v.id
+    JOIN 
+        tutores t ON v.tutores_id = t.id
+    WHERE 
+        ev.estado_vinculacion = p_estado_vinculacion
+        AND (
+            e.nombres LIKE CONCAT('%', p_queryparam, '%')
+            OR e.apellidos LIKE CONCAT('%', p_queryparam, '%')
+            OR e.nro_identificacion LIKE CONCAT('%', p_queryparam, '%')
+            OR e.correo LIKE CONCAT('%', p_queryparam, '%')
+            OR e.telefono LIKE CONCAT('%', p_queryparam, '%')
+        );
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_estudiantes_vinculacion_completo;
+DELIMITER //
+CREATE PROCEDURE listar_estudiantes_vinculacion_completo(
+)
+BEGIN
+    SELECT 
+        -- v.id AS `Vinculación ID`,
+        v.periodo_academico AS 'Periodo académico',
+        ev.estado_vinculacion AS 'Estado de vinculación',
+        v.codigo_ies AS 'Código IES',
+        e.tipo_identificacion AS 'Tipo identificación Estudiante',
+        e.nro_identificacion AS 'Identificación estudiante',
+        CONCAT(e.nombres, ' ', e.apellidos) AS `Nombre del Estudiante`,
+        inst.nombre AS 'Nombre de institución',
+        inst.tipo_institucion AS 'Tipo de institución',
+        c.nombre AS 'Nombre Carrera',
+        DATE_FORMAT(v.fecha_inicio, '%Y-%m-%d') AS `Fecha Inicio`,
+        DATE_FORMAT(ev.fecha_final, '%Y-%m-%d') AS `Fecha Fin`,
+        ev.nro_horas AS 'Número de horas',
+        v.campo_especifico AS 'Campo específico',
+        t.nro_identificacion AS 'Identificación tutor',
+        CONCAT(t.nombres, ' ', t.apellidos) AS `Nombre del Tutor`
+    FROM 
+        estudiantes_vinculacion ev
+    JOIN 
+        estudiantes e ON ev.estudiantes_id = e.id
+    JOIN 
+        vinculacion v ON ev.vinculacion_id = v.id
+    JOIN 
+        tutores t ON v.tutores_id = t.id
+    JOIN 
+        institucion inst ON v.institucion_id = inst.id
+    JOIN 
+        carrera c ON e.carrera_id = c.id
+    ORDER BY 
+        v.fecha_inicio DESC;
+END //
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS listar_informes_por_periodo_academico;
+DELIMITER $$
+CREATE PROCEDURE listar_informes_por_periodo_academico(IN periodo_academico VARCHAR(50))
+BEGIN
+	SELECT
+		tu.id,
+		CONCAT(tu.nombres, ' ', tu.apellidos) AS Tutor,
+		IFNULL(MAX(CASE WHEN i.mes = 'Enero' THEN 'SI' ELSE 'NO' END), 'NO') AS Enero,
+		IFNULL(MAX(CASE WHEN i.mes = 'Febrero' THEN 'SI' ELSE 'NO' END), 'NO') AS Febrero,
+		IFNULL(MAX(CASE WHEN i.mes = 'Marzo' THEN 'SI' ELSE 'NO' END), 'NO') AS Marzo,
+		IFNULL(MAX(CASE WHEN i.mes = 'Abril' THEN 'SI' ELSE 'NO' END), 'NO') AS Abril,
+		IFNULL(MAX(CASE WHEN i.mes = 'Mayo' THEN 'SI' ELSE 'NO' END), 'NO') AS Mayo,
+		IFNULL(MAX(CASE WHEN i.mes = 'Junio' THEN 'SI' ELSE 'NO' END), 'NO') AS Junio,
+		IFNULL(MAX(CASE WHEN i.mes = 'Julio' THEN 'SI' ELSE 'NO' END), 'NO') AS Julio,
+		IFNULL(MAX(CASE WHEN i.mes = 'Agosto' THEN 'SI' ELSE 'NO' END), 'NO') AS Agosto,
+		IFNULL(MAX(CASE WHEN i.mes = 'Setiembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Setiembre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Octubre' THEN 'SI' ELSE 'NO' END), 'NO') AS Octubre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Noviembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Noviembre,
+		IFNULL(MAX(CASE WHEN i.mes = 'Diciembre' THEN 'SI' ELSE 'NO' END), 'NO') AS Diciembre
+	FROM (
+		SELECT id FROM tutores 
+	) t
+	LEFT JOIN informes i ON t.id = i.tutor_id AND i.periodo_academico = periodo_academico
+	LEFT JOIN tutores tu ON tu.id = t.id
+    WHERE tu.estado = true
+	GROUP BY t.id;
+
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS consulta_fichas;
+DELIMITER $$
+CREATE PROCEDURE consulta_fichas(IN periodo_academico_param VARCHAR(50))
+BEGIN
+    SELECT
+		tu.id,
+        concat( tu.nombres, ' ', tu.apellidos ),
+        CASE
+            WHEN f.is_ficha = 1 THEN 'SI'
+            ELSE ''
+        END AS SI,
+        CASE
+            WHEN f.is_ficha = 0 THEN 'NO'
+            WHEN f.tutor_id IS NULL THEN 'NO'
+            ELSE ''  
+        END AS NO
+    FROM
+        tutores tu
+    LEFT JOIN fichas f ON tu.id = f.tutor_id AND f.periodo_academico = periodo_academico_param
+    WHERE tu.estado = true
+    ;
+END$$
+DELIMITER ;
+
+
+DROP PROCEDURE IF EXISTS consulta_memorandum;
+DELIMITER $$
+CREATE PROCEDURE consulta_memorandum(IN periodo_academico_param VARCHAR(50))
+BEGIN
+    SELECT
+		tu.id,
+        concat( tu.nombres, ' ', tu.apellidos ),
+        CASE
+            WHEN m.is_memorandum = 1 THEN 'SI'
+            ELSE ''
+        END AS SI,
+        CASE
+            WHEN m.is_memorandum = 0 THEN 'NO'
+            WHEN m.tutor_id IS NULL THEN 'NO'
+            ELSE ''  
+        END AS NO
+    FROM
+        tutores tu
+    LEFT JOIN memorandum m ON tu.id = m.tutor_id AND m.periodo_academico = periodo_academico_param
+    WHERE tu.estado = true
+    ;
+END$$
+DELIMITER ;
+
+
+call consulta_memorandum('P1-2024')
+
+
+
+
+
+
