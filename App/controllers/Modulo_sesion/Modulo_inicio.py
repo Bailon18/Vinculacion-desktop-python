@@ -29,9 +29,6 @@ class Login(QtWidgets.QDialog):
         
         self.conec_base = BaseDatos()
         
-        self.venLogin.line_contrasena.setText('admin123')
-        self.venLogin.line_correo.setText('usuario@gmail.com')
-            
         # Quitar sombra - titulo de barra
         self.setWindowFlag(QtCore.Qt.FramelessWindowHint)
         self.setAttribute(QtCore.Qt.WA_TranslucentBackground)
